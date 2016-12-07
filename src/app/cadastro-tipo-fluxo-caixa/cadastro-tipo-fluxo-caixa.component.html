@@ -1,3 +1,37 @@
-<p>
-  cadastro-tipo-fluxo-caixa works!
-</p>
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Cadastro de Itens de Fluxo de Caixa</legend>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Tipo de Fluxo</label>
+  <div class="col-md-6">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+      <option value="E">Entrada</option>
+      <option value="S|">Saida</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Nome do Fluxo</label>  
+  <div class="col-md-6">
+  <input id="textinput" name="textinput" type="text" placeholder="Pag. Luz, Pag. Agua,  Gasto Limpeza .." class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="button1id"></label>
+  <div class="col-md-8">
+    <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
+    <button id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
