@@ -1,3 +1,46 @@
-<p>
-  lancamento-movimentacao-caixa works!
-</p>
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Cadastro de Fluxo de Caixa</legend>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Nome do Fluxo</label>
+  <div class="col-md-6">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+      <option value="1">Agua</option>
+      <option value="2">Pagamento professores</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Data</label>  
+  <div class="col-md-6">
+  <input id="textinput" name="textinput" type="text" placeholder="01/01/2017" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Valor</label>  
+  <div class="col-md-6">
+  <input id="textinput" name="textinput" type="text" placeholder="R$1000,00" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="button1id"></label>
+  <div class="col-md-8">
+    <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
+    <button id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
