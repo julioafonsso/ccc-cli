@@ -6,6 +6,7 @@ import { CadastroTipoFluxoCaixaComponent } from './cadastro-tipo-fluxo-caixa.com
   imports: [
     CommonModule
   ],
-  declarations: [CadastroTipoFluxoCaixaComponent]
+  declarations: [CadastroTipoFluxoCaixaComponent],
+  exports: [CadastroTipoFluxoCaixaComponent]
 })
 export class CadastroTipoFluxoCaixaModule { }

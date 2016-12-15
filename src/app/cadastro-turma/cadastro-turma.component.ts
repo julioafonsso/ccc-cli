@@ -1,3 +1,5 @@
+import { DiasAulas } from './cadastro-turma.module';
+import { CadastroTurmaService } from './cadastro-turma.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cadastro-turma.component.scss']
 })
 export class CadastroTurmaComponent implements OnInit {
+  dias: DiasAulas[];
 
-  constructor() { }
+  constructor(private cadasstroTurmaService: CadastroTurmaService) { }
 
   ngOnInit() {
+    this.cadasstroTurmaService.getDiasAulas().subscribe(res => {
+      console.log(res);
+      this.dias = res});
   }
 
 }

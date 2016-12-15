@@ -1,0 +1,30 @@
+[
+    {
+        "nome": "Domingo",
+        "Valor": "1"
+    },
+    {
+        "nome": "Segunda-Feira",
+        "valor": "2"
+    },
+    {
+        "nome": "Terça-Feira",
+        "valor": "3"
+    },
+    {
+        "nome": "Quarta-Feira",
+        "valor": "4"
+    },
+    {
+        "nome": "Quinta-Feira",
+        "valor": "5"
+    },
+    {
+        "nome": "Sexta-Feira",
+        "valor": "6"
+    },
+    {
+        "nome": "Sabado",
+        "valor": "7"
+    }
+]
