@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CadastroTipoTurmaComponent } from './cadastro-tipo-turma.component';
+
+import { CadastroTipoTurmaComponent } from './../cadastro-tipo-turma/cadastro-tipo-turma.component';
 
 @NgModule({
   imports: [
@@ -8,4 +9,4 @@ import { CadastroTipoTurmaComponent } from './cadastro-tipo-turma.component';
   ],
   declarations: [CadastroTipoTurmaComponent]
 })
-export class CadastroTipoTurmaModule { }
+export class TipoTurmaModule { }

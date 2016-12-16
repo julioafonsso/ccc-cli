@@ -1,6 +1,7 @@
-import { DiasAulas } from './cadastro-turma.module';
 import { CadastroTurmaService } from './cadastro-turma.service';
 import { Component, OnInit } from '@angular/core';
+
+import { DiasAulas } from './../modulos/turma.module';
 
 @Component({
   selector: 'app-cadastro-turma',

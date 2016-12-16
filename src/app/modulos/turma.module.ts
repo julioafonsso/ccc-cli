@@ -1,7 +1,8 @@
-import { CadastroTurmaService } from './cadastro-turma.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CadastroTurmaComponent } from './cadastro-turma.component';
+
+import { CadastroTurmaService } from './../cadastro-turma/cadastro-turma.service';
+import { CadastroTurmaComponent } from './../cadastro-turma/cadastro-turma.component';
 
 @NgModule({
   imports: [
@@ -10,7 +11,7 @@ import { CadastroTurmaComponent } from './cadastro-turma.component';
   declarations: [CadastroTurmaComponent],
   providers: [CadastroTurmaService]
 })
-export class CadastroTurmaModule { }
+export class TurmaModule { }
 
 export class DiasAulas {
   constructor(

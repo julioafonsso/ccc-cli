@@ -1,6 +1,8 @@
 import { Http, Response } from '@angular/http';
-import { DiasAulas } from './cadastro-turma.module';
 import { Injectable } from '@angular/core';
+
+import { DiasAulas } from './../modulos/turma.module';
+
 
 @Injectable()
 export class CadastroTurmaService {
