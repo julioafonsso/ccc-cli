@@ -1,0 +1,15 @@
+[
+    {
+        "id" : 1,
+        "nome" : "Site"
+    },
+    {
+        "id" : 2,
+        "nome" : "Amigos"
+    },
+    {
+        "id" : 1,
+        "nome" : "Facebook"
+    }
+
+]

@@ -8,11 +8,9 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Modalidade da Turma</label>
       <div class="col-md-6">
-        <select id="selectbasic" name="selectbasic" class="form-control">
-      <option value="1">Forro</option>
-      <option value="2">Dança de Salão</option>
-      <option value="3">Samba de Gafieira</option>
-    </select>
+        <select class="form-control">
+      <option *ngFor="let tipoTurma of tipoTurmas" [value]="tipoTurma.nome"  >{{tipoTurma.nome}} - {{tipoTurma.nivel}}</option>
+        </select>
       </div>
     </div>
 
@@ -32,47 +30,43 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Horario Inicial</label>
       <div class="col-md-6">
-        <input id="textinput" name="textinput" type="text" placeholder="18:30 as 19:30" class="form-control input-md" required="">
+        <input  type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
 
       </div>
     </div>
 
     <!-- Select Basic -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="selectbasic">Professor 1</label>
+      <label class="col-md-4 control-label" for="select1">Professor</label>
       <div class="col-md-6">
-        <select id="selectbasic" name="selectbasic" class="form-control">
-      <option value="1">Laryssa França</option>
-      <option value="2">Jefferson Bilisco</option>
+        <select class="form-control">
+      <option *ngFor="let professor of professores" [value]="professor.nome"  >{{professor.nome}}</option>
     </select>
       </div>
     </div>
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Percentual do Professor 1</label>
+      <label class="col-md-4 control-label" for="textinput">Percentual do Professor</label>
       <div class="col-md-6">
-        <input id="textinput" name="textinput" type="text" placeholder="20%" class="form-control input-md" required="">
+        <input  type="text" placeholder="20%" class="form-control input-md" required="">
 
       </div>
     </div>
 
-    <!-- Select Basic -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="selectbasic">Professor 2</label>
+      <label class="col-md-4 control-label">Professora</label>
       <div class="col-md-6">
-        <select id="selectbasic" name="selectbasic" class="form-control">
-      <option value="1">Marcos Vinicius</option>
-      <option value="2">Carol Duarte</option>
+        <select class="form-control">
+      <option *ngFor="let professora of professoras" [value]="professora.nome"  >{{professora.nome}}</option>
     </select>
       </div>
     </div>
-
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Percentual do Professor 2</label>
+      <label class="col-md-4 control-label" for="textinput">Percentual da Professora</label>
       <div class="col-md-6">
-        <input id="textinput" name="textinput" type="text" placeholder="15%" class="form-control input-md" required="">
+        <input  type="text" placeholder="15%" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -81,7 +75,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Valor da Mensalidade</label>
       <div class="col-md-6">
-        <input id="textinput" name="textinput" type="text" placeholder="R$135,00" class="form-control input-md" required="">
+        <input  type="text" placeholder="R$135,00" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -90,7 +84,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Numero de Vagas</label>
       <div class="col-md-6">
-        <input id="textinput" name="textinput" type="text" placeholder="15" class="form-control input-md" required="">
+        <input  type="number" placeholder="15" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -99,13 +93,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Sala da Aula</label>
       <div class="col-md-6">
-        <select id="selectbasic" name="selectbasic" class="form-control">
-      <option value="1">Sala 1</option>
-      <option value="2">Sala 2</option>
-      <option value="3">Sala 3</option>
-      <option value="4">Sala 4</option>
-      <option value="5">Sala 5</option>
-      <option value="6">Sala 6</option>
+        <select class="form-control">
+      <option *ngFor="let sala of salas" [value]="sala.nome"  >{{sala.nome}}</option>
     </select>
       </div>
     </div>

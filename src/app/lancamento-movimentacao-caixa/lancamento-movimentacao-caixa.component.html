@@ -6,11 +6,21 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="selectbasic">Nome do Fluxo</label>
+  <label class="col-md-4 control-label" for="selectbasic">Tipo Fluxo</label>
   <div class="col-md-6">
-    <select id="selectbasic" name="selectbasic" class="form-control">
-      <option value="1">Agua</option>
-      <option value="2">Pagamento professores</option>
+    <select class="form-control">
+      <option value="E">Entrada</option>
+      <option value="S">Saida</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Nome Fluxo</label>
+  <div class="col-md-6">
+    <select class="form-control">
+      <option *ngFor="let fluxo of fluxos">{{fluxo.nome}}</option>
     </select>
   </div>
 </div>
@@ -19,7 +29,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Data</label>  
   <div class="col-md-6">
-  <input id="textinput" name="textinput" type="text" placeholder="01/01/2017" class="form-control input-md" required="">
+  <input type="date" placeholder="01/01/2017" class="form-control input-md" required="">
     
   </div>
 </div>
@@ -28,7 +38,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Valor</label>  
   <div class="col-md-6">
-  <input id="textinput" name="textinput" type="text" placeholder="R$1000,00" class="form-control input-md" required="">
+  <input type="number" placeholder="R$1000,00" step="0.01" class="form-control input-md" required="">
     
   </div>
 </div>

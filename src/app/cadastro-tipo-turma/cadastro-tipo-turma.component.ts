@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { TipoTurmaService, NivelTurma } from './../servicos/tipo-turma.service';
+
 @Component({
   selector: 'app-cadastro-tipo-turma',
   templateUrl: './cadastro-tipo-turma.component.html',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroTipoTurmaComponent implements OnInit {
 
-  constructor() { }
+  private niveis :NivelTurma[];
+  constructor(private tipoTurmaService: TipoTurmaService) { }
 
   ngOnInit() {
+    this.tipoTurmaService.getNiveis().subscribe(res => {
+      this.niveis = res;
+    })
   }
 
 }

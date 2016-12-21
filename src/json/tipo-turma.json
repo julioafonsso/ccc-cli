@@ -1,0 +1,15 @@
+[
+    {"id": 1,
+    "nivel" : "basico",
+    "nome": "forro"
+    },
+    {"id": 2,
+    "nivel" : "basico",
+    "nome": "Samba"
+    },
+    {"id": 3,
+    "nivel" : "Intermediario",
+    "nome": "forro"
+    }
+    
+]

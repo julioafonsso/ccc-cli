@@ -1,26 +1,36 @@
 <form class="form-horizontal">
-<fieldset>
+  <fieldset>
 
-<!-- Form Name -->
-<legend>Cadastro de Modalidade de Turma</legend>
+    <!-- Form Name -->
+    <legend>Cadastro de Modalidade de Turma</legend>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Nome da modalidade</label>  
-  <div class="col-md-6">
-  <input id="textinput" name="textinput" type="text" placeholder="Forro/Samba" class="form-control input-md" required="">
-    
-  </div>
-</div>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Nome da modalidade</label>
+      <div class="col-md-6">
+        <input id="textinput" name="textinput" type="text" placeholder="Forro/Samba" class="form-control input-md" required="">
 
-<!-- Button (Double) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="button1id"></label>
-  <div class="col-md-8">
-    <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
-    <button id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
-  </div>
-</div>
+      </div>
+    </div>
 
-</fieldset>
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="select1">Nivel</label>
+      <div class="col-md-6">
+        <select class="form-control">
+      <option *ngFor="let nivel of niveis" [value]="nivel.id"  >{{nivel.nome}}</option>
+    </select>
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="button1id"></label>
+      <div class="col-md-8">
+        <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
+        <button id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
+      </div>
+    </div>
+
+  </fieldset>
 </form>

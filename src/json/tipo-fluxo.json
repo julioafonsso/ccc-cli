@@ -1,0 +1,12 @@
+[
+    {
+        "id" : 1,
+        "nome" : "pagamento",
+        "indEntrada" : false
+    },
+    {
+        "id" : 2,
+        "nome" : "Recebimento mensalidade",
+        "indEntrada" : true
+    }
+]

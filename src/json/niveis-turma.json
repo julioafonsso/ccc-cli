@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "nome": "Basico"
+    },
+    {
+        "id": 2,
+        "nome": "Intermediario"
+    },
+    {
+        "id": 3,
+        "nome": "Avançado"
+    }
+]

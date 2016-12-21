@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CadastroTipoDescontoComponent } from './../cadastro-tipo-desconto/cadastro-tipo-desconto.component';
+import { CadastroTipoDescontoComponent } from './cadastro-tipo-desconto.component';
 
 @NgModule({
   imports: [
@@ -9,4 +9,4 @@ import { CadastroTipoDescontoComponent } from './../cadastro-tipo-desconto/cadas
   ],
   declarations: [CadastroTipoDescontoComponent]
 })
-export class TipoDescontoModule { }
+export class CadastroTipoDescontoModule { }
