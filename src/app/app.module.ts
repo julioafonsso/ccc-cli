@@ -18,13 +18,14 @@ import { ConsultaTurmasModule } from './consulta-turmas/consulta-turmas.module';
 import { ConsultaAlunosDebitoModule } from './consulta-alunos-debito/consulta-alunos-debito.module';
 import { ConsultaAlunoModule } from './consulta-aluno/consulta-aluno.module';
 import { CadastroTurmaModule } from './cadastro-turma/cadastro-turma.module';
-import { CadastroTipoTurmaModule } from './cadastro-tipo-turma/cadastro-tipo-turma.module';
 import { CadastroTipoFluxoCaixaModule } from './cadastro-tipo-fluxo-caixa/cadasstro-tipo-fluxo-caixa.module';
 import { CadastroTipoDescontoModule } from './cadastro-tipo-desconto/cadastro-tipo-desconto.module';
 import { CadastroProfessorModule } from './cadastro-professor/cadastro-professor.module';
 import { CadastroAlunoModule } from './cadastro-aluno/cadastro-aluno.module';
 
+
 import { routing } from './app.routing';
+import { CadastroModalidadeTurmaComponent } from './cadastro-modalidade-turma/cadastro-modalidade-turma.component';
 
 
 
@@ -32,7 +33,8 @@ import { routing } from './app.routing';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CadastroModalidadeTurmaComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,6 @@ import { routing } from './app.routing';
     CadastroProfessorModule,
     CadastroTipoDescontoModule,
     CadastroTipoFluxoCaixaModule,
-    CadastroTipoTurmaModule,
     CadastroTurmaModule,
     ConsultaAlunoModule,
     ConsultaAlunosDebitoModule,

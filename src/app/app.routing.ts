@@ -8,7 +8,7 @@ import { RelatorioMovimentacaoCaixaComponent } from './relatorio-movimentacao-ca
 import { LancamentoMovimentacaoCaixaComponent } from './lancamento-movimentacao-caixa/lancamento-movimentacao-caixa.component';
 import { ConsultaAlunosDebitoComponent } from './consulta-alunos-debito/consulta-alunos-debito.component';
 import { CadastroTurmaComponent } from './cadastro-turma/cadastro-turma.component';
-import { CadastroTipoTurmaComponent } from './cadastro-tipo-turma/cadastro-tipo-turma.component';
+import { CadastroModalidadeTurmaComponent } from './cadastro-modalidade-turma/cadastro-modalidade-turma.component'
 import { CadastroProfessorComponent } from './cadastro-professor/cadastro-professor.component';
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
 import { CadastroTipoFluxoCaixaComponent } from './cadastro-tipo-fluxo-caixa/cadastro-tipo-fluxo-caixa.component';
@@ -17,7 +17,7 @@ import { CadastroTipoDescontoComponent } from './cadastro-tipo-desconto/cadastro
 const ROTAS = [
     { path: 'cadastro-tipo-desconto', component: CadastroTipoDescontoComponent },
     { path: 'cadastro-tipo-fluxo-caixa', component: CadastroTipoFluxoCaixaComponent },
-    { path: 'cadastro-tipo-turma', component: CadastroTipoTurmaComponent },
+    { path: 'cadastro-modalidade-turma', component: CadastroModalidadeTurmaComponent },
     { path: 'cadastro-aluno', component: CadastroAlunoComponent },
     { path: 'cadastro-professor', component: CadastroProfessorComponent },
     { path: 'cadastro-turma', component: CadastroTurmaComponent },
