@@ -1,6 +1,10 @@
 import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
+import { Sexo } from './../models/sexo';
+import { ConheceEscola } from './../models/conhece-escola';
+
+
 @Injectable()
 export class AlunoService {
 
@@ -9,14 +13,14 @@ export class AlunoService {
   getListaComoConheceu()
   {
     return this.http.get("json/como-conheceu.json")
-    .map((response : Response) => <ComoConheceu[]> response.json())
+    .map((response : Response) => <ConheceEscola[]> response.json())
+  }
+
+  getSexo(){
+    return this.http.get("json/sexo.json")
+    .map((response : Response) => <Sexo[]> response.json())
   }
 
 }
 
-export class ComoConheceu {
-  constructor(
-    public id: number,
-    public nome: String
-  ) { }
-}
+

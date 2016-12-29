@@ -1,6 +1,8 @@
 import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
+import { NivelTurma } from './../models/nivel-turma';
+
 @Injectable()
 export class TipoTurmaService {
 
@@ -8,7 +10,7 @@ export class TipoTurmaService {
 
   getTipoTurmas() {
     return this.http.get("json/tipo-turma.json")
-      .map((response: Response) => <TipoTurma[]>response.json());
+      .map((response: Response) => <TipoTurmaService[]>response.json());
   }
 
   getNiveis() {
@@ -17,18 +19,4 @@ export class TipoTurmaService {
   }
 
 
-}
-
-export class TipoTurma {
-  constructor(
-    public id: number,
-    public nivel: NivelTurma,
-    public modalidade
-  ) { }
-}
-
-export class NivelTurma {
-  constructor(
-    public id: number,
-    public nome: String, ) { }
 }

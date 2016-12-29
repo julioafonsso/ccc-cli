@@ -1,77 +1,67 @@
-<form class="form-horizontal">
-<fieldset>
+<form class="form-horizontal" (ngSubmit)="onSubmit()">
+  <fieldset>
 
-<!-- Form Name -->
-<legend>Cadastro de Professores</legend>
+    <!-- Form Name -->
+    <legend>Cadastro de Professores</legend>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Nome do Professor</label>  
-  <div class="col-md-6">
-  <input type="text" placeholder="Isnard Manso" class="form-control input-md" required="">
-    
-  </div>
-</div>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Nome do Professor</label>
+      <div class="col-md-6">
+        <input [(ngModel)]="professor.nome" name="nome" type="text" placeholder="Isnard Manso" class="form-control input-md" required="">
+      </div>
+    </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Data de Nascimento</label>  
-  <div class="col-md-6">
-  <input type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
-    
-  </div>
-</div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Identidade (RG)</label>  
-  <div class="col-md-6">
-  <input type="text" placeholder="000000001" class="form-control input-md" required="">
-    
-  </div>
-</div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">CPF</label>  
-  <div class="col-md-6">
-  <input type="text" placeholder="01234567890" class="form-control input-md" required="">
-    
-  </div>
-</div>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Identidade (RG)</label>
+      <div class="col-md-6">
+        <input [(ngModel)]="professor.rg" name="rg" type="text" placeholder="000000001" class="form-control input-md" required="">
+      </div>
+    </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Email</label>  
-  <div class="col-md-6">
-  <input type="email" placeholder="email@email.com" class="form-control input-md" required>
-  </div>
-</div>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">CPF</label>
+      <div class="col-md-6">
+        <input [(ngModel)]="professor.cpf" name="cpf" type="text" placeholder="01234567890" class="form-control input-md" required="">
+      </div>
+    </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Telefone</label>  
-  <div class="col-md-6">
-  <input type="tel" placeholder="(21) 99999-9999" class="form-control input-md" required>
-  </div>
-</div>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Email</label>
+      <div class="col-md-6">
+        <input [(ngModel)]="professor.email" name="email" type="email" placeholder="email@email.com" class="form-control input-md" required>
+      </div>
+    </div>
 
-<!-- Text Area-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Observação</label>  
-  <div class="col-md-6">
-  <textarea class="form-control"></textarea>
-  </div>
-</div>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Telefone</label>
+      <div class="col-md-6">
+        <input [(ngModel)]="professor.telefone" name="telefone" type="tel" placeholder="(21) 99999-9999" class="form-control input-md" required>
+      </div>
+    </div>
 
-<!-- Button (Double) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="button1id"></label>
-  <div class="col-md-8">
-    <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
-    <button id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
-  </div>
-</div>
+    <!-- Text Area-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Observação</label>
+      <div class="col-md-6">
+        <textarea [(ngModel)]="professor.observacao" name="observacao" class="form-control"></textarea>
+      </div>
+    </div>
 
-</fieldset>
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="button1id"></label>
+      <div class="col-md-8">
+        <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
+        <button id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
+      </div>
+    </div>
+
+  </fieldset>
 </form>

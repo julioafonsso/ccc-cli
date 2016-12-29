@@ -1,10 +1,17 @@
+import { TurmaProfessor } from './../models/turma-professor';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { TurmaService } from './../servicos/turma.service';
+import { ProfessorService } from './../servicos/professor.service';
+import { TipoTurmaService } from './../servicos/tipo-turma.service';
 
-import { TurmaService, DiasAulas, Salas } from './../servicos/turma.service';
-import { ProfessorService, Professor } from './../servicos/professor.service';
-import { TipoTurmaService, TipoTurma } from './../servicos/tipo-turma.service';
+import { Salas } from './../models/salas';
+import { Professor } from './../models/professor';
+import { DiasSemana } from './../models/dias-semana';
+import { ModalidadeTurma } from './../models/modalidade-turma';
+import { NivelTurma } from './../models/nivel-turma';
+import { Turma } from './../models/turma';
 
 
 @Component({
@@ -16,20 +23,21 @@ import { TipoTurmaService, TipoTurma } from './../servicos/tipo-turma.service';
 
 
 export class CadastroTurmaComponent implements OnInit {
-  dias: DiasAulas[];
+  dias: DiasSemana[];
   professores: Professor[];
   professoras: Professor[];
   salas: Salas[];
-  tipoTurmas: TipoTurma[];
+  nives: NivelTurma[];
+  modalidades: ModalidadeTurma[];
 
   selecionado: string = "tete";
-
+  turma = new Turma();
 
   constructor(private turmaService: TurmaService,
-    private professorService: ProfessorService,
-    private tipoTurmaService: TipoTurmaService) { }
+    private professorService: ProfessorService) { }
 
   ngOnInit() {
+    this.turma.inicializarTurmaProfessor();
     this.turmaService.getDiasAulas().subscribe(res => {
       this.dias = res
     });
@@ -44,9 +52,19 @@ export class CadastroTurmaComponent implements OnInit {
     this.turmaService.getSalas().subscribe(res => {
       this.salas = res;
     })
-    this.tipoTurmaService.getTipoTurmas().subscribe(res => {
-      this.tipoTurmas = res;
+
+    this.turmaService.getModalidades().subscribe(res => {
+      this.modalidades = res;
     })
+
+    this.turmaService.getNiveis().subscribe(res => {
+      this.nives = res;
+    })
+
+  }
+
+  onSubmit() {
+    console.log(this.turma)
   }
 
 }

@@ -1,4 +1,4 @@
-<form class="form-horizontal">
+<form class="form-horizontal" (ngSubmit)="onSubmit()" >
   <fieldset>
 
     <!-- Form Name -->
@@ -8,7 +8,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Nome do Aluno</label>
       <div class="col-md-6">
-        <input type="text" placeholder="Julio Marques" class="form-control input-md" required="">
+        <input [(ngModel)]="aluno.nome" name="nome" type="text" placeholder="Julio Marques" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -17,7 +17,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">CPF</label>
       <div class="col-md-6">
-        <input type="text" placeholder="01234567890" class="form-control input-md" required="">
+        <input [(ngModel)]="aluno.cpf" name="cpf" type="text" placeholder="01234567890" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -26,7 +26,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Identidade (RG)</label>
       <div class="col-md-6">
-        <input type="text" placeholder="000000001" class="form-control input-md" required="">
+        <input [(ngModel)]="aluno.rg" name="rg" type="text" placeholder="000000001" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -35,8 +35,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Data de Nascimento</label>
       <div class="col-md-6">
-        <input type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
-
+        <input [(ngModel)]="aluno.dataNascimento" name="dataNascimento" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
       </div>
     </div>
 
@@ -44,17 +43,15 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">E-mail</label>
       <div class="col-md-6">
-        <input type="email" placeholder="alunoccc@ccc.com.br" class="form-control input-md" required="">
-
+        <input [(ngModel)]="aluno.email" name="email" type="email" placeholder="alunoccc@ccc.com.br" class="form-control input-md" required="">
       </div>
     </div>
 
-    <!-- Text input-->
+     <!--Text input-->
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Telefone</label>
       <div class="col-md-6">
-        <input type="tel" placeholder="21 234 5678" class="form-control input-md" required="">
-
+        <input [(ngModel)]="aluno.telefone" name="telefone" type="tel" placeholder="21 234 5678" class="form-control input-md" required="">
       </div>
     </div>
 
@@ -62,8 +59,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Endereço</label>
       <div class="col-md-6">
-        <input type="text" placeholder="rua, numero, bairro, cidade" class="form-control input-md" required="">
-
+        <input [(ngModel)]="aluno.endereco" name="endereco" type="text" placeholder="rua, numero, bairro, cidade" class="form-control input-md" required="">
       </div>
     </div>
 
@@ -71,8 +67,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Profissão</label>
       <div class="col-md-6">
-        <input type="text" placeholder="Analista, Professor ..." class="form-control input-md" required="">
-
+        <input [(ngModel)]="aluno.profissao" name="profissao" type="text" placeholder="Analista, Professor ..." class="form-control input-md" required="">
       </div>
     </div>
 
@@ -80,19 +75,22 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Sexo</label>
       <div class="col-md-6">
-        <select class="form-control">
-      <option value="F">Feminino</option>
-      <option value="M">Masculino</option>
+        <select [(ngModel)]="aluno.sexo" name="sexo" class="form-control" name="teste">
+      <option *ngFor="let item of Sexos" [ngValue]="item">{{item.nome}}</option>
     </select>
       </div>
     </div>
 
+    <!--<select required [(ngModel)]="model.property" ngControl="controlName">
+      <option *ngFor="#item of collection" [value]="item">{{item}} </option>
+    </select>-->
+
     <!-- Select Basic -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="select1">Como Conheceu</label>
+      <label class="col-md-4 control-label" for="selectbasic">Como Conheceu</label>
       <div class="col-md-6">
-        <select class="form-control">
-      <option *ngFor="let item of listaComoConheceu" [value]="item.id"  >{{item.nome}}</option>
+        <select [(ngModel)]="aluno.conheceEscola" name="conheceEscola" class="form-control" name="teste">
+      <option *ngFor="let item of listaComoConheceu" [ngValue]="item" >{{item.nome}}</option>
     </select>
       </div>
     </div>
@@ -102,7 +100,7 @@
       <label class="col-md-4 control-label" for="button1id"></label>
       <div class="col-md-8">
         <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
-        <button id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
+        <button id="button2id" name="button2id" class="btn <btn-dan></btn-dan>ger">Limpar Campos</button>
       </div>
     </div>
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TipoFluxoCaixaService, TipoFluxo } from './../servicos/tipo-fluxo-caixa.service';
+import { TipoFluxoCaixaService } from './../servicos/tipo-fluxo-caixa.service';
+import { TipoFluxo } from './../models/tipo-fluxo';
+
 
 @Component({
   selector: 'app-lancamento-movimentacao-caixa',

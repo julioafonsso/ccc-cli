@@ -1,4 +1,4 @@
-<form class="form-horizontal">
+<form class="form-horizontal" (ngSubmit)="onSubmit()">
   <fieldset>
 
     <!-- Form Name -->
@@ -8,8 +8,18 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Modalidade da Turma</label>
       <div class="col-md-6">
-        <select class="form-control">
-      <option *ngFor="let tipoTurma of tipoTurmas" [value]="tipoTurma.nome"  >{{tipoTurma.nome}} - {{tipoTurma.nivel}}</option>
+        <select [(ngModel)]="turma.modalidade" name="modalidade" class="form-control">
+      <option *ngFor="let item of modalidades" [ngValue]="item"  >{{item.nome}}</option>
+        </select>
+      </div>
+    </div>
+
+<!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="selectbasic">Nivel da Turma</label>
+      <div class="col-md-6">
+        <select [(ngModel)]="turma.nivel" name="nivel" class="form-control">
+      <option *ngFor="let item of nives" [ngValue]="item"  >{{item.nome}}</option>
         </select>
       </div>
     </div>
@@ -19,8 +29,7 @@
       <label class="col-md-4 control-label" for="checkboxes">Dia das Aulas</label>
       <div class="col-md-4">
         <label *ngFor="let dia of dias" class="checkbox-inline">
-          <input type="checkbox"  value="{{dia.valor}}">
-            {{dia.nome}}
+          <input type="checkbox" value="{{dia.valor}}">{{dia.nome}}
         </label>
 
       </div>
@@ -28,10 +37,12 @@
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Horario Inicial</label>
-      <div class="col-md-6">
-        <input  type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
-
+      <label class="col-md-4 control-label" for="textinput">Horario</label>
+      <div class="col-md-2">
+        <input [(ngModel)]="turma.horaInicio" name="horaInicio" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
+      </div>
+      <div class="col-md-2">
+        <input [(ngModel)]="turma.horaFim" name="horaFim" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
       </div>
     </div>
 
@@ -39,8 +50,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="select1">Professor</label>
       <div class="col-md-6">
-        <select class="form-control">
-      <option *ngFor="let professor of professores" [value]="professor.nome"  >{{professor.nome}}</option>
+        <select [(ngModel)]="turma.professores[0].professor" name="professor1" class="form-control">
+      <option *ngFor="let professor of professores" [ngValue]="professor"  >{{professor.nome}}</option>
     </select>
       </div>
     </div>
@@ -49,7 +60,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual do Professor</label>
       <div class="col-md-6">
-        <input  type="text" placeholder="20%" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.professores[0].percentual" name="percentual1" type="text" placeholder="20%" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -57,8 +68,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Professora</label>
       <div class="col-md-6">
-        <select class="form-control">
-      <option *ngFor="let professora of professoras" [value]="professora.nome"  >{{professora.nome}}</option>
+        <select [(ngModel)]="turma.professores[1].professor" name="professor2" class="form-control">
+      <option *ngFor="let professora of professoras" [ngValue]="professora"  >{{professora.nome}}</option>
     </select>
       </div>
     </div>
@@ -66,7 +77,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual da Professora</label>
       <div class="col-md-6">
-        <input  type="text" placeholder="15%" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.professores[1].percentual" name="percentual2" type="text" placeholder="15%" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -75,7 +86,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Valor da Mensalidade</label>
       <div class="col-md-6">
-        <input  type="text" placeholder="R$135,00" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.mensalidade" name="mensalidade" type="text" placeholder="R$135,00" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -84,7 +95,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Numero de Vagas</label>
       <div class="col-md-6">
-        <input  type="number" placeholder="15" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.vagas" name="vagas" type="number" placeholder="15" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -93,8 +104,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Sala da Aula</label>
       <div class="col-md-6">
-        <select class="form-control">
-      <option *ngFor="let sala of salas" [value]="sala.nome"  >{{sala.nome}}</option>
+        <select [(ngModel)]="turma.salaAula" name="sala" class="form-control">
+      <option *ngFor="let sala of salas" [ngValue]="sala.nome"  >{{sala.nome}}</option>
     </select>
       </div>
     </div>
