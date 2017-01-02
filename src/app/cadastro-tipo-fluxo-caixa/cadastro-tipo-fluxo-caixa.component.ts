@@ -1,4 +1,7 @@
+import { TipoFluxoCaixaService } from './../servicos/tipo-fluxo-caixa.service';
 import { Component, OnInit } from '@angular/core';
+
+import { TipoFluxo } from './../models/tipo-fluxo';
 
 @Component({
   selector: 'app-cadastro-tipo-fluxo-caixa',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroTipoFluxoCaixaComponent implements OnInit {
 
-  constructor() { }
+  private tipo = new TipoFluxo();
+  constructor(private tipoFluxoService: TipoFluxoCaixaService) { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    this.tipoFluxoService.cadastrar(this.tipo)
+    .subscribe((res: any) => {
+      console.log(res);
+    });
+  }
 }
