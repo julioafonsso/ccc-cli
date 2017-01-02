@@ -1,7 +1,7 @@
 export class ModalidadeTurma{
 
     public id: Number;
-    public modalidade: String;
+    public nome: String;
     
     constructor() { }
 }

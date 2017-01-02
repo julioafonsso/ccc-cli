@@ -13,14 +13,14 @@ export class Turma {
     private horarioInicial: String;
     private horarioFinal: String;
     private mensalidade: Number;
-    private salaAula: Salas;
+    private sala: Salas;
     private nivel: NivelTurma;
     private professores: TurmaProfessor[];
     private vagas: Number;
 
     constructor() {
         this.professores = [];
-        console.log(this.professores);
+        this.diasSemana = [];
 
     }
 
@@ -30,5 +30,21 @@ export class Turma {
         console.log(this.professores);
     }
 
+    addDia(dia: DiasSemana)
+    {
+        
+        this.diasSemana.push(dia);
+        console.log(this.diasSemana);
+    }
+
+    removeDia(dia: DiasSemana)
+    {
+        var index = this.diasSemana.indexOf(dia, 0);
+        if(index>-1)
+        {
+            this.diasSemana.splice(index, 1);
+        }
+        console.log(this.diasSemana);
+    }
 
 }

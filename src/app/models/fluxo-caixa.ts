@@ -9,6 +9,6 @@ export class FluxoCaixa {
     public tipoFluxo: TipoFluxo;
     public descricao: String;
     public userLancamento: Usuario;
-
+    
     constructor() { }
 }

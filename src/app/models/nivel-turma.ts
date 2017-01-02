@@ -1,7 +1,7 @@
 export class NivelTurma {
 
     public id: Number;
-    public nivel: String
+    public nome: String
     
     constructor() { }
 }

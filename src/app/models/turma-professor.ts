@@ -1,6 +1,7 @@
 import { Turma } from './turma';
 import { Professor } from './professor';
 export class TurmaProfessor {
+    
     private id: Number;
     private percentual: Number;
     private professor: Professor;

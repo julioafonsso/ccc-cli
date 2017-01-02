@@ -1,5 +1,5 @@
+import { EstadoCivil } from './estado-civil';
 import { ConheceEscola } from './conhece-escola';
-import { Sexo } from './sexo';
 
 export class Aluno {
 
@@ -14,8 +14,9 @@ export class Aluno {
     public cidade: String;
     public dataNacimento: Date;
     public profissao: String;
-    public sexo: Sexo;
-    public conheceEscola: ConheceEscola
+    public sexo: String;
+    public conheceEscola: ConheceEscola;
+    public estadoCivil :EstadoCivil ;
 
     constructor() {}
 

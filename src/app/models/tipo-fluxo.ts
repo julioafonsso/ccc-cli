@@ -1,7 +1,7 @@
 export class TipoFluxo {
 
     public id: Number;
-    public nomeFluxo: String;
+    public nome: String;
     public indEntrada : Boolean;
     
     constructor() { }

@@ -1,6 +1,6 @@
 export class DiasSemana {
     public id: Number;
-    public dias: String;
+    public nome: String;
     
     constructor() { }
 }

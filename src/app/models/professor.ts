@@ -1,4 +1,3 @@
-import { Sexo } from './../models/sexo';
 
 export class Professor {
     
@@ -10,7 +9,7 @@ export class Professor {
     public endereco: String;
     public telefone: String;
     public observacao: String;
-    public sexo: Sexo
+    public sexo: String;
 
     constructor(){}
 }
