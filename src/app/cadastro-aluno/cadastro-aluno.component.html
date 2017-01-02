@@ -75,21 +75,18 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Sexo</label>
       <div class="col-md-6">
-        <select [(ngModel)]="aluno.sexo" name="sexo" class="form-control" name="teste">
-      <option *ngFor="let item of Sexos" [ngValue]="item">{{item.nome}}</option>
+        <select [(ngModel)]="aluno.sexo" name="sexo" class="form-control" required>
+          <option  value="F">Feminino</option>
+          <option  value="M">Masculino</option>
     </select>
       </div>
     </div>
-
-    <!--<select required [(ngModel)]="model.property" ngControl="controlName">
-      <option *ngFor="#item of collection" [value]="item">{{item}} </option>
-    </select>-->
 
     <!-- Select Basic -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Como Conheceu</label>
       <div class="col-md-6">
-        <select [(ngModel)]="aluno.conheceEscola" name="conheceEscola" class="form-control" name="teste">
+        <select [(ngModel)]="aluno.conheceEscola" name="conheceEscola" class="form-control" required>
       <option *ngFor="let item of listaComoConheceu" [ngValue]="item" >{{item.nome}}</option>
     </select>
       </div>

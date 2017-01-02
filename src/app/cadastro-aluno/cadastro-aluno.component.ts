@@ -1,7 +1,7 @@
+import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
 import { AlunoService } from './../servicos/aluno.service';
-import { Sexo } from './../models/sexo';
 import { ConheceEscola } from './../models/conhece-escola';
 import { Aluno } from './../models/aluno';
 
@@ -14,7 +14,6 @@ import { Aluno } from './../models/aluno';
 export class CadastroAlunoComponent implements OnInit {
 
   private listaComoConheceu: ConheceEscola[];
-  private Sexos: Sexo[];
   private aluno = new Aluno();
 
   constructor(private alunoService: AlunoService) { }
@@ -25,15 +24,13 @@ export class CadastroAlunoComponent implements OnInit {
       this.listaComoConheceu = res;
     })
 
-    this.alunoService.getSexo().subscribe(res => {
-      this.Sexos = res;
-    })
-
   }
 
   onSubmit() {
-    console.log(this.aluno)
-    console.log(this.aluno.conheceEscola)
+    this.alunoService.cadastrar(this.aluno)
+    .subscribe((res: any) =>{
+      console.log(res)
+    })
   }
 
 }

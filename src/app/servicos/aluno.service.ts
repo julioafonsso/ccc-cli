@@ -1,9 +1,9 @@
 import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
-import { Sexo } from './../models/sexo';
 import { ConheceEscola } from './../models/conhece-escola';
-
+import { Aluno } from './../models/aluno';
+import { environment } from './../../environments/environment';
 
 @Injectable()
 export class AlunoService {
@@ -12,15 +12,15 @@ export class AlunoService {
 
   getListaComoConheceu()
   {
-    return this.http.get("json/como-conheceu.json")
+    return this.http.get(environment.url + "conhece-escola")
     .map((response : Response) => <ConheceEscola[]> response.json())
   }
 
-  getSexo(){
-    return this.http.get("json/sexo.json")
-    .map((response : Response) => <Sexo[]> response.json())
+  cadastrar(aluno: Aluno)
+  {
+    console.log(aluno)
+    return this.http.post(environment.url + "alunos", aluno);
   }
-
 }
 
 
