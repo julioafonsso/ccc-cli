@@ -17,9 +17,12 @@ export class CadastroModalidadeTurmaComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.modal)
     this.turmaService.cadastrarModalidade(this.modal)
+      .subscribe((err: any) => {
+        console.log(err);
+      })
   }
 
 }
