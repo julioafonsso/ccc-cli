@@ -1,3 +1,4 @@
+import { Response } from '@angular/http';
 import { TurmaProfessor } from './../models/turma-professor';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -38,22 +39,23 @@ export class CadastroTurmaComponent implements OnInit {
 
   ngOnInit() {
     this.turma.inicializarTurmaProfessor();
+
     this.turmaService.getDiasAulas().subscribe(res => {
       this.dias = res
     });
 
     this.professorService.getProfessores().subscribe(res => {
-      this.professores = res
+      this.professores = res;
+      this.professoras = res;
     })
 
-    this.professorService.getProfessoras().subscribe(res => {
-      this.professoras = res
-    })
     this.turmaService.getSalas().subscribe(res => {
+      console.log(res)
       this.salas = res;
     })
 
     this.turmaService.getModalidades().subscribe(res => {
+      console.log(res)
       this.modalidades = res;
     })
 
@@ -63,8 +65,22 @@ export class CadastroTurmaComponent implements OnInit {
 
   }
 
+  checkDias(dia: DiasSemana, event){
+    if(event.target.checked)
+    {
+      this.turma.addDia(dia)
+    }
+    else
+    {
+      this.turma.removeDia(dia)
+    }
+  }
+
   onSubmit() {
-    console.log(this.turma)
+    this.turmaService.cadastrarTurma(this.turma).subscribe((res: Response) => {
+      console.log(res)
+    })
+    
   }
 
 }

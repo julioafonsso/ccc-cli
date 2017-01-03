@@ -29,7 +29,7 @@
       <label class="col-md-4 control-label" for="checkboxes">Dia das Aulas</label>
       <div class="col-md-4">
         <label *ngFor="let dia of dias" class="checkbox-inline">
-          <input type="checkbox" value="{{dia.valor}}">{{dia.nome}}
+          <input type="checkbox" (change)="checkDias(dia, $event)">{{dia.nome}}
         </label>
 
       </div>
@@ -39,10 +39,10 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Horario</label>
       <div class="col-md-2">
-        <input [(ngModel)]="turma.horaInicio" name="horaInicio" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.horarioInicia" name="horarioInicial" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
       </div>
       <div class="col-md-2">
-        <input [(ngModel)]="turma.horaFim" name="horaFim" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.horarioFina" name="horarioFinal" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
       </div>
     </div>
 
@@ -104,8 +104,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Sala da Aula</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.salaAula" name="sala" class="form-control">
-      <option *ngFor="let sala of salas" [ngValue]="sala.nome"  >{{sala.nome}}</option>
+        <select [(ngModel)]="turma.sala" name="sala" class="form-control">
+      <option *ngFor="let sala of salas" [ngValue]="sala"  >{{sala.nome}}</option>
     </select>
       </div>
     </div>
