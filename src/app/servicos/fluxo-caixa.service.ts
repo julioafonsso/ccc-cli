@@ -11,7 +11,7 @@ export class FluxoCaixaService {
   constructor(private http: Http) { }
 
   cadastrar(fluxoCaixa: FluxoCaixa){
-    this.http.post(environment.url + "fluxo-caixa", fluxoCaixa)
+    return this.http.post(environment.url + "fluxo-caixa", fluxoCaixa)
   }
 
 }

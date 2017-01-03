@@ -41,6 +41,9 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
   }
 
   onSubmit(){
-    this.fluxoCaixaService.cadastrar(this.fluxoCaixa);
+    this.fluxoCaixaService.cadastrar(this.fluxoCaixa)
+    .subscribe((res: any) =>{
+      console.log(res);
+    });
   }
 }
