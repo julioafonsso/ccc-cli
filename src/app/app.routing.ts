@@ -1,3 +1,4 @@
+import { ManutencaoTurmaComponent } from './manutencao-turma/manutencao-turma.component';
 
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from "@angular/router";
@@ -24,7 +25,8 @@ const ROTAS = [
     { path: 'lancamento-movimentacao-caixa', component: LancamentoMovimentacaoCaixaComponent },
     { path: 'consulta-aluno-debito', component: ConsultaAlunosDebitoComponent },
     { path: 'relatorio-movimentacao-caixa', component: RelatorioMovimentacaoCaixaComponent },
-    { path: 'relatorio-pagamento-professor', component: RelatorioPagamentoProfessorComponent }
+    { path: 'relatorio-pagamento-professor', component: RelatorioPagamentoProfessorComponent },
+    { path: 'manutencao-turma', component: ManutencaoTurmaComponent }
 
 ];
 
