@@ -18,7 +18,15 @@ export class CadastroProfessorComponent implements OnInit {
   }
 
    onSubmit() {
-    console.log(this.professor)
+    this.professorService.cadstrarProfessor(this.professor)
+    .subscribe(error => {
+      console.log("erro")
+      console.log(error)
+    },
+    res =>{
+      console.log("res")
+      console.log(res)
+    });
     
   }
 
