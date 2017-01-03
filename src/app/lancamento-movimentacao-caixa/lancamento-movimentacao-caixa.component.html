@@ -7,8 +7,8 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">Tipo Fluxo</label>
-  <div class="col-md-6">
-    <select class="form-control">
+  <div class="col-md-6">  
+    <select [(ngModel)]="indEntrada" (change)="atualizarTipoFluxo(indEntrada)" name="indEntrada"  class="form-control">
       <option value="E">Entrada</option>
       <option value="S">Saida</option>
     </select>
@@ -19,7 +19,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">Nome Fluxo</label>
   <div class="col-md-6">
-    <select  class="form-control">
+    <select [(ngModel)]="fluxoCaixa.tipoFluxo" name="tipoFluxo" class="form-control" required="">
       <option *ngFor="let fluxo of fluxos">{{fluxo.nome}}</option>
     </select>
   </div>
@@ -29,7 +29,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Data</label>  
   <div class="col-md-6">
-  <input type="date" placeholder="01/01/2017" class="form-control input-md" required="">
+  <input [(ngModel)]="fluxoCaixa.dataFluxo" name="dataFluxo" type="date" placeholder="01/01/2017" class="form-control input-md" required="">
     
   </div>
 </div>
@@ -38,10 +38,17 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Valor</label>  
   <div class="col-md-6">
-  <input type="number" placeholder="R$1000,00" step="0.01" class="form-control input-md" required="">
-    
+  <input [(ngModel)]="fluxoCaixa.valor" name="valorFluxo" type="number" placeholder="R$1000,00" step="0.01" class="form-control input-md" required="">
   </div>
 </div>
+
+<!-- Text Area-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Observação</label>
+      <div class="col-md-6">
+        <textarea [(ngModel)]="fluxoCaixa.descricao" name="observacao" class="form-control"></textarea>
+      </div>
+    </div>
 
 <!-- Button (Double) -->
 <div class="form-group">
