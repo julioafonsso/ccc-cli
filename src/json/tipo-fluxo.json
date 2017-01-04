@@ -1,12 +1,33 @@
 [
     {
-        "id" : 1,
-        "nome" : "pagamento",
-        "indEntrada" : false
+        "id": 1,
+        "nome": "Mensalidade",
+        "indEntrada": true,
+        "fluxos": [
+            {
+                "id": 2,
+                "valor": 0.03,
+                "descricao": "teste",
+                "dataFluxo": "2017-12-30"
+            }
+        ]
     },
     {
-        "id" : 2,
-        "nome" : "Recebimento mensalidade",
-        "indEntrada" : true
+        "id": 2,
+        "nome": "Venda de ingresso",
+        "indEntrada": true,
+        "fluxos": []
+    },
+    {
+        "id": 3,
+        "nome": "Pagamento Agua",
+        "indEntrada": false,
+        "fluxos": []
+    },
+    {
+        "id": 4,
+        "nome": "Pagamento Luz",
+        "indEntrada": false,
+        "fluxos": []
     }
 ]
