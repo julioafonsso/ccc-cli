@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { CadastroTurmaComponent } from './cadastro-turma.component';
 import { TurmaService } from './../servicos/turma.service';
 import { ProfessorService } from './../servicos/professor.service';
-import { TipoTurmaService } from './../servicos/tipo-turma.service';
 
 
 
@@ -15,6 +14,6 @@ import { TipoTurmaService } from './../servicos/tipo-turma.service';
     FormsModule
   ],
   declarations: [CadastroTurmaComponent],
-  providers: [TipoTurmaService, TurmaService, ProfessorService]
+  providers: [ TurmaService, ProfessorService]
 })
 export class CadastroTurmaModule { }

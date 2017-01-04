@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 import { TurmaService } from './../servicos/turma.service';
 import { ProfessorService } from './../servicos/professor.service';
-import { TipoTurmaService } from './../servicos/tipo-turma.service';
 
 import { Salas } from './../models/salas';
 import { Professor } from './../models/professor';
@@ -50,12 +49,10 @@ export class CadastroTurmaComponent implements OnInit {
     })
 
     this.turmaService.getSalas().subscribe(res => {
-      console.log(res)
       this.salas = res;
     })
 
     this.turmaService.getModalidades().subscribe(res => {
-      console.log(res)
       this.modalidades = res;
     })
 
