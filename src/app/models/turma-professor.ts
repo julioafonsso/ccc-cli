@@ -2,14 +2,13 @@ import { Turma } from './turma';
 import { Professor } from './professor';
 export class TurmaProfessor {
     
-    private id: Number;
-    private percentual: Number;
-    private professor: Professor;
-    private turma: Turma;
+    public id: Number;
+    public percentual: Number;
+    public professor: Professor;
+    public turma: Turma;
 
     constructor() {
 
         this.professor = new Professor();
-        // this.turma = new Turma();
      }
 }

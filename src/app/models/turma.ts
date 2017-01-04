@@ -7,16 +7,18 @@ import { ModalidadeTurma } from './modalidade-turma';
 
 export class Turma {
 
-    private id: Number;
-    private modalidade: ModalidadeTurma;
-    private diasSemana: DiasSemana[];
-    private horarioInicial: String;
-    private horarioFinal: String;
-    private mensalidade: Number;
-    private sala: Salas;
-    private nivel: NivelTurma;
-    private professores: TurmaProfessor[];
-    private vagas: Number;
+    public id: Number;
+    public modalidade: ModalidadeTurma;
+    public diasSemana: DiasSemana[];
+    public horarioInicial: String;
+    public horarioFinal: String;
+    public mensalidade: Number;
+    public sala: Salas;
+    public nivel: NivelTurma;
+    public professores: TurmaProfessor[];
+    public vagas: Number;
+    public qtdAlunos: number;
+    public qtdAlunas: number;
 
     constructor() {
         this.professores = [];
