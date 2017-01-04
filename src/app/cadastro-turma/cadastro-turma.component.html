@@ -35,6 +35,17 @@
       </div>
     </div>
 
+     <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Data Inicio / Data Termino</label>
+      <div class="col-md-2">
+        <input [(ngModel)]="turma.dataInicio" name="dataInicio" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+      </div>
+      <div class="col-md-2">
+        <input [(ngModel)]="turma.dataTermino" name="dataTermino" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+      </div>
+    </div>
+
     <!-- Text input-->
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Horario</label>

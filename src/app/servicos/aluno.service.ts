@@ -1,3 +1,4 @@
+import { EstadoCivil } from './../models/estado-civil';
 import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -9,6 +10,17 @@ import { environment } from './../../environments/environment';
 export class AlunoService {
 
   constructor(private http : Http) { }
+
+  getListaEstadoCivil()
+  {
+    if(environment.mock){
+      return this.http.get(environment.url + "estado-civil.json")
+      .map((response : Response) => <EstadoCivil[]> response.json())
+    }
+    else{
+      return this.http.get(environment.url + "estado-civil")
+      .map((response : Response) => <EstadoCivil[]> response.json())
+    }
 
   getListaComoConheceu()
   {
