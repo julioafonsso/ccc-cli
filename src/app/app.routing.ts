@@ -1,5 +1,3 @@
-import { ManutencaoTurmaComponent } from './manutencao-turma/manutencao-turma.component';
-
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from "@angular/router";
 
@@ -14,6 +12,9 @@ import { CadastroProfessorComponent } from './cadastro-professor/cadastro-profes
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
 import { CadastroTipoFluxoCaixaComponent } from './cadastro-tipo-fluxo-caixa/cadastro-tipo-fluxo-caixa.component';
 import { CadastroTipoDescontoComponent } from './cadastro-tipo-desconto/cadastro-tipo-desconto.component';
+import { ConsultaTurmasComponent } from './consulta-turmas/consulta-turmas.component';
+import { ManutencaoTurmaComponent } from './manutencao-turma/manutencao-turma.component';
+
 
 const ROTAS = [
     { path: 'cadastro-tipo-desconto', component: CadastroTipoDescontoComponent },
@@ -26,7 +27,8 @@ const ROTAS = [
     { path: 'consulta-aluno-debito', component: ConsultaAlunosDebitoComponent },
     { path: 'relatorio-movimentacao-caixa', component: RelatorioMovimentacaoCaixaComponent },
     { path: 'relatorio-pagamento-professor', component: RelatorioPagamentoProfessorComponent },
-    { path: 'manutencao-turma', component: ManutencaoTurmaComponent }
+    { path: 'consulta-turma', component: ConsultaTurmasComponent },
+    { path: 'manutencao-turma/:id' , component: ManutencaoTurmaComponent }
 
 ];
 
