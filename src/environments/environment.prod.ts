@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  url : 'json/'
+  url : 'json/',
+  mock: true
 };
