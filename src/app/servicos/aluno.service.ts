@@ -12,8 +12,16 @@ export class AlunoService {
 
   getListaComoConheceu()
   {
-    return this.http.get(environment.url + "conhece-escola")
-    .map((response : Response) => <ConheceEscola[]> response.json())
+    if(environment.mock){
+      return this.http.get(environment.url + "conhece-escola.json")
+      .map((response : Response) => <ConheceEscola[]> response.json())
+    }
+    else{
+      return this.http.get(environment.url + "conhece-escola")
+      .map((response : Response) => <ConheceEscola[]> response.json())
+    }
+
+      
   }
 
   cadastrar(aluno: Aluno)
