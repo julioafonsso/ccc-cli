@@ -1,3 +1,4 @@
+import { EstadoCivil } from './../models/estado-civil';
 import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,6 +14,9 @@ import { Aluno } from './../models/aluno';
 })
 export class CadastroAlunoComponent implements OnInit {
 
+  private listaEstadoCivil: EstadoCivil[];
+  // private aluno = new Aluno();
+
   private listaComoConheceu: ConheceEscola[];
   private aluno = new Aluno();
 
@@ -20,6 +24,10 @@ export class CadastroAlunoComponent implements OnInit {
 
   ngOnInit() {
   
+    this.alunoService.getListaEstadoCivil().subscribe(res => {
+      this.listaEstadoCivil = res;
+    })
+
     this.alunoService.getListaComoConheceu().subscribe(res => {
       this.listaComoConheceu = res;
     })
