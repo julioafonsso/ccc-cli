@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Professor } from './../models/professor';
 import { environment } from './../../environments/environment';
+import { TurmaProfessor } from './../models/turma-professor';
 
 
 
@@ -11,22 +12,31 @@ export class ProfessorService {
 
   constructor(private http: Http) { }
 
-  getProfessores(){
-    if(environment.mock)
-    {
+  getProfessores() {
+    if (environment.mock) {
       return this.http.get(environment.url + "professores.json")
-      .map((response: Response) => <Professor[]>response.json())
-      
+        .map((response: Response) => <Professor[]>response.json())
+
     }
-    else{
+    else {
       return this.http.get(environment.url + "professores")
-      .map((response: Response) => <Professor[]>response.json())
+        .map((response: Response) => <Professor[]>response.json())
     }
-    
+
   }
 
-  cadstrarProfessor(professor: Professor){
+  cadstrarProfessor(professor: Professor) {
     return this.http.post(environment.url + "/professores", professor);
   }
+
+  getProfessor(professores: TurmaProfessor[], index: number) {
+    if (index > professores.length - 1) {
+      return 'Sem Professor';
+    }
+
+    return professores[index].professor.nome;
+
+  }
+
 
 }

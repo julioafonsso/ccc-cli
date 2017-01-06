@@ -1,5 +1,5 @@
 import { EstadoCivil } from './../models/estado-civil';
-import { Http, Response } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { ConheceEscola } from './../models/conhece-escola';
@@ -9,38 +9,71 @@ import { environment } from './../../environments/environment';
 @Injectable()
 export class AlunoService {
 
-  constructor(private http : Http) { }
+  constructor(private http: Http) { }
 
-  getListaEstadoCivil()
-  {
-    if(environment.mock){
+  getListaEstadoCivil() {
+    if (environment.mock) {
       return this.http.get(environment.url + "estado-civil.json")
-      .map((response : Response) => <EstadoCivil[]> response.json())
+        .map((response: Response) => <EstadoCivil[]>response.json())
     }
-    else{
+    else {
       return this.http.get(environment.url + "estado-civil")
-      .map((response : Response) => <EstadoCivil[]> response.json())
+        .map((response: Response) => <EstadoCivil[]>response.json())
     }
-
-  getListaComoConheceu()
-  {
-    if(environment.mock){
+  }
+  getListaComoConheceu() {
+    if (environment.mock) {
       return this.http.get(environment.url + "conhece-escola.json")
-      .map((response : Response) => <ConheceEscola[]> response.json())
+        .map((response: Response) => <ConheceEscola[]>response.json())
     }
-    else{
+    else {
       return this.http.get(environment.url + "conhece-escola")
-      .map((response : Response) => <ConheceEscola[]> response.json())
+        .map((response: Response) => <ConheceEscola[]>response.json())
     }
 
-      
+
   }
 
-  cadastrar(aluno: Aluno)
-  {
+  cadastrar(aluno: Aluno) {
     console.log(aluno)
     return this.http.post(environment.url + "alunos", aluno);
   }
+
+  getAll() {
+    if (environment.mock) {
+      return this.http.get(environment.url + "alunos-nao-matriculados").map((response: Response) => <Aluno[]>response.json());
+    }
+    {
+      return this.http.get(environment.url + "alunos").map((response: Response) => <Aluno[]>response.json());
+    }
+  }
+
+  getAluno(idAluno: number) {
+    if (environment.mock) {
+      return this.http.get(environment.url + "aluno").map((response: Response) => <Aluno>response.json());
+    }
+    {
+      return this.http.get(environment.url + "alunos/" + idAluno).map((response: Response) => <Aluno>response.json());
+    }
+  }
+
+  pesquisarAlunos(nome: string, email: string, cpf: string) {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('nome', nome);
+    params.set('email', email);
+    params.set('cpf', cpf);
+
+    if (environment.mock) {
+      return this.http.get(environment.url + "alunos-nao-matriculados").map((response: Response) => <Aluno[]>response.json());
+    }
+    {
+      return this.http.get(environment.url + "alunos", {
+        search: params
+      }).map((response: Response) => <Aluno[]>response.json());
+    }
+  }
+
 }
 
 
