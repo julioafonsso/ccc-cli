@@ -1,3 +1,5 @@
+import { AlunoTurma } from './aluno-turma';
+import { Aluno } from './aluno';
 import { TurmaProfessor } from './turma-professor';
 import { Professor } from './professor';
 import { NivelTurma } from './nivel-turma';
@@ -19,17 +21,21 @@ export class Turma {
     public vagas: Number;
     public qtdAlunos: number;
     public qtdAlunas: number;
+    public alunos: AlunoTurma[];
 
     constructor() {
         this.professores = [];
         this.diasSemana = [];
-
+        this.nivel = new NivelTurma()
+        this.sala = new Salas();
+        this.modalidade = new ModalidadeTurma();
+        this.alunos = [];
     }
 
     inicializarTurmaProfessor() {
         this.professores[0] = new TurmaProfessor();
         this.professores[1] = new TurmaProfessor();
-        console.log(this.professores);
+        
     }
 
     addDia(dia: DiasSemana)
