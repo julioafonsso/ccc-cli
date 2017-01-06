@@ -1,3 +1,70 @@
-<p>
-  consulta-turmas works!
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">Filtros</div>
+  <div class="panel-body">
+
+  <div class="col-md-3">
+      <label class="control-label" for="textinput">Modalidades</label>
+      <select [(ngModel)]="modalidadeSelecionado" name="modalidade" class="form-control">
+      <option *ngFor="let item of modalidades" [ngValue]="item">{{item.nome}}</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+      <label class="control-label" for="textinput">Niveis</label>
+      <select [(ngModel)]="nivelSelecionado" name="nivel" class="form-control">
+      <option  *ngFor="let item of niveis" [ngValue]="item">{{item.nome}}</option>
+        </select>
+    </div>
+
+
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Lista de Turmas</div>
+
+  <!-- Table -->
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <!--<th>#</th>-->
+        <th>Modalidade</th>
+        <th>Nivel</th>
+        <th>Horario</th>
+        <th>Data Inicio</th>
+        <th>Data Fim</th>
+        <th>dias</th>
+        <th>Qtd Cavalheiros</th>
+        <th>Qtd Damas</th>
+        <th>Professor</th>
+        <th>Professor</th>
+        <th>Mensalidade</th>
+        <th>Nº Vagas</th>
+        <th>Ação</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let turma of getTurmas()">
+        <!--<th scope=row>1</th>-->
+        <td>{{turma.modalidade.nome}}</td>
+        <td>{{turma.nivel.nome}}</td>
+        <td>{{turma.horarioInicial}} {{turma.horarioFinal}}</td>
+        <td></td>
+        <td></td>
+        <td>{{getDias(turma.diasSemana)}}</td>
+        <td>{{turma.qtdAlunos}}</td>
+        <td>{{turma.qtdAlunas}}</td>
+        <td>{{getProfessor(turma.professores, 0)}}</td>
+        <td>{{getProfessor(turma.professores, 1)}}</td>
+        <td>{{turma.mensalidade}}</td>
+        <td>{{turma.vagas}}</td>
+        <td><button class="btn btn-primary" [routerLink]="['/manutencao-turma', turma.id]" >Manutenção Turma</button></td>
+        
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
