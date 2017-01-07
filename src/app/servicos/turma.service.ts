@@ -1,15 +1,14 @@
-import { AlunoService } from './aluno.service';
-import { AlunoTurma } from './../models/aluno-turma';
-import { Aluno } from './../models/aluno';
-import { Turma } from './../models/turma';
-import { ModalidadeTurma } from './../models/modalidade-turma';
-import { NivelTurma } from './../models/nivel-turma';
 import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 
 import { environment } from './../../environments/environment';
-
+import { AlunoService } from './aluno.service';
+import { Aluno } from './../models/aluno';
+import { Turma } from './../models/turma';
+import { Matricula } from './../models/maticula';
+import { ModalidadeTurma } from './../models/modalidade-turma';
+import { NivelTurma } from './../models/nivel-turma';
 import { DiasSemana } from './../models/dias-semana';
 import { Salas } from './../models/salas';
 
@@ -18,23 +17,25 @@ export class TurmaService {
 
     constructor(private http: Http) { }
 
-    matricularAluno(turma: Turma, aluno: Aluno)
-    {
-        let matricula = new AlunoTurma();
+    matricularAluno(turma: Turma, aluno: Aluno) {
+        let matricula = new Matricula();
         matricula.aluno = aluno;
         matricula.turma = turma;
         matricula.diaVencimento = aluno.diaVencimento;
         return this.http.post(environment.url + "turmas/matricula", matricula);
     }
 
-    excluirAlunoTurma(aluno: AlunoTurma){
+    getAlunosTurma(idturma: number) {
+    }
+
+    excluirAlunoTurma(aluno: Matricula) {
         console.log(aluno);
-        return this.http.delete(environment.url+ "turmas/matricula", {body: {id : aluno.id}});
+        return this.http.delete(environment.url + "turmas/matricula", { body: { id: aluno.id } });
     }
 
     getTurma(id: number) {
         if (environment.mock) {
-            return this.http.get(environment.url + "Turma.json").map((response: Response) => <Turma>response.json());
+            return this.http.get(environment.url + "turma.json").map((response: Response) => <Turma>response.json());
         }
         else {
             return this.http.get(environment.url + "turmas/" + id).map((response: Response) => <Turma>response.json());

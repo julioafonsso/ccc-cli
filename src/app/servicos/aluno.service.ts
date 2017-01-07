@@ -13,6 +13,11 @@ export class AlunoService {
 
   getListaEstadoCivil() {
     if (environment.mock) {
+      
+      this.http.get(environment.url + "estado-civil.json")
+        .map((response: Response) =>(console.log(response))).subscribe();
+      
+
       return this.http.get(environment.url + "estado-civil.json")
         .map((response: Response) => <EstadoCivil[]>response.json())
     }
@@ -23,6 +28,11 @@ export class AlunoService {
   }
   getListaComoConheceu() {
     if (environment.mock) {
+      console.log(environment.url + "conhece-escola.json")
+      
+      this.http.get(environment.url + "conhece-escola.json")
+        .map((response: Response) => console.log(response.json()))
+
       return this.http.get(environment.url + "conhece-escola.json")
         .map((response: Response) => <ConheceEscola[]>response.json())
     }
@@ -41,7 +51,7 @@ export class AlunoService {
 
   getAll() {
     if (environment.mock) {
-      return this.http.get(environment.url + "alunos-nao-matriculados").map((response: Response) => <Aluno[]>response.json());
+      return this.http.get(environment.url + "alunos.json").map((response: Response) => <Aluno[]>response.json());
     }
     {
       return this.http.get(environment.url + "alunos").map((response: Response) => <Aluno[]>response.json());
@@ -50,7 +60,7 @@ export class AlunoService {
 
   getAluno(idAluno: number) {
     if (environment.mock) {
-      return this.http.get(environment.url + "aluno").map((response: Response) => <Aluno>response.json());
+      return this.http.get(environment.url + "aluno.json").map((response: Response) => <Aluno>response.json());
     }
     {
       return this.http.get(environment.url + "alunos/" + idAluno).map((response: Response) => <Aluno>response.json());
@@ -65,7 +75,7 @@ export class AlunoService {
     params.set('cpf', cpf);
 
     if (environment.mock) {
-      return this.http.get(environment.url + "alunos-nao-matriculados").map((response: Response) => <Aluno[]>response.json());
+      return this.http.get(environment.url + "alunos.json").map((response: Response) => <Aluno[]>response.json());
     }
     {
       return this.http.get(environment.url + "alunos", {
