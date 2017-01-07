@@ -1,4 +1,4 @@
-import { AlunoTurma } from './aluno-turma';
+import { Matricula } from './maticula';
 import { EstadoCivil } from './estado-civil';
 import { ConheceEscola } from './conhece-escola';
 
@@ -18,7 +18,7 @@ export class Aluno {
     public sexo: string;
     public conheceEscola: ConheceEscola;
     public estadoCivil :EstadoCivil ;
-    public turmas: AlunoTurma[];
+    public matriculas: Matricula[];
     public diaVencimento: number;
     public foto: string;
 

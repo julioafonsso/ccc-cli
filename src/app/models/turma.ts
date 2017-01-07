@@ -1,4 +1,4 @@
-import { AlunoTurma } from './aluno-turma';
+import { Matricula } from './maticula';
 import { Aluno } from './aluno';
 import { TurmaProfessor } from './turma-professor';
 import { Professor } from './professor';
@@ -21,7 +21,7 @@ export class Turma {
     public vagas: Number;
     public qtdAlunos: number;
     public qtdAlunas: number;
-    public alunos: AlunoTurma[];
+    public matriculas: Matricula[];
 
     constructor() {
         this.professores = [];
@@ -29,7 +29,7 @@ export class Turma {
         this.nivel = new NivelTurma()
         this.sala = new Salas();
         this.modalidade = new ModalidadeTurma();
-        this.alunos = [];
+        this.matriculas = [];
     }
 
     inicializarTurmaProfessor() {
