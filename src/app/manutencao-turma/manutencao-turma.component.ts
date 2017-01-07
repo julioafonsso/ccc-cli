@@ -1,5 +1,4 @@
-import { AlunoTurma } from './../models/aluno-turma';
-import { Aluno } from './../models/aluno';
+import { Matricula } from './../models/maticula';
 import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +15,7 @@ import { TurmaProfessor } from './../models/turma-professor';
 import { Turma } from './../models/turma';
 import { TurmaService } from './../servicos/turma.service';
 import { DiasSemana } from './../models/dias-semana';
+import { Aluno } from './../models/aluno';
 
 @Component({
   selector: 'app-manutencao-turma',
@@ -80,10 +80,9 @@ export class ManutencaoTurmaComponent implements OnInit {
       this.turma = res;
 
     });
-
   }
 
-  excluirAluno(aluno: AlunoTurma) {
+  excluirAluno(aluno: Matricula) {
     aluno.turma = this.turma;
     this.turmaService.excluirAlunoTurma(aluno).subscribe(res => {
       if(res.status === 200 ){
