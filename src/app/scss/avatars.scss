@@ -13,39 +13,32 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-.card.hovercard {
     position: relative;
-    padding-top: 0;
     overflow: hidden;
     text-align: center;
-    background-color: rgba(214, 224, 226, 0.2);
 }
 
-.card.hovercard .cardheader {
+.cardheader {
     background: url("http://lorempixel.com/850/280/nature/4/");
     background-size: cover;
     height: 135px;
 }
 
-.card.hovercard .avatar {
+.avatar {
     position: relative;
     top: -50px;
     margin-bottom: -50px;
+    img{
+        width: 100px;
+        height: 100px;
+        max-width: 100px;
+        max-height: 100px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        border: 5px solid rgba(255,255,255,0.5);
+    }
 }
-
-.card.hovercard .avatar img {
-    width: 100px;
-    height: 100px;
-    max-width: 100px;
-    max-height: 100px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    border: 5px solid rgba(255,255,255,0.5);
-}
-
 .card.hovercard .info {
     padding: 4px 8px 10px;
 }
