@@ -1,10 +1,11 @@
+import { DetalheProfessorComponent } from './detalhe-professor/detalhe-professor.component';
+import { ConsultaProfessoresComponent } from './consulta-professores/consulta-professores.component';
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from "@angular/router";
 
 
 import { ConsultaAlunosComponent } from './consulta-alunos/consulta-alunos.component';
 import { DetalheAlunoComponent } from './detalhe-aluno/detalhe-aluno.component';
-import { RelatorioPagamentoProfessorComponent } from './relatorio-pagamento-professor/relatorio-pagamento-professor.component';
 import { RelatorioMovimentacaoCaixaComponent } from './relatorio-movimentacao-caixa/relatorio-movimentacao-caixa.component';
 import { LancamentoMovimentacaoCaixaComponent } from './lancamento-movimentacao-caixa/lancamento-movimentacao-caixa.component';
 import { ConsultaAlunosDebitoComponent } from './consulta-alunos-debito/consulta-alunos-debito.component';
@@ -28,11 +29,12 @@ const ROTAS = [
     { path: 'lancamento-movimentacao-caixa', component: LancamentoMovimentacaoCaixaComponent },
     { path: 'consulta-aluno-debito', component: ConsultaAlunosDebitoComponent },
     { path: 'relatorio-movimentacao-caixa', component: RelatorioMovimentacaoCaixaComponent },
-    { path: 'relatorio-pagamento-professor', component: RelatorioPagamentoProfessorComponent },
     { path: 'consulta-turmas', component: ConsultaTurmasComponent },
     { path: 'manutencao-turma/:id' , component: ManutencaoTurmaComponent },
     { path: 'detalhe-aluno/:id', component: DetalheAlunoComponent},
-    { path: 'consulta-alunos', component: ConsultaAlunosComponent}
+    { path: 'consulta-alunos', component: ConsultaAlunosComponent},
+    { path: 'consulta-professores', component: ConsultaProfessoresComponent},
+    { path: 'detalhe-professor/:id', component: DetalheProfessorComponent}
 
 ];
 

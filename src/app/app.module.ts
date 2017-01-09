@@ -1,4 +1,3 @@
-import { CadastroModalidadeTurmaModule } from './cadastro-modalidade-turma/cadastro-modalidade-turma.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,9 +6,10 @@ import 'rxjs/Rx';
 
 import { AppComponent } from './app.component';
 import { MenuModule } from './menu/menu.module';
-
+import { DetalheProfessorModule } from './detalhe-professor/detalhe-professor.module';
+import { ConsultaProfessoresModule } from './consulta-professores/consulta-professores.module';
+import { CadastroModalidadeTurmaModule } from './cadastro-modalidade-turma/cadastro-modalidade-turma.module';
 import { LoginModule } from './login/login.module';
-
 import { RelatorioMovimentacaoCaixaModule } from './relatorio-movimentacao-caixa/relatorio-movimentacao-caixa.module';
 import { ManutencaoTurmaModule } from './manutencao-turma/manutencao-turma.module';
 import { LancamentoMovimentacaoCaixaModule } from './lancamento-movimentacao-caixa/lancamento-movimentacao-caixa.module';
@@ -49,6 +49,8 @@ import { routing } from './app.routing';
     ManutencaoTurmaModule,
     RelatorioMovimentacaoCaixaModule,
     DetalheAlunoModule,
+    ConsultaProfessoresModule,
+    DetalheProfessorModule,
     routing
   ],
   exports: [],
