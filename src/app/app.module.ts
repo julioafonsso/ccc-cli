@@ -10,10 +10,8 @@ import { MenuModule } from './menu/menu.module';
 
 import { LoginModule } from './login/login.module';
 
-import { RelatorioPagamentoProfessorModule } from './relatorio-pagamento-professor/relatorio-pagamento-professor.module';
 import { RelatorioMovimentacaoCaixaModule } from './relatorio-movimentacao-caixa/relatorio-movimentacao-caixa.module';
 import { ManutencaoTurmaModule } from './manutencao-turma/manutencao-turma.module';
-import { ManutencaoProfessorModule } from './manutencao-professor/manutencao-professor.module';
 import { LancamentoMovimentacaoCaixaModule } from './lancamento-movimentacao-caixa/lancamento-movimentacao-caixa.module';
 import { ConsultaTurmasModule } from './consulta-turmas/consulta-turmas.module';
 import { ConsultaAlunosDebitoModule } from './consulta-alunos-debito/consulta-alunos-debito.module';
@@ -48,10 +46,8 @@ import { routing } from './app.routing';
     ConsultaAlunosDebitoModule,
     ConsultaTurmasModule,
     LancamentoMovimentacaoCaixaModule,
-    ManutencaoProfessorModule,
     ManutencaoTurmaModule,
     RelatorioMovimentacaoCaixaModule,
-    RelatorioPagamentoProfessorModule,
     DetalheAlunoModule,
     routing
   ],
