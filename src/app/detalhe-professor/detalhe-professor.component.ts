@@ -16,7 +16,7 @@ export class DetalheProfessorComponent implements OnInit {
 
   constructor(private professorService: ProfessorService, private router: ActivatedRoute) { }
 
-  ngOnInit() {
+ngOnInit() {
     this.inscricao = this.router.params.subscribe(
       (params: any) => {
         this.idProfessor = params['id'];

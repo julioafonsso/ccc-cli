@@ -9,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultaProfessoresComponent implements OnInit {
 
+  private professores: Professor[];
+
   constructor(private professorService: ProfessorService) { }
 
   ngOnInit() {
-    this.professorService.getAll().subscribe(res =>{
+    this.professorService.getProfessores().subscribe(res =>{
       this.professores = res;
     })
   }

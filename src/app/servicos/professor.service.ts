@@ -29,11 +29,14 @@ export class ProfessorService {
     return this.http.post(environment.url + "/professores", professor);
   }
 
-  getProfessor(professores: TurmaProfessor[], index: number) {
+  getProfessor(idProfessor: number){
+    return this.http.get(environment.url + "/professores/" + idProfessor ).map((response: Response) => <Professor> response.json());
+  }
+
+  getNomeProfessor(professores: TurmaProfessor[], index: number) {
     if (index > professores.length - 1) {
       return 'Sem Professor';
     }
-
     return professores[index].professor.nome;
 
   }
