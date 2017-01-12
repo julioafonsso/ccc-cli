@@ -8,6 +8,7 @@ export class Professor {
     public email: String;
     public endereco: String;
     public telefone: String;
+    public dataAdmissao: Date;
     public observacao: String;
     public sexo: String;
 
