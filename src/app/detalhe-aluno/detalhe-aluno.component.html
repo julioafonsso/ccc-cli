@@ -1,37 +1,113 @@
 <div>
-  <div class="card hovercard">
-    <div class="card-background">
-      <img class="card-bkimg" alt="">
+  <div class="card">
+    <div class="card__header">
     </div>
-    <div class="useravatar">
-      <img alt="" [src]="aluno.foto">
+    <div class="card__avatar">
+      <img class="card__avatar__img" alt="" [src]="aluno.foto">
     </div>
-    <div class="card-info"> <span class="card-title">{{aluno.nome}}</span>
-
+    <div class="card__info">
+      <div class="card__info__title">
+        {{aluno.nome}}
+      </div>
     </div>
   </div>
-  <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-    <div class="btn-group" role="group">
-      <button type="button" id="stars" class="btn btn-primary" href="#tabBios" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+</div>
+
+<div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+    <button type="button" id="perfil" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(0), 'btn-primary': getTabAtiva(0)}"
+      (click)="tabBios()" href="#tabBios" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 <div class="hidden-xs">Perfil</div>
             </button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" id="favorites" class="btn btn-default" href="#tabTurmas" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+  </div>
+
+  <div class="btn-group" role="group">
+    <button type="button" id="turmas" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(1), 'btn-primary': getTabAtiva(1)}"
+      (click)="tabTurmas()" href="#tabTurmas" data-toggle="tab"><span class="glyphicon glyphicon-text-size" aria-hidden="true"></span>
                 <div class="hidden-xs">Turmas</div>
             </button>
-    </div>
   </div>
 
-  <div class="well">
-    <div class="tab-content">
-      <div class="tab-pane fade in active" id="tabBios">
-        <h3>This is tab 1</h3>
-      </div>
-      <div class="tab-pane fade in" id="tabTurmas">
+  <div class="btn-group" role="group">
+    <button type="button" id="debitos" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(2), 'btn-primary': getTabAtiva(2)}"
+      (click)="tabDebitos()" href="#tabDebitos" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                <div class="hidden-xs"><Debitos></Debitos></div>
+            </button>
+  </div>
+
+
+</div>
+
+<div class="well">
+  <div class="tab-content">
+    <div class="tab-pane active" id="tabBios">
+      <div class="card__info">
+        <div class="card__info__detalhes"><label>Email: </ label>{{aluno.email}}</div>
+          <div class="card__info__detalhes"><label>Telefone: </label> {{aluno.telefone}}</div>
+        <div class="card__info__detalhes"><label>CPF: </label> {{aluno.cpf}}</div>
+        <div class="card__info__detalhes"><label>RG: </label> {{aluno.rg}}</div>
+        <div class="card__info__detalhes"><label>Data Nascimento: </label> {{aluno.dataNascimento}}</div>
+        <div class="card__info__detalhes"><label>Cidade: </label> {{aluno.cidade}}</div>
+        <div class="card__info__detalhes"><label>Bairro: </label> {{aluno.bairro}}</div>
+        <div class="card__info__detalhes"><label>Endereco: </label> {{aluno.endereco}}</div>
+        <div class="card__info__detalhes"><label>Estado Civil: </label> {{aluno.estadoCivil.nome}}</div>
+        <div class="card__info__detalhes"><label>Sexo: </label> {{aluno.sexo}}</div>
 
       </div>
     </div>
-  </div>
 
+    <div class="tab-pane " id="tabTurmas">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Codigo</th>
+              <th>Modalidade</th>
+              <th>Nivel</th>
+              <th>Horario</th>
+              <th>Dias</th>
+              <th>Sala</th>
+              <th>Dia Vencimento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let matricula of matriculas">
+              <td>{{matricula.turma.codigo}}</td>
+              <td>{{matricula.turma.modalidade.nome}}</td>
+              <td>{{matricula.turma.nivel.nome}}</td>
+              <td>{{matricula.turma.horarioInicial}} - {{matricula.turma.horarioFinal}}</td>
+              <td></td>
+              <td>{{matricula.turma.sala.nome}}</td>
+              <td>{{matricula.diaVencimento}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  <div class="tab-pane " id="tabDebitosd">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Codigo</th>
+              <th>Modalidade</th>
+              <th>Nivel</th>
+              <th>Dia Vencimento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let matricula of aluno.matriculas">
+              <td>{{matricula.turma.codigo}}</td>
+              <td>{{matricula.turma.modalidade.nome}}</td>
+              <td>{{matricula.turma.nivel.nome}}</td>
+              <td>{{matricula.diaVencimento}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
 </div>

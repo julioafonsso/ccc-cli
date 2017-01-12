@@ -1,7 +1,9 @@
-import { EstadoCivil } from './../models/estado-civil';
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
+import { Matricula } from './../models/maticula';
+import { Turma } from './../models/turma';
+import { EstadoCivil } from './../models/estado-civil';
 import { ConheceEscola } from './../models/conhece-escola';
 import { Aluno } from './../models/aluno';
 import { environment } from './../../environments/environment';
@@ -13,10 +15,10 @@ export class AlunoService {
 
   getListaEstadoCivil() {
     if (environment.mock) {
-      
+
       this.http.get(environment.url + "estado-civil.json")
-        .map((response: Response) =>(console.log(response))).subscribe();
-      
+        .map((response: Response) => (console.log(response))).subscribe();
+
 
       return this.http.get(environment.url + "estado-civil.json")
         .map((response: Response) => <EstadoCivil[]>response.json())
@@ -29,7 +31,7 @@ export class AlunoService {
   getListaComoConheceu() {
     if (environment.mock) {
       console.log(environment.url + "conhece-escola.json")
-      
+
       this.http.get(environment.url + "conhece-escola.json")
         .map((response: Response) => console.log(response.json()))
 
@@ -49,12 +51,21 @@ export class AlunoService {
     return this.http.post(environment.url + "alunos", aluno);
   }
 
-  getAll() {
+  getAlunos() {
     if (environment.mock) {
       return this.http.get(environment.url + "alunos.json").map((response: Response) => <Aluno[]>response.json());
     }
     {
       return this.http.get(environment.url + "alunos").map((response: Response) => <Aluno[]>response.json());
+    }
+  }
+
+  getMatriculas(idAluno: number) {
+    if (environment.mock) {
+      return this.http.get(environment.url + "matriculas.json").map((response: Response) => <Matricula[]>response.json());
+    }
+    {
+      return this.http.get(environment.url + "alunos/" + idAluno + "/turmas").map((response: Response) => <Matricula[]>response.json());
     }
   }
 

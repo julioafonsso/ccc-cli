@@ -78,8 +78,8 @@ export class ConsultaTurmasComponent implements OnInit {
     return this.turmaService.getDias(diasSemana)
   }
 
-  getProfessor(professores: TurmaProfessor[], index: number) {
-    return this.professorService.getProfessor(professores, index);
+  getNomeProfessor(professores: TurmaProfessor[], index: number) {
+    return this.professorService.getNomeProfessor(professores, index);
 
   }
 

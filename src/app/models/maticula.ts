@@ -10,6 +10,6 @@ export class Matricula
 
     constructor()
     {
-
+        this.turma = new Turma();
     }
 }

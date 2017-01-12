@@ -92,7 +92,6 @@ export class ManutencaoTurmaComponent implements OnInit {
   }
 
   pesquisarAlunos() {
-    console.log("VOU PESQUISASR")
     this.alunoService.pesquisarAlunos( this.pesquisa.nome, this.pesquisa.email, this.pesquisa.cpf).subscribe(res => {
       this.alunos = res;
     });
@@ -112,8 +111,8 @@ export class ManutencaoTurmaComponent implements OnInit {
     return this.turmaService.getDias(diasSemana)
   }
 
-  getProfessor(professores: TurmaProfessor[], index: number) {
-    return this.professorService.getProfessor(professores, index);
+  getNomeProfessor(professores: TurmaProfessor[], index: number) {
+    return this.professorService.getNomeProfessor(professores, index);
 
   }
 

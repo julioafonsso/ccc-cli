@@ -1,6 +1,10 @@
+import { Subscription } from 'rxjs/Rx';
+import { Component, OnInit } from '@angular/core';
+
 import { Aluno } from './../models/aluno';
 import { AlunoService } from './../servicos/aluno.service';
-import { Component, OnInit } from '@angular/core';
+import { Turma } from './../models/turma';
+import { TurmaService } from './../servicos/turma.service';
 
 @Component({
   selector: 'app-consulta-alunos',
@@ -9,16 +13,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultaAlunosComponent implements OnInit {
   private alunos: Aluno[]
-
+  private turmas: Turma[];
   constructor(private alunoService: AlunoService) { }
 
   ngOnInit() {
-    this.alunoService.getAll().subscribe(res => {
+    this.alunoService.getAlunos().subscribe(res => {
       this.alunos = res;
-      console.log(res);
     })
+
   }
+
   getAlunos() {
     return this.alunos;
   }
+  
 }

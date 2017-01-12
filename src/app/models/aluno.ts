@@ -23,6 +23,7 @@ export class Aluno {
     public foto: string;
 
     constructor() {
+        this.estadoCivil = new EstadoCivil()
         
     }
 

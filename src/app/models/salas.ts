@@ -1,7 +1,7 @@
 export class Salas {
 
     public id: Number;
-    public salaAula: String;
+    public nome: String;
 
     constructor() { }
 }

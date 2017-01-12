@@ -10,6 +10,7 @@ import { ModalidadeTurma } from './modalidade-turma';
 export class Turma {
 
     public id: Number;
+    public codigo: String;
     public modalidade: ModalidadeTurma;
     public diasSemana: DiasSemana[];
     public horarioInicial: String;
