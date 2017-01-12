@@ -1,28 +1,33 @@
 <div>
-  <div class="card hovercard">
-    <div class="card-background">
-      <img class="card-bkimg" alt="">
+  <div class="card">
+    <div class="card__header">
     </div>
-    <div class="useravatar">
-      <img alt="" [src]="professor.foto">
+    <div class="card__avatar">
+      <img class="card__avatar__img" alt="" [src]="professor.foto">
     </div>
-    <div class="card-info"> <span class="card-title">{{professor.nome}}</span>
-
+    <div class="card__info">
+      <div class="card__info__title">
+        {{professor.nome}}
+      </div>
     </div>
+  </div>
+</div>
   </div>
   <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
     <div class="btn-group" role="group">
-      <button type="button" id="user" class="btn btn-primary" href="#tabBios" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      <button type="button" id="perfil" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(0), 'btn-primary': getTabAtiva(0)}"
+     (click)="tabBios()" href="#tabBios" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 <div class="hidden-xs">Perfil</div>
             </button>
     </div>
     <div class="btn-group" role="group">
-      <button type="button" id="favorites" class="btn btn-default" href="#tabTurmas" data-toggle="tab"><span class="glyphicon glyphicon-music" aria-hidden="true"></span>
+       <button type="button" id="turmas" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(1), 'btn-primary': getTabAtiva(1)}"
+      (click)="tabTurmas()" href="#tabTurmas" data-toggle="tab"><span class="glyphicon glyphicon-music" aria-hidden="true"></span>
                 <div class="hidden-xs">Turmas</div>
             </button>
     </div>
      <div class="btn-group" role="group">
-      <button type="button" id="money" class="btn btn-default" href="#tabPagamentos" data-toggle="tab"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
+      (click)="tabDebitos()" href="#tabDebitos" data-toggle="tab"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>>
                 <div class="hidden-xs">Pagamentos</div>
             </button>
     </div>
