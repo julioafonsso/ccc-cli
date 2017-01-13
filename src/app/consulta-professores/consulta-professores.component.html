@@ -1,18 +1,18 @@
 <div class="col-lg-3 col-sm-6" *ngFor="let professor of getProfessores()">
 
-    <div class="card hovercard">
-        <div class="cardheader">
+    <div class="card">
+        <div class="card__header">
 
         </div>
-        <div class="avatar">
-            <img alt="" [src]="professor.foto">
+        <div class="card__avatar">
+            <img class="card__avatar__img" alt="" [src]="professor.foto">
         </div>
-        <div class="info">
-            <div class="title">
+        <div class="card__info">
+            <div class="card__info__titulo">
                 <a [routerLink]="['/detalhe-professor', professor.id]">{{professor.nome}}</a>
             </div>
-            <div class="desc">{{professor.email}}</div>
-            <div class="desc">{{professor.telefone}}</div>
+            <div class="card__info__detalhes">{{professor.email}}</div>
+            <div class="card__info__detalhes">{{professor.telefone}}</div>
         </div>
     </div>
 </div>

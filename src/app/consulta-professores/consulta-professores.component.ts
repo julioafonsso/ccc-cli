@@ -1,6 +1,8 @@
+import { Component, OnInit } from '@angular/core';
+
 import { Professor } from './../models/professor';
 import { ProfessorService } from './../servicos/professor.service';
-import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-consulta-professores',
