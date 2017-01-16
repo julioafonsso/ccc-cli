@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { TipoDesconto } from './../models/tipo-desconto';
+
 @Component({
   selector: 'app-cadastro-tipo-desconto',
   templateUrl: './cadastro-tipo-desconto.component.html',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroTipoDescontoComponent implements OnInit {
 
+  private desconto = new TipoDesconto();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSubmit(){
+    console.log("onSubmit()");
   }
 
 }

@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -5,7 +6,8 @@ import { CadastroTipoDescontoComponent } from './cadastro-tipo-desconto.componen
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   declarations: [CadastroTipoDescontoComponent]
 })

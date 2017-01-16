@@ -8,7 +8,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Nome do Tipo de Desconto</label>  
   <div class="col-md-6">
-  <input [(ngModel)]="desconto.nome" id="textinput" name="textinput" type="text" placeholder="Petrobras, Bolsista, Cetip, ..." class="form-control input-md" required="">
+  <input [(ngModel)]="desconto.nome" id="textinput" name="nome desconto" type="text" placeholder="Petrobras, Bolsista, Cetip, ..." class="form-control input-md" required="">
     
   </div>
 </div>
@@ -17,17 +17,17 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Percentual de Desconto</label>  
   <div class="col-md-6">
-  <input [(ngModel)]="desconto.percentual" id="textinput" name="textinput" type="text" placeholder="10, 50, 100, ..." class="form-control input-md" required="">
+  <input [(ngModel)]="desconto.valor" id="textinput" name="valor desconto" type="number" step="1" min="1" max="100" placeholder="10, 50, 100, ..." class="form-control input-md" required="">
     
   </div>
 </div>
 
 <!-- Button (Double) -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="button1id"></label>
+  <label class="col-md-4 control-label" ></label>
   <div class="col-md-8">
-    <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
-    <button id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
+    <button class="btn btn-success">Cadastrar</button>
+    <button class="btn btn-danger">Limpar Campos</button>
   </div>
 </div>
 
