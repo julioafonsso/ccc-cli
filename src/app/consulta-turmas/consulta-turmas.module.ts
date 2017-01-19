@@ -1,17 +1,23 @@
+import { ProfessorService } from './../servicos/professor.service';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ConsultaTurmasComponent } from './consulta-turmas.component';
-import { routing } from './../app.routing';
+import { TurmaService } from './../servicos/turma.service';
 
+
+const rotas = [ { path: '', component: ConsultaTurmasComponent } ];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    routing
+    RouterModule.forChild(rotas)
   ],
-  declarations: [ConsultaTurmasComponent]
+  declarations: [ConsultaTurmasComponent],
+  providers: [TurmaService, ProfessorService],
+  exports: []
 })
 export class ConsultaTurmasModule { }
