@@ -8,7 +8,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="selectbasic">Tipo Fluxo</label>
   <div class="col-md-6">  
-    <select [(ngModel)]="indEntrada" (change)="atualizarTipoFluxo(indEntrada)" name="indEntrada"  class="form-control">
+    <select [(ngModel)]="indEntrada" (change)="atualizarTipoFluxo(indEntrada)" name="indEntrada"  class="form-control" required>
       <option value="E">Entrada</option>
       <option value="S">Saida</option>
     </select>
@@ -16,7 +16,7 @@
 </div>
 
 <!-- Select Basic -->
-<div class="form-group">
+<div class="form-group" *ngIf="indEntrada" >
   <label class="col-md-4 control-label" for="selectbasic">Nome Fluxo</label>
   <div class="col-md-6">
     <select [(ngModel)]="fluxoCaixa.tipoFluxo" name="tipoFluxo" class="form-control" required="">
