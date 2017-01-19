@@ -64,8 +64,6 @@
               <th>Codigo</th>
               <th>Modalidade</th>
               <th>Nivel</th>
-              <th>Horario</th>
-              <th>Dias</th>
               <th>Sala</th>
               <th>Dia Vencimento</th>
             </tr>
@@ -75,8 +73,6 @@
               <td>{{matricula.turma.codigo}}</td>
               <td>{{matricula.turma.modalidade.nome}}</td>
               <td>{{matricula.turma.nivel.nome}}</td>
-              <td>{{matricula.turma.horarioInicial}} - {{matricula.turma.horarioFinal}}</td>
-              <td></td>
               <td>{{matricula.turma.sala.nome}}</td>
               <td>{{matricula.diaVencimento}}</td>
             </tr>
@@ -86,7 +82,7 @@
     </div>
 
 
-  <div class="tab-pane " id="tabDebitosd">
+  <div class="tab-pane " id="tabDebitos">
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
@@ -95,14 +91,28 @@
               <th>Modalidade</th>
               <th>Nivel</th>
               <th>Dia Vencimento</th>
+              <th>Mes Referencia</th>
+              <th>Mensalidade</th>
+              <th>Valor para pagar</th>
+              <th>Pagar</th>
+              
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let matricula of aluno.matriculas">
-              <td>{{matricula.turma.codigo}}</td>
-              <td>{{matricula.turma.modalidade.nome}}</td>
-              <td>{{matricula.turma.nivel.nome}}</td>
-              <td>{{matricula.diaVencimento}}</td>
+            <tr *ngFor="let debito of debitos">
+              <td>{{debito.turma}}</td>
+              <td>{{debito.modalidadeTurma}}</td>
+              <td>{{debito.nivelTurma}}</td>
+              <td>{{debito.diaVencimento}}</td>
+              <td>{{debito.mes}}/{{debito.ano}}</td>
+              <td>{{debito.valorMensalidade}}</td>
+              <td>{{debito.valorCalculado}}</td>
+              <td><button class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar</button>
+                  <button (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado != debito.valorMensalidade"  [ngClass]="{'btn': true, 
+                                     'btn-success': debito.valorCalculado< debito.valorMensalidade, 
+                                     'btn-danger': debito.valorCalculado> debito.valorMensalidade}">Pagar</button>
+                  </td>
+              
             </tr>
           </tbody>
         </table>

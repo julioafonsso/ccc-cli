@@ -1,4 +1,3 @@
-import { Matricula } from './../models/maticula';
 import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { Turma } from './../models/turma';
 import { AlunoService } from './../servicos/aluno.service';
 import { Aluno } from './../models/aluno';
+import { Mensalidade } from './../models/mensalidade';
+import { Matricula } from './../models/maticula';
 
 @Component({
   selector: 'app-detalhe-aluno',
@@ -18,7 +19,10 @@ export class DetalheAlunoComponent implements OnInit {
   private idAluno: number;
   private aluno = new Aluno();
   private matriculas: Matricula[];
+  private debitos: Mensalidade[];
   private botoes = new Array();
+
+
 
   constructor(private alunoService: AlunoService, private router: Router, private route: ActivatedRoute) { }
 
@@ -29,6 +33,7 @@ export class DetalheAlunoComponent implements OnInit {
         this.idAluno = params['id'];
         this.loadAluno()
         this.loadTurmas();
+        this.loadDebitos();
       }
     );
   }
@@ -43,6 +48,14 @@ export class DetalheAlunoComponent implements OnInit {
     this.alunoService.getAluno(this.idAluno).subscribe(res => {
       this.aluno = res;
       console.log(res);
+    })
+  }
+
+  loadDebitos()
+  {
+    this.alunoService.getDebitos(this.idAluno).subscribe(res => {
+      console.log(res);
+      this.debitos = res;
     })
   }
 
@@ -65,6 +78,22 @@ export class DetalheAlunoComponent implements OnInit {
   tabDebitos() {
     this.botoes = new Array();
     this.botoes[2] = true;
+  }
+
+  pagarMensalidade(mensalidade: Mensalidade)
+  {
+    mensalidade.valorParaPagar = mensalidade.valorMensalidade;
+    this.alunoService.pagarMensalidade(mensalidade ).subscribe(res =>{
+      
+    });
+  }
+
+  pagarMensalidadeCalculada(mensalidade: Mensalidade)
+  {
+    mensalidade.valorParaPagar = mensalidade.valorCalculado;
+    this.alunoService.pagarMensalidade(mensalidade ).subscribe(res =>{
+
+    });
   }
 
 }
