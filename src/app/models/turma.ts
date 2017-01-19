@@ -14,6 +14,7 @@ export class Turma {
     public modalidade: ModalidadeTurma;
     public diasSemana: DiasSemana[];
     public horarioInicial: String;
+    public dataInicio: String;
     public horarioFinal: String;
     public mensalidade: Number;
     public sala: Salas;

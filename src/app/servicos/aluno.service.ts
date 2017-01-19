@@ -1,3 +1,4 @@
+import { Mensalidade } from './../models/mensalidade';
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -15,11 +16,6 @@ export class AlunoService {
 
   getListaEstadoCivil() {
     if (environment.mock) {
-
-      this.http.get(environment.url + "estado-civil.json")
-        .map((response: Response) => (console.log(response))).subscribe();
-
-
       return this.http.get(environment.url + "estado-civil.json")
         .map((response: Response) => <EstadoCivil[]>response.json())
     }
@@ -30,11 +26,6 @@ export class AlunoService {
   }
   getListaComoConheceu() {
     if (environment.mock) {
-      console.log(environment.url + "conhece-escola.json")
-
-      this.http.get(environment.url + "conhece-escola.json")
-        .map((response: Response) => console.log(response.json()))
-
       return this.http.get(environment.url + "conhece-escola.json")
         .map((response: Response) => <ConheceEscola[]>response.json())
     }
@@ -42,12 +33,9 @@ export class AlunoService {
       return this.http.get(environment.url + "conhece-escola")
         .map((response: Response) => <ConheceEscola[]>response.json())
     }
-
-
   }
 
   cadastrar(aluno: Aluno) {
-    console.log(aluno)
     return this.http.post(environment.url + "alunos", aluno);
   }
 
@@ -55,7 +43,7 @@ export class AlunoService {
     if (environment.mock) {
       return this.http.get(environment.url + "alunos.json").map((response: Response) => <Aluno[]>response.json());
     }
-    {
+    else {
       return this.http.get(environment.url + "alunos").map((response: Response) => <Aluno[]>response.json());
     }
   }
@@ -64,7 +52,7 @@ export class AlunoService {
     if (environment.mock) {
       return this.http.get(environment.url + "matriculas.json").map((response: Response) => <Matricula[]>response.json());
     }
-    {
+    else {
       return this.http.get(environment.url + "alunos/" + idAluno + "/turmas").map((response: Response) => <Matricula[]>response.json());
     }
   }
@@ -73,7 +61,7 @@ export class AlunoService {
     if (environment.mock) {
       return this.http.get(environment.url + "aluno.json").map((response: Response) => <Aluno>response.json());
     }
-    {
+    else {
       return this.http.get(environment.url + "alunos/" + idAluno).map((response: Response) => <Aluno>response.json());
     }
   }
@@ -88,13 +76,29 @@ export class AlunoService {
     if (environment.mock) {
       return this.http.get(environment.url + "alunos.json").map((response: Response) => <Aluno[]>response.json());
     }
-    {
+    else {
       return this.http.get(environment.url + "alunos", {
         search: params
       }).map((response: Response) => <Aluno[]>response.json());
     }
   }
 
+  getDebitos(idAluno: number) {
+    if (environment.mock) {
+      return this.http.get(environment.url + "debitos.json")
+      .map((response: Response) => <Mensalidade[]>response.json());
+    }
+    else {
+      return this.http.get(environment.url + "alunos/" + idAluno + "/debitos")
+      .map((response: Response) => <Mensalidade[]>response.json());
+    }
+  }
+
+  pagarMensalidade(mensalidade: Mensalidade){
+    console.log(mensalidade);
+    return this.http.post(environment.url + "alunos/pagamento",mensalidade);
+  }
 }
+
 
 

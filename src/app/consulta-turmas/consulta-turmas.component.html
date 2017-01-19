@@ -29,13 +29,10 @@
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
-        <!--<th>#</th>-->
+        <th>Codigo</th>
         <th>Modalidade</th>
         <th>Nivel</th>
-        <th>Horario</th>
         <th>Data Inicio</th>
-        <th>Data Fim</th>
-        <th>dias</th>
         <th>Qtd Cavalheiros</th>
         <th>Qtd Damas</th>
         <th>Professor</th>
@@ -48,13 +45,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let turma of getTurmas()">
-        <!--<th scope=row>1</th>-->
+        <td>{{turma.codigo}}</td>
         <td>{{turma.modalidade.nome}}</td>
         <td>{{turma.nivel.nome}}</td>
-        <td>{{turma.horarioInicial}} {{turma.horarioFinal}}</td>
-        <td></td>
-        <td></td>
-        <td>{{getDias(turma.diasSemana)}}</td>
+        <td>{{turma.dataInicio}}</td>
         <td>{{turma.qtdAlunos}}</td>
         <td>{{turma.qtdAlunas}}</td>
         <td>{{getNomeProfessor(turma.professores, 0)}}</td>
