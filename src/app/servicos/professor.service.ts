@@ -41,5 +41,14 @@ export class ProfessorService {
 
   }
 
+  getTurmaProfessor(idProfessor: number){
+    if (environment.mock) {
+      return this.http.get(environment.url + "turmas-professor.json").map((response: Response) => <Professor[]>response.json());
+    }
+    else {
+      return this.http.get(environment.url + "professores/" + idProfessor + "/turmas").map((response: Response) => <Professor[]>response.json());
+    }
+  }
+
 
 }

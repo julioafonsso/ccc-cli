@@ -1,8 +1,11 @@
-import { ProfessorService } from './../servicos/professor.service';
-import { Professor } from './../models/professor';
 import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
+import { ProfessorService } from './../servicos/professor.service';
+import { Professor } from './../models/professor';
+import { Turma } from './../models/turma';
+import { TurmaProfessor } from './../models/turma-professor'
 
 @Component({
   selector: 'app-detalhe-professor',
@@ -13,6 +16,7 @@ export class DetalheProfessorComponent implements OnInit {
   private inscricao: Subscription;
   private idProfessor: number;
   private professor = new Professor();
+  //private pagamentos: Salario[];
   private botoes = new Array();
 
   constructor(private professorService: ProfessorService, private router: ActivatedRoute) { }
@@ -24,9 +28,18 @@ ngOnInit() {
         this.idProfessor = params['id'];
         this.loadProfessor();
         //this.loadTurmas();
+       // this.loadPagamento();
       }
     );
   }
+
+
+ /* loadTurmas() {
+    this.professorService.getTurmaProfessor(this.idProfessor).subscribe(res => {
+      this.professor = res;
+    })
+  }*/
+
   loadProfessor(){
     this.professorService.getProfessor(this.idProfessor).subscribe(res =>{
       this.professor = res;

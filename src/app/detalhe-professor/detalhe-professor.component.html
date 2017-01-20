@@ -12,11 +12,6 @@
     </div>
   </div>
 
-
-
-
-
-
   <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
     <div class="btn-group" role="group">
       <button type="button" id="perfil" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(0), 'btn-primary': getTabAtiva(0)}"
@@ -38,7 +33,27 @@
     </div>
   </div>
 
+
+<div class="well">
+  <div class="tab-content">
+    <div class="tab-pane active" id="tabBios">
+      <div class="card__info">
+        <div class="card__info__detalhes"><label>Email: </ label>{{professor.email}}</div>
+          <div class="card__info__detalhes"><label>Telefone: </label> {{professor.telefone}}</div>
+        <div class="card__info__detalhes"><label>CPF: </label> {{professor.cpf}}</div>
+        <div class="card__info__detalhes"><label>RG: </label> {{professor.rg}}</div>
+        <div class="card__info__detalhes"><label>Data Admissao: </label> {{professor.dataAdmissao}}</div>
+        <div class="card__info__detalhes"><label>Endereco: </label> {{professor.endereco}}</div>
+        <div class="card__info__detalhes"><label>Cidade: </label> {{professor.cidade}}</div>
+        <div class="card__info__detalhes"><label>Bairro: </label> {{professor.bairro}}</div>
+        <div class="card__info__detalhes"><label>Observacao: </label> {{professor.observacao}}</div>
+        
+      </div>
+    </div>
+
   <div class="tab-pane " id="tabTurmas">
+
+
       <div class="table-responsive">
         <table class="table table-bordered table-striped">
           <thead>
@@ -46,9 +61,8 @@
               <th>Codigo</th>
               <th>Modalidade</th>
               <th>Nivel</th>
-              <th>Horario</th>
-              <th>Dias</th>
               <th>Sala</th>
+              <th>Dia Vencimento</th>
             </tr>
           </thead>
           <tbody>
@@ -56,8 +70,6 @@
               <td>{{matricula.turma.codigo}}</td>
               <td>{{matricula.turma.modalidade.nome}}</td>
               <td>{{matricula.turma.nivel.nome}}</td>
-              <td>{{matricula.turma.horarioInicial}} - {{matricula.turma.horarioFinal}}</td>
-              <td></td>
               <td>{{matricula.turma.sala.nome}}</td>
               <td>{{matricula.diaVencimento}}</td>
             </tr>
@@ -68,5 +80,47 @@
 
   
 
+
+</div>
+
+<div class="tab-pane " id="tabPagamentos">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Codigo</th>
+              <th>Modalidade</th>
+              <th>Nivel</th>
+              <th>Dia Pagamento</th>
+              <th>Mes Referencia</th>
+              <th>Porcentagem</th>
+              <th>Valor para Pagar</th>
+              <th>Pagar</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pagamento of pagamentos">
+              <td>{{pagamento.turma}}</td>
+              <td>{{pagamento.modalidadeTurma}}</td>
+              <td>{{pagamento.nivelTurma}}</td>
+              <td>{{pagamento.diaVencimento}}</td>
+              <td>{{pagamento.mes}}/{{pagamento.ano}}</td>
+              <td>{{pagamento.valorMensalidade}}</td>
+              <td>{{pagamento.valorCalculado}}</td>
+              <td><button class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar</button>
+                  <button (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado != debito.valorMensalidade"  [ngClass]="{'btn': true, 
+                                     'btn-success': debito.valorCalculado< debito.valorMensalidade, 
+                                     'btn-danger': debito.valorCalculado> debito.valorMensalidade}">Pagar</button>
+                  </td>
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 </div>
