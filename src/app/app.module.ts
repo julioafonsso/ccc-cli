@@ -7,10 +7,17 @@ import 'rxjs/Rx';
 import { AppComponent } from './app.component';
 import { MenuModule } from './menu/menu.module';
 import { AppRoutingModule } from './app.routing.module'
+import { LoginService } from './servicos/login.service';
+import { HomeComponent } from './home/home.component';
+
+import { PerfilSupervisorGuard } from './guards/perfil-supervisor.guard';
+import { EstaLogadoGuard } from './guards/esta-logado.guard';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +27,7 @@ import { AppRoutingModule } from './app.routing.module'
     AppRoutingModule
   ],
   exports: [],
-  providers: [],
+  providers: [LoginService, EstaLogadoGuard, PerfilSupervisorGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

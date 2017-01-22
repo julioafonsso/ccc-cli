@@ -1,6 +1,7 @@
 export class Usuario {
-    public id: Number;
-    public nomeUsuario: String;
-    public senha: String;
+    public id: number;
+    public login: string;
+    public senha: string;
+    public indSupervisor: boolean;
     constructor() { }
 }
