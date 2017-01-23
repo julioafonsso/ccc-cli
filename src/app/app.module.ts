@@ -7,8 +7,10 @@ import 'rxjs/Rx';
 import { AppComponent } from './app.component';
 import { MenuModule } from './menu/menu.module';
 import { AppRoutingModule } from './app.routing.module'
-import { LoginService } from './servicos/login.service';
 import { HomeComponent } from './home/home.component';
+
+import { HttpCustormerService } from './servicos/http-custormer.service';
+import { LoginService } from './servicos/login.service';
 
 import { PerfilSupervisorGuard } from './guards/perfil-supervisor.guard';
 import { EstaLogadoGuard } from './guards/esta-logado.guard';
@@ -27,7 +29,7 @@ import { EstaLogadoGuard } from './guards/esta-logado.guard';
     AppRoutingModule
   ],
   exports: [],
-  providers: [LoginService, EstaLogadoGuard, PerfilSupervisorGuard],
+  providers: [LoginService, EstaLogadoGuard, PerfilSupervisorGuard, HttpCustormerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
