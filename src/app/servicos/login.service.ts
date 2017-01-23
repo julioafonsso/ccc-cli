@@ -1,11 +1,11 @@
-import { Usuario } from './../models/usuario';
 import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
-import { Http, Response } from '@angular/http';
+import { Response, Http } from '@angular/http';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subscription, Observable, BehaviorSubject } from 'rxjs/Rx';
 
-
+import { HttpCustormerService } from './http-custormer.service';
+import { Usuario } from './../models/usuario';
 
 @Injectable()
 export class LoginService {
@@ -14,7 +14,7 @@ export class LoginService {
   private usuarioEhSupervisorOBJS: BehaviorSubject<boolean>;
   private messageLogin: BehaviorSubject<string>;
 
-  constructor(private http: Http,
+  constructor(private http: HttpCustormerService,
     private route: Router
   ) {
     this.usuarioEstaLogadoOBS = new BehaviorSubject(false);
@@ -23,7 +23,6 @@ export class LoginService {
   }
 
   logoff(){
-    console.log("LOGOFF")
     this.usuarioEstaLogadoOBS.next(false);
   }
 
@@ -36,6 +35,7 @@ export class LoginService {
   }
 
   login(usuario: Usuario) {
+    this.messageLogin = new BehaviorSubject(null);
     console.log(usuario);
     this.messageLogin.next(null);
     if (environment.mock) {

@@ -1,3 +1,4 @@
+import { HttpCustormerService } from './http-custormer.service';
 import { Mensalidade } from './../models/mensalidade';
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -12,7 +13,7 @@ import { environment } from './../../environments/environment';
 @Injectable()
 export class AlunoService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpCustormerService) { }
 
   getListaEstadoCivil() {
     if (environment.mock) {
@@ -77,9 +78,7 @@ export class AlunoService {
       return this.http.get(environment.url + "alunos.json").map((response: Response) => <Aluno[]>response.json());
     }
     else {
-      return this.http.get(environment.url + "alunos", {
-        search: params
-      }).map((response: Response) => <Aluno[]>response.json());
+      return this.http.get(environment.url + "alunos", params).map((response: Response) => <Aluno[]>response.json());
     }
   }
 

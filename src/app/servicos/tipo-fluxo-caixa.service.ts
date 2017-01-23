@@ -1,15 +1,15 @@
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from './../../environments/environment';
 
-
+import { HttpCustormerService } from './http-custormer.service';
 import { TipoFluxo } from './../models/tipo-fluxo';
 
 @Injectable()
 export class TipoFluxoCaixaService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpCustormerService) { }
 
     getTipoFluxo() {
         if (environment.mock) {

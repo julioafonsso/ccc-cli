@@ -1,4 +1,4 @@
-import { Http, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 
@@ -11,11 +11,13 @@ import { ModalidadeTurma } from './../models/modalidade-turma';
 import { NivelTurma } from './../models/nivel-turma';
 import { DiasSemana } from './../models/dias-semana';
 import { Salas } from './../models/salas';
+import { HttpCustormerService } from './http-custormer.service';
+
 
 @Injectable()
 export class TurmaService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpCustormerService) { }
 
     matricularAluno(turma: Turma, aluno: Aluno) {
         let matricula = new Matricula();
@@ -28,9 +30,8 @@ export class TurmaService {
     getAlunosTurma(idturma: number) {
     }
 
-    excluirAlunoTurma(aluno: Matricula) {
-        console.log(aluno);
-        return this.http.delete(environment.url + "turmas/matricula", { body: { id: aluno.id } });
+    excluirAlunoTurma(matricula: Matricula) {
+        return this.http.delete(environment.url + "turmas/matricula/" + matricula.id );
     }
 
     getTurma(id: number) {
@@ -75,7 +76,7 @@ export class TurmaService {
             return this.http.get(environment.url + 'salas.json')
                 .map((response: Response) => <Salas[]>response.json());
         } else {
-            return this.http.get(environment.url + 'salas.json')
+            return this.http.get(environment.url + 'salas')
                 .map((response: Response) => <Salas[]>response.json());
         }
     }
