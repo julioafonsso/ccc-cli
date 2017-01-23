@@ -14,7 +14,7 @@ export class LoginService {
   private usuarioEhSupervisorOBJS: BehaviorSubject<boolean>;
   private messageLogin: BehaviorSubject<string>;
 
-  constructor(private http: HttpCustormerService,
+  constructor(private http: Http,
     private route: Router
   ) {
     this.usuarioEstaLogadoOBS = new BehaviorSubject(false);
@@ -23,7 +23,9 @@ export class LoginService {
   }
 
   logoff(){
-    this.usuarioEstaLogadoOBS.next(false);
+    this.usuarioEstaLogadoOBS = new BehaviorSubject(false);
+    this.usuarioEhSupervisorOBJS = new BehaviorSubject(false);
+    this.messageLogin = new BehaviorSubject(null);
   }
 
   usuarioLogado() {
