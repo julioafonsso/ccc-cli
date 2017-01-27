@@ -16,7 +16,7 @@ export class DetalheProfessorComponent implements OnInit {
   private inscricao: Subscription;
   private idProfessor: number;
   private professor = new Professor();
-  private turmas: TurmaProfessor[];
+  private turmasProfessor: TurmaProfessor[];
  //private pagamentos: Salario[];
   private botoes = new Array();
 
@@ -37,7 +37,8 @@ ngOnInit() {
 
  loadTurmas() {
     this.professorService.getTurmaProfessor(this.idProfessor).subscribe(res => {
-      this.turmas = res;
+      this.turmasProfessor = res;
+      console.log(res);
     })
   }
 
