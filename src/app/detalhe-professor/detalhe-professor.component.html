@@ -43,14 +43,12 @@
         <div class="card__info__detalhes"><label>CPF: </label> {{professor.cpf}}</div>
         <div class="card__info__detalhes"><label>RG: </label> {{professor.rg}}</div>
         <div class="card__info__detalhes"><label>Data Admissao: </label> {{professor.dataAdmissao}}</div>
-        <div class="card__info__detalhes"><label>Endereco: </label> {{professor.endereco}}</div>
-        <div class="card__info__detalhes"><label>Cidade: </label> {{professor.cidade}}</div>
-        <div class="card__info__detalhes"><label>Bairro: </label> {{professor.bairro}}</div>
         <div class="card__info__detalhes"><label>Observacao: </label> {{professor.observacao}}</div>
         
       </div>
     </div>
-
+   
+ 
   <div class="tab-pane " id="tabTurmas">
 
 
@@ -62,16 +60,14 @@
               <th>Modalidade</th>
               <th>Nivel</th>
               <th>Sala</th>
-              <th>Dia Vencimento</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let matricula of matriculas">
-              <td>{{matricula.turma.codigo}}</td>
-              <td>{{matricula.turma.modalidade.nome}}</td>
-              <td>{{matricula.turma.nivel.nome}}</td>
-              <td>{{matricula.turma.sala.nome}}</td>
-              <td>{{matricula.diaVencimento}}</td>
+            <tr *ngFor="let turmaProfessor of turmasProfessor">
+              <td>{{turmaProfessor.turma.codigo}}</td>
+              <td>{{turmaProfessor.turma.modalidade.nome}}</td>
+              <td>{{turmaProfessor.turma.nivel.nome}}</td>
+              <td>{{turmaProfessor.turma.sala.nome}}</td>
             </tr>
           </tbody>
         </table>
@@ -81,7 +77,7 @@
   
 
 
-</div>
+
 
 <div class="tab-pane " id="tabPagamentos">
       <div class="table-responsive">
@@ -119,7 +115,7 @@
         </table>
       </div>
     </div>
-
-  </div>
+   </div>
+  </div>  
 </div>
 
