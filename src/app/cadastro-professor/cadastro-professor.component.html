@@ -26,7 +26,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">CPF</label>
       <div class="col-md-6">
-        <input [(ngModel)]="professor.cpf" name="cpf" type="text" placeholder="01234567890" class="form-control input-md" required="">
+        <input appCpf [(ngModel)]="professor.cpf" name="cpf" type="text" placeholder="012.345.678-90" class="form-control input-md" required="">
       </div>
     </div>
 
@@ -42,7 +42,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Telefone</label>
       <div class="col-md-6">
-        <input [(ngModel)]="professor.telefone" name="telefone" type="tel" placeholder="(21) 99999-9999" class="form-control input-md" required>
+        <input appTelefone [(ngModel)]="professor.telefone" name="telefone" type="tel" placeholder="(21) 99999-9999" class="form-control input-md" required>
       </div>
     </div>
 

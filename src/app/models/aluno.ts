@@ -4,7 +4,7 @@ import { ConheceEscola } from './conhece-escola';
 
 export class Aluno {
 
-    public id: Number;
+    public id: number;
     public nome: string;
     public cpf: string;
     public rg: string;

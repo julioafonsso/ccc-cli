@@ -5,14 +5,14 @@ import { CommonModule } from '@angular/common';
 
 
 import { LoginComponent } from './login.component';
-// import { GrowlModule } from 'primeng/primeng';
+import { GrowlModule } from 'primeng/primeng';
 
 const rotas = [{ path: '', component: LoginComponent }];
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    // GrowlModule,
+    GrowlModule,
     RouterModule.forChild(rotas)
   ],
   declarations: [LoginComponent],
