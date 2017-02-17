@@ -31,7 +31,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.idAluno = params['id'];
-        this.loadAluno()
+        this.loadAluno();
         this.loadTurmas();
         this.loadDebitos();
       }
