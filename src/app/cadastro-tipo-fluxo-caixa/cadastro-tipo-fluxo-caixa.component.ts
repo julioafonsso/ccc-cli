@@ -1,7 +1,9 @@
+import { Response } from '@angular/http';
 import { TipoFluxoCaixaService } from './../servicos/tipo-fluxo-caixa.service';
 import { Component, OnInit } from '@angular/core';
 
 import { TipoFluxo } from './../models/tipo-fluxo';
+import { Message } from 'primeng/primeng';
 
 @Component({
   selector: 'app-cadastro-tipo-fluxo-caixa',
@@ -10,16 +12,29 @@ import { TipoFluxo } from './../models/tipo-fluxo';
 })
 export class CadastroTipoFluxoCaixaComponent implements OnInit {
 
-  private tipo = new TipoFluxo();
-  constructor(private tipoFluxoService: TipoFluxoCaixaService) { }
+  private tipo: TipoFluxo;
+  private msgs: Message[];
+  
+  constructor(private tipoFluxoService: TipoFluxoCaixaService) {
+    this.msgs = [];
+    this.tipo = new TipoFluxo();
+  }
+
+
 
   ngOnInit() {
   }
 
   onSubmit() {
     this.tipoFluxoService.cadastrar(this.tipo)
-    .subscribe((res: any) => {
-      console.log(res);
-    });
+      .subscribe(response => {
+
+        this.tipo = new TipoFluxo();
+        this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+
+      },
+      erro => {
+        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !' });
+      });
   }
 }

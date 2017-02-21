@@ -13,7 +13,7 @@ export class LoginService {
   private usuarioEstaLogadoOBS: BehaviorSubject<boolean>;
   private usuarioEhSupervisorOBJS: BehaviorSubject<boolean>;
   private messageLogin: BehaviorSubject<string>;
-  private token:string;
+  private token: string;
 
   constructor(private http: Http,
     private route: Router
@@ -23,14 +23,14 @@ export class LoginService {
     this.messageLogin = new BehaviorSubject(null);
   }
 
-  logoff(){
+  logoff() {
     this.usuarioEstaLogadoOBS = new BehaviorSubject(false);
     this.usuarioEhSupervisorOBJS = new BehaviorSubject(false);
     this.messageLogin = new BehaviorSubject(null);
     this.token = null;
   }
 
-  getToken(){
+  getToken() {
     // return this.token;
     return "FOI";
   }
@@ -45,37 +45,24 @@ export class LoginService {
 
   login(usuario: Usuario) {
     this.messageLogin = new BehaviorSubject(null);
-    console.log(usuario);
     this.messageLogin.next(null);
-    if (environment.mock) {
-      if (usuario.login === 'isnard' && usuario.senha === 'isnard') {
-        this.usuarioEstaLogadoOBS.next(true);
-        this.usuarioEhSupervisorOBJS.next(true)
-        this.route.navigate(['/']);
 
-      }
-      else if (usuario.login === 'ccc' && usuario.senha === 'ccc') {
-          this.usuarioEstaLogadoOBS.next(true);
-          this.usuarioEhSupervisorOBJS.next(false)
-          this.route.navigate(['/']);
-        }
-        else{
-          this.messageLogin.next("Usuario ou Senha não cadastrados");
-        }
-      }
-    else {
-      this.http.post(environment.url + "login", usuario).subscribe(res => {
-        this.token = res.headers.get("token");
-        this.usuarioEstaLogadoOBS.next(true);
-        this.route.navigate(['/cadastro-aluno']);
-        let user: Usuario = res.json();
-        this.usuarioEhSupervisorOBJS.next(user.indSupervisor);
+    this.http.post(environment.url + "login", usuario).subscribe(res => {
+      this.token = res.headers.get("token");
+      this.usuarioEstaLogadoOBS.next(true);
+      this.route.navigate(['/cadastro-aluno']);
+      let user: Usuario = res.json();
+      this.usuarioEhSupervisorOBJS.next(user.indSupervisor);
 
-      }, (error: (Response)) => {
+    }, (error: (Response)) => {
+      
+      if(error.status === 0)
+        this.messageLogin.next("Falha na conexão");
+      else
         this.messageLogin.next(error.json().message);
-      })
+    })
 
-    }
+
     return this.messageLogin;
   }
 }

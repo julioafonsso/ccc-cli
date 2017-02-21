@@ -21,6 +21,8 @@ export class CpfDirective {
   }
 
   @HostListener("keyup", ['$event']) keyUp(event) {
+    console.log(event);
+    alert(event.key);
     if (this.ehNumero(event.key))
       this.formataValor(event.target)
   }

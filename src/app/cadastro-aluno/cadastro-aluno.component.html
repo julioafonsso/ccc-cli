@@ -1,19 +1,27 @@
+<p-growl [value]="msgs"  life=6000 ></p-growl>
 <form class="form-horizontal" (ngSubmit)="onSubmit()" >
   <fieldset>
 
     <!-- Form Name -->
     <legend>Cadastro de Alunos</legend>
 
+
+    <div class="card" *ngIf="getUploadSuccess()">
+        
+        <div class="card__avatar--temp">
+            <img class="card__avatar--temp__img" [src]="aluno.urlFoto"   >
+        </div>
+        
+    </div>
+
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Nome do Aluno</label>
+      <label class="col-md-4 control-label" for="textinput">Selecione a Foto</label>
       <div class="col-md-6">
         <!--<input type="file" class="btn-upload" ng2FileSelect [uploader]="uploader" />-->
         <input type="file" [(ngModel)]="foto" name="foto" (change)="onChange($event)" class="custom-file-input" ng2FileSelect [uploader]="uploader">
-        <img [src]="url">
       </div>
     </div>
-
 
       <!-- Text input-->
       <div class="form-group">
@@ -127,7 +135,7 @@
       <label class="col-md-4 control-label" for="button1id"></label>
       <div class="col-md-8">
         <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
-        <button id="button2id" name="button2id" class="btn <btn-dan></btn-dan>ger">Limpar Campos</button>
+        <button type="reset" id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
       </div>
     </div>
 

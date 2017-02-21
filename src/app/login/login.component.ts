@@ -13,10 +13,12 @@ export class LoginComponent implements OnInit {
 
   private usuario: Usuario;
   private msgs: Message[];
+  private bloquearBotao: boolean
 
   constructor(private loginService: LoginService) {
     this.usuario = new Usuario();
     this.msgs = [];
+    this.bloquearBotao = false;
   }
 
   ngOnInit() {
@@ -24,9 +26,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.msgs = [];
+    this.bloquearBotao = true;
     this.loginService.login(this.usuario).subscribe(res => {
       if (res != null) {
         this.msgs.push({ severity: 'error', summary: 'Login Fail', detail: res })
+        this.bloquearBotao = false;
       }
     });
 

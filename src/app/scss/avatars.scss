@@ -14,7 +14,7 @@
   @include box-sizing(border-box);
 
   &__header {
-    background: url("http://lorempixel.com/850/280/nature/4/");
+    background: url("https://www.dancaccc.com.br/wp-content/uploads/2011/10/Sem-t%C3%ADtulo-1111.jpg");
     background-size: cover;
     height: 135px;
   }
@@ -23,6 +23,22 @@
     position: relative;
     top: -50px;
     margin-bottom: -50px;
+
+    &__img {
+      width: 100px;
+      height: 100px;
+      max-width: 100px;
+      max-height: 100px;
+      @include border-radius(50% 50% 50% 50%);
+      border: 5px solid rgba(255,255,255,0.5);
+    }
+  }
+
+  &__avatar--temp {
+    position: relative;
+    top: -10px;
+    background-color: white;
+    border: none;
 
     &__img {
       width: 100px;

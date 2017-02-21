@@ -50,9 +50,9 @@
   </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-6"  >
 
-  <div class="panel panel-success">
+  <div class="panel panel-success" *ngIf="mostrarGraficoEntrada">
     <div class="panel-heading">Entradas</div>
     <div class="panel-body">
       <canvas baseChart 
@@ -66,7 +66,7 @@
   </div>
 
 
-<div class="panel panel-success">
+<div class="panel panel-success" *ngIf="mostrarGraficoSaida">
     <div class="panel-heading">Saidas</div>
     <div class="panel-body">
       <canvas baseChart 

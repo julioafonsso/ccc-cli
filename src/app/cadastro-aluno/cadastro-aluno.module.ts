@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
+import { GrowlModule } from 'primeng/primeng';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { CpfModule } from './../diretivas/cpf/cpf.module';
 import { TelefoneModule } from './../diretivas/telefone/telefone.module';
@@ -19,6 +19,7 @@ const rotas = [ { path: '', component: CadastroAlunoComponent } ];
     TelefoneModule,
     CpfModule,
     FileUploadModule,
+    GrowlModule,
     RouterModule.forChild(rotas)
   ],
   declarations: [CadastroAlunoComponent],

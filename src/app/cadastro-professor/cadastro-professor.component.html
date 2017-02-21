@@ -1,3 +1,4 @@
+<p-growl [value]="msgs"  life=6000 ></p-growl>
 <form class="form-horizontal" (ngSubmit)="onSubmit()">
   <fieldset>
 
@@ -47,6 +48,15 @@
     </div>
 
     <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Data de Nascimento</label>
+        <div class="col-md-6">
+          <input [(ngModel)]="professor.dataNascimento" name="dataNascimento" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+        </div>
+      </div>
+
+
+    <!-- Text input-->
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Data de Admissão</label>
       <div class="col-md-6">
@@ -67,7 +77,7 @@
       <label class="col-md-4 control-label" for="button1id"></label>
       <div class="col-md-8">
         <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
-        <button id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
+        <button type="reset" id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
       </div>
     </div>
 

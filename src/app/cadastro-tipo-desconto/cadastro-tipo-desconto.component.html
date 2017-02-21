@@ -1,3 +1,4 @@
+<p-growl [value]="msgs"  life=6000 ></p-growl>
 <form class="form-horizontal" (ngSubmit)="onSubmit()" >
 <fieldset>
 
@@ -17,7 +18,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Percentual de Desconto</label>  
   <div class="col-md-6">
-  <input [(ngModel)]="desconto.valor" id="textinput" name="valor desconto" type="number" step="1" min="1" max="100" placeholder="10, 50, 100, ..." class="form-control input-md" required="">
+  <input appNumeroInteiro [(ngModel)]="desconto.valor" id="textinput" name="valor desconto" type="number" step="1" min="1" max="100" placeholder="10, 50, 100, ..." class="form-control input-md" required="">
     
   </div>
 </div>
@@ -27,7 +28,7 @@
   <label class="col-md-4 control-label" ></label>
   <div class="col-md-8">
     <button class="btn btn-success">Cadastrar</button>
-    <button class="btn btn-danger">Limpar Campos</button>
+    <button type="reset" class="btn btn-danger">Limpar Campos</button>
   </div>
 </div>
 

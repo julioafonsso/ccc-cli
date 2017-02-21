@@ -21,6 +21,7 @@ export class Aluno {
     public matriculas: Matricula[];
     public diaVencimento: number;
     public foto: string;
+    public urlFoto:String
 
     constructor() {
         this.estadoCivil = new EstadoCivil()

@@ -13,51 +13,56 @@ import { Color } from 'ng2-charts';
 })
 export class RelatorioMovimentacaoCaixaComponent implements OnInit {
 
-  public colors: Array<Color> = [
-    {
-      backgroundColor: ['#e84351',
-        '#434a54',
-        '#3ebf9b',
-        '#4d86dc',
-        '#f3af37']
-    }];
+  private colors: Array<Color>;
 
   private lancamentos: Extrato[];
   private dataInicio: Date;
   private dataFim: Date;
 
-  public labelsEntradas = [];
-  public dadosEntradas = [];
-  
-  public labelsSaidas = [];
-  public dadosSaidas = [];
-  
+  private labelsEntradas = [];
+  private dadosEntradas = [];
 
-  public type: string = 'pie';
+  private labelsSaidas = [];
+  private dadosSaidas = [];
+  private mostrarGraficoSaida: boolean;
+  private mostrarGraficoEntrada: boolean;
+
+  private type: string = 'pie';
 
   constructor(private extratoService: ExtratoService) {
+    this.mostrarGraficoSaida = false;
+    this.mostrarGraficoEntrada = false;
     this.dataFim = new Date();
     this.dataInicio = new Date();
+    this.colors = [
+      {
+        backgroundColor: ['#e84351',
+          '#434a54',
+          '#3ebf9b',
+          '#4d86dc',
+          '#f3af37']
+      }];
   }
 
-  public getDadosGraficoEntrada() {
+  getDadosGraficoEntrada() {
     return this.dadosEntradas;
   }
-  public getLabelsGraficoEntrada() {
+  getLabelsGraficoEntrada() {
     return this.labelsEntradas;
   }
 
-public getDadosGraficoSaida() {
+  getDadosGraficoSaida() {
     return this.dadosSaidas;
   }
-  public getLabelsGraficoSaida() {
+  getLabelsGraficoSaida() {
     return this.labelsSaidas;
   }
 
   pesquisar() {
 
     let d = new DatePipe("pt");
-
+    this.mostrarGraficoSaida = false;
+    this.mostrarGraficoEntrada = false;
 
     this.extratoService.getExtrato(d.transform(this.dataInicio, "yyyyMMdd"), d.transform(this.dataFim, "yyyyMMdd")).subscribe(res => {
       this.lancamentos = res;
@@ -69,7 +74,6 @@ public getDadosGraficoSaida() {
 
         while (this.labelsEntradas.length > 0) {
           this.labelsEntradas.pop();
-
         }
 
         this.dadosEntradas = res[0];
@@ -77,9 +81,13 @@ public getDadosGraficoSaida() {
         for (let item of res[1]) {
           this.labelsEntradas.push(item);
         }
+        if(this.labelsEntradas.length > 0)
+        {
+          this.mostrarGraficoEntrada = true;
+        }
       })
 
-      this.extratoService.getExtratoConsolidadoSaidas(d.transform(this.dataInicio, "yyyyMMdd"),
+    this.extratoService.getExtratoConsolidadoSaidas(d.transform(this.dataInicio, "yyyyMMdd"),
       d.transform(this.dataFim, "yyyyMMdd")).
       subscribe(res => {
 
@@ -93,6 +101,12 @@ public getDadosGraficoSaida() {
         for (let item of res[1]) {
           this.labelsSaidas.push(item);
         }
+
+        if(this.labelsSaidas.length > 0)
+        {
+          this.mostrarGraficoSaida = true;
+        }
+
       })
 
 

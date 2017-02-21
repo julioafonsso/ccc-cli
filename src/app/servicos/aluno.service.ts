@@ -41,10 +41,19 @@ export class AlunoService {
     return this.http.post(environment.url + "alunos", aluno);
   }
 
-  cadastrarFoto(id:number,upload: FileUploader)
-  {
-    console.log("VOU TENTAR CADASTRAR FOTO")
-    upload.setOptions({url: environment.url + "alunos/" + id + "/foto"})
+  alterarFoto(idFoto : string, upload: FileUploader) {
+    this.enviarFoto(idFoto, upload)
+  }
+
+  cadastrarFoto(upload: FileUploader) {
+    let data = new Date();
+    let idFotoTmp: string = data.getTime().toString();
+    this.enviarFoto(idFotoTmp, upload)
+    return idFotoTmp.toString();
+  }
+
+  private enviarFoto(idFotoTmp: string, upload: FileUploader) {
+    upload.setOptions({ url: environment.url + "alunos/" + idFotoTmp + "/foto" })
     upload.uploadAll();
   }
 
@@ -93,17 +102,17 @@ export class AlunoService {
   getDebitos(idAluno: number) {
     if (environment.mock) {
       return this.http.get(environment.url + "debitos.json")
-      .map((response: Response) => <Mensalidade[]>response.json());
+        .map((response: Response) => <Mensalidade[]>response.json());
     }
     else {
       return this.http.get(environment.url + "alunos/" + idAluno + "/debitos")
-      .map((response: Response) => <Mensalidade[]>response.json());
+        .map((response: Response) => <Mensalidade[]>response.json());
     }
   }
 
-  pagarMensalidade(mensalidade: Mensalidade){
+  pagarMensalidade(mensalidade: Mensalidade) {
     console.log(mensalidade);
-    return this.http.post(environment.url + "alunos/pagamento",mensalidade);
+    return this.http.post(environment.url + "alunos/pagamento", mensalidade);
   }
 }
 

@@ -1,6 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 
+import { Message } from 'primeng/primeng';
 import { TipoDesconto } from './../models/tipo-desconto';
+import { DescontoService } from './../servicos/desconto.service';
 
 @Component({
   selector: 'app-cadastro-tipo-desconto',
@@ -9,15 +12,26 @@ import { TipoDesconto } from './../models/tipo-desconto';
 })
 export class CadastroTipoDescontoComponent implements OnInit {
 
-  private desconto = new TipoDesconto();
+  private desconto: TipoDesconto;
+  private msgs: Message[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private descontoService: DescontoService) {
+    this.desconto = new TipoDesconto();
+    this.msgs = [];
+    
   }
 
-  onSubmit(){
-    console.log("onSubmit()");
+  ngOnInit() {
+      
+  }
+
+  onSubmit() {
+    this.descontoService.cadastrarTipoDesconto(this.desconto).subscribe(response => {
+      this.desconto = new TipoDesconto();
+      this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+    }, erro => {
+      this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !' });
+    })
   }
 
 }

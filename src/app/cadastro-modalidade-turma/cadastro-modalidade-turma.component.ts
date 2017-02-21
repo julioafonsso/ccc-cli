@@ -2,6 +2,7 @@ import { ModalidadeTurma } from './../models/modalidade-turma';
 import { Component, OnInit } from '@angular/core';
 
 import { TurmaService } from './../servicos/turma.service';
+import { Message } from 'primeng/primeng';
 
 @Component({
   selector: 'app-cadastro-modalidade-turma',
@@ -10,9 +11,12 @@ import { TurmaService } from './../servicos/turma.service';
 })
 export class CadastroModalidadeTurmaComponent implements OnInit {
 
-  private modal = new ModalidadeTurma();
-
-  constructor(private turmaService: TurmaService) { }
+  private modal :ModalidadeTurma;
+  private msgs: Message[];
+  constructor(private turmaService: TurmaService) { 
+    this.msgs = []
+    this.modal = new ModalidadeTurma();
+  }
 
   ngOnInit() {
   }
@@ -20,8 +24,12 @@ export class CadastroModalidadeTurmaComponent implements OnInit {
   onSubmit() {
     console.log(this.modal)
     this.turmaService.cadastrarModalidade(this.modal)
-      .subscribe((err: any) => {
-        console.log(err);
+      .subscribe(response => {
+        this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+        this.modal = new ModalidadeTurma();
+      },
+      error => {
+        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !' });
       })
   }
 
