@@ -83,6 +83,22 @@
 
       <!-- Text input-->
       <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Número</label>
+        <div class="col-md-6">
+          <input [(ngModel)]="aluno.numero" name="numero" type="text" placeholder="12" class="form-control input-md" required="">
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Complemento</label>
+        <div class="col-md-6">
+          <input [(ngModel)]="aluno.complemento" name="complemento" type="text" placeholder="bloco, apartamento, condominio" class="form-control input-md" required="">
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Profissão</label>
         <div class="col-md-6">
           <input [(ngModel)]="aluno.profissao" name="profissao" type="text" placeholder="Analista, Professor ..." class="form-control input-md" required="">

@@ -11,9 +11,11 @@ export class Aluno {
     public email: string;
     public telefone: string;
     public endereco: string;
+    public numero: number;
+    public complemento: string;
     public bairro: string;
     public cidade: string;
-    public dataNascimento: Date;
+    public dataNascimento: string;
     public profissao: string;
     public sexo: string;
     public conheceEscola: ConheceEscola;
