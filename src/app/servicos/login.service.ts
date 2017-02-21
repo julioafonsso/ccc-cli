@@ -13,6 +13,7 @@ export class LoginService {
   private usuarioEstaLogadoOBS: BehaviorSubject<boolean>;
   private usuarioEhSupervisorOBJS: BehaviorSubject<boolean>;
   private messageLogin: BehaviorSubject<string>;
+  private token:string;
 
   constructor(private http: Http,
     private route: Router
@@ -26,6 +27,12 @@ export class LoginService {
     this.usuarioEstaLogadoOBS = new BehaviorSubject(false);
     this.usuarioEhSupervisorOBJS = new BehaviorSubject(false);
     this.messageLogin = new BehaviorSubject(null);
+    this.token = null;
+  }
+
+  getToken(){
+    // return this.token;
+    return "FOI";
   }
 
   usuarioLogado() {
@@ -47,19 +54,20 @@ export class LoginService {
         this.route.navigate(['/']);
 
       }
-      else {
-        if (usuario.login === 'ccc' && usuario.senha === 'ccc') {
+      else if (usuario.login === 'ccc' && usuario.senha === 'ccc') {
           this.usuarioEstaLogadoOBS.next(true);
-          this.usuarioEhSupervisorOBJS.next(true)
+          this.usuarioEhSupervisorOBJS.next(false)
+          this.route.navigate(['/']);
+        }
+        else{
+          this.messageLogin.next("Usuario ou Senha não cadastrados");
         }
       }
-      this.messageLogin.next("Usuario ou Senha não cadastrados");
-
-    }
     else {
       this.http.post(environment.url + "login", usuario).subscribe(res => {
+        this.token = res.headers.get("token");
         this.usuarioEstaLogadoOBS.next(true);
-        this.route.navigate(['/']);
+        this.route.navigate(['/cadastro-aluno']);
         let user: Usuario = res.json();
         this.usuarioEhSupervisorOBJS.next(user.indSupervisor);
 
@@ -70,7 +78,4 @@ export class LoginService {
     }
     return this.messageLogin;
   }
-
-
-
 }

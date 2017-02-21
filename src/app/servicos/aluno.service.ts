@@ -1,3 +1,4 @@
+import { FileUploader } from 'ng2-file-upload';
 import { HttpCustormerService } from './http-custormer.service';
 import { Mensalidade } from './../models/mensalidade';
 import { Http, Response, URLSearchParams } from '@angular/http';
@@ -38,6 +39,13 @@ export class AlunoService {
 
   cadastrar(aluno: Aluno) {
     return this.http.post(environment.url + "alunos", aluno);
+  }
+
+  cadastrarFoto(id:number,upload: FileUploader)
+  {
+    console.log("VOU TENTAR CADASTRAR FOTO")
+    upload.setOptions({url: environment.url + "alunos/" + id + "/foto"})
+    upload.uploadAll();
   }
 
   getAlunos() {

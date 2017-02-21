@@ -1,19 +1,22 @@
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 
+import { LoginService } from './login.service';
+
+
 @Injectable()
 export class HttpCustormerService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private loginService: LoginService) { }
 
   createrHeader() {
     let header: Headers = new Headers();
-    header.append('token', 'abcdefgh');
+    header.append('token', this.loginService.getToken());
     return header;
   }
 
   get(url: string, parametros?: any) {
-    console.log("GET")
     return this.http.get(url, {
       search: parametros,
       headers: this.createrHeader()
@@ -21,7 +24,6 @@ export class HttpCustormerService {
   }
 
   post(url: string, parametro: any) {
-    console.log("POST")
     return this.http.post(url, parametro, {headers: this.createrHeader()});
   }
 

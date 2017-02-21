@@ -2,6 +2,7 @@ import { EstadoCivil } from './../models/estado-civil';
 import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
+import { FileUploader } from 'ng2-file-upload';
 import { AlunoService } from './../servicos/aluno.service';
 import { ConheceEscola } from './../models/conhece-escola';
 import { Aluno } from './../models/aluno';
@@ -15,15 +16,18 @@ import { Aluno } from './../models/aluno';
 export class CadastroAlunoComponent implements OnInit {
 
   private listaEstadoCivil: EstadoCivil[];
-  // private aluno = new Aluno();
+  public uploader:FileUploader = new FileUploader({url: 'teste'});
+  
 
+  
   private listaComoConheceu: ConheceEscola[];
   private aluno = new Aluno();
-
+  private foto: any;
+  private url:string ="";
+  
   constructor(private alunoService: AlunoService) { }
 
   ngOnInit() {
-  
     this.alunoService.getListaEstadoCivil().subscribe(res => {
       this.listaEstadoCivil = res;
     })
@@ -34,11 +38,25 @@ export class CadastroAlunoComponent implements OnInit {
 
   }
 
+  
   onSubmit() {
     this.alunoService.cadastrar(this.aluno)
-    .subscribe((res: any) =>{
-      console.log(res)
+    .subscribe((res: Response) =>{
+      if(res.status == 200)
+      {
+        let alunoCadastrado: Aluno = res.json();
+        this.alunoService.cadastrarFoto(alunoCadastrado.id, this.uploader);
+      }
+      else{
+        console.log("ERRO")
+      }
     })
+    
+    this.uploader.uploadAll();
+    
   }
-
+  
+  onChange(event) {
+    var files = event.srcElement.files;
+  }
 }

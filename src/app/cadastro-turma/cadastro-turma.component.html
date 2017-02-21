@@ -71,7 +71,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual do Professor</label>
       <div class="col-md-6">
-        <input [(ngModel)]="turma.professores[0].percentual" name="percentual1" type="text" placeholder="20%" class="form-control input-md" required="">
+        <input appNumeroInteiro [(ngModel)]="turma.professores[0].percentual" name="percentual1" type="number" min="0" placeholder="20%" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -88,17 +88,16 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual da Professora</label>
       <div class="col-md-6">
-        <input [(ngModel)]="turma.professores[1].percentual" name="percentual2" type="text" placeholder="15%" class="form-control input-md" required="">
+        <input appNumeroInteiro [(ngModel)]="turma.professores[1].percentual" name="percentual2" type="number" min="0" placeholder="15%" class="form-control input-md" required="">
 
       </div>
     </div>
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Valor da Mensalidade</label>
+      <label class="col-md-4 control-label" for="textinput">Valor </label>
       <div class="col-md-6">
-        <input [(ngModel)]="turma.mensalidade" name="mensalidade" type="text" placeholder="R$135,00" class="form-control input-md" required="">
-
+        <input appValor [(ngModel)]="turma.mensalidade" name="mensalidade" type="text"  placeholder="R$135,00" class="form-control input-md" required="">
       </div>
     </div>
 
@@ -106,7 +105,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Numero de Vagas</label>
       <div class="col-md-6">
-        <input [(ngModel)]="turma.vagas" name="vagas" type="number" placeholder="15" class="form-control input-md" required="">
+        <input appNumeroInteiro [(ngModel)]="turma.vagas" name="vagas" type="number" placeholder="15" min="0" class="form-control input-md" required="">
 
       </div>
     </div>

@@ -3,6 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
+import { FileUploader, FileUploadModule } from 'ng2-file-upload';
+import { CpfModule } from './../diretivas/cpf/cpf.module';
+import { TelefoneModule } from './../diretivas/telefone/telefone.module';
 import { CadastroAlunoComponent } from './cadastro-aluno.component';
 import { AlunoService } from './../servicos/aluno.service';
 
@@ -12,6 +16,9 @@ const rotas = [ { path: '', component: CadastroAlunoComponent } ];
   imports: [
     CommonModule,
     FormsModule,
+    TelefoneModule,
+    CpfModule,
+    FileUploadModule,
     RouterModule.forChild(rotas)
   ],
   declarations: [CadastroAlunoComponent],

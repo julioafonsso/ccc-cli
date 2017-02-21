@@ -9,7 +9,7 @@
   position: relative;
   overflow: hidden;
   text-align: center;
-  @include border-radius(3px);
+  @include border-radius(3px 3px 3px 3px);
   @include box-shadow(none);
   @include box-sizing(border-box);
 
@@ -29,7 +29,7 @@
       height: 100px;
       max-width: 100px;
       max-height: 100px;
-      @include border-radius(50%);
+      @include border-radius(50% 50% 50% 50%);
       border: 5px solid rgba(255,255,255,0.5);
     }
   }
