@@ -1,15 +1,14 @@
+<p-growl [value]="msgs" life=6000></p-growl>
 <div class="panel panel-default">
     <div class="panel-heading">Dados da Turma</div>
     <div class="table-responsive">
         <table class="table table-bordered table-striped ">
             <thead>
                 <tr>
-                    <!--<th>#</th>-->
+                    <th>Codigo</th>
                     <th>Modalidade</th>
                     <th>Nivel</th>
                     <th>Horario</th>
-                    <th>Data Inicio</th>
-                    <th>Data Fim</th>
                     <th>dias</th>
                     <th>Qtd Cavalheiros</th>
                     <th>Qtd Damas</th>
@@ -21,17 +20,16 @@
             </thead>
             <tbody>
                 <tr>
+                    <td>{{turma.codigo}}</td>
                     <td>{{turma.modalidade.nome}}</td>
                     <td>{{turma.nivel.nome}}</td>
-                    <td>{{turma.horarioInicial}} {{turma.horarioFinal}}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{turma.horarioInicial}} - {{turma.horarioFinal}}</td>
                     <td>{{getDias(turma.diasSemana)}}</td>
                     <td>{{turma.qtdAlunos}}</td>
                     <td>{{turma.qtdAlunas}}</td>
                     <td>{{getNomeProfessor(turma.professores, 0)}}</td>
                     <td>{{getNomeProfessor(turma.professores, 1)}}</td>
-                    <td>{{turma.mensalidade}}</td>
+                    <td>{{turma.mensalidade | currency:'BRL':true}}</td>
                     <td>{{turma.vagas}}</td>
                 </tr>
             </tbody>
@@ -75,7 +73,9 @@
                             <th>Email</th>
                             <th>Telefone</th>
                             <th>Data Vencimento</th>
+                            <th>Desconto</th>
                             <th>Matricular</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -83,11 +83,14 @@
                             <td>{{aluno.nome}}</td>
                             <td>{{aluno.cpf}}</td>
                             <td>{{aluno.rg}}</td>
-                            <td>{{aluno.dataNascimento}}</td>
+                            <td> {{aluno.dataNascimento | date: 'dd/MM/yyyy'}}</td>
                             <td>{{aluno.email}}</td>
                             <td>{{aluno.telefone}}</td>
-                            <td><input [(ngModel)]="aluno.diaVencimento" type="number" step="1" min="1" max="31"></td>
-                            <td><button class="btn btn-primary" (click)="matricular(aluno)">Matricular</button></td>
+                            <td><input [(ngModel)]="diaVencimento[aluno.id]" type="number" step="1" min="1" max="31"></td>
+                            <td><select [(ngModel)]="desconto[aluno.id]" name="desconto" class="form-control" required>
+        <option *ngFor="let desconto of descontos" [ngValue]="desconto" >{{desconto.nome}} -- {{desconto.valor}} %</option>
+      </select></td>
+                            <td><button [disabled]="submit" class="btn btn-primary" (click)="matricular(aluno,desconto[aluno.id], diaVencimento[aluno.id])">Matricular</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -109,6 +112,7 @@
                     <th>Email</th>
                     <th>Telefone</th>
                     <th>Dia Vencimento</th>
+                    <th>Desconto %</th>
                     <th>Excluir Aluno</th>
                 </tr>
             </thead>
@@ -117,11 +121,13 @@
                     <td>{{item.aluno.nome}}</td>
                     <td>{{item.aluno.cpf}}</td>
                     <td>{{item.aluno.rg}}</td>
-                    <td>{{item.aluno.dataNascimento}}</td>
+                    <td>{{item.aluno.dataNascimento | date: 'dd/MM/yyyy'}}</td>
                     <td>{{item.aluno.email}}</td>
                     <td>{{item.aluno.telefone}}</td>
                     <td>{{item.diaVencimento}}</td>
-                    <td><button class="btn btn-primary" (click)="excluirAluno(item)" >Excluir</button></td>
+                    <td *ngIf="item.desconto" >{{item.desconto?.nome}} - {{item.desconto?.valor}} %</td>
+                    <td *ngIf="!item.desconto">----</td>
+                    <td><button [disabled]="submit" class="btn btn-primary" (click)="excluirAluno(item)">Excluir</button></td>
                 </tr>
             </tbody>
         </table>

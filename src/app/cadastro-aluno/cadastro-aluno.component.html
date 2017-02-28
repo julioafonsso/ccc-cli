@@ -9,7 +9,7 @@
     <div class="card" *ngIf="getUploadSuccess()">
         
         <div class="card__avatar--temp">
-            <img class="card__avatar--temp__img" [src]="aluno.urlFoto"   >
+            <img class="card__avatar--temp__img" [src]="aluno.foto"   >
         </div>
         
     </div>
@@ -53,7 +53,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Data de Nascimento</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.dataNascimento" name="dataNascimento" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+          <input [(ngModel)]="dataNascimento" name="dataNascimento" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
         </div>
       </div>
 
@@ -85,7 +85,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Número</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.numero" name="numero" type="text" placeholder="12" class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.numero" name="numero" type="number" placeholder="12" class="form-control input-md" required="">
         </div>
       </div>
 
@@ -93,7 +93,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Complemento</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.complemento" name="complemento" type="text" placeholder="bloco, apartamento, condominio" class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.complemento" name="complemento" type="text" placeholder="bloco, apartamento, condominio" class="form-control input-md">
         </div>
       </div>
 
@@ -140,7 +140,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Observação</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.observacao" name="observacao" type="text" placeholder="Observação" class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.observacao" name="observacao" type="text" placeholder="Observação" class="form-control input-md" >
         </div>
       </div>
       
@@ -150,7 +150,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="button1id"></label>
       <div class="col-md-8">
-        <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
+        <button id="button1id" name="button1id" class="btn btn-success" [disabled]="submit">Cadastrar</button>
         <button type="reset" id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
       </div>
     </div>

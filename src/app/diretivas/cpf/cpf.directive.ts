@@ -11,17 +11,18 @@ export class CpfDirective {
   private borderColor = '';
   private valorInicial = '___.___.___-__'
   private numeros: string = "0123456789"
+
   @HostBinding('style.borderColor') get setColor() {
     return this.borderColor;
   }
+
   @HostListener("keypress", ['$event']) keyPress(event) {
-    if (this.getSomenteNumeros(event.target.value).length > 11)
+    if (this.getSomenteNumeros(event.target.value).length > 10)
       return false;
     return this.ehNumero(event.key)
   }
 
   @HostListener("keyup", ['$event']) keyUp(event) {
-    console.log(event);
     if (this.ehNumero(event.key))
       this.formataValor(event.target)
   }
@@ -51,15 +52,20 @@ export class CpfDirective {
     let index: number = 0;
     valor = target.value;
     valor = this.getSomenteNumeros(valor);
-    for (var n of this.valorInicial) {
-      if (n == '_' && index < valor.length) {
-        valorFormatado += valor.substr(index, 1);
-        index++;
-      }
-      else {
-        valorFormatado += n;
-      }
+    if(valor.length > 9)
+    {
+      valorFormatado = valor.substr(0, 3) + "." + valor.substr(3, 3) + "." + valor.substr(6, 3) + "-" + valor.substr(9);
+    }else if(valor.length > 6)
+    {
+      valorFormatado = valor.substr(0, 3) + "." + valor.substr(3, 3) + "." + valor.substr(6, 3)
     }
+    else if (valor.length>3){
+      valorFormatado = valor.substr(0, 3) + "." + valor.substr(3, 3) 
+    }
+    else{
+      valorFormatado = valor;
+    }
+
 
     target.value = valorFormatado;
 

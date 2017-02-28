@@ -1,3 +1,4 @@
+<p-growl [value]="msgs" life=6000></p-growl>
 <div>
   <div class="card">
     <div class="card__header">
@@ -27,95 +28,103 @@
     </div>
     <div class="btn-group" role="group">
       <button type="button" id="turmas" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(2), 'btn-primary': getTabAtiva(2)}"
-      (click)="tabPagamentos()" href="#tabPagamentos" data-toggle="tab"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
+        (click)="tabPagamentos()" href="#tabPagamentos" data-toggle="tab"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
       <div class="hidden-xs">Pagamentos</div>
       </button>
     </div>
   </div>
 
 
-<div class="well">
-  <div class="tab-content">
-    <div class="tab-pane active" id="tabBios">
-      <div class="card__info">
-        <div class="card__info__detalhes"><label>Email: </ label>{{professor.email}}</div>
+  <div class="well">
+    <div class="tab-content">
+      <div class="tab-pane active" id="tabBios">
+        <div class="card__info">
+          <div class="card__info__detalhes"><label>Email: </ label>{{professor.email}}</div>
           <div class="card__info__detalhes"><label>Telefone: </label> {{professor.telefone}}</div>
-        <div class="card__info__detalhes"><label>CPF: </label> {{professor.cpf}}</div>
-        <div class="card__info__detalhes"><label>RG: </label> {{professor.rg}}</div>
-        <div class="card__info__detalhes"><label>Data Admissao: </label> {{professor.dataAdmissao}}</div>
-        <div class="card__info__detalhes"><label>Observacao: </label> {{professor.observacao}}</div>
-        
+          <div class="card__info__detalhes"><label>CPF: </label> {{professor.cpf}}</div>
+          <div class="card__info__detalhes"><label>RG: </label> {{professor.rg}}</div>
+          <div class="card__info__detalhes"><label>Data Nascimento: </label> {{professor.dataNascimento | date: 'dd/MM/yyyy'}}</div>
+          <div class="card__info__detalhes"><label>Data Admissao: </label> {{professor.dataAdmissao | date: 'dd/MM/yyyy'}}</div>
+          <div class="card__info__detalhes"><label>Observacao: </label> {{professor.observacao}}</div>
+
+        </div>
+      </div>
+
+
+      <div class="tab-pane " id="tabTurmas">
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Codigo</th>
+                <th>Modalidade</th>
+                <th>Nivel</th>
+                <th>Sala</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let turmaProfessor of turmasProfessor">
+                <td>{{turmaProfessor.turma.codigo}}</td>
+                <td>{{turmaProfessor.turma.modalidade.nome}}</td>
+                <td>{{turmaProfessor.turma.nivel.nome}}</td>
+                <td>{{turmaProfessor.turma.sala.nome}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+
+
+
+      <div class="tab-pane " id="tabPagamentos">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Codigo</th>
+                <th>Aluno</th>
+                <th>Mes Referencia</th>
+                <th>Valor Mensalidade</th>
+                <th>Valor Pago</th>
+                <th>Porcentagem</th>
+                <th>Valor a Receber</th>
+                <th>Pagar</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let salario of salarios">
+                <td>{{salario.mensalidade.matricula.turma.codigo}}</td>
+                <td>{{salario.mensalidade.matricula.aluno.nome}}</td>
+                <td>{{salario.mensalidade.mesReferencia.mes}}/{{salario.mensalidade.mesReferencia.ano}}</td>
+                <td>{{salario.mensalidade.matricula.turma.mensalidade | currency:'BRL':true}}</td>
+                <td>{{salario.mensalidade.fluxoCaixa.valor | currency:'BRL':true}}</td>
+                <td>{{salario.percentual}} %</td>
+                <td>{{salario.valor | currency:'BRL':true}}</td>
+                <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(salario)">Pagar</button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="success">
+                <td>TOTAL</td>
+                <td>----</td>
+                <td>----</td>
+                <td>----</td>
+                <td>----</td>
+                <td>----</td>
+                <td>{{getValorTotal() | currency:'BRL':true}}</td>
+                <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarTudo()">Pagar Total</button></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
     </div>
-   
- 
-  <div class="tab-pane " id="tabTurmas">
-
-
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Codigo</th>
-              <th>Modalidade</th>
-              <th>Nivel</th>
-              <th>Sala</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let turmaProfessor of turmasProfessor">
-              <td>{{turmaProfessor.turma.codigo}}</td>
-              <td>{{turmaProfessor.turma.modalidade.nome}}</td>
-              <td>{{turmaProfessor.turma.nivel.nome}}</td>
-              <td>{{turmaProfessor.turma.sala.nome}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  
-
-
-
-
-<div class="tab-pane " id="tabPagamentos">
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Codigo</th>
-              <th>Modalidade</th>
-              <th>Nivel</th>
-              <th>Mensalidade</th>
-              <th>Mes Referencia</th>
-              <th>Porcentagem</th>
-              <th>Valor para Pagar</th>
-              <th>Pagar</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let pagamento of pagamentos">
-              <td>{{pagamento.turma}}</td>
-              <td>{{pagamento.modalidadeTurma}}</td>
-              <td>{{pagamento.nivelTurma}}</td>
-              <td>{{pagamento.mensalidade}}</td>
-              <td>{{pagamento.mes}}/{{pagamento.ano}}</td>
-              <td>{{pagamento.valorMensalidade}}</td>
-              <td>{{pagamento.valorCalculado}}</td>
-              <td><button class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar</button>
-                  <button (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado != debito.valorMensalidade"  [ngClass]="{'btn': true, 
-                                     'btn-success': debito.valorCalculado< debito.valorMensalidade, 
-                                     'btn-danger': debito.valorCalculado> debito.valorMensalidade}">Pagar</button>
-                  </td>
-              
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-   </div>
-  </div>  
+  </div>
 </div>
-

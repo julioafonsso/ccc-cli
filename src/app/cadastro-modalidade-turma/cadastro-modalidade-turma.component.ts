@@ -13,23 +13,27 @@ export class CadastroModalidadeTurmaComponent implements OnInit {
 
   private modal :ModalidadeTurma;
   private msgs: Message[];
+  private submit: boolean;
   constructor(private turmaService: TurmaService) { 
     this.msgs = []
     this.modal = new ModalidadeTurma();
+    this.submit =false
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log(this.modal)
+    this.submit = true;
     this.turmaService.cadastrarModalidade(this.modal)
       .subscribe(response => {
         this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
         this.modal = new ModalidadeTurma();
+        this.submit = false;
       },
       error => {
         this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !' });
+        this.submit = false;
       })
   }
 

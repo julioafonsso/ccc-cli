@@ -26,7 +26,7 @@
   <div class="panel-heading">Lista de Turmas</div>
 <div class="table-responsive">
   <!-- Table -->
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped table-hover">
     <thead>
       <tr>
         <th>Codigo</th>
@@ -48,12 +48,12 @@
         <td>{{turma.codigo}}</td>
         <td>{{turma.modalidade.nome}}</td>
         <td>{{turma.nivel.nome}}</td>
-        <td>{{turma.dataInicio}}</td>
+        <td>{{turma.dataInicio | date: 'dd/MM/yyyy'}}</td>
         <td>{{turma.qtdAlunos}}</td>
         <td>{{turma.qtdAlunas}}</td>
         <td>{{getNomeProfessor(turma.professores, 0)}}</td>
         <td>{{getNomeProfessor(turma.professores, 1)}}</td>
-        <td>{{turma.mensalidade}}</td>
+        <td>{{turma.mensalidade | currency:'BRL':true}}</td>
         <td>{{turma.vagas}}</td>
         <td><button class="btn btn-primary" [routerLink]="['/manutencao-turma', turma.id]" >Manutenção Turma</button></td>
         

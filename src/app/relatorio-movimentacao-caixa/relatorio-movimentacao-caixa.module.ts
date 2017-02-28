@@ -7,7 +7,6 @@ import { RelatorioMovimentacaoCaixaComponent } from './relatorio-movimentacao-ca
 import { ExtratoService } from './../servicos/extrato.service';
 
 import {CalendarModule} from 'primeng/primeng';
-// import { ChartModule } from 'primeng/primeng';
 import { ChartsModule, Color } from 'ng2-charts';
 
 

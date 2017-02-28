@@ -41,23 +41,7 @@ export class AlunoService {
     return this.http.post(environment.url + "alunos", aluno);
   }
 
-  alterarFoto(idFoto : string, upload: FileUploader) {
-    this.enviarFoto(idFoto, upload)
-  }
-
-  cadastrarFoto(upload: FileUploader) {
-    let data = new Date();
-    let idFotoTmp: string = data.getTime().toString();
-    this.enviarFoto(idFotoTmp, upload)
-    return idFotoTmp.toString();
-  }
-
-  private enviarFoto(idFotoTmp: string, upload: FileUploader) {
-    upload.setOptions({ url: environment.url + "alunos/" + idFotoTmp + "/foto" })
-    upload.uploadAll();
-  }
-
-  getAlunos() {
+   getAlunos() {
     if (environment.mock) {
       return this.http.get(environment.url + "alunos.json").map((response: Response) => <Aluno[]>response.json());
     }

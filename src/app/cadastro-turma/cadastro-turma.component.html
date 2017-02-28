@@ -1,3 +1,4 @@
+<p-growl [value]="msgs"  life=6000 ></p-growl>
 <form class="form-horizontal" (ngSubmit)="onSubmit()">
   <fieldset>
 
@@ -39,10 +40,10 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Data Inicio / Data Termino</label>
       <div class="col-md-2">
-        <input [(ngModel)]="turma.dataInicio" name="dataInicio" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+        <input [(ngModel)]="dataInicio" name="dataInicio" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
       </div>
       <div class="col-md-2">
-        <input [(ngModel)]="turma.dataTermino" name="dataTermino" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+        <input [(ngModel)]="dataTermino" name="dataTermino" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" >
       </div>
     </div>
 
@@ -50,10 +51,10 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Horario</label>
       <div class="col-md-2">
-        <input [(ngModel)]="turma.horarioInicia" name="horarioInicial" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.horarioInicial" name="horarioInicial" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
       </div>
       <div class="col-md-2">
-        <input [(ngModel)]="turma.horarioFina" name="horarioFinal" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.horarioFinal" name="horarioFinal" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
       </div>
     </div>
 
@@ -71,7 +72,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual do Professor</label>
       <div class="col-md-6">
-        <input appNumeroInteiro [(ngModel)]="turma.professores[0].percentual" name="percentual1" type="number" min="0" placeholder="20%" class="form-control input-md" required="">
+        <input appNumeroInteiro [(ngModel)]="turma.professores[0].percentual" name="percentual1" type="number" min="0" max="100" placeholder="20%" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -88,7 +89,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual da Professora</label>
       <div class="col-md-6">
-        <input appNumeroInteiro [(ngModel)]="turma.professores[1].percentual" name="percentual2" type="number" min="0" placeholder="15%" class="form-control input-md" required="">
+        <input appNumeroInteiro [(ngModel)]="turma.professores[1].percentual" name="percentual2" type="number" min="0" max="100" placeholder="15%" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -125,7 +126,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="button1id"></label>
       <div class="col-md-8">
-        <button id="button1id" name="button1id" class="btn btn-success">Cadastrar</button>
+        <button id="button1id" name="button1id" class="btn btn-success" [disabled]="submit">Cadastrar</button>
         <button type="reset" id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
       </div>
     </div>

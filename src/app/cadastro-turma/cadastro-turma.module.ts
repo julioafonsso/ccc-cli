@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { GrowlModule } from 'primeng/primeng';
 import { NumeroInteiroModule } from './../diretivas/numero-inteiro/numero-inteiro.module';
 import { ValorModule } from './../diretivas/valor/valor.module';
 import { CadastroTurmaComponent } from './cadastro-turma.component';
@@ -16,6 +17,7 @@ const rotas = [ { path: '', component: CadastroTurmaComponent } ];
     CommonModule,
     FormsModule,
     ValorModule,
+    GrowlModule,
     NumeroInteiroModule,
     RouterModule.forChild(rotas)
   ],

@@ -1,3 +1,4 @@
+import { TipoDesconto } from './../models/tipo-desconto';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -19,11 +20,12 @@ export class TurmaService {
 
     constructor(private http: HttpCustormerService) { }
 
-    matricularAluno(turma: Turma, aluno: Aluno) {
+    matricularAluno(turma: Turma, aluno: Aluno, desconto:TipoDesconto, diaVencimento: number) {
         let matricula = new Matricula();
         matricula.aluno = aluno;
         matricula.turma = turma;
-        matricula.diaVencimento = aluno.diaVencimento;
+        matricula.diaVencimento = diaVencimento;
+        matricula.desconto = desconto;
         return this.http.post(environment.url + "turmas/matricula", matricula);
     }
 
@@ -109,7 +111,7 @@ export class TurmaService {
     }
 
     cadastrarTurma(turma) {
-        console.log(turma)
+        
         return this.http.post(environment.url + 'turmas', turma);
     }
 

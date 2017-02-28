@@ -23,7 +23,7 @@
     <div *ngFor="let dia of lancamentos">
       <div class="separator ">
         <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{dia.data}}</small></p>
-        <p><i class="glyphicon glyphicon-info-sign"></i> Saldo R$ {{dia.valor}}</p>
+        <p><i class="glyphicon glyphicon-info-sign"></i> Saldo {{dia.valor | currency:'BRL':true}}</p>
       </div>
       <article class="panel" [ngClass]="{'panel-success': fluxo.tipoFluxo.indEntrada, 'panel-danger' : !fluxo.tipoFluxo.indEntrada }"
         *ngFor="let fluxo of dia.fluxos">
@@ -34,7 +34,7 @@
           <h2 class="panel-title">{{fluxo.tipoFluxo.nome}}</h2>
         </div>
         <ul class="list-group">
-          <li class="list-group-item">R$ {{fluxo.valor}}</li>
+          <li class="list-group-item">{{fluxo.valor | currency:'BRL':true}}</li>
           <li class="list-group-item">{{fluxo.descricao}} </li>
         </ul>
       </article>

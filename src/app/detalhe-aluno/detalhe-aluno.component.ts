@@ -1,3 +1,4 @@
+import { Message } from 'primeng/primeng';
 import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -17,14 +18,20 @@ export class DetalheAlunoComponent implements OnInit {
 
   private inscricao: Subscription;
   private idAluno: number;
-  private aluno = new Aluno();
+  private aluno :Aluno;
   private matriculas: Matricula[];
   private debitos: Mensalidade[];
   private botoes = new Array();
+  private msgs: Message[];
+  private submit: boolean;
 
 
-
-  constructor(private alunoService: AlunoService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private alunoService: AlunoService, private router: Router, private route: ActivatedRoute) { 
+    this.msgs = [];
+    this.aluno = new Aluno();
+    this.botoes = new Array();
+    this.submit =false;
+  }
 
   ngOnInit() {
     this.botoes[0] = true;
@@ -54,8 +61,8 @@ export class DetalheAlunoComponent implements OnInit {
   loadDebitos()
   {
     this.alunoService.getDebitos(this.idAluno).subscribe(res => {
-      console.log(res);
       this.debitos = res;
+      this.submit =false;
     })
   }
 
@@ -82,17 +89,19 @@ export class DetalheAlunoComponent implements OnInit {
 
   pagarMensalidade(mensalidade: Mensalidade)
   {
-    mensalidade.valorParaPagar = mensalidade.valorMensalidade;
-    this.alunoService.pagarMensalidade(mensalidade ).subscribe(res =>{
-      
-    });
+    mensalidade.valorCalculado = mensalidade.matricula.turma.mensalidade;
+    this.pagarMensalidadeCalculada(mensalidade);
   }
 
   pagarMensalidadeCalculada(mensalidade: Mensalidade)
   {
-    mensalidade.valorParaPagar = mensalidade.valorCalculado;
+    this.submit =true;
     this.alunoService.pagarMensalidade(mensalidade ).subscribe(res =>{
-
+      this.msgs.push({ severity: 'success', summary: 'Pagamento Com Sucesso !' });
+      this.loadDebitos();
+    },error =>{
+      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+      this.submit =false;
     });
   }
 

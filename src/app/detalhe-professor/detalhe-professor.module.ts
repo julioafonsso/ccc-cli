@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { DetalheProfessorComponent } from './detalhe-professor.component';
 import { ProfessorService } from './../servicos/professor.service';
+import { GrowlModule } from 'primeng/primeng';
 
 
 const rotas = [ { path: '', component: DetalheProfessorComponent } ];
@@ -13,6 +14,7 @@ const rotas = [ { path: '', component: DetalheProfessorComponent } ];
   imports: [
     CommonModule,
     FormsModule,
+    GrowlModule,
     RouterModule.forChild(rotas)
   ],
   declarations: [DetalheProfessorComponent],

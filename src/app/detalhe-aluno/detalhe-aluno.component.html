@@ -1,3 +1,4 @@
+<p-growl [value]="msgs"  life=6000 ></p-growl>
 <div>
   <div class="card">
     <div class="card__header">
@@ -45,21 +46,22 @@
         <div class="card__info__detalhes"><label>Email: </ label>{{aluno.email}}</div>
           <div class="card__info__detalhes"><label>Telefone: </label> {{aluno.telefone}}</div>
         <div class="card__info__detalhes"><label>CPF: </label> {{aluno.cpf}}</div>
-        <div class="card__info__detalhes"><label>Data Nascimento: </label> {{aluno.dataNascimento}}</div>
-        <div class="card__info__detalhes"><label>Cidade: </label> {{aluno.cidade}}</div>
-        <div class="card__info__detalhes"><label>Bairro: </label> {{aluno.bairro}}</div>
+        <div class="card__info__detalhes"><label>RG: </label> {{aluno.rg}}</div>
+        <div class="card__info__detalhes"><label>Data Nascimento: </label> {{aluno.dataNascimento | date: 'dd/MM/yyyy'}}</div>
         <div class="card__info__detalhes"><label>Endereco: </label> {{aluno.endereco}}</div>
         <div class="card__info__detalhes"><label>Numero: </label> {{aluno.numero}}</div>
         <div class="card__info__detalhes"><label>Complemento: </label> {{aluno.complemento}}</div>
         <div class="card__info__detalhes"><label>Estado Civil: </label> {{aluno.estadoCivil.nome}}</div>
         <div class="card__info__detalhes"><label>Sexo: </label> {{aluno.sexo}}</div>
+        <div class="card__info__detalhes"><label>Profissão: </label> {{aluno.profissao}}</div>
+        <div class="card__info__detalhes"><label>Como Conheceu: </label> {{aluno.conheceEscola?.nome}}</div>
 
       </div>
     </div>
 
     <div class="tab-pane " id="tabTurmas">
       <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
               <th>Codigo</th>
@@ -85,14 +87,13 @@
 
   <div class="tab-pane " id="tabDebitos">
       <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
               <th>Codigo</th>
               <th>Modalidade</th>
               <th>Nivel</th>
-              <th>Dia Vencimento</th>
-              <th>Mes Referencia</th>
+              <th>Vencimento</th>
               <th>Mensalidade</th>
               <th>Valor para pagar</th>
               <th>Pagar</th>
@@ -101,18 +102,16 @@
           </thead>
           <tbody>
             <tr *ngFor="let debito of debitos">
-              <td>{{debito.turma}}</td>
-              <td>{{debito.modalidadeTurma}}</td>
-              <td>{{debito.nivelTurma}}</td>
-              <td>{{debito.diaVencimento}}</td>
-              <td>{{debito.mes}}/{{debito.ano}}</td>
-              <td>{{debito.valorMensalidade}}</td>
-              <td>{{debito.valorCalculado}}</td>
-              <td><button class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar</button>
-                  <button (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado != debito.valorMensalidade"  [ngClass]="{'btn': true, 
-                                     'btn-success': debito.valorCalculado< debito.valorMensalidade, 
-                                     'btn-danger': debito.valorCalculado> debito.valorMensalidade}">Pagar</button>
-                  </td>
+              <td>{{debito.matricula.turma.codigo}}</td>
+              <td>{{debito.matricula.turma.modalidade.nome}}</td>
+              <td>{{debito.matricula.turma.nivel.nome}}</td>
+              <td>{{debito.matricula.diaVencimento}}/{{debito.mesReferencia.mes}}/{{debito.mesReferencia.ano}}</td>
+              <td>{{debito.matricula.turma.mensalidade | currency:'BRL':true}}</td>
+              <td>{{debito.valorCalculado | currency:'BRL':true}}</td>
+              <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar Mensalidade</button>
+                  <button [disabled]="submit" class="btn btn-success" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado< debito.matricula.turma.mensalidade" >Pagar com Desconto</button>
+                  <button [disabled]="submit" class="btn btn-danger" (click)="pagarMensalidadeCalculada(debito)"  *ngIf="debito.valorCalculado> debito.matricula.turma.mensalidade">Pagar com Multa</button>
+              </td>
               
             </tr>
           </tbody>

@@ -1,3 +1,6 @@
+import { DatePipe } from '@angular/common';
+import { Response } from '@angular/http';
+import { Message } from 'primeng/primeng';
 import { FluxoCaixaService } from './../servicos/fluxo-caixa.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -16,9 +19,16 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
   private fluxos: TipoFluxo[];
   private fluxosEntrada: TipoFluxo[];
   private fluxosSaida: TipoFluxo[];
-  private fluxoCaixa = new FluxoCaixa();
+  private fluxoCaixa : FluxoCaixa;
+  private msgs: Message[];
+  private data: Date;
+  private submit:boolean;
 
-  constructor(private tipoFluxoService: TipoFluxoCaixaService, private fluxoCaixaService: FluxoCaixaService) { }
+  constructor(private tipoFluxoService: TipoFluxoCaixaService, private fluxoCaixaService: FluxoCaixaService) {
+    this.submit =false; 
+    this.fluxoCaixa = new FluxoCaixa();
+    this.msgs = [];
+  }
 
   ngOnInit() {
     this.tipoFluxoService.getTipoFluxoEntrada().subscribe(res => {
@@ -41,9 +51,24 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submit = true;
+    let d = new DatePipe("pt");
+    
+    this.fluxoCaixa.data = d.transform(this.data, 'yyyyMMdd');
+  
+
+   let valorInicial = this.fluxoCaixa.valor;
+    let valor = this.fluxoCaixa.valor.toString().replace(/[^0-9]/gi, '');
+    this.fluxoCaixa.valor =  Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
     this.fluxoCaixaService.cadastrar(this.fluxoCaixa)
-    .subscribe((res: any) =>{
-      console.log(res);
-    });
+    .subscribe((res: Response) =>{
+      this.submit = false
+      this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+    },
+      error => {
+        this.submit =false;
+        this.fluxoCaixa.valor = valorInicial;
+        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+      });
   }
 }

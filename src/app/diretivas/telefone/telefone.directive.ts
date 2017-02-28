@@ -16,17 +16,17 @@ export class TelefoneDirective {
   }
 
   @HostListener("keypress", ['$event']) keyPress(event) {
-     if(this.getSomenteNumeros(event.target.value).length > 11)
-        return false;
+    if (this.getSomenteNumeros(event.target.value).length > 10)
+      return false;
     return this.ehNumero(event.key)
   }
 
   @HostListener("keyup", ['$event']) keyUp(event) {
-      if(this.ehNumero(event.key))
-        this.formataValor(event.target)
+    if (this.ehNumero(event.key))
+      this.formataValor(event.target)
   }
 
-  @HostListener("keydown", ['$event']) keyDown(event) {}
+  @HostListener("keydown", ['$event']) keyDown(event) { }
 
   @HostListener('focus', ['$event.target']) onFocus(target) {
     this.limpaErro();
@@ -49,16 +49,18 @@ export class TelefoneDirective {
     let index: number = 0;
     valor = target.value;
     valor = this.getSomenteNumeros(valor);
-    for (var n of this.valorInicial) {
-      if (n == '_' && index < valor.length) {
-        valorFormatado += valor.substr(index, 1);
-        index++;
-      }
-      else {
-        valorFormatado += n;
-      }
+    if (valor.length === 11) {
+      valorFormatado = "(" + valor.substr(0, 2) + ")" + valor.substr(2, 5) + "-" + valor.substr(7);
     }
-
+    else if (valor.length > 6) {
+      valorFormatado = "(" + valor.substr(0, 2) + ")" + valor.substr(2, 4) + "-" + valor.substr(6);
+    }
+    else if (valor.length > 2) {
+      valorFormatado = "(" + valor.substr(0, 2) + ")" + valor.substr(2)
+    }
+    else {
+      valorFormatado = valorFormatado = "(" + valor.substr(0, 2) + ")";
+    }
     target.value = valorFormatado;
   }
 
@@ -75,8 +77,7 @@ export class TelefoneDirective {
     return valor.replace(/[^0-9]/gi, '');
   }
 
-  ehNumero(caracter:string)
-  {
+  ehNumero(caracter: string) {
     return this.numeros.indexOf(caracter) > -1
   }
 

@@ -1,3 +1,4 @@
+import { Response } from '@angular/http';
 import { HttpCustormerService } from './http-custormer.service';
 import { Injectable } from '@angular/core';
 
@@ -12,6 +13,11 @@ export class DescontoService {
 
   cadastrarTipoDesconto(desconto: TipoDesconto){
     return this.http.post(environment.url + "descontos",desconto)
+  }
+
+  obterDescontos(){
+    console.log(environment.url + "descontos")
+    return this.http.get(environment.url + "descontos").map((res:Response) => <TipoDesconto[]> res.json());
   }
 
 }

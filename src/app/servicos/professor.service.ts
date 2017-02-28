@@ -1,6 +1,7 @@
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
+import { Salario } from './../models/salario';
 import { Professor } from './../models/professor';
 import { environment } from './../../environments/environment';
 import { TurmaProfessor } from './../models/turma-professor';
@@ -16,6 +17,11 @@ export class ProfessorService {
 
   cadstrarProfessor(professor: Professor) {
     return this.http.post(environment.url + "/professores", professor);
+  }
+
+  getMensalidadesParaReceber(idProfessor: number){
+    return this.http.get(environment.url + "/professores/" + idProfessor + "/salario-pendente")
+    .map((res:  Response) =><Salario[]> res.json());
   }
 
    getProfessores() {
@@ -56,6 +62,11 @@ export class ProfessorService {
     else {
       return this.http.get(environment.url + "professores/" + idProfessor + "/turmas").map((response: Response) => <TurmaProfessor[]>response.json());
     }
+  }
+
+  cadastrarRecebimento(idProfessor: number, salario:Salario[]){
+    return this.http.post(environment.url + "professores/" + idProfessor + "/salario", salario);
+
   }
 
 }

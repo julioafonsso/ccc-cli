@@ -9,18 +9,19 @@ import { ModalidadeTurma } from './modalidade-turma';
 
 export class Turma {
 
-    public id: Number;
+    public id: number;
     public codigo: String;
     public modalidade: ModalidadeTurma;
     public diasSemana: DiasSemana[];
     public horarioInicial: String;
     public dataInicio: String;
+    public dataTermino: String
     public horarioFinal: String;
-    public mensalidade: Number;
+    public mensalidade: number;
     public sala: Salas;
     public nivel: NivelTurma;
     public professores: TurmaProfessor[];
-    public vagas: Number;
+    public vagas: number;
     public qtdAlunos: number;
     public qtdAlunas: number;
     public matriculas: Matricula[];

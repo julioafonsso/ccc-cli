@@ -14,10 +14,12 @@ export class CadastroTipoDescontoComponent implements OnInit {
 
   private desconto: TipoDesconto;
   private msgs: Message[];
+  private submit: boolean;
 
   constructor(private descontoService: DescontoService) {
     this.desconto = new TipoDesconto();
     this.msgs = [];
+    this.submit =false;
     
   }
 
@@ -26,10 +28,13 @@ export class CadastroTipoDescontoComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submit =true;
     this.descontoService.cadastrarTipoDesconto(this.desconto).subscribe(response => {
       this.desconto = new TipoDesconto();
       this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+      this.submit =false;
     }, erro => {
+      this.submit =false;
       this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !' });
     })
   }

@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Response, Headers } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
+import { FtpService } from './../servicos/ftp.service';
 import { FileUploader } from 'ng2-file-upload';
 import { AlunoService } from './../servicos/aluno.service';
 import { ConheceEscola } from './../models/conhece-escola';
@@ -18,6 +20,8 @@ export class CadastroAlunoComponent implements OnInit {
   private listaEstadoCivil: EstadoCivil[];
   public uploader: FileUploader;
   private msgs: Message[];
+  private dataNascimento: Date;
+  private submit: boolean;
 
 
 
@@ -27,12 +31,13 @@ export class CadastroAlunoComponent implements OnInit {
   private url: string;
   private envieiFoto: boolean;
 
-  constructor(private alunoService: AlunoService) {
+  constructor(private alunoService: AlunoService, private ftpService: FtpService) {
     this.aluno = new Aluno();
     this.url = "";
     this.uploader = new FileUploader({ url: "" });
     this.msgs = [];
     this.envieiFoto = false;
+    this.submit = false;
   }
 
   ngOnInit() {
@@ -45,51 +50,57 @@ export class CadastroAlunoComponent implements OnInit {
     })
   }
 
+  reset(){
+        this.aluno = new Aluno();
+        this.envieiFoto = false;
+        this.dataNascimento = null;
+        this.submit =false;
+  }
 
   onSubmit() {
+
+    this.submit =true;
+    let d = new DatePipe("pt");
+    this.aluno.dataNascimento = d.transform(this.dataNascimento, 'yyyyMMdd');
     
     this.alunoService.cadastrar(this.aluno)
       .subscribe(response => {
         this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-        // this.aluno = new Aluno();
-        this.envieiFoto = false;
+        this.reset()
       },
       error => {
-        console.log(error);
+        this.submit = false;
         this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
       })
   }
 
   onChange(event) {
     if (this.envieiFoto) {
-      this.alunoService.alterarFoto(this.aluno.foto, this.uploader);
+      this.ftpService.alterarFoto(this.aluno.foto, this.uploader);
     }
     else {
-      this.aluno.foto = this.alunoService.cadastrarFoto(this.uploader);
-      
+      this.ftpService.cadastrarFoto(this.uploader);
+
     }
-      this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-        
-        if(status === 200)
-        {
-          this.aluno.urlFoto = "";
-          this.envieiFoto = true;
-          this.aluno.urlFoto = "imagens/tmp/"+ this.aluno.foto ;
-        }
-        else{
-          
-          this.msgs.push({ severity: 'error', summary: JSON.parse(response)["message"] });
-          this.envieiFoto = false;
-        }
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      if (status === 200) {
+        this.aluno.foto = response
+        this.envieiFoto = true;
+      }
+      else {
+        this.msgs.push({ severity: 'error', summary: JSON.parse(response)["message"] });
+        this.envieiFoto = false;
       }
 
-      
+    }
+
+
   }
 
   getUploadSuccess() {
     return this.envieiFoto && !this.uploader.isUploading;
   }
 
-  
+
 }
 

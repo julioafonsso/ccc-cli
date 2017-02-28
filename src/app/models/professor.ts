@@ -2,15 +2,17 @@
 export class Professor {
 
     public id: Number;
-    public cpf: String;
-    public nome: String;
-    public rg: String;
-    public email: String;
-    public endereco: String;
-    public telefone: String;
-    public dataAdmissao: Date;
-    public observacao: String;
-    public sexo: String;
-    public dataNascimento: Date;
+    public cpf: string;
+    public nome: string;
+    public rg: string;
+    public email: string;
+    public endereco: string;
+    public telefone: string;
+    public dataAdmissao: string;
+    public observacao: string;
+    public sexo: string;
+    public dataNascimento: string;
+    public foto: string;
+    
     constructor() { }
 }
