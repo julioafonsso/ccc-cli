@@ -1,6 +1,8 @@
 export class DiasSemana {
     public id: Number;
     public nome: String;
-    
-    constructor() { }
+    public check: boolean;
+       
+    constructor() {
+     }
 }

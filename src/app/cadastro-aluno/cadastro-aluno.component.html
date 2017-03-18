@@ -53,7 +53,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Data de Nascimento</label>
         <div class="col-md-6">
-          <input [(ngModel)]="dataNascimento" name="dataNascimento" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.dataNascimento" name="dataNascimento" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
         </div>
       </div>
 
@@ -120,7 +120,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="selectbasic">Estado Civil</label>
         <div class="col-md-6">
-          <select [(ngModel)]="aluno.estadoCivil" name="estadoCivil" class="form-control" required>
+          <select [(ngModel)]="aluno.estadoCivil" name="estadoCivil" class="form-control" >
         <option *ngFor="let item of listaEstadoCivil" [ngValue]="item" >{{item.nome}}</option>
       </select>
         </div>
@@ -130,7 +130,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="selectbasic">Como Conheceu</label>
         <div class="col-md-6">
-          <select [(ngModel)]="aluno.conheceEscola" name="conheceEscola" class="form-control" required>
+          <select [(ngModel)]="aluno.conheceEscola" name="conheceEscola" class="form-control" >
         <option *ngFor="let item of listaComoConheceu" [ngValue]="item" >{{item.nome}}</option>
       </select>
         </div>

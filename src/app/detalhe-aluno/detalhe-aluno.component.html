@@ -1,4 +1,4 @@
-<p-growl [value]="msgs"  life=6000 ></p-growl>
+<p-growl [value]="msgs" life=6000></p-growl>
 <div>
   <div class="card">
     <div class="card__header">
@@ -33,6 +33,11 @@
     <button type="button" id="debitos" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(2), 'btn-primary': getTabAtiva(2)}"
       (click)="tabDebitos()" href="#tabDebitos" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
                 <div class="hidden-xs">Debitos</div>
+            </button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" id="editar" class="btn btn-default" [routerLink]="['/manutencao-aluno', aluno.id]"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                <div class="hidden-xs">Editar</div>
             </button>
   </div>
 
@@ -85,7 +90,7 @@
     </div>
 
 
-  <div class="tab-pane " id="tabDebitos">
+    <div class="tab-pane " id="tabDebitos">
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
           <thead>
@@ -97,7 +102,7 @@
               <th>Mensalidade</th>
               <th>Valor para pagar</th>
               <th>Pagar</th>
-              
+
             </tr>
           </thead>
           <tbody>
@@ -109,10 +114,10 @@
               <td>{{debito.matricula.turma.mensalidade | currency:'BRL':true}}</td>
               <td>{{debito.valorCalculado | currency:'BRL':true}}</td>
               <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar Mensalidade</button>
-                  <button [disabled]="submit" class="btn btn-success" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado< debito.matricula.turma.mensalidade" >Pagar com Desconto</button>
-                  <button [disabled]="submit" class="btn btn-danger" (click)="pagarMensalidadeCalculada(debito)"  *ngIf="debito.valorCalculado> debito.matricula.turma.mensalidade">Pagar com Multa</button>
+                <button [disabled]="submit" class="btn btn-success" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado< debito.matricula.turma.mensalidade">Pagar com Desconto</button>
+                <button [disabled]="submit" class="btn btn-danger" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado> debito.matricula.turma.mensalidade">Pagar com Multa</button>
               </td>
-              
+
             </tr>
           </tbody>
         </table>

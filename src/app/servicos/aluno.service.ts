@@ -41,6 +41,10 @@ export class AlunoService {
     return this.http.post(environment.url + "alunos", aluno);
   }
 
+  alterar(aluno: Aluno) {
+    return this.http.put(environment.url + "alunos", aluno);
+  }
+
    getAlunos() {
     if (environment.mock) {
       return this.http.get(environment.url + "alunos.json").map((response: Response) => <Aluno[]>response.json());

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Matricula } from './maticula';
 import { EstadoCivil } from './estado-civil';
 import { ConheceEscola } from './conhece-escola';
@@ -15,7 +16,7 @@ export class Aluno {
     public complemento: string;
     public bairro: string;
     public cidade: string;
-    public dataNascimento: string;
+    public dataNascimento: DatePipe;
     public profissao: string;
     public sexo: string;
     public conheceEscola: ConheceEscola;

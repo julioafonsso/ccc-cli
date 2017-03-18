@@ -1,4 +1,4 @@
-<p-growl [value]="msgs"  life=6000 ></p-growl>
+<p-growl [value]="msgs" life=6000></p-growl>
 <form class="form-horizontal" (ngSubmit)="onSubmit()">
   <fieldset>
 
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-<!-- Select Basic -->
+    <!-- Select Basic -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Nivel da Turma</label>
       <div class="col-md-6">
@@ -30,20 +30,21 @@
       <label class="col-md-4 control-label" for="checkboxes">Dia das Aulas</label>
       <div class="col-md-4">
         <label *ngFor="let dia of dias" class="checkbox-inline">
-          <input type="checkbox" (change)="checkDias(dia, $event)">{{dia.nome}}
+          <input type="checkbox" [checked]="dia.check" (change)="checkDias(dia, $event)">{{dia.nome}}
         </label>
 
       </div>
     </div>
 
-     <!-- Text input-->
+    <!-- Text input-->
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Data Inicio / Data Termino</label>
       <div class="col-md-2">
-        <input [(ngModel)]="dataInicio" name="dataInicio" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.dataInicio" name="dataInicio" type="date" placeholder="DD/MM/AAAA" class="form-control input-md"
+          required="">
       </div>
       <div class="col-md-2">
-        <input [(ngModel)]="dataTermino" name="dataTermino" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" >
+        <input [(ngModel)]="turma.dataTermino" name="dataTermino" type="date" placeholder="DD/MM/AAAA" class="form-control input-md">
       </div>
     </div>
 
@@ -51,10 +52,12 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Horario</label>
       <div class="col-md-2">
-        <input [(ngModel)]="turma.horarioInicial" name="horarioInicial" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.horarioInicial" name="horarioInicial" type="time" placeholder="18:30 as 19:30" class="form-control input-md"
+          required="">
       </div>
       <div class="col-md-2">
-        <input [(ngModel)]="turma.horarioFinal" name="horarioFinal" type="time" placeholder="18:30 as 19:30" class="form-control input-md" required="">
+        <input [(ngModel)]="turma.horarioFinal" name="horarioFinal" type="time" placeholder="18:30 as 19:30" class="form-control input-md"
+          required="">
       </div>
     </div>
 
@@ -72,7 +75,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual do Professor</label>
       <div class="col-md-6">
-        <input appNumeroInteiro [(ngModel)]="turma.professores[0].percentual" name="percentual1" type="number" min="0" max="100" placeholder="20%" class="form-control input-md" required="">
+        <input appNumeroInteiro [(ngModel)]="turma.professores[0].percentual" name="percentual1" type="number" min="0" max="100"
+          placeholder="20%" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -89,7 +93,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual da Professora</label>
       <div class="col-md-6">
-        <input appNumeroInteiro [(ngModel)]="turma.professores[1].percentual" name="percentual2" type="number" min="0" max="100" placeholder="15%" class="form-control input-md" required="">
+        <input appNumeroInteiro [(ngModel)]="turma.professores[1].percentual" name="percentual2" type="number" min="0" max="100"
+          placeholder="15%" class="form-control input-md" required="">
 
       </div>
     </div>
@@ -98,7 +103,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Valor </label>
       <div class="col-md-6">
-        <input appValor [(ngModel)]="turma.mensalidade" name="mensalidade" type="text"  placeholder="R$135,00" class="form-control input-md" required="">
+        <input appValor [(ngModel)]="turma.mensalidade" name="mensalidade" type="text" placeholder="R$135,00" class="form-control input-md"
+          required="">
       </div>
     </div>
 
@@ -106,7 +112,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Numero de Vagas</label>
       <div class="col-md-6">
-        <input appNumeroInteiro [(ngModel)]="turma.vagas" name="vagas" type="number" placeholder="15" min="0" class="form-control input-md" required="">
+        <input appNumeroInteiro [(ngModel)]="turma.vagas" name="vagas" type="number" placeholder="15" min="0" class="form-control input-md"
+          required="">
 
       </div>
     </div>

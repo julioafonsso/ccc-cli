@@ -20,7 +20,7 @@ export class TurmaService {
 
     constructor(private http: HttpCustormerService) { }
 
-    matricularAluno(turma: Turma, aluno: Aluno, desconto:TipoDesconto, diaVencimento: number) {
+    matricularAluno(turma: Turma, aluno: Aluno, desconto: TipoDesconto, diaVencimento: number) {
         let matricula = new Matricula();
         matricula.aluno = aluno;
         matricula.turma = turma;
@@ -33,7 +33,7 @@ export class TurmaService {
     }
 
     excluirAlunoTurma(matricula: Matricula) {
-        return this.http.delete(environment.url + "turmas/matricula/" + matricula.id );
+        return this.http.delete(environment.url + "turmas/matricula/" + matricula.id);
     }
 
     getTurma(id: number) {
@@ -111,8 +111,11 @@ export class TurmaService {
     }
 
     cadastrarTurma(turma) {
-        
         return this.http.post(environment.url + 'turmas', turma);
+    }
+
+    alterarTurma(turma) {
+        return this.http.put(environment.url + 'turmas', turma);
     }
 
     getDias(diasSemana: DiasSemana[]) {

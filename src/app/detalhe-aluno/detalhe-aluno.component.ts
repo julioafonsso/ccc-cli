@@ -1,6 +1,6 @@
 import { Message } from 'primeng/primeng';
 import { Subscription } from 'rxjs/Rx';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { Turma } from './../models/turma';
@@ -26,7 +26,7 @@ export class DetalheAlunoComponent implements OnInit {
   private submit: boolean;
 
 
-  constructor(private alunoService: AlunoService, private router: Router, private route: ActivatedRoute) { 
+  constructor(private alunoService: AlunoService, private route: ActivatedRoute) { 
     this.msgs = [];
     this.aluno = new Aluno();
     this.botoes = new Array();
@@ -54,7 +54,6 @@ export class DetalheAlunoComponent implements OnInit {
   loadAluno() {
     this.alunoService.getAluno(this.idAluno).subscribe(res => {
       this.aluno = res;
-      console.log(res);
     })
   }
 

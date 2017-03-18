@@ -8,13 +8,6 @@ export class FtpService {
 
   constructor() { }
 
-
-
-  alterarFoto(idFoto : string, upload: FileUploader) {
-        upload.setOptions({ url: environment.url + "ftp/foto/"+ idFoto });
-        upload.uploadAll();
-  }   
-
   cadastrarFoto(upload: FileUploader) {
         upload.setOptions({ url: environment.url + "ftp/foto/" })
         upload.uploadAll();

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Matricula } from './maticula';
 import { Aluno } from './aluno';
 import { TurmaProfessor } from './turma-professor';
@@ -14,8 +15,8 @@ export class Turma {
     public modalidade: ModalidadeTurma;
     public diasSemana: DiasSemana[];
     public horarioInicial: String;
-    public dataInicio: String;
-    public dataTermino: String
+    public dataInicio: DatePipe;
+    public dataTermino: DatePipe
     public horarioFinal: String;
     public mensalidade: number;
     public sala: Salas;
@@ -38,24 +39,6 @@ export class Turma {
     inicializarTurmaProfessor() {
         this.professores[0] = new TurmaProfessor();
         this.professores[1] = new TurmaProfessor();
-        
-    }
 
-    addDia(dia: DiasSemana)
-    {
-        
-        this.diasSemana.push(dia);
-        console.log(this.diasSemana);
     }
-
-    removeDia(dia: DiasSemana)
-    {
-        var index = this.diasSemana.indexOf(dia, 0);
-        if(index>-1)
-        {
-            this.diasSemana.splice(index, 1);
-        }
-        console.log(this.diasSemana);
-    }
-
 }

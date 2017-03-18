@@ -27,6 +27,13 @@ export class HttpCustormerService {
     return this.http.post(url, parametro, {headers: this.createrHeader()});
   }
 
+  put(url: string, parametro:any)
+  {
+    console.log("PUT ")
+    console.log(parametro)
+    return this.http.put(url, parametro, {headers: this.createrHeader()});
+  }
+
   delete(url: string, parametro?: any) {
     return this.http.delete(url, {
       headers: this.createrHeader(),

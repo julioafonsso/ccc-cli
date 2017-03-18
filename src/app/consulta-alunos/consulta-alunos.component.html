@@ -11,6 +11,9 @@
             <div class="card__info__title">
                 <a [routerLink]="['/detalhe-aluno', aluno.id]">{{aluno.nome}}</a>
             </div>
+            <!--<div class="card__info__title">
+                <button class="btn btn-success" [routerLink]="['/manutencao-aluno', aluno.id]">editar</button>
+            </div>-->
             <div class="card__info__detalhes">{{aluno.email}}</div>
             <div class="card__info__detalhes">{{aluno.telefone}}</div>
         </div>

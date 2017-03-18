@@ -50,7 +50,7 @@ export class LoginService {
     this.http.post(environment.url + "login", usuario).subscribe(res => {
       this.token = res.headers.get("token");
       this.usuarioEstaLogadoOBS.next(true);
-      this.route.navigate(['/cadastro-aluno']);
+      this.route.navigate(['/cadastro-turma/7']);
       let user: Usuario = res.json();
       this.usuarioEhSupervisorOBJS.next(user.indSupervisor);
 

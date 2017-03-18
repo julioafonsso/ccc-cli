@@ -14,11 +14,13 @@ import { LoginService } from './servicos/login.service';
 
 import { PerfilSupervisorGuard } from './guards/perfil-supervisor.guard';
 import { EstaLogadoGuard } from './guards/esta-logado.guard';
+import { TesteComponent } from './teste/teste.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    TesteComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Response } from '@angular/http';
 import { TurmaProfessor } from './../models/turma-professor';
@@ -35,9 +36,9 @@ export class CadastroTurmaComponent implements OnInit {
   private turma: Turma;
   private dataInicio: Date;
   private dataTermino: Date
-  private submit:boolean;
+  private submit: boolean;
 
-  constructor(private turmaService: TurmaService,
+  constructor(private route: ActivatedRoute, private turmaService: TurmaService,
     private professorService: ProfessorService) {
     this.msgs = [];
     this.turma = new Turma()
@@ -47,11 +48,66 @@ export class CadastroTurmaComponent implements OnInit {
   ngOnInit() {
     this.turma.inicializarTurmaProfessor();
     this.loadCamposBasicos();
+    this.loadTurma();
+  }
+
+  loadTurma() {
+    this.route.params.subscribe(
+      (params: any) => {
+        if (params['id'] != undefined) {
+          this.submit = true;
+          this.turmaService.getTurma(params['id']).subscribe(res => {
+            this.turma = res;
+            this.setCamposCombo();
+            this.submit = false;
+          })
+        }
+      }
+    );
+  }
+
+  setCamposCombo() {
+    this.modalidades.forEach(v => {
+      if (this.turma.modalidade.id == v.id)
+        this.turma.modalidade = v;
+    })
+
+    this.nives.forEach(v => {
+      if (this.turma.nivel.id == v.id)
+        this.turma.nivel = v;
+    })
+
+    this.salas.forEach(v => {
+      if (this.turma.sala.id == v.id)
+        this.turma.sala = v;
+    })
+
+
+    this.professores.forEach(v => {
+      if (this.turma.professores[0].professor.id == v.id)
+        this.turma.professores[0].professor = v;
+    })
+
+    this.professoras.forEach(v => {
+      if (this.turma.professores[1].professor.id == v.id)
+        this.turma.professores[1].professor = v;
+    })
+
+    this.turma.diasSemana.forEach(v => {
+      this.dias.forEach(x => {
+        if (v.id == x.id)
+          x.check = true;
+      })
+    })
+
   }
 
   loadCamposBasicos() {
     this.turmaService.getDiasAulas().subscribe(res => {
       this.dias = res
+      this.dias.forEach(v => {
+        v.check = false;
+      })
     });
 
     this.professorService.getProfessores().subscribe(res => {
@@ -73,12 +129,17 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   checkDias(dia: DiasSemana, event) {
-    if (event.target.checked) {
-      this.turma.addDia(dia)
-    }
-    else {
-      this.turma.removeDia(dia)
-    }
+    dia.check = event.target.checked 
+  }
+
+  tratarDias() {
+    this.turma.diasSemana = [];
+    console.log(this.turma.diasSemana)
+    this.dias.forEach(v => {
+      if (v.check)
+        this.turma.diasSemana.push(v);
+    })
+    console.log(this.turma.diasSemana)
   }
 
   reset() {
@@ -87,27 +148,31 @@ export class CadastroTurmaComponent implements OnInit {
     this.loadCamposBasicos();
     this.dataInicio = null;
     this.dataTermino = null;
-    this.submit =false;
+    this.submit = false;
+  }
+
+  cadastrar() {
+    if (this.turma.id == undefined)
+      return this.turmaService.cadastrarTurma(this.turma);
+    else
+      return this.turmaService.alterarTurma(this.turma);
   }
 
   onSubmit() {
-    this.submit =true;
-    let d = new DatePipe("pt");
-    this.turma.dataInicio = d.transform(this.dataInicio, 'yyyyMMdd');
-    this.turma.dataTermino = d.transform(this.dataTermino, 'yyyyMMdd');
+    this.submit = true;
     let valorInicial = this.turma.mensalidade;
     let valor = this.turma.mensalidade.toString().replace(/[^0-9]/gi, '');
-    this.turma.mensalidade =  Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
-    console.log(this.turma)
-    this.turmaService.cadastrarTurma(this.turma).subscribe((res: Response) => {
-      this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-      this.reset()
-    },
-      error => {
-        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-        this.turma.mensalidade = valorInicial;
-        this.submit = true;
-      })
+    // this.turma.mensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
+    this.tratarDias();
+      this.cadastrar().subscribe((res: Response) => {
+        this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+        this.reset()
+      },
+        error => {
+          this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+          // this.turma.mensalidade = valorInicial;
+          this.submit = true;
+        })
 
   }
 
