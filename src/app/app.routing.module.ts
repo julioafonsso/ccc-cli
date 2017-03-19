@@ -24,9 +24,15 @@ const appRoutes: Routes = [
     { path: 'consulta-professores', loadChildren: './consulta-professores/consulta-professores.module#ConsultaProfessoresModule', canActivate: [EstaLogadoGuard] },
     { path: 'detalhe-professor/:id', loadChildren: './detalhe-professor/detalhe-professor.module#DetalheProfessorModule', canActivate: [EstaLogadoGuard] },
     { path: 'relatorio-movimentacao-caixa', loadChildren: './relatorio-movimentacao-caixa/relatorio-movimentacao-caixa.module#RelatorioMovimentacaoCaixaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
+    { path: 'consulta-tipo-desconto', loadChildren: './consulta-tipo-desconto/consulta-tipo-desconto.module#ConsultaTipoDescontoModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
     { path: 'cadastro-tipo-desconto', loadChildren: './cadastro-tipo-desconto/cadastro-tipo-desconto.module#CadastroTipoDescontoModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
+    { path: 'cadastro-tipo-desconto/:id', loadChildren: './cadastro-tipo-desconto/cadastro-tipo-desconto.module#CadastroTipoDescontoModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
+    { path: 'consulta-tipo-fluxo', loadChildren: './consulta-tipo-fluxo/consulta-tipo-fluxo.module#ConsultaTipoFluxoModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
     { path: 'cadastro-tipo-fluxo-caixa', loadChildren: './cadastro-tipo-fluxo-caixa/cadastro-tipo-fluxo-caixa.module#CadastroTipoFluxoCaixaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
+    { path: 'cadastro-tipo-fluxo-caixa/:id', loadChildren: './cadastro-tipo-fluxo-caixa/cadastro-tipo-fluxo-caixa.module#CadastroTipoFluxoCaixaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
+    { path: 'consulta-modalidade-turma', loadChildren: './consulta-modalidade-turma/consulta-modalidade-turma.module#ConsultaModalidadeTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
     { path: 'cadastro-modalidade-turma', loadChildren: './cadastro-modalidade-turma/cadastro-modalidade-turma.module#CadastroModalidadeTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
+    { path: 'cadastro-modalidade-turma/:id', loadChildren: './cadastro-modalidade-turma/cadastro-modalidade-turma.module#CadastroModalidadeTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
     
     { path: 'login', loadChildren: './login/login.module#LoginModule', canActivate: [] }
 

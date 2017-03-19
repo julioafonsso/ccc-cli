@@ -11,18 +11,16 @@ export class TipoFluxoCaixaService {
 
     constructor(private http: HttpCustormerService) { }
 
-    getTipoFluxo() {
-        if (environment.mock) {
-            return this.http.get(environment.url + "tipo-fluxo-caixa.json")
-                .map((response: Response) => <TipoFluxo[]>response.json())
-        }
-        else {
-
-            return this.http.get(environment.url + "tipo-fluxo-caixa")
-                .map((response: Response) => <TipoFluxo[]>response.json())
-        }
-
+    getTipoFluxos() {
+        return this.http.get(environment.url + "tipo-fluxo-caixa")
+            .map((response: Response) => <TipoFluxo[]>response.json())
     }
+
+    getTipoFluxo(id: number) {
+        return this.http.get(environment.url + "tipo-fluxo-caixa/" + id)
+            .map((response: Response) => <TipoFluxo>response.json())
+    }
+
 
     getTipoFluxoEntrada() {
         if (environment.mock) {
@@ -49,5 +47,9 @@ export class TipoFluxoCaixaService {
 
     cadastrar(tipo: TipoFluxo) {
         return this.http.post(environment.url + "tipo-fluxo-caixa", tipo);
+    }
+
+    alterar(tipo: TipoFluxo) {
+        return this.http.put(environment.url + "tipo-fluxo-caixa", tipo);
     }
 }

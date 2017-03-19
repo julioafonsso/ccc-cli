@@ -29,9 +29,14 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="checkboxes">Dia das Aulas</label>
       <div class="col-md-4">
-        <label *ngFor="let dia of dias" class="checkbox-inline">
-          <input type="checkbox" [checked]="dia.check" (change)="checkDias(dia, $event)">{{dia.nome}}
-        </label>
+        <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="turma.domingo" [checked]="turma.domingo" name="domingo" >Domingo</label>
+        <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="turma.segunda" [checked]="turma.segunda" name="segunda" >Segunda</label>
+        <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="turma.terca" [checked]="turma.terca" name="terca" >Terca</label>
+        <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="turma.quarta" [checked]="turma.quarta" name="quarta" >Quarta</label>
+        <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="turma.quinta" [checked]="turma.quinta" name="quinta" >Quinta</label>
+        <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="turma.sexta" [checked]="turma.sexta" name="sexta" >Sexta</label>
+        <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="turma.sabado" [checked]="turma.sabado" name="sabado" >Sabado</label>
+
 
       </div>
     </div>
@@ -65,7 +70,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="select1">Professor</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.professores[0].professor" name="professor1" class="form-control">
+        <select [(ngModel)]="turma.professor1" name="professor1" class="form-control">
       <option *ngFor="let professor of professores" [ngValue]="professor"  >{{professor.nome}}</option>
     </select>
       </div>
@@ -75,7 +80,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual do Professor</label>
       <div class="col-md-6">
-        <input appNumeroInteiro [(ngModel)]="turma.professores[0].percentual" name="percentual1" type="number" min="0" max="100"
+        <input appNumeroInteiro [(ngModel)]="turma.percentualProfessor1" name="percentual1" type="number" min="0" max="100"
           placeholder="20%" class="form-control input-md" required="">
 
       </div>
@@ -84,7 +89,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Professora</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.professores[1].professor" name="professor2" class="form-control">
+        <select [(ngModel)]="turma.professor2" name="professor2" class="form-control">
       <option *ngFor="let professora of professoras" [ngValue]="professora"  >{{professora.nome}}</option>
     </select>
       </div>
@@ -93,7 +98,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Percentual da Professora</label>
       <div class="col-md-6">
-        <input appNumeroInteiro [(ngModel)]="turma.professores[1].percentual" name="percentual2" type="number" min="0" max="100"
+        <input appNumeroInteiro [(ngModel)]="turma.percentualProfessor2" name="percentual2" type="number" min="0" max="100"
           placeholder="15%" class="form-control input-md" required="">
 
       </div>

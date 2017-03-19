@@ -11,6 +11,6 @@ export class Matricula
     public desconto :TipoDesconto
     constructor()
     {
-        this.turma = new Turma();
+        // this.turma = new Turma();
     }
 }

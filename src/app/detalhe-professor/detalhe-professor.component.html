@@ -72,11 +72,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let turmaProfessor of turmasProfessor">
-                <td>{{turmaProfessor.turma.codigo}}</td>
-                <td>{{turmaProfessor.turma.modalidade.nome}}</td>
-                <td>{{turmaProfessor.turma.nivel.nome}}</td>
-                <td>{{turmaProfessor.turma.sala.nome}}</td>
+              <tr *ngFor="let turma of turmas">
+                <td>{{turma.codigo}}</td>
+                <td>{{turma.modalidade.nome}}</td>
+                <td>{{turma.nivel.nome}}</td>
+                <td>{{turma.sala.nome}}</td>
               </tr>
             </tbody>
           </table>

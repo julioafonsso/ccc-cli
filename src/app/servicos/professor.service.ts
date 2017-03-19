@@ -1,10 +1,10 @@
+import { Turma } from './../models/turma';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { Salario } from './../models/salario';
 import { Professor } from './../models/professor';
 import { environment } from './../../environments/environment';
-import { TurmaProfessor } from './../models/turma-professor';
 import { HttpCustormerService } from './http-custormer.service';
 
 
@@ -28,43 +28,16 @@ export class ProfessorService {
   }
 
   getProfessores() {
-    if (environment.mock) {
-      return this.http.get(environment.url + "professores.json")
-        .map((response: Response) => <Professor[]>response.json())
-
-    }
-    else {
       return this.http.get(environment.url + "professores")
         .map((response: Response) => <Professor[]>response.json())
-    }
   }
 
   getProfessor(idProfessor: number) {
-    if (environment.mock) {
-      return this.http.get(environment.url + "professor.json")
-        .map((response: Response) => <Professor>response.json())
-    }
-    else {
       return this.http.get(environment.url + "/professores/" + idProfessor).map((response: Response) => <Professor>response.json());
-    }
-
-  }
-
-  getNomeProfessor(professores: TurmaProfessor[], index: number) {
-    if (index > professores.length - 1) {
-      return 'Sem Professor';
-    }
-    return professores[index].professor.nome;
-
   }
 
   getTurmaProfessor(idProfessor: number) {
-    if (environment.mock) {
-      return this.http.get(environment.url + "turmas-professor.json").map((response: Response) => <TurmaProfessor[]>response.json());
-    }
-    else {
-      return this.http.get(environment.url + "professores/" + idProfessor + "/turmas").map((response: Response) => <TurmaProfessor[]>response.json());
-    }
+      return this.http.get(environment.url + "professores/" + idProfessor + "/turmas").map((response: Response) => <Turma[]>response.json());
   }
 
   cadastrarRecebimento(idProfessor: number, salario: Salario[]) {

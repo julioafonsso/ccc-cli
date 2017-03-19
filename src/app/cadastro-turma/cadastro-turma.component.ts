@@ -1,7 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Response } from '@angular/http';
-import { TurmaProfessor } from './../models/turma-professor';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -46,7 +45,6 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.turma.inicializarTurmaProfessor();
     this.loadCamposBasicos();
     this.loadTurma();
   }
@@ -84,31 +82,17 @@ export class CadastroTurmaComponent implements OnInit {
 
 
     this.professores.forEach(v => {
-      if (this.turma.professores[0].professor.id == v.id)
-        this.turma.professores[0].professor = v;
+      if (this.turma.professor1.id == v.id)
+        this.turma.professor1 = v;
     })
 
     this.professoras.forEach(v => {
-      if (this.turma.professores[1].professor.id == v.id)
-        this.turma.professores[1].professor = v;
+      if (this.turma.professor2.id == v.id)
+        this.turma.professor2 = v;
     })
-
-    this.turma.diasSemana.forEach(v => {
-      this.dias.forEach(x => {
-        if (v.id == x.id)
-          x.check = true;
-      })
-    })
-
   }
 
   loadCamposBasicos() {
-    this.turmaService.getDiasAulas().subscribe(res => {
-      this.dias = res
-      this.dias.forEach(v => {
-        v.check = false;
-      })
-    });
 
     this.professorService.getProfessores().subscribe(res => {
       this.professores = res;
@@ -128,23 +112,8 @@ export class CadastroTurmaComponent implements OnInit {
     })
   }
 
-  checkDias(dia: DiasSemana, event) {
-    dia.check = event.target.checked 
-  }
-
-  tratarDias() {
-    this.turma.diasSemana = [];
-    console.log(this.turma.diasSemana)
-    this.dias.forEach(v => {
-      if (v.check)
-        this.turma.diasSemana.push(v);
-    })
-    console.log(this.turma.diasSemana)
-  }
-
   reset() {
     this.turma = new Turma();
-    this.turma.inicializarTurmaProfessor();
     this.loadCamposBasicos();
     this.dataInicio = null;
     this.dataTermino = null;
@@ -159,20 +128,20 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.turma)
     this.submit = true;
     let valorInicial = this.turma.mensalidade;
     let valor = this.turma.mensalidade.toString().replace(/[^0-9]/gi, '');
-    // this.turma.mensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
-    this.tratarDias();
-      this.cadastrar().subscribe((res: Response) => {
-        this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-        this.reset()
-      },
-        error => {
-          this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-          // this.turma.mensalidade = valorInicial;
-          this.submit = true;
-        })
+    this.turma.mensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
+    this.cadastrar().subscribe((res: Response) => {
+      this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+      this.reset()
+    },
+      error => {
+        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+        this.turma.mensalidade = valorInicial;
+        this.submit = true;
+      })
 
   }
 

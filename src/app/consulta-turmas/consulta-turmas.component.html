@@ -51,8 +51,8 @@
         <td>{{turma.dataInicio | date: 'dd/MM/yyyy'}}</td>
         <td>{{turma.qtdAlunos}}</td>
         <td>{{turma.qtdAlunas}}</td>
-        <td>{{getNomeProfessor(turma.professores, 0)}}</td>
-        <td>{{getNomeProfessor(turma.professores, 1)}}</td>
+        <td>{{turma.professor1.nome}}</td>
+        <td>{{turma.professor2.nome}}</td>
         <td>{{turma.mensalidade | currency:'BRL':true}}</td>
         <td>{{turma.vagas}}</td>
         <td><button class="btn btn-primary" [routerLink]="['/manutencao-turma', turma.id]" >Manutenção Turma</button></td>

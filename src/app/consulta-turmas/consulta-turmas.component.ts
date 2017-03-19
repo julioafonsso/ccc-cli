@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalidadeTurma } from './../models/modalidade-turma';
 import { NivelTurma } from './../models/nivel-turma';
 import { Professor } from './../models/professor';
-import { TurmaProfessor } from './../models/turma-professor';
 import { Turma } from './../models/turma';
 import { TurmaService } from './../servicos/turma.service';
 import { DiasSemana } from './../models/dias-semana';
@@ -69,18 +68,4 @@ export class ConsultaTurmasComponent implements OnInit {
 
     return valores;
   }
-
-
-  
-
-
-  getDias(diasSemana: DiasSemana[]) {
-    return this.turmaService.getDias(diasSemana);
-  }
-
-  getNomeProfessor(professores: TurmaProfessor[], index: number) {
-    return this.professorService.getNomeProfessor(professores, index);
-
-  }
-
 }

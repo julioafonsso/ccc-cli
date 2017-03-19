@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProfessorService } from './../servicos/professor.service';
 import { Professor } from './../models/professor';
 import { Turma } from './../models/turma';
-import { TurmaProfessor } from './../models/turma-professor'
 import { Salario } from './../models/salario';
 import { Message } from 'primeng/primeng';
 
@@ -21,11 +20,11 @@ export class DetalheProfessorComponent implements OnInit {
   private inscricao: Subscription;
   private idProfessor: number;
   private professor: Professor;
-  private turmasProfessor: TurmaProfessor[];
   private salarios: Salario[];
   private botoes = new Array();
   private msgs: Message[];
   private submit:boolean;
+  private turmas: Turma[];
 
   constructor(private professorService: ProfessorService, private router: ActivatedRoute) {
     this.professor = new Professor();
@@ -57,7 +56,7 @@ export class DetalheProfessorComponent implements OnInit {
 
   loadTurmas() {
     this.professorService.getTurmaProfessor(this.idProfessor).subscribe(res => {
-      this.turmasProfessor = res;
+      this.turmas = res;
     })
   }
 

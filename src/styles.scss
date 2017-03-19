@@ -38,3 +38,9 @@
 body {
   padding: 20px;
 }
+
+
+.form-control::-webkit-input-placeholder { color: lightgray !important; }
+.form-control:-moz-placeholder { color: lightgray !important; }
+.form-control::-moz-placeholder { color: lightgray !important; }
+.form-control:-ms-input-placeholder { color: lightgray !important; }

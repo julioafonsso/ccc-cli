@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { ModalidadeTurma } from './../models/modalidade-turma';
 import { Component, OnInit } from '@angular/core';
 
@@ -14,18 +15,38 @@ export class CadastroModalidadeTurmaComponent implements OnInit {
   private modal :ModalidadeTurma;
   private msgs: Message[];
   private submit: boolean;
-  constructor(private turmaService: TurmaService) { 
+  constructor(private route: ActivatedRoute,private turmaService: TurmaService) { 
     this.msgs = []
     this.modal = new ModalidadeTurma();
     this.submit =false
   }
 
   ngOnInit() {
+    this.loadModalidade();
+  }
+
+  loadModalidade() {
+    this.route.params.subscribe(
+      (params: any) => {
+        if (params['id'] != undefined) {
+          this.submit = true;
+          this.turmaService.getModalidade(params['id']).subscribe(res => {
+            this.modal = res;
+            this.submit = false;
+          })
+        }
+      })
+  }
+
+  cadastrar(){
+    if(this.modal.id != null)
+    return this.turmaService.alterarModalidade(this.modal)
+    return this.turmaService.cadastrarModalidade(this.modal);
   }
 
   onSubmit() {
     this.submit = true;
-    this.turmaService.cadastrarModalidade(this.modal)
+    this.cadastrar()
       .subscribe(response => {
         this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
         this.modal = new ModalidadeTurma();

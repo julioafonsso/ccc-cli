@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -16,25 +17,46 @@ export class CadastroTipoDescontoComponent implements OnInit {
   private msgs: Message[];
   private submit: boolean;
 
-  constructor(private descontoService: DescontoService) {
+  constructor(private route: ActivatedRoute, private descontoService: DescontoService) {
     this.desconto = new TipoDesconto();
     this.msgs = [];
-    this.submit =false;
-    
+    this.submit = false;
+
   }
 
   ngOnInit() {
-      
+    this.loadTipoDesconto();
+  }
+
+
+  loadTipoDesconto() {
+    this.route.params.subscribe(
+      (params: any) => {
+        if (params['id'] != undefined) {
+          this.submit = true;
+          this.descontoService.obterDesconto(params['id']).subscribe(res => {
+            this.desconto = res;
+            this.submit = false;
+          })
+        }
+      })
+  }
+
+
+  cadastrar() {
+    if (this.desconto.id != undefined)
+      return this.descontoService.alterarTipoDesconto(this.desconto)
+    return this.descontoService.cadastrarTipoDesconto(this.desconto)
   }
 
   onSubmit() {
-    this.submit =true;
-    this.descontoService.cadastrarTipoDesconto(this.desconto).subscribe(response => {
+    this.submit = true;
+    this.cadastrar().subscribe(response => {
       this.desconto = new TipoDesconto();
       this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-      this.submit =false;
+      this.submit = false;
     }, erro => {
-      this.submit =false;
+      this.submit = false;
       this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !' });
     })
   }

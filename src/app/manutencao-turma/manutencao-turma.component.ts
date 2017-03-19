@@ -11,7 +11,6 @@ import { Salas } from './../models/salas';
 import { ModalidadeTurma } from './../models/modalidade-turma';
 import { NivelTurma } from './../models/nivel-turma';
 import { Professor } from './../models/professor';
-import { TurmaProfessor } from './../models/turma-professor';
 import { Turma } from './../models/turma';
 import { TurmaService } from './../servicos/turma.service';
 import { DiasSemana } from './../models/dias-semana';
@@ -58,7 +57,6 @@ export class ManutencaoTurmaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.turma.inicializarTurmaProfessor();
 
     this.descontoService.obterDescontos().subscribe(res => {
       this.descontos = res;
@@ -66,18 +64,6 @@ export class ManutencaoTurmaComponent implements OnInit {
       console.log("ERRO")
     });
 
-    // this.turmaService.getDiasAulas().subscribe(res => {
-    //   this.dias = res
-    // });
-
-    // this.professorService.getProfessores().subscribe(res => {
-    //   this.professores = res;
-    //   this.professoras = res;
-    // })
-
-    // this.turmaService.getSalas().subscribe(res => {
-    //   this.salas = res;
-    // })
 
     this.turmaService.getModalidades().subscribe(res => {
       this.modalidades = res;
@@ -140,15 +126,6 @@ export class ManutencaoTurmaComponent implements OnInit {
       this.msgs.push({ severity: 'error', summary: 'Matricula Com Erro !', detail: JSON.parse(error._body)["message"] });
     }
     );
-  }
-
-  getDias(diasSemana: DiasSemana[]) {
-    return this.turmaService.getDias(diasSemana)
-  }
-
-  getNomeProfessor(professores: TurmaProfessor[], index: number) {
-    return this.professorService.getNomeProfessor(professores, index);
-
   }
 
 

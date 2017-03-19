@@ -15,9 +15,15 @@ export class DescontoService {
     return this.http.post(environment.url + "descontos",desconto)
   }
 
+  alterarTipoDesconto(desconto: TipoDesconto){
+    return this.http.put(environment.url + "descontos",desconto)
+  }
   obterDescontos(){
-    console.log(environment.url + "descontos")
     return this.http.get(environment.url + "descontos").map((res:Response) => <TipoDesconto[]> res.json());
+  }
+
+  obterDesconto(id: number){
+    return this.http.get(environment.url + "descontos/" + id).map((res:Response) => <TipoDesconto> res.json());
   }
 
 }

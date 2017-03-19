@@ -50,7 +50,49 @@
   </div>
 </div>
 
-<div class="col-md-6"  >
+<div class="container col-md-6">
+
+  <div class="page-header">
+    <h2>Extrato <small> - Janeiro </small></h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="line text-muted"></div>
+
+    <div *ngFor="let dia of lancamentos">
+      <div class="separator ">
+        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{dia.data}}</small></p>
+        <p><i class="glyphicon glyphicon-info-sign"></i> Saldo {{dia.valor | currency:'BRL':true}}</p>
+      </div>
+      <article class="panel" [ngClass]="{'panel-success': fluxo.tipoFluxo.indEntrada, 'panel-danger' : !fluxo.tipoFluxo.indEntrada }"
+        *ngFor="let fluxo of dia.fluxos">
+        <div class="panel-heading icon">
+          <i class="glyphicon glyphicon-plus"></i>
+        </div>
+        <div class="panel-heading">
+          <h2 class="panel-title">{{fluxo.tipoFluxo.nome}}</h2>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">{{fluxo.valor | currency:'BRL':true}}</li>
+          <li class="list-group-item">{{fluxo.descricao}} </li>
+        </ul>
+      </article>
+      <div>
+
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
+<!--<div class="col-md-6"  >
 
   <div class="panel panel-success" *ngIf="mostrarGraficoEntrada">
     <div class="panel-heading">Entradas</div>
@@ -80,4 +122,4 @@
   </div>
 
 
-</div>
+</div>-->

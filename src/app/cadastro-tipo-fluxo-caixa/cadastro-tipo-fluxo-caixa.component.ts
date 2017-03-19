@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 import { TipoFluxoCaixaService } from './../servicos/tipo-fluxo-caixa.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,23 +16,43 @@ export class CadastroTipoFluxoCaixaComponent implements OnInit {
   private tipo: TipoFluxo;
   private msgs: Message[];
   private submit: boolean;
-  
-  constructor(private tipoFluxoService: TipoFluxoCaixaService) {
+
+  constructor(private route: ActivatedRoute, private tipoFluxoService: TipoFluxoCaixaService) {
     this.msgs = [];
     this.tipo = new TipoFluxo();
-    this.submit =false;
+    this.submit = false;
   }
 
 
 
   ngOnInit() {
+    this.load()
+  }
+
+  load() {
+    this.route.params.subscribe(
+      (params: any) => {
+        if (params['id'] != undefined) {
+          this.submit = true;
+          this.tipoFluxoService.getTipoFluxo(params['id']).subscribe(res => {
+            this.tipo = res;
+            this.submit = false;
+          })
+        }
+      })
+  }
+
+  cadastrar() {
+    if (this.tipo.id != null)
+      this.tipoFluxoService.alterar(this.tipo)
+    return this.tipoFluxoService.cadastrar(this.tipo)
   }
 
   onSubmit() {
-    this.submit =true;
-    this.tipoFluxoService.cadastrar(this.tipo)
+    this.submit = true;
+    this.cadastrar()
       .subscribe(response => {
-        this.submit =false;
+        this.submit = false;
         this.tipo = new TipoFluxo();
         this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
 
