@@ -40,8 +40,8 @@ export class ProfessorService {
       return this.http.get(environment.url + "professores/" + idProfessor + "/turmas").map((response: Response) => <Turma[]>response.json());
   }
 
-  cadastrarRecebimento(idProfessor: number, salario: Salario[]) {
-    return this.http.post(environment.url + "professores/" + idProfessor + "/salario", salario);
+  cadastrarRecebimento(idProfessor: number) {
+    return this.http.post(environment.url + "professores/" + idProfessor + "/salario", null);
 
   }
 

@@ -30,7 +30,9 @@
                     <td>{{turma.professor2?.nome}}</td>
                     <td>{{turma.mensalidade | currency:'BRL':true}}</td>
                     <td>{{turma.vagas}}</td>
-                    <td><button class="btn btn-primary" [routerLink]="['/cadastro-turma', turma.id]">Manutenção Turma</button></td>
+                    <td><button class="btn btn-primary" [routerLink]="['/cadastro-turma', turma.id]">Editar</button>
+                        <button class="btn btn-danger" (click)="encerrar()">Finalizar</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -68,11 +70,12 @@
                         <tr>
                             <th>Nome</th>
                             <th>CPF</th>
-                            <th>RG</th>
+                            <!--<th>RG</th>-->
                             <th>Data Nascimento</th>
                             <th>Email</th>
                             <th>Telefone</th>
                             <th>Data Vencimento</th>
+                            <th>Valor Matricula</th>
                             <th>Desconto</th>
                             <th>Matricular</th>
 
@@ -82,15 +85,16 @@
                         <tr *ngFor="let aluno of alunos">
                             <td>{{aluno.nome}}</td>
                             <td>{{aluno.cpf}}</td>
-                            <td>{{aluno.rg}}</td>
+                            <!--<td>{{aluno.rg}}</td>-->
                             <td> {{aluno.dataNascimento | date: 'dd/MM/yyyy'}}</td>
                             <td>{{aluno.email}}</td>
                             <td>{{aluno.telefone}}</td>
-                            <td><input [(ngModel)]="diaVencimento[aluno.id]" type="number" step="1" min="1" max="31"></td>
+                            <td><input [(ngModel)]="diaVencimento[aluno.id]" type="number" step="1" min="1" max="31" class="form-control input-md"></td>
+                            <td><input appValor [(ngModel)]="valorMatricula[aluno.id]" type="text" class="form-control input-md"></td>
                             <td><select [(ngModel)]="desconto[aluno.id]" name="desconto" class="form-control" required>
         <option *ngFor="let desconto of descontos" [ngValue]="desconto" >{{desconto.nome}} -- {{desconto.valor}} %</option>
       </select></td>
-                            <td><button [disabled]="submit" class="btn btn-primary" (click)="matricular(aluno,desconto[aluno.id], diaVencimento[aluno.id])">Matricular</button></td>
+                            <td><button [disabled]="submit" class="btn btn-primary" (click)="matricular(aluno,desconto[aluno.id], diaVencimento[aluno.id], valorMatricula[aluno.id])">Matricular</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -117,7 +121,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of turma.matriculas">
+                <tr *ngFor="let item of matriculas">
                     <td>{{item.aluno.nome}}</td>
                     <td>{{item.aluno.cpf}}</td>
                     <td>{{item.aluno.rg}}</td>

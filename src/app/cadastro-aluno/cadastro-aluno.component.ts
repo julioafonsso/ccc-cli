@@ -48,7 +48,7 @@ export class CadastroAlunoComponent implements OnInit {
             this.listaComoConheceu = res;
         })
 
-        this.loadAluno
+        this.loadAluno()
     }
 
     loadAluno() {

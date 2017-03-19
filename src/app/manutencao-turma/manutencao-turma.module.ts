@@ -1,3 +1,4 @@
+import { ValorModule } from './../diretivas/valor/valor.module';
 import { DescontoService } from './../servicos/desconto.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ const rotas = [ { path: '', component: ManutencaoTurmaComponent } ];
     CommonModule,
     FormsModule,
     GrowlModule,
+    ValorModule,
     RouterModule.forChild(rotas)
   ],
   declarations: [ManutencaoTurmaComponent],

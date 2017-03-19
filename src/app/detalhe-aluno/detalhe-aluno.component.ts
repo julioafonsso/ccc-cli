@@ -18,7 +18,7 @@ export class DetalheAlunoComponent implements OnInit {
 
   private inscricao: Subscription;
   private idAluno: number;
-  private aluno :Aluno;
+  private aluno: Aluno;
   private matriculas: Matricula[];
   private debitos: Mensalidade[];
   private botoes = new Array();
@@ -26,11 +26,11 @@ export class DetalheAlunoComponent implements OnInit {
   private submit: boolean;
 
 
-  constructor(private alunoService: AlunoService, private route: ActivatedRoute) { 
+  constructor(private alunoService: AlunoService, private route: ActivatedRoute) {
     this.msgs = [];
     this.aluno = new Aluno();
     this.botoes = new Array();
-    this.submit =false;
+    this.submit = false;
   }
 
   ngOnInit() {
@@ -57,11 +57,10 @@ export class DetalheAlunoComponent implements OnInit {
     })
   }
 
-  loadDebitos()
-  {
+  loadDebitos() {
     this.alunoService.getDebitos(this.idAluno).subscribe(res => {
       this.debitos = res;
-      this.submit =false;
+      this.submit = false;
     })
   }
 
@@ -86,22 +85,28 @@ export class DetalheAlunoComponent implements OnInit {
     this.botoes[2] = true;
   }
 
-  pagarMensalidade(mensalidade: Mensalidade)
-  {
-    mensalidade.valorCalculado = mensalidade.matricula.turma.mensalidade;
-    this.pagarMensalidadeCalculada(mensalidade);
-  }
-
-  pagarMensalidadeCalculada(mensalidade: Mensalidade)
-  {
-    this.submit =true;
-    this.alunoService.pagarMensalidade(mensalidade ).subscribe(res =>{
+  pagar(mensalidade: Mensalidade) {
+    console.log(mensalidade)
+    this.submit = true;
+    this.alunoService.pagarMensalidade(mensalidade).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Com Sucesso !' });
       this.loadDebitos();
-    },error =>{
+    }, error => {
       this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
-      this.submit =false;
+      this.submit = false;
     });
+
+  }
+
+  pagarMensalidade(mensalidade: Mensalidade) {
+    mensalidade.valorParaPagar = mensalidade.matricula.turma.mensalidade;
+    this.pagar(mensalidade);
+  }
+
+  pagarMensalidadeCalculada(mensalidade: Mensalidade) {
+    mensalidade.valorParaPagar = mensalidade.valorCalculado;
+    this.pagar(mensalidade);
+
   }
 
 }

@@ -40,6 +40,8 @@ export class ManutencaoTurmaComponent implements OnInit {
   private descontos: TipoDesconto[];
   private desconto: TipoDesconto[];
   private diaVencimento: number[];
+  private valorMatricula: number[];
+  private matriculas: Matricula[];
   private submit: boolean;
 
   constructor(private turmaService: TurmaService,
@@ -52,7 +54,8 @@ export class ManutencaoTurmaComponent implements OnInit {
     this.msgs = [];
     this.desconto = []
     this.diaVencimento = [];
-    this.submit =false;
+    this.valorMatricula = [];
+    this.submit = false;
   }
 
   ngOnInit() {
@@ -87,6 +90,18 @@ export class ManutencaoTurmaComponent implements OnInit {
       this.turma = res;
 
     });
+
+    this.turmaService.getMatriculas(this.idTurma).subscribe(res => {
+      this.matriculas = res;
+
+    });
+
+  }
+  encerrar() {
+    this.turmaService.finalizar(this.turma).subscribe(res => {
+      this.msgs.push({ severity: 'success', summary: 'Turma Encerrada Com Sucesso !' });
+
+    })
   }
 
   excluirAluno(aluno: Matricula) {
@@ -97,7 +112,7 @@ export class ManutencaoTurmaComponent implements OnInit {
       this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
     },
       error => {
-        this.submit =false;
+        this.submit = false;
         this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
       });
   }
@@ -112,17 +127,17 @@ export class ManutencaoTurmaComponent implements OnInit {
     this.alunos = new Array<Aluno>();
     this.loadTurma();
     this.pesquisa = new Aluno();
-    this.submit =false;
+    this.submit = false;
   }
 
-  matricular(alunoParametro: Aluno, desconto: TipoDesconto, diaVencimento: number) {
-    this.submit =true;
-    this.turmaService.matricularAluno(this.turma, alunoParametro, desconto, diaVencimento).subscribe(res => {
+  matricular(alunoParametro: Aluno, desconto: TipoDesconto, diaVencimento: number, valorMatricula: number) {
+    this.submit = true;
+    this.turmaService.matricularAluno(this.turma, alunoParametro, desconto, diaVencimento, valorMatricula).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Matricula Efetuada Com Sucesso !' });
       this.reset();
 
     }, error => {
-      this.submit =false;
+      this.submit = false;
       this.msgs.push({ severity: 'error', summary: 'Matricula Com Erro !', detail: JSON.parse(error._body)["message"] });
     }
     );

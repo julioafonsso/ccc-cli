@@ -88,19 +88,16 @@ export class AlunoService {
   }
 
   getDebitos(idAluno: number) {
-    if (environment.mock) {
-      return this.http.get(environment.url + "debitos.json")
-        .map((response: Response) => <Mensalidade[]>response.json());
-    }
-    else {
       return this.http.get(environment.url + "alunos/" + idAluno + "/debitos")
         .map((response: Response) => <Mensalidade[]>response.json());
-    }
   }
 
   pagarMensalidade(mensalidade: Mensalidade) {
-    console.log(mensalidade);
-    return this.http.post(environment.url + "alunos/pagamento", mensalidade);
+    let pagamento= new Mensalidade();
+    pagamento.id = mensalidade.id;
+    pagamento.valorParaPagar = mensalidade.valorParaPagar;
+    return this.http.post(environment.url + "alunos/pagamento", pagamento
+    );
   }
 }
 

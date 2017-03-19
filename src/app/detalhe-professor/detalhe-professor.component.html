@@ -113,7 +113,8 @@
                 <td>{{salario.mensalidade.fluxoCaixa.valor | currency:'BRL':true}}</td>
                 <td>{{salario.percentual}} %</td>
                 <td>{{salario.valor | currency:'BRL':true}}</td>
-                <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(salario)">Pagar</button>
+                <td>
+                  <!--<button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(salario)">Pagar</button>-->
                 </td>
               </tr>
             </tbody>

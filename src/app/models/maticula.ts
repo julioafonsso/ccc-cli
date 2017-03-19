@@ -9,6 +9,7 @@ export class Matricula
     public diaVencimento: number;
     public id: number;
     public desconto :TipoDesconto
+    public valor: number;
     constructor()
     {
         // this.turma = new Turma();

@@ -23,14 +23,14 @@ export class DetalheProfessorComponent implements OnInit {
   private salarios: Salario[];
   private botoes = new Array();
   private msgs: Message[];
-  private submit:boolean;
+  private submit: boolean;
   private turmas: Turma[];
 
   constructor(private professorService: ProfessorService, private router: ActivatedRoute) {
     this.professor = new Professor();
     this.salarios = [];
     this.msgs = [];
-    this.submit =false;
+    this.submit = false;
   }
 
   getValorTotal() {
@@ -89,30 +89,30 @@ export class DetalheProfessorComponent implements OnInit {
   loadPagamento() {
     this.professorService.getMensalidadesParaReceber(this.idProfessor).subscribe(res => {
       this.salarios = res;
-      this.submit =false;
+      this.submit = false;
     })
   }
 
-  pagarMensalidade(salario: Salario) {
-    this.submit =true;
-    let salarios = [];
-    salarios.push(salario);
-    this.professorService.cadastrarRecebimento(this.idProfessor, salarios).subscribe((res: Response) => {
-      this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
-      this.loadPagamento();
-    }, error => {
-      this.submit =false;
-      this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-    })
-  }
+  // pagarMensalidade(salario: Salario) {
+  //   this.submit =true;
+  //   let salarios = [];
+  //   salarios.push(salario);
+  //   this.professorService.cadastrarRecebimento(this.idProfessor, salarios).subscribe((res: Response) => {
+  //     this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
+  //     this.loadPagamento();
+  //   }, error => {
+  //     this.submit =false;
+  //     this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+  //   })
+  // }
 
   pagarTudo() {
-    this.submit =true;
-    this.professorService.cadastrarRecebimento(this.idProfessor, this.salarios).subscribe((res: Response) => {
+    this.submit = true;
+    this.professorService.cadastrarRecebimento(this.idProfessor).subscribe((res: Response) => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
       this.loadPagamento();
     }, error => {
-      this.submit =false;
+      this.submit = false;
       this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
     })
   }

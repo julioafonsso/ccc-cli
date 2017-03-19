@@ -130,16 +130,16 @@ export class CadastroTurmaComponent implements OnInit {
   onSubmit() {
     console.log(this.turma)
     this.submit = true;
-    let valorInicial = this.turma.mensalidade;
-    let valor = this.turma.mensalidade.toString().replace(/[^0-9]/gi, '');
-    this.turma.mensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
+    // let valorInicial = this.turma.mensalidade;
+    // let valor = this.turma.mensalidade.toString().replace(/[^0-9]/gi, '');
+    // this.turma.mensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
     this.cadastrar().subscribe((res: Response) => {
       this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
       this.reset()
     },
       error => {
         this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-        this.turma.mensalidade = valorInicial;
+        // this.turma.mensalidade = valorInicial;
         this.submit = true;
       })
 

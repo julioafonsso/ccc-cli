@@ -110,7 +110,7 @@
               <td>{{debito.matricula.turma.codigo}}</td>
               <td>{{debito.matricula.turma.modalidade.nome}}</td>
               <td>{{debito.matricula.turma.nivel.nome}}</td>
-              <td>{{debito.matricula.diaVencimento}}/{{debito.mesReferencia.mes}}/{{debito.mesReferencia.ano}}</td>
+              <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
               <td>{{debito.matricula.turma.mensalidade | currency:'BRL':true}}</td>
               <td>{{debito.valorCalculado | currency:'BRL':true}}</td>
               <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar Mensalidade</button>
