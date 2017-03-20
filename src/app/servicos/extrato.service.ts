@@ -1,3 +1,4 @@
+import { ExtratoConsolidado } from './../models/extrato-consolidado';
 import { Extrato } from './../models/extrato';
 import { Response } from '@angular/http';
 import { environment } from './../../environments/environment';
@@ -31,21 +32,21 @@ export class ExtratoService {
   }
 
   private mapExtratoConsolidado(json: any) {
-    let dados = [];
-    let labels = [];
-    let color = []
-
+    let extratos :ExtratoConsolidado[] = [];
+    
     for (let item of json) {
-      dados.push(item[0]);
-      labels.push(item[1]);
-      color.push(this.getRandomColor())
+      let extrato = new ExtratoConsolidado();
+      extrato.quantidade = item[0];
+      extrato.valor = item[1];
+      extrato.nome = item[2];
+      extrato.id = item[3];
+      extrato.lancamentos = item[4];
+      console.log(extrato.lancamentos);
+      extrato.mostrarDetalhe = false;
+      extratos.push(extrato);
     }
 
-    let obj = [];
-    obj.push(dados);
-    obj.push(labels);
-
-    return obj;
+    return extratos;
   }
 
   private getRandomColor() {

@@ -13,83 +13,125 @@
 <div class="container col-md-6">
 
   <div class="page-header">
-    <h2>Extrato <small> - Janeiro </small></h2>
+    <h2>Extrato <small> - Entradas </small></h2>
   </div>
 
   <div class="timeline">
 
     <div class="line text-muted"></div>
 
-    <div *ngFor="let dia of lancamentos">
+    <div *ngFor="let entrada of entradas">
+
       <div class="separator ">
-        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{dia.data}}</small></p>
-        <p><i class="glyphicon glyphicon-info-sign"></i> Saldo {{dia.valor | currency:'BRL':true}}</p>
+
       </div>
-      <article class="panel" [ngClass]="{'panel-success': fluxo.tipoFluxo.indEntrada, 'panel-danger' : !fluxo.tipoFluxo.indEntrada }"
-        *ngFor="let fluxo of dia.fluxos">
-        <div class="panel-heading icon">
-          <i class="glyphicon glyphicon-plus"></i>
+
+      <article class="panel panel-consolidado" [ngClass]="{'panel-success': true }">
+        <div class="panel-heading icon" (click)="entrada.mostrarDetalhe = !entrada.mostrarDetalhe">
+          <i class="glyphicon" [ngClass]="{'glyphicon-plus': !entrada.mostrarDetalhe, 'glyphicon-minus' : entrada.mostrarDetalhe }"></i>
         </div>
         <div class="panel-heading">
-          <h2 class="panel-title">{{fluxo.tipoFluxo.nome}}</h2>
+          <h2 class="panel-title">{{entrada.nome}}</h2>
         </div>
         <ul class="list-group">
-          <li class="list-group-item">{{fluxo.valor | currency:'BRL':true}}</li>
-          <li class="list-group-item">{{fluxo.descricao}} </li>
+          <li class="list-group-item">{{entrada.valor | currency:'BRL':true}}</li>
+          <li class="list-group-item">{{entrada.quantidade}} Lancamentos </li>
         </ul>
       </article>
-      <div>
 
+      <!--Subitens-->
 
+      <div *ngFor="let dia of getDetalhe(entrada)">
+
+        <div class="separator-detalhe">
+          <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{dia.data}}</small></p>
+          <p><i class="glyphicon glyphicon-info-sign"></i> Saldo Do Dia {{dia.valor | currency:'BRL':true}}</p>
+        </div>
+
+        <article class="panel panel-detalhe" [ngClass]="{'panel-info':true}" *ngFor="let fluxo of dia.fluxos">
+          <div class="panel-heading">
+            <h2 class="panel-title">{{fluxo.tipoFluxo.nome}}</h2>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item">{{fluxo.valor | currency:'BRL':true}}</li>
+            <li class="list-group-item">{{fluxo.descricao}} </li>
+          </ul>
+        </article>
       </div>
 
+
+
+      <!--Fim subitens-->
 
 
     </div>
 
   </div>
+  <!--timeline-->
 </div>
+
+
+
 
 <div class="container col-md-6">
 
   <div class="page-header">
-    <h2>Extrato <small> - Janeiro </small></h2>
+    <h2>Extrato <small> - Saidas </small></h2>
   </div>
 
   <div class="timeline">
 
     <div class="line text-muted"></div>
 
-    <div *ngFor="let dia of lancamentos">
+    <div *ngFor="let saida of saidas">
+
       <div class="separator ">
-        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{dia.data}}</small></p>
-        <p><i class="glyphicon glyphicon-info-sign"></i> Saldo {{dia.valor | currency:'BRL':true}}</p>
+
       </div>
-      <article class="panel" [ngClass]="{'panel-success': fluxo.tipoFluxo.indEntrada, 'panel-danger' : !fluxo.tipoFluxo.indEntrada }"
-        *ngFor="let fluxo of dia.fluxos">
-        <div class="panel-heading icon">
-          <i class="glyphicon glyphicon-plus"></i>
+
+      <article class="panel panel-consolidado" [ngClass]="{'panel-danger': true }">
+        <div class="panel-heading icon" (click)="saida.mostrarDetalhe = !saida.mostrarDetalhe">
+          <i class="glyphicon" [ngClass]="{'glyphicon-plus': !saida.mostrarDetalhe, 'glyphicon-minus' : saida.mostrarDetalhe }"></i>
         </div>
         <div class="panel-heading">
-          <h2 class="panel-title">{{fluxo.tipoFluxo.nome}}</h2>
+          <h2 class="panel-title">{{saida.nome}}</h2>
         </div>
         <ul class="list-group">
-          <li class="list-group-item">{{fluxo.valor | currency:'BRL':true}}</li>
-          <li class="list-group-item">{{fluxo.descricao}} </li>
+          <li class="list-group-item">{{saida.valor | currency:'BRL':true}}</li>
+          <li class="list-group-item">{{saida.quantidade}} Lancamentos </li>
         </ul>
       </article>
-      <div>
 
+      <!--Subitens-->
 
+      <div *ngFor="let dia of getDetalhe(saida)">
+
+        <div class="separator-detalhe">
+          <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{dia.data}}</small></p>
+          <p><i class="glyphicon glyphicon-info-sign"></i> Saldo Do Dia {{dia.valor | currency:'BRL':true}}</p>
+        </div>
+
+        <article class="panel panel-detalhe" [ngClass]="{'panel-info':true}" *ngFor="let fluxo of dia.fluxos">
+          <div class="panel-heading">
+            <h2 class="panel-title">{{fluxo.tipoFluxo.nome}}</h2>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item">{{fluxo.valor | currency:'BRL':true}}</li>
+            <li class="list-group-item">{{fluxo.descricao}} </li>
+          </ul>
+        </article>
       </div>
 
+
+
+      <!--Fim subitens-->
 
 
     </div>
 
   </div>
+  <!--timeline-->
 </div>
-
 
 
 <!--<div class="col-md-6"  >
