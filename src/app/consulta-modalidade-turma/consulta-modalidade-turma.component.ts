@@ -13,7 +13,6 @@ export class ConsultaModalidadeTurmaComponent implements OnInit {
   constructor(private turmaService: TurmaService) { }
   private modalidades: ModalidadeTurma[];
   ngOnInit() {
-    console.log("onInit")
     this.turmaService.getModalidades().subscribe(res =>{
       this.modalidades = res;
     })

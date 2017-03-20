@@ -85,8 +85,8 @@ export class DetalheAlunoComponent implements OnInit {
     this.botoes[2] = true;
   }
 
+
   pagar(mensalidade: Mensalidade) {
-    console.log(mensalidade)
     this.submit = true;
     this.alunoService.pagarMensalidade(mensalidade).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Com Sucesso !' });

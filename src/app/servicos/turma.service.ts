@@ -91,14 +91,10 @@ export class TurmaService {
     }
 
     private tratarDadosTurma(turma: Turma){
-        console.log(turma.mensalidade)
         let turma2: Turma = Object.assign({}, turma);
-        console.log(turma2.mensalidade)
         let valor = turma2.mensalidade.toString().replace(/[^0-9]/gi, '');
-        console.log(valor);
         turma2.mensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
 
-        console.log(turma2)
         return turma2;
     }
 }

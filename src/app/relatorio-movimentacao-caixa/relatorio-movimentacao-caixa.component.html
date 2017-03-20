@@ -10,10 +10,14 @@
   <button (click)="pesquisar()" class="btn btn-default">Pesquisar</button>
 </form>
 
+<div class="page-header">
+    <h4>Saldo No Periodo <small> {{getSaldoPeriodo() | currency:'BRL':true}} </small></h4>
+  </div>
+
 <div class="container col-md-6">
 
   <div class="page-header">
-    <h2>Extrato <small> - Entradas </small></h2>
+    <h2><small> Entradas </small></h2>
   </div>
 
   <div class="timeline">
@@ -76,7 +80,7 @@
 <div class="container col-md-6">
 
   <div class="page-header">
-    <h2>Extrato <small> - Saidas </small></h2>
+    <h2><small> Saidas </small></h2>
   </div>
 
   <div class="timeline">

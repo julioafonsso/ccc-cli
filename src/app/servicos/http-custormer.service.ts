@@ -29,8 +29,6 @@ export class HttpCustormerService {
 
   put(url: string, parametro:any)
   {
-    console.log("PUT ")
-    console.log(parametro)
     return this.http.put(url, parametro, {headers: this.createrHeader()});
   }
 

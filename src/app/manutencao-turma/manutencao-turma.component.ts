@@ -64,7 +64,6 @@ export class ManutencaoTurmaComponent implements OnInit {
     this.descontoService.obterDescontos().subscribe(res => {
       this.descontos = res;
     }, erro => {
-      console.log("ERRO")
     });
 
 

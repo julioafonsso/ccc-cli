@@ -25,6 +25,8 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
   constructor(private extratoService: ExtratoService) {
     this.dataFim = new Date();
     this.dataInicio = new Date();
+    this.entradas = [];
+    this.saidas = [];
 
   }
 
@@ -32,6 +34,18 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
     if (extrato.mostrarDetalhe)
       return extrato.lancamentos
     return [];
+  }
+
+getSaldoPeriodo(){
+    let valor: number = 0;
+    this.entradas.forEach(v=>{
+      valor = valor + v.valor;
+    })
+
+    this.saidas.forEach(v =>{
+      valor = valor - v.valor;
+    })
+    return valor;
   }
 
   pesquisar() {

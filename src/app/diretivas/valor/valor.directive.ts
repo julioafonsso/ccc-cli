@@ -15,7 +15,6 @@ export class ValorDirective {
   }
 
   @HostListener("keyup", ['$event']) keyUp(event) {
-    console.log(event.key)
     if (this.ehNumero(event.key))
       this.formataValor(event.target)
   }
