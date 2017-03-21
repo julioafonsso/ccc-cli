@@ -46,7 +46,7 @@ export class TurmaService {
     }
 
     getMatriculas(id: number) {
-        return this.http.get(environment.url + "turmas/" + id+"/alunos").map((response: Response) => <Matricula[]>response.json());
+        return this.http.get(environment.url + "turmas/" + id + "/alunos").map((response: Response) => <Matricula[]>response.json());
     }
 
     getTurmas() {
@@ -90,9 +90,15 @@ export class TurmaService {
         return this.http.put(environment.url + 'turmas', this.tratarDadosTurma(turma));
     }
 
-    private tratarDadosTurma(turma: Turma){
+    private tratarDadosTurma(turma: Turma) {
+        let valor = turma.mensalidade.toString();
+        if (valor.indexOf(",") < 0) {
+            if (valor.indexOf(".") < 0)
+                valor = valor + ",00";
+        }
+
         let turma2: Turma = Object.assign({}, turma);
-        let valor = turma2.mensalidade.toString().replace(/[^0-9]/gi, '');
+        valor = turma2.mensalidade.toString().replace(/[^0-9]/gi, '');
         turma2.mensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
 
         return turma2;

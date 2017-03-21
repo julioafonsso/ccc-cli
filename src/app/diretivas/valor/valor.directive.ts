@@ -5,10 +5,10 @@ import { Directive, HostListener, HostBinding } from '@angular/core';
 })
 export class ValorDirective {
 
-  
+
 
   constructor() { }
-  
+
   private numeros: string = "0123456789"
   @HostListener("keypress", ['$event']) keyPress(event) {
     return this.ehNumero(event.key)
@@ -40,34 +40,40 @@ export class ValorDirective {
     let valorFormatado: string = '';
     let separador: string = '';
     let contador: number = 0;
-    valor = this.getSomenteNumeros(target.value);
-    
-    if(valor.length < 3)
-    {
-      
+
+    valor = target.value;
+    if (valor.indexOf(",") < 0) {
+      if (valor.indexOf(".") < 0)
+        valor = valor + ",00";
+    }
+
+
+    valor = this.getSomenteNumeros(valor);
+
+    if (valor.length < 3) {
       valor = '000' + valor;
       valor = valor.substr(valor.length - 3);
     }
-    else{
-      while(valor.startsWith('0') ){
-        if(valor.length <4)
+    else {
+      //Remove os zeros a esquerda
+      while (valor.startsWith('0')) {
+        if (valor.length < 4)
           break
-        valor = valor.replace('0','');
+        valor = valor.replace('0', '');
       }
     }
-    for (var i = valor.length; i >= 0 ; i--)
-    {
-      
+    for (var i = valor.length; i >= 0; i--) {
 
-      if(contador == 3)
+
+      if (contador == 3)
         separador = ',';
-      else if(contador > 3 && (contador -3) % 3 == 0)
+      else if (contador > 3 && (contador - 3) % 3 == 0)
         separador = '.';
       else
         separador = '';
-      
-      contador ++;
-      valorFormatado = valor.substr(i,1) + separador +  valorFormatado;
+
+      contador++;
+      valorFormatado = valor.substr(i, 1) + separador + valorFormatado;
     }
 
     target.value = valorFormatado;

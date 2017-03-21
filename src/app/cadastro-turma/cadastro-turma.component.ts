@@ -24,7 +24,6 @@ import { Turma } from './../models/turma';
 
 
 export class CadastroTurmaComponent implements OnInit {
-  private dias: DiasSemana[];
   private professores: Professor[];
   private professoras: Professor[];
   private salas: Salas[];
@@ -33,13 +32,16 @@ export class CadastroTurmaComponent implements OnInit {
   private msgs: Message[];
   private selecionado: string = "tete";
   private turma: Turma;
-  private dataInicio: Date;
-  private dataTermino: Date
   private submit: boolean;
 
   constructor(private route: ActivatedRoute, private turmaService: TurmaService,
     private professorService: ProfessorService) {
     this.msgs = [];
+    this.modalidades = [];
+    this.professoras = [];
+    this.professores = [];
+    this.salas = [];
+    this.nives = [];
     this.turma = new Turma()
     this.submit = false;
   }
@@ -65,27 +67,30 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   setCamposCombo() {
+    console.log(this.modalidades)
+    // while(this.modalidades == undefined)
+    // {}
     this.modalidades.forEach(v => {
       if (this.turma.modalidade.id == v.id)
         this.turma.modalidade = v;
     })
-
+    console.log(this.nives)
     this.nives.forEach(v => {
       if (this.turma.nivel.id == v.id)
         this.turma.nivel = v;
     })
-
+    console.log(this.salas)
     this.salas.forEach(v => {
       if (this.turma.sala.id == v.id)
         this.turma.sala = v;
     })
 
-
+    console.log(this.professores)
     this.professores.forEach(v => {
       if (this.turma.professor1.id == v.id)
         this.turma.professor1 = v;
     })
-
+    console.log(this.professoras)
     this.professoras.forEach(v => {
       if (this.turma.professor2.id == v.id)
         this.turma.professor2 = v;
@@ -115,12 +120,11 @@ export class CadastroTurmaComponent implements OnInit {
   reset() {
     this.turma = new Turma();
     this.loadCamposBasicos();
-    this.dataInicio = null;
-    this.dataTermino = null;
     this.submit = false;
   }
 
   cadastrar() {
+    console.log(this.turma)
     if (this.turma.id == undefined)
       return this.turmaService.cadastrarTurma(this.turma);
     else
@@ -135,7 +139,6 @@ export class CadastroTurmaComponent implements OnInit {
     },
       error => {
         this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-        // this.turma.mensalidade = valorInicial;
         this.submit = true;
       })
 
