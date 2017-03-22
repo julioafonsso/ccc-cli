@@ -33,6 +33,7 @@
         <th>Modalidade</th>
         <th>Nivel</th>
         <th>Data Inicio</th>
+        <th>Data Fim</th>
         <th>Qtd Cavalheiros</th>
         <th>Qtd Damas</th>
         <th>Professor</th>
@@ -49,6 +50,7 @@
         <td>{{turma.modalidade.nome}}</td>
         <td>{{turma.nivel.nome}}</td>
         <td>{{turma.dataInicio | date: 'dd/MM/yyyy'}}</td>
+        <td>{{turma.dataTermino | date: 'dd/MM/yyyy'}}</td>
         <td>{{turma.qtdAlunos}}</td>
         <td>{{turma.qtdAlunas}}</td>
         <td>{{turma.professor1.nome}}</td>

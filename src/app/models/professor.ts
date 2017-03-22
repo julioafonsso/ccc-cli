@@ -1,5 +1,3 @@
-import { DatePipe } from '@angular/common';
-
 export class Professor {
 
     public id: Number;
@@ -9,10 +7,10 @@ export class Professor {
     public email: string;
     public endereco: string;
     public telefone: string;
-    public dataAdmissao: DatePipe;
+    public dataAdmissao: Date;
     public observacao: string;
     public sexo: string;
-    public dataNascimento: DatePipe;
+    public dataNascimento: Date;
     public foto: string;
     
     constructor() { }

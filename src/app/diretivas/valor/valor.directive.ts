@@ -42,10 +42,13 @@ export class ValorDirective {
     let contador: number = 0;
 
     valor = target.value;
-    if (valor.indexOf(",") < 0) {
-      if (valor.indexOf(".") < 0)
-        valor = valor + ",00";
+    if (valor.length > 3) {
+      if (valor.indexOf(",") < 0) {
+        if (valor.indexOf(".") < 0)
+          valor = valor + ",00";
+      }
     }
+
 
 
     valor = this.getSomenteNumeros(valor);

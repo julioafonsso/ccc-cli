@@ -1,21 +1,24 @@
+<p-growl [value]="msgs" life=6000></p-growl>
 <div class="panel panel-default">
   <div class="panel-heading">Lista de Descontos</div>
-<div class="table-responsive">
-  <table class="table table-bordered table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Percentual</th>
-        <th>Ação</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let desconto of getDescontos()">
-        <td>{{desconto.nome}}</td>
-        <td>{{desconto.valor}} %</td>
-        <td><button class="btn btn-primary" [routerLink]="['/cadastro-tipo-desconto', desconto.id]" >Manutenção Turma</button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Percentual</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let desconto of getDescontos()">
+          <td>{{desconto.nome}}</td>
+          <td>{{desconto.valor}} %</td>
+          <td><button [disabled]="submit" class="btn btn-primary" [routerLink]="['/cadastro-tipo-desconto', desconto.id]">Manutenção Tipo Desconto</button>
+            <button [disabled]="submit" class="btn btn-danger" (click)="deletar(desconto)">Excluir Tipo Desconto</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

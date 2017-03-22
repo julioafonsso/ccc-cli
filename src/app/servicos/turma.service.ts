@@ -1,4 +1,3 @@
-import { TipoDesconto } from './../models/tipo-desconto';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -13,6 +12,7 @@ import { NivelTurma } from './../models/nivel-turma';
 import { DiasSemana } from './../models/dias-semana';
 import { Salas } from './../models/salas';
 import { HttpCustormerService } from './http-custormer.service';
+import { TipoDesconto } from './../models/tipo-desconto';
 
 
 @Injectable()
@@ -64,6 +64,11 @@ export class TurmaService {
             .map((response: Response) => <NivelTurma[]>response.json());
     }
 
+    deletarModalidade(modalidade: ModalidadeTurma)
+    {
+        return this.http.delete(environment.url + 'modalidades/' + modalidade.id);
+    }
+
     getModalidades() {
         return this.http.get(environment.url + 'modalidades')
             .map((response: Response) => <ModalidadeTurma[]>response.json());
@@ -96,9 +101,8 @@ export class TurmaService {
             if (valor.indexOf(".") < 0)
                 valor = valor + ",00";
         }
-
         let turma2: Turma = Object.assign({}, turma);
-        valor = turma2.mensalidade.toString().replace(/[^0-9]/gi, '');
+        valor = valor.replace(/[^0-9]/gi, '');
         turma2.mensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
 
         return turma2;

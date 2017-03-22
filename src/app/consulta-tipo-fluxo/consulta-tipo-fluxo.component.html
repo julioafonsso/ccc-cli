@@ -1,3 +1,4 @@
+<p-growl [value]="msgs" life=6000></p-growl>
 <div class="panel panel-default">
   <div class="panel-heading">Lista de Modalidades</div>
 <div class="table-responsive">
@@ -14,7 +15,9 @@
         <td>{{tipo.nome}}</td>
         <td *ngIf="tipo.indEntrada" >Entrada</td>
         <td *ngIf="!tipo.indEntrada" >Saida</td>
-        <td><button class="btn btn-primary" [routerLink]="['/cadastro-tipo-fluxo-caixa', tipo.id]" >Manutenção Turma</button></td>
+        <td><button class="btn btn-primary" [routerLink]="['/cadastro-tipo-fluxo-caixa', tipo.id]" >Manutenção Tipo Flxuo</button>
+        <button class="btn btn-danger" (click)="deletar(tipo)" >Excluir Tipo Fluxo</button>
+        </td>
       </tr>
     </tbody>
   </table>

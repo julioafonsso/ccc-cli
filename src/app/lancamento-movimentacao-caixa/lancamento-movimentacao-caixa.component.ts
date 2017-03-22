@@ -51,15 +51,6 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
   }
 
   onSubmit(){
-    this.submit = true;
-    let d = new DatePipe("pt");
-    
-    this.fluxoCaixa.data = d.transform(this.data, 'yyyyMMdd');
-  
-
-   let valorInicial = this.fluxoCaixa.valor;
-    let valor = this.fluxoCaixa.valor.toString().replace(/[^0-9]/gi, '');
-    this.fluxoCaixa.valor =  Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
     this.fluxoCaixaService.cadastrar(this.fluxoCaixa)
     .subscribe((res: Response) =>{
       this.submit = false
@@ -67,7 +58,6 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
     },
       error => {
         this.submit =false;
-        this.fluxoCaixa.valor = valorInicial;
         this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
       });
   }

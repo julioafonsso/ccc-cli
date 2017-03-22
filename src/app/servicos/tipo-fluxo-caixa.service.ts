@@ -11,6 +11,10 @@ export class TipoFluxoCaixaService {
 
     constructor(private http: HttpCustormerService) { }
 
+    deletar(tipo: TipoFluxo){
+        return this.http.delete(environment.url + "tipo-fluxo-caixa/" + tipo.id);
+    }
+
     getTipoFluxos() {
         return this.http.get(environment.url + "tipo-fluxo-caixa")
             .map((response: Response) => <TipoFluxo[]>response.json())

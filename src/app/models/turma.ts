@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Matricula } from './maticula';
 import { Aluno } from './aluno';
 import { Professor } from './professor';
@@ -14,8 +13,8 @@ export class Turma {
     public modalidade: ModalidadeTurma;
     public diasSemana: DiasSemana[];
     public horarioInicial: String;
-    public dataInicio: DatePipe;
-    public dataTermino: DatePipe
+    public dataInicio: Date;
+    public dataTermino: Date
     public horarioFinal: String;
     public mensalidade: number;
     public sala: Salas;

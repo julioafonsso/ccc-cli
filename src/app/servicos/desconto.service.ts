@@ -15,6 +15,11 @@ export class DescontoService {
     return this.http.post(environment.url + "descontos",desconto)
   }
 
+  deletar(desconto: TipoDesconto)
+  {
+    return this.http.delete(environment.url + "descontos/" + desconto.id)
+  }
+
   alterarTipoDesconto(desconto: TipoDesconto){
     return this.http.put(environment.url + "descontos",desconto)
   }

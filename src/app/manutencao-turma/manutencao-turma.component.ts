@@ -48,7 +48,8 @@ export class ManutencaoTurmaComponent implements OnInit {
     private professorService: ProfessorService,
     private router: Router, private route: ActivatedRoute,
     private alunoService: AlunoService,
-    private descontoService: DescontoService) {
+    private descontoService: DescontoService,
+    ) {
     this.pesquisa = new Aluno();
     this.turma = new Turma();
     this.msgs = [];
@@ -99,7 +100,7 @@ export class ManutencaoTurmaComponent implements OnInit {
   encerrar() {
     this.turmaService.finalizar(this.turma).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Turma Encerrada Com Sucesso !' });
-
+      this.router.navigate(['/consulta-turmas']);
     })
   }
 
