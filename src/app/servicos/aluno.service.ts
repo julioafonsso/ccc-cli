@@ -45,7 +45,7 @@ export class AlunoService {
     return this.http.put(environment.url + "alunos", aluno);
   }
 
-   getAlunos() {
+  getAlunos() {
     if (environment.mock) {
       return this.http.get(environment.url + "alunos.json").map((response: Response) => <Aluno[]>response.json());
     }
@@ -88,12 +88,16 @@ export class AlunoService {
   }
 
   getDebitos(idAluno: number) {
-      return this.http.get(environment.url + "alunos/" + idAluno + "/debitos")
-        .map((response: Response) => <Mensalidade[]>response.json());
+    return this.http.get(environment.url + "alunos/" + idAluno + "/debitos")
+      .map((response: Response) => <Mensalidade[]>response.json());
   }
 
+  getPagamentos(idAluno: number) {
+    return this.http.get(environment.url + "alunos/" + idAluno + "/pagamentos")
+      .map((response: Response) => <Mensalidade[]>response.json());
+  }
   pagarMensalidade(mensalidade: Mensalidade) {
-    let pagamento= new Mensalidade();
+    let pagamento = new Mensalidade();
     pagamento.id = mensalidade.id;
     pagamento.valorParaPagar = mensalidade.valorParaPagar;
     return this.http.post(environment.url + "alunos/pagamento", pagamento

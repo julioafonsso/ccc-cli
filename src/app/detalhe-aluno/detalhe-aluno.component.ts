@@ -21,6 +21,7 @@ export class DetalheAlunoComponent implements OnInit {
   private aluno: Aluno;
   private matriculas: Matricula[];
   private debitos: Mensalidade[];
+  private histPagamento: Mensalidade[];
   private botoes = new Array();
   private msgs: Message[];
   private submit: boolean;
@@ -41,8 +42,16 @@ export class DetalheAlunoComponent implements OnInit {
         this.loadAluno();
         this.loadTurmas();
         this.loadDebitos();
+        this.loadPagamentos();
       }
     );
+  }
+
+  loadPagamentos(){
+    this.alunoService.getPagamentos(this.idAluno).subscribe(res =>{
+      console.log(res);
+      this.histPagamento = res;
+    })
   }
 
   loadTurmas() {
@@ -85,12 +94,18 @@ export class DetalheAlunoComponent implements OnInit {
     this.botoes[2] = true;
   }
 
+  tabHistPag(){
+    this.botoes = new Array();
+    this.botoes[3] = true;
+  }
+
 
   pagar(mensalidade: Mensalidade) {
     this.submit = true;
     this.alunoService.pagarMensalidade(mensalidade).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Com Sucesso !' });
       this.loadDebitos();
+      this.loadPagamentos()
     }, error => {
       this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
       this.submit = false;
