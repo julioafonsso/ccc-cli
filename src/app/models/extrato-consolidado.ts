@@ -1,3 +1,4 @@
+import { FluxoCaixa } from './fluxo-caixa';
 import { Extrato } from './extrato';
 import { Usuario } from './usuario';
 import { TipoFluxo } from './tipo-fluxo';
@@ -8,7 +9,8 @@ export class ExtratoConsolidado {
     public valor: number;
     public nome: string;
     public id: number;
-    public lancamentos: Extrato[];
+    // public lancamentos: Extrato[];
+    public lancamentos: FluxoCaixa[];
     public mostrarDetalhe: boolean;
 
     

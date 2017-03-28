@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Response } from '@angular/http';
 import { Message } from 'primeng/primeng';
 import { FluxoCaixaService } from './../servicos/fluxo-caixa.service';

@@ -17,7 +17,7 @@
 <div class="container col-md-6">
 
   <div class="page-header">
-    <h2><small> Entradas </small></h2>
+    <h2><small> Entradas </small><h4><small>{{getSaldoEntradas() | currency:'BRL':true  }}</small></h4></h2>
   </div>
 
   <div class="timeline">
@@ -39,12 +39,13 @@
         </div>
         <ul class="list-group">
           <li class="list-group-item">{{entrada.valor | currency:'BRL':true}}</li>
-          <li class="list-group-item">{{entrada.quantidade}} Lancamentos </li>
+          <li *ngIf="!entrada.mostrarDetalhe" class="list-group-item">{{entrada.quantidade}} Lancamentos </li>
+          <li class="list-group-item" *ngFor="let lancamento of getDetalhe(entrada)">{{lancamento.data | date: 'dd/MM/yyyy'}} <p> <p> {{lancamento.valor | currency:'BRL':true}} <p> {{lancamento.descricao}} </li> 
         </ul>
       </article>
 
       <!--Subitens-->
-
+<!--
       <div *ngFor="let dia of getDetalhe(entrada)">
 
         <div class="separator-detalhe">
@@ -61,7 +62,7 @@
             <li class="list-group-item">{{fluxo.descricao}} </li>
           </ul>
         </article>
-      </div>
+      </div>-->
 
 
 
@@ -80,7 +81,7 @@
 <div class="container col-md-6">
 
   <div class="page-header">
-    <h2><small> Saidas </small></h2>
+    <h2><small> Saidas </small><h4><small>{{getSaldoSaidas() | currency:'BRL':true  }}</small></h4></h2>
   </div>
 
   <div class="timeline">
@@ -102,13 +103,14 @@
         </div>
         <ul class="list-group">
           <li class="list-group-item">{{saida.valor | currency:'BRL':true}}</li>
-          <li class="list-group-item">{{saida.quantidade}} Lancamentos </li>
+          <li *ngIf="!saida.mostrarDetalhe"  class="list-group-item">{{saida.quantidade}} Lancamentos </li>
+          <li class="list-group-item" *ngFor="let lancamento of getDetalhe(saida)">{{lancamento.data | date: 'dd/MM/yyyy'}} <p> <p>{{lancamento.valor | currency:'BRL':true}} <p> {{lancamento.descricao}} </li>
         </ul>
       </article>
 
       <!--Subitens-->
 
-      <div *ngFor="let dia of getDetalhe(saida)">
+      <!--<div *ngFor="let dia of getDetalhe(saida)">
 
         <div class="separator-detalhe">
           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{dia.data}}</small></p>
@@ -124,7 +126,7 @@
             <li class="list-group-item">{{fluxo.descricao}} </li>
           </ul>
         </article>
-      </div>
+      </div>-->
 
 
 

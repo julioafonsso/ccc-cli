@@ -22,6 +22,7 @@ export class ConsultaAlunosComponent implements OnInit {
     })
 
   }
+  
 
   getAlunos() {
     return this.alunos;

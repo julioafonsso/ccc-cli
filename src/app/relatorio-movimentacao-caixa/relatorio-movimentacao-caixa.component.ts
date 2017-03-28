@@ -1,6 +1,6 @@
 import { ExtratoConsolidado } from './../models/extrato-consolidado';
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 
 
 import { ExtratoService } from './../servicos/extrato.service';
@@ -25,6 +25,8 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
   constructor(private extratoService: ExtratoService) {
     this.dataFim = new Date();
     this.dataInicio = new Date();
+    this.dataInicio.setDate(this.dataInicio.getDate() - 30);
+    this.dataInicio;
     this.entradas = [];
     this.saidas = [];
 
@@ -36,14 +38,32 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
     return [];
   }
 
-getSaldoPeriodo(){
+  getSaldoEntradas() {
     let valor: number = 0;
-    this.entradas.forEach(v=>{
+    this.entradas.forEach(v => {
       valor = valor + v.valor;
     })
 
-    this.saidas.forEach(v =>{
-      valor = valor - v.valor;
+    return valor;
+  }
+
+getSaldoSaidas() {
+    let valor: number = 0;
+    this.saidas.forEach(v => {
+      valor = valor + v.valor;
+    })
+
+    return valor;
+  }
+
+  getSaldoPeriodo() {
+    let valor: number = 0;
+    this.entradas.forEach(v => {
+      valor = valor + v.valor;
+    })
+
+    this.saidas.forEach(v => {
+      valor = valor + v.valor;
     })
     return valor;
   }

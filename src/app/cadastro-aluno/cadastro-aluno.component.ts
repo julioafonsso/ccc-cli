@@ -1,5 +1,4 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { Response, Headers } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 

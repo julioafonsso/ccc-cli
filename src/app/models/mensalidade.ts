@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Matricula } from './maticula';
 import { FluxoCaixa } from './fluxo-caixa';
 import { MesReferencia } from './mes-referencia';
@@ -12,7 +11,7 @@ export class Mensalidade{
     public fluxoCaixa: FluxoCaixa;
 	public matricula: Matricula;
 	public valorCalculado: number;
-	public dataVencimento: DatePipe;
+	public dataVencimento: Date;
 	public valorParaPagar:number;
 	
     constructor(){}

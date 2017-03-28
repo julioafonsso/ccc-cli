@@ -1,5 +1,4 @@
 import { ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';

@@ -1,5 +1,4 @@
 import { ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { FtpService } from './../servicos/ftp.service';
