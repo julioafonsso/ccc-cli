@@ -38,7 +38,7 @@
 
 <div class="btn-group" role="group">
     <button type="button" id="debitos" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(3), 'btn-primary': getTabAtiva(3)}"
-      (click)="tabDebitos()" href="#tabHistPag" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+      (click)="tabHistPag()" href="#tabHistPag" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
                 <div class="hidden-xs">Historico Pagamento</div>
             </button>
   </div>
@@ -120,7 +120,8 @@
               <td>{{debito.matricula.turma.nivel.nome}}</td>
               <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
               <td>{{debito.matricula.turma.mensalidade | currency:'BRL':true}}</td>
-              <td>
+              <td>{{debito.valorCalculado | currency:'BRL':true}}</td>
+              <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar Mensalidade</button>
                 <button [disabled]="submit" class="btn btn-success" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado< debito.matricula.turma.mensalidade">Pagar com Desconto</button>
                 <button [disabled]="submit" class="btn btn-danger" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado> debito.matricula.turma.mensalidade">Pagar com Multa</button>
               </td>

@@ -134,6 +134,7 @@ export class ManutencaoTurmaComponent implements OnInit {
     this.submit = true;
     this.turmaService.matricularAluno(this.turma, alunoParametro, desconto, diaVencimento, valorMatricula).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Matricula Efetuada Com Sucesso !' });
+      this.router.navigate(['/detalhe-aluno', alunoParametro.id]);
       this.reset();
 
     }, error => {
