@@ -1,3 +1,9 @@
+<div class="col-md-12">
+    <div class="input-group input-group-sm">
+        <span class="input-group-addon" id="sizing-addon1">Filtro</span>
+        <input [(ngModel)]="filtro" type="text" class="form-control" placeholder="Pesquisar..." aria-describedby="sizing-addon1">
+    </div>
+</div>
 <div class="col-lg-3 col-sm-6" *ngFor="let professor of getProfessores()">
 
     <div class="card">

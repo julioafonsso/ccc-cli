@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Professor } from './../models/professor';
 import { ProfessorService } from './../servicos/professor.service';
-import { Turma } from './../models/turma';
 import { TurmaService } from './../servicos/turma.service';
 
 
@@ -14,9 +13,12 @@ import { TurmaService } from './../servicos/turma.service';
 export class ConsultaProfessoresComponent implements OnInit {
 
   private professores: Professor[];
-  private turmas: Turma[];
+  private filtro: string;
 
-  constructor(private professorService: ProfessorService) { }
+  constructor(private professorService: ProfessorService) { 
+    this.professores = [];
+    this.filtro = "";
+  }
 
   ngOnInit() {
     this.professorService.getProfessores().subscribe(res =>{
@@ -24,7 +26,14 @@ export class ConsultaProfessoresComponent implements OnInit {
     })
   }
   getProfessores(){
-    return this.professores;
+     return this.professores.filter((professor) => {
+      if (professor.nome.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
+        return true;
+      if (professor.cpf.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
+        return true;
+      if (professor.email.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
+        return true;
+    });
   }
 
 }

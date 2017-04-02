@@ -134,6 +134,7 @@
 
 
     <div class="tab-pane " id="tabHistPag">
+      De: <input [(ngModel)]="dataInicio" id="de" type="month"> Ate: <input [(ngModel)]="dataFim" id="ate" type="month" > <button (click)="pesquisar()" class="btn btn-primary">Pesquisar</button>
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
           <thead>

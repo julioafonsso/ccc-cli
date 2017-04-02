@@ -14,7 +14,11 @@ import { TurmaService } from './../servicos/turma.service';
 export class ConsultaAlunosComponent implements OnInit {
   private alunos: Aluno[]
   private turmas: Turma[];
-  constructor(private alunoService: AlunoService) { }
+  private filtro: string;
+  constructor(private alunoService: AlunoService) { 
+    this.alunos = [];
+    this.filtro ="";
+  }
 
   ngOnInit() {
     this.alunoService.getAlunos().subscribe(res => {
@@ -22,10 +26,18 @@ export class ConsultaAlunosComponent implements OnInit {
     })
 
   }
-  
+
 
   getAlunos() {
-    return this.alunos;
+    
+    return this.alunos.filter((aluno) => {
+      if (aluno.nome.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
+        return true;
+      if (aluno.cpf.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
+        return true;
+      if (aluno.email.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
+        return true;
+    });
   }
-  
+
 }

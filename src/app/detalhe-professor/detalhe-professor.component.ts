@@ -1,3 +1,5 @@
+import { DatePipe } from '@angular/common';
+import { FluxoCaixa } from './../models/fluxo-caixa';
 import { Response } from '@angular/http';
 import { Mensalidade } from './../models/mensalidade';
 import { Subscription } from 'rxjs/Rx';
@@ -25,12 +27,46 @@ export class DetalheProfessorComponent implements OnInit {
   private msgs: Message[];
   private submit: boolean;
   private turmas: Turma[];
+  private recebimentos: FluxoCaixa[];
+  private detalhes: any[];
+  private detalhe: Salario[];
+  private mostraDetalhe: boolean;
+  private idFluxoDetalhado: number;
+  private dataInicio: string;
+  private dataFim: string;
 
   constructor(private professorService: ProfessorService, private router: ActivatedRoute) {
     this.professor = new Professor();
     this.salarios = [];
     this.msgs = [];
+    this.recebimentos = [];
     this.submit = false;
+    this.detalhes = [];
+    this.detalhe = [];
+    this.mostraDetalhe = false;
+    this.idFluxoDetalhado = -1;
+    this.initDatas();
+
+  }
+
+  initDatas() {
+    let dp = new DatePipe("yyyy-MM");
+    this.dataFim = dp.transform(Date.now(), "yyyy-MM");
+    let valores = this.dataFim.split("-");
+    let ano = new Number(valores[0]).valueOf()
+    let mes = new Number(valores[1]).valueOf()
+
+    mes -= 6;
+
+    if (mes < 1) {
+      mes = 12 + mes;
+      ano -= 1;
+    }
+
+    if (mes.toString.length == 1)
+      this.dataInicio = ano.toString() + "-0" + mes.toString();
+    else
+      this.dataInicio = ano.toString() + "-" + mes.toString();
   }
 
   getValorTotal() {
@@ -49,10 +85,26 @@ export class DetalheProfessorComponent implements OnInit {
         this.loadProfessor();
         this.loadTurmas();
         this.loadPagamento();
+        this.pesquisar();
+
       }
     );
   }
 
+  loadRecebimentos() {
+    this.professorService.getRecebimentos(this.idProfessor, this.dataInicio, this.dataFim).subscribe(res => {
+      this.recebimentos = res;
+      this.loadDetalheRecebimento();
+    })
+  }
+
+  loadDetalheRecebimento() {
+    this.recebimentos.forEach(v => {
+      this.professorService.getDetalheRecebimento(v.id).subscribe(res => {
+        this.detalhes[v.id] = res;
+      })
+    })
+  }
 
   loadTurmas() {
     this.professorService.getTurmaProfessor(this.idProfessor).subscribe(res => {
@@ -86,6 +138,11 @@ export class DetalheProfessorComponent implements OnInit {
     this.botoes = new Array();
     this.botoes[2] = true;
   }
+
+  tabHistPagamentos() {
+    this.botoes = new Array();
+    this.botoes[3] = true;
+  }
   loadPagamento() {
     this.professorService.getMensalidadesParaReceber(this.idProfessor).subscribe(res => {
       this.salarios = res;
@@ -93,28 +150,87 @@ export class DetalheProfessorComponent implements OnInit {
     })
   }
 
-  // pagarMensalidade(salario: Salario) {
-  //   this.submit =true;
-  //   let salarios = [];
-  //   salarios.push(salario);
-  //   this.professorService.cadastrarRecebimento(this.idProfessor, salarios).subscribe((res: Response) => {
-  //     this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
-  //     this.loadPagamento();
-  //   }, error => {
-  //     this.submit =false;
-  //     this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-  //   })
-  // }
-
   pagarTudo() {
     this.submit = true;
     this.professorService.cadastrarRecebimento(this.idProfessor).subscribe((res: Response) => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
       this.loadPagamento();
+      this.loadRecebimentos();
     }, error => {
       this.submit = false;
       this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
     })
   }
+
+  getDatelhePagamento() {
+    return this.detalhe;
+  }
+
+  ehDetalheExibido(recebio: FluxoCaixa) {
+    return recebio.id == this.idFluxoDetalhado
+  }
+
+  getRecebimentosParte1() {
+    if (this.idFluxoDetalhado == -1)
+      return this.recebimentos
+    else {
+      return this.recebimentos.filter(v => {
+        return v.id <= this.idFluxoDetalhado;
+      })
+    }
+  }
+
+  getRecebimentosParte2() {
+    if (this.idFluxoDetalhado == -1)
+      return []
+    else {
+      return this.recebimentos.filter(v => {
+        return v.id > this.idFluxoDetalhado;
+      })
+    }
+  }
+
+  mostrarSegundaParte() {
+    let retorno = false;
+    if (this.idFluxoDetalhado == -1)
+      return false;
+    this.recebimentos.forEach(v => {
+      if (v.id > this.idFluxoDetalhado)
+        retorno = true;
+      else
+        retorno = false
+    })
+
+    return retorno;
+  }
+
+  pesquisar() {
+    if (this.dataInicio == undefined || this.dataInicio.toString().length < 7) {
+      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Inicio" });
+    }
+    else if (this.dataFim == undefined || this.dataFim.toString().length < 7) {
+      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Fim" });
+    }
+    else {
+      this.loadRecebimentos();
+    }
+  }
+
+  mostrarDetalhe(recebimento: FluxoCaixa) {
+    if (recebimento.id == this.idFluxoDetalhado) {
+      this.mostraDetalhe = false;
+      this.detalhe = [];
+      this.idFluxoDetalhado = -1;
+    }
+    else {
+
+      this.detalhe = this.detalhes[recebimento.id];
+      this.idFluxoDetalhado = recebimento.id
+      console.log(this.detalhe)
+      this.mostraDetalhe = true;
+
+    }
+  }
+
 
 }

@@ -4,7 +4,7 @@ import { TipoFluxo } from './tipo-fluxo';
 
 export class FluxoCaixa {
 
-    public id: Number;
+    public id: number;
     public valor: Number;
     public data: Date;
     public tipoFluxo: TipoFluxo;

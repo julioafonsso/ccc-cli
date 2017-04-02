@@ -92,8 +92,8 @@ export class AlunoService {
       .map((response: Response) => <Mensalidade[]>response.json());
   }
 
-  getPagamentos(idAluno: number) {
-    return this.http.get(environment.url + "alunos/" + idAluno + "/pagamentos")
+  getPagamentos(idAluno: number, dataInicio: string, dataFim: string) {
+    return this.http.get(environment.url + "alunos/" + idAluno + "/pagamentos/"+ dataInicio+"/" + dataFim)
       .map((response: Response) => <Mensalidade[]>response.json());
   }
   pagarMensalidade(mensalidade: Mensalidade) {

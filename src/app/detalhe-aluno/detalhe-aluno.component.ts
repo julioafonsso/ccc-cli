@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Message } from 'primeng/primeng';
 import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
@@ -25,6 +26,8 @@ export class DetalheAlunoComponent implements OnInit {
   private botoes = new Array();
   private msgs: Message[];
   private submit: boolean;
+  private dataInicio: string;
+  private dataFim: string;
 
 
   constructor(private alunoService: AlunoService, private route: ActivatedRoute) {
@@ -32,6 +35,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.aluno = new Aluno();
     this.botoes = new Array();
     this.submit = false;
+    this.initDatas();
   }
 
   ngOnInit() {
@@ -42,13 +46,47 @@ export class DetalheAlunoComponent implements OnInit {
         this.loadAluno();
         this.loadTurmas();
         this.loadDebitos();
-        this.loadPagamentos();
+        this.pesquisar();
       }
     );
   }
 
-  loadPagamentos(){
-    this.alunoService.getPagamentos(this.idAluno).subscribe(res =>{
+  initDatas() {
+    let dp = new DatePipe("yyyy-MM");
+    this.dataFim = dp.transform(Date.now(), "yyyy-MM");
+    let valores = this.dataFim.split("-");
+    let ano = new Number(valores[0]).valueOf()
+    let mes = new Number(valores[1]).valueOf()
+
+    mes -= 6;
+
+    if (mes < 1) {
+      mes = 12 + mes;
+      ano -= 1;
+    }
+
+    if (mes.toString.length == 1)
+      this.dataInicio = ano.toString() + "-0" + mes.toString();
+    else
+      this.dataInicio = ano.toString() + "-" + mes.toString();
+  }
+
+
+  pesquisar() {
+    if (this.dataInicio == undefined || this.dataInicio.toString().length < 7) {
+      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Inicio" });
+    }
+    else if (this.dataFim == undefined || this.dataFim.toString().length < 7) {
+      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Fim" });
+    }
+    else {
+      this.loadPagamentos();
+    }
+  }
+
+
+  loadPagamentos() {
+    this.alunoService.getPagamentos(this.idAluno, this.dataInicio, this.dataFim).subscribe(res => {
       console.log(res);
       this.histPagamento = res;
     })
@@ -94,7 +132,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.botoes[2] = true;
   }
 
-  tabHistPag(){
+  tabHistPag() {
     this.botoes = new Array();
     this.botoes[3] = true;
   }

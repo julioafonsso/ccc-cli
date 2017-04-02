@@ -1,3 +1,5 @@
+import { DatePipe } from '@angular/common';
+import { FluxoCaixa } from './../models/fluxo-caixa';
 import { Turma } from './../models/turma';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -36,10 +38,17 @@ export class ProfessorService {
       return this.http.get(environment.url + "/professores/" + idProfessor).map((response: Response) => <Professor>response.json());
   }
 
+  getRecebimentos(idProfessor: number, dataInicio: string, dataFim: string){
+    return this.http.get(environment.url + "professores/" + idProfessor + "/recibos/"+ dataInicio + "/" +dataFim).map((response: Response) => <FluxoCaixa[]>response.json());
+  }
+
   getTurmaProfessor(idProfessor: number) {
       return this.http.get(environment.url + "professores/" + idProfessor + "/turmas").map((response: Response) => <Turma[]>response.json());
   }
 
+  getDetalheRecebimento(idFluxo: number){
+    return this.http.get(environment.url + "professores/detalhe-pagamento/"+ idFluxo).map((response: Response) => <Salario[]>response.json());
+  }
   cadastrarRecebimento(idProfessor: number) {
     return this.http.post(environment.url + "professores/" + idProfessor + "/salario", null);
 
