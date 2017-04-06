@@ -107,6 +107,7 @@
               <th>Modalidade</th>
               <th>Nivel</th>
               <th>Vencimento</th>
+              <th>Mes Referencia</th>
               <th>Mensalidade</th>
               <th>Valor para pagar</th>
               <th>Pagar</th>
@@ -119,6 +120,7 @@
               <td>{{debito.matricula.turma.modalidade.nome}}</td>
               <td>{{debito.matricula.turma.nivel.nome}}</td>
               <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+              <td>{{debito.mesReferencia.mes}}/{{debito.mesReferencia.ano}}</td>
               <td>{{debito.matricula.turma.mensalidade | currency:'BRL':true}}</td>
               <td>{{debito.valorCalculado | currency:'BRL':true}}</td>
               <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar Mensalidade</button>
@@ -142,6 +144,7 @@
               <th>Codigo</th>
               <th>Modalidade</th>
               <th>Nivel</th>
+              <th>Mes Referencia</th>
               <th>Vencimento</th>
               <th>Data Pagamento</th>
               <th>Valor Pago</th>
@@ -152,6 +155,7 @@
               <td>{{debito.matricula.turma.codigo}}</td>
               <td>{{debito.matricula.turma.modalidade.nome}}</td>
               <td>{{debito.matricula.turma.nivel.nome}}</td>
+              <td>{{debito.mesReferencia.mes}}/{{debito.mesReferencia.ano}}</td>
               <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
               <td>{{debito.fluxoCaixa.data | date: 'dd/MM/yyyy'}}</td>
               <td>{{debito.fluxoCaixa.valor | currency:'BRL':true}}</td>
