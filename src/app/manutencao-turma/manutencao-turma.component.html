@@ -26,8 +26,8 @@
                     <td>{{turma.horarioInicial}} - {{turma.horarioFinal}}</td>
                     <td>{{turma.qtdAlunos}}</td>
                     <td>{{turma.qtdAlunas}}</td>
-                    <td>{{turma.professor1?.nome}}</td>
-                    <td>{{turma.professor2?.nome}}</td>
+                    <td>{{turma?.professor1?.nome}}</td>
+                    <td>{{turma?.professor2?.nome}}</td>
                     <td>{{turma.mensalidade | currency:'BRL':true}}</td>
                     <td>{{turma.vagas}}</td>
                     <td><button class="btn btn-primary" [routerLink]="['/cadastro-turma', turma.id]">Editar</button>
