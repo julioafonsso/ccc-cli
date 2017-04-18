@@ -92,7 +92,7 @@
                             <td><input [(ngModel)]="diaVencimento[aluno.id]" type="number" step="1" min="1" max="31" class="form-control input-md"></td>
                             <td><input appValor [(ngModel)]="valorMatricula[aluno.id]" type="text" class="form-control input-md"></td>
                             <td><select [(ngModel)]="desconto[aluno.id]" name="desconto" class="form-control" required>
-        <option *ngFor="let desconto of descontos" [ngValue]="desconto" >{{desconto.nome}} -- {{desconto.valor}} %</option>
+                            <option *ngFor="let desconto of descontos" [ngValue]="desconto" >{{desconto.nome}} -- {{desconto.valor}} %</option>
       </select></td>
                             <td><button [disabled]="submit" class="btn btn-primary" (click)="matricular(aluno,desconto[aluno.id], diaVencimento[aluno.id], valorMatricula[aluno.id])">Matricular</button></td>
                         </tr>
@@ -129,9 +129,13 @@
                     <td>{{item.aluno.email}}</td>
                     <td>{{item.aluno.telefone}}</td>
                     <td>{{item.diaVencimento}}</td>
-                    <td *ngIf="item.desconto">{{item.desconto?.nome}} - {{item.desconto?.valor}} %</td>
-                    <td *ngIf="!item.desconto">----</td>
-                    <td><button [disabled]="submit" class="btn btn-primary" (click)="excluirAluno(item)">Excluir</button></td>
+                    <td><select [(ngModel)]="item.desconto" name="desconto" class="form-control" required>
+                            <option *ngFor="let desconto of descontos" [ngValue]="desconto" >{{desconto.nome}} -- {{desconto.valor}} %</option>
+      </select></td>
+                    
+                    <td><button [disabled]="submit" class="btn btn-primary" (click)="excluirAluno(item)">Excluir</button>
+                    <button [disabled]="submit" class="btn btn-primary" (click)="atualizarDesconto(item)">Alterar Desconto</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

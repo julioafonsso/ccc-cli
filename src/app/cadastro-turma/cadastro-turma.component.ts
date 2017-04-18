@@ -32,6 +32,7 @@ export class CadastroTurmaComponent implements OnInit {
   private selecionado: string = "tete";
   private turma: Turma;
   private submit: boolean;
+  private load: any;
 
   constructor(private route: ActivatedRoute, private turmaService: TurmaService,
     private professorService: ProfessorService) {
@@ -51,23 +52,35 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   loadTurma() {
-    this.route.params.subscribe(
-      (params: any) => {
-        if (params['id'] != undefined) {
-          this.submit = true;
-          this.turmaService.getTurma(params['id']).subscribe(res => {
-            this.turma = res;
-            this.setCamposCombo();
-            this.submit = false;
-          })
+    if (
+      this.modalidades.length == 0 ||
+      this.professoras.length == 0 ||
+      this.professores.length == 0 ||
+      this.salas.length == 0 ||
+      this.nives.length == 0
+    ) {
+      this.load = setInterval(() => { this.loadTurma() }, 500);
+    }
+    else {
+      clearInterval(this.load);
+      this.route.params.subscribe(
+        (params: any) => {
+          if (params['id'] != undefined) {
+            this.submit = true;
+            this.turmaService.getTurma(params['id']).subscribe(res => {
+              this.turma = res;
+              this.setCamposCombo();
+              this.submit = false;
+            })
+          }
         }
-      }
-    );
+      );
+    }
+
+
   }
 
   setCamposCombo() {
-    // while(this.modalidades == undefined)
-    // {}
     this.modalidades.forEach(v => {
       if (this.turma.modalidade.id == v.id)
         this.turma.modalidade = v;

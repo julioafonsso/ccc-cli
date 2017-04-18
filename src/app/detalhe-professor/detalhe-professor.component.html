@@ -94,6 +94,7 @@
       </div>
 
       <div class="tab-pane " id="tabPagamentos">
+        Mes Referencia: <input [(ngModel)]="mesReferenciaPagamento" id="de" type="month"><button (click)="loadPagamento()" class="btn btn-primary">Pesquisar</button>
         <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -119,7 +120,7 @@
                 <td>{{salario.percentual}} %</td>
                 <td>{{salario.valor | currency:'BRL':true}}</td>
                 <td>
-                  <!--<button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(salario)">Pagar</button>-->
+                  <button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(salario)">Pagar</button>
                 </td>
               </tr>
             </tbody>
@@ -141,7 +142,7 @@
 
 
       <div class="tab-pane " id="tabHistPagamento">
-        De: <input [(ngModel)]="dataInicio" id="de" type="month"> Ate: <input [(ngModel)]="dataFim" id="ate" type="month" > <button (click)="pesquisar()" class="btn btn-primary">Pesquisar</button>  
+        De: <input [(ngModel)]="dataInicioHistPagamento" id="de" type="month"> Ate: <input [(ngModel)]="dataFimHistPagamento" id="ate" type="month" > <button (click)="pesquisarPagamentoHistorico()" class="btn btn-primary">Pesquisar</button>  
         <div class="table-responsive">
 
           <table class="table table-bordered table-striped table-hover">

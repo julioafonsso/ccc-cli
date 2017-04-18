@@ -65,11 +65,13 @@ export class DetalheAlunoComponent implements OnInit {
       ano -= 1;
     }
 
-    if (mes.toString.length == 1)
+    if (mes.toString().length === 1)
       this.dataInicio = ano.toString() + "-0" + mes.toString();
     else
       this.dataInicio = ano.toString() + "-" + mes.toString();
+
   }
+  
 
 
   pesquisar() {

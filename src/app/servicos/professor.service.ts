@@ -24,8 +24,8 @@ export class ProfessorService {
     return this.http.post(environment.url + "/professores", professor);
   }
 
-  getMensalidadesParaReceber(idProfessor: number) {
-    return this.http.get(environment.url + "/professores/" + idProfessor + "/salario-pendente")
+  getMensalidadesParaReceber(idProfessor: number, mesReferencia:string) {
+    return this.http.get(environment.url + "/professores/" + idProfessor + "/salario-pendente/" + mesReferencia)
       .map((res: Response) => <Salario[]>res.json());
   }
 
@@ -49,9 +49,12 @@ export class ProfessorService {
   getDetalheRecebimento(idFluxo: number){
     return this.http.get(environment.url + "professores/detalhe-pagamento/"+ idFluxo).map((response: Response) => <Salario[]>response.json());
   }
-  cadastrarRecebimento(idProfessor: number) {
-    return this.http.post(environment.url + "professores/" + idProfessor + "/salario", null);
+  cadastrarRecebimento(idProfessor: number,mes: string ) {
+    return this.http.post(environment.url + "professores/" + idProfessor + "/salario-periodo/" + mes, null);
+  }
 
+  cadastrarRecebimentoParcial(idProfessor: number, idSalario) {
+    return this.http.post(environment.url + "professores/" + idProfessor + "/salario/" + idSalario, null);
   }
 
 }

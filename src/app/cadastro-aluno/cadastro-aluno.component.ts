@@ -27,6 +27,7 @@ export class CadastroAlunoComponent implements OnInit {
     private foto: any;
     private url: string;
     private envieiFoto: boolean;
+    private load: any;
 
     constructor(private route: ActivatedRoute, private alunoService: AlunoService, private ftpService: FtpService) {
         this.aluno = new Aluno();
@@ -35,10 +36,11 @@ export class CadastroAlunoComponent implements OnInit {
         this.msgs = [];
         this.envieiFoto = false;
         this.submit = false;
+        this.listaEstadoCivil = [];
+        this.listaComoConheceu = []
     }
 
     ngOnInit() {
-
         this.alunoService.getListaEstadoCivil().subscribe(res => {
             this.listaEstadoCivil = res;
         })
@@ -46,36 +48,38 @@ export class CadastroAlunoComponent implements OnInit {
         this.alunoService.getListaComoConheceu().subscribe(res => {
             this.listaComoConheceu = res;
         })
-
         this.loadAluno()
     }
 
     loadAluno() {
-        this.route.params.subscribe(
-            (params: any) => {
-                if (params['id'] != undefined) {
-                    this.submit = true;
-                    this.envieiFoto = true;
-                    this.alunoService.getAluno(params['id']).subscribe(res => {
-                        this.aluno = res;
-                        this.listaEstadoCivil.forEach(v => {
-                            if (v.id == this.aluno.estadoCivil.id) {
-                                this.aluno.estadoCivil = v;
-                            }
+        if (this.listaEstadoCivil.length == 0 || this.listaComoConheceu.length == 0) {
+            this.load = setInterval(() => { this.loadAluno() }, 500);
+        }
+        else {
+            clearInterval(this.load);
+            this.route.params.subscribe(
+                (params: any) => {
+                    if (params['id'] != undefined) {
+                        this.submit = true;
+                        this.envieiFoto = true;
+                        this.alunoService.getAluno(params['id']).subscribe(res => {
+                            this.aluno = res;
+                            this.listaEstadoCivil.forEach(v => {
+                                if (v.id == this.aluno.estadoCivil.id) {
+                                    this.aluno.estadoCivil = v;
+                                }
+                            })
+                            this.listaComoConheceu.forEach(v => {
+                                if (v.id == this.aluno.conheceEscola.id) {
+                                    this.aluno.conheceEscola = v;
+                                }
+                            })
+                            this.submit = false;
                         })
-                        this.listaComoConheceu.forEach(v => {
-                            if (v.id == this.aluno.conheceEscola.id) {
-                                this.aluno.conheceEscola = v;
-                            }
-                        })
-                        this.submit = false;
-                    })
+                    }
                 }
-            }
-        );
-
-
-
+            );
+        }
 
     }
 

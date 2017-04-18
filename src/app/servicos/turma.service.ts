@@ -20,6 +20,15 @@ export class TurmaService {
 
     constructor(private http: HttpCustormerService) { }
 
+
+    deletarDesconto(matricula: Matricula) {
+        return this.http.delete(environment.url + "turmas/matricula/" + matricula.id + "/desconto");
+    }
+
+    alterarDesconto(matricula: Matricula) {
+        return this.http.put(environment.url + "turmas/matricula/" + matricula.id + "/desconto/" + matricula.desconto.id, null);
+    }
+
     matricularAluno(turma: Turma, aluno: Aluno, desconto: TipoDesconto, diaVencimento: number, valorMatricula: number) {
         let matricula = new Matricula();
         matricula.aluno = aluno;
@@ -64,8 +73,7 @@ export class TurmaService {
             .map((response: Response) => <NivelTurma[]>response.json());
     }
 
-    deletarModalidade(modalidade: ModalidadeTurma)
-    {
+    deletarModalidade(modalidade: ModalidadeTurma) {
         return this.http.delete(environment.url + 'modalidades/' + modalidade.id);
     }
 

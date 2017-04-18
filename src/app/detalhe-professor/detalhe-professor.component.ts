@@ -32,8 +32,11 @@ export class DetalheProfessorComponent implements OnInit {
   private detalhe: Salario[];
   private mostraDetalhe: boolean;
   private idFluxoDetalhado: number;
-  private dataInicio: string;
-  private dataFim: string;
+  private dataInicioHistPagamento: string;
+  private dataFimHistPagamento: string;
+  private mesReferenciaPagamento: string;
+  private mesParaPagar: string
+  
 
   constructor(private professorService: ProfessorService, private router: ActivatedRoute) {
     this.professor = new Professor();
@@ -51,22 +54,16 @@ export class DetalheProfessorComponent implements OnInit {
 
   initDatas() {
     let dp = new DatePipe("yyyy-MM");
-    this.dataFim = dp.transform(Date.now(), "yyyy-MM");
-    let valores = this.dataFim.split("-");
-    let ano = new Number(valores[0]).valueOf()
-    let mes = new Number(valores[1]).valueOf()
+    let data = new Date(Date.now());
+    this.dataFimHistPagamento = dp.transform(Date.now(), "yyyy-MM");
 
-    mes -= 6;
+    data.setMonth(data.getMonth()-1)
+    this.mesReferenciaPagamento = dp.transform(data.getTime(), "yyyy-MM");
+    this.mesParaPagar = this.mesReferenciaPagamento;
 
-    if (mes < 1) {
-      mes = 12 + mes;
-      ano -= 1;
-    }
+    data.setMonth(data.getMonth()-5)
+    this.dataInicioHistPagamento = dp.transform(data.getTime(), "yyyy-MM");
 
-    if (mes.toString.length == 1)
-      this.dataInicio = ano.toString() + "-0" + mes.toString();
-    else
-      this.dataInicio = ano.toString() + "-" + mes.toString();
   }
 
   getValorTotal() {
@@ -85,14 +82,14 @@ export class DetalheProfessorComponent implements OnInit {
         this.loadProfessor();
         this.loadTurmas();
         this.loadPagamento();
-        this.pesquisar();
+        this.pesquisarPagamentoHistorico();
 
       }
     );
   }
 
   loadRecebimentos() {
-    this.professorService.getRecebimentos(this.idProfessor, this.dataInicio, this.dataFim).subscribe(res => {
+    this.professorService.getRecebimentos(this.idProfessor, this.dataInicioHistPagamento, this.dataFimHistPagamento).subscribe(res => {
       this.recebimentos = res;
       this.loadDetalheRecebimento();
     })
@@ -144,15 +141,29 @@ export class DetalheProfessorComponent implements OnInit {
     this.botoes[3] = true;
   }
   loadPagamento() {
-    this.professorService.getMensalidadesParaReceber(this.idProfessor).subscribe(res => {
+    this.submit = true;
+    this.mesParaPagar = this.mesReferenciaPagamento;
+    this.professorService.getMensalidadesParaReceber(this.idProfessor, this.mesReferenciaPagamento).subscribe(res => {
       this.salarios = res;
       this.submit = false;
     })
   }
 
+  pagarMensalidade(salario: Salario){
+    this.submit = true;
+    this.professorService.cadastrarRecebimentoParcial(this.idProfessor, salario.id).subscribe((res: Response) => {
+      this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
+      this.loadPagamento();
+      this.loadRecebimentos();
+    }, error => {
+      this.submit = false;
+      this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+    })
+  }
+
   pagarTudo() {
     this.submit = true;
-    this.professorService.cadastrarRecebimento(this.idProfessor).subscribe((res: Response) => {
+    this.professorService.cadastrarRecebimento(this.idProfessor, this.mesParaPagar).subscribe((res: Response) => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
       this.loadPagamento();
       this.loadRecebimentos();
@@ -204,11 +215,11 @@ export class DetalheProfessorComponent implements OnInit {
     return retorno;
   }
 
-  pesquisar() {
-    if (this.dataInicio == undefined || this.dataInicio.toString().length < 7) {
+  pesquisarPagamentoHistorico() {
+    if (this.dataInicioHistPagamento == undefined || this.dataInicioHistPagamento.toString().length < 7) {
       this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Inicio" });
     }
-    else if (this.dataFim == undefined || this.dataFim.toString().length < 7) {
+    else if (this.dataFimHistPagamento == undefined || this.dataFimHistPagamento.toString().length < 7) {
       this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Fim" });
     }
     else {

@@ -43,17 +43,19 @@ export class ManutencaoTurmaComponent implements OnInit {
   private valorMatricula: number[];
   private matriculas: Matricula[];
   private submit: boolean;
+  private load: any;
 
   constructor(private turmaService: TurmaService,
     private professorService: ProfessorService,
     private router: Router, private route: ActivatedRoute,
     private alunoService: AlunoService,
     private descontoService: DescontoService,
-    ) {
+  ) {
     this.pesquisa = new Aluno();
     this.turma = new Turma();
     this.msgs = [];
     this.desconto = []
+    this.descontos = [];
     this.diaVencimento = [];
     this.valorMatricula = [];
     this.submit = false;
@@ -63,7 +65,12 @@ export class ManutencaoTurmaComponent implements OnInit {
 
 
     this.descontoService.obterDescontos().subscribe(res => {
-      this.descontos = res;
+      this.descontos = [];
+      this.descontos.push(new TipoDesconto());
+      res.forEach(v => {
+        this.descontos.push(v);
+      })
+
     }, erro => {
     });
 
@@ -85,6 +92,47 @@ export class ManutencaoTurmaComponent implements OnInit {
     );
   }
 
+  setDescontosAlunosMatriculados(){
+    if(this.descontos.length === 0)
+    {
+      this.load = setInterval(this.setDescontosAlunosMatriculados(), 500);
+    }
+    else{
+      clearInterval(this.load);
+
+      this.matriculas.forEach(matricula =>{
+        if(matricula.desconto != undefined || matricula.desconto != null)
+        {
+          this.descontos.forEach(desconto =>{
+            if(desconto.id === matricula.desconto.id)
+            {
+              matricula.desconto = desconto;
+            }
+          })
+        }
+      })
+    }
+  }
+
+  alterarDesconto(matricula: Matricula)
+  {
+    if(matricula.desconto.id === undefined)
+      return this.turmaService.deletarDesconto(matricula)
+    else
+      return this.turmaService.alterarDesconto(matricula);
+  }
+
+  atualizarDesconto(matricula: Matricula){
+      this.alterarDesconto(matricula).subscribe(res => {
+      this.reset();
+      this.msgs.push({ severity: 'success', summary: 'Desconto Alterado !' });
+    },
+      error => {
+        this.submit = false;
+        this.msgs.push({ severity: 'error', summary: 'Desconto não Alterado !', detail: JSON.parse(error._body)["message"] });
+      });
+  }
+
   loadTurma() {
     this.turmaService.getTurma(this.idTurma).subscribe(res => {
       this.turma = res;
@@ -93,6 +141,7 @@ export class ManutencaoTurmaComponent implements OnInit {
 
     this.turmaService.getMatriculas(this.idTurma).subscribe(res => {
       this.matriculas = res;
+      this.setDescontosAlunosMatriculados();
 
     });
 
