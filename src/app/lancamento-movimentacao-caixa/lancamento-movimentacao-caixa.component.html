@@ -26,6 +26,14 @@
   </div>
 </div>
 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Descricao</label>  
+  <div class="col-md-6">
+  <input [(ngModel)]="fluxoCaixa.descricao" name="descricao" type="text" placeholder="Descricao" class="form-control input-md" required>
+  </div>
+</div>
+
+
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Data</label>  
@@ -43,11 +51,19 @@
   </div>
 </div>
 
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Quantidade</label>  
+  <div class="col-md-6">
+  <input [(ngModel)]="fluxoCaixa.quantidade" name="quantidade" type="number" min="1" placeholder="R$1000,00"  class="form-control input-md" required="">
+  </div>
+</div>
+
 <!-- Text Area-->
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Observação</label>
       <div class="col-md-6">
-        <textarea [(ngModel)]="fluxoCaixa.descricao" name="observacao" class="form-control"></textarea>
+        <textarea [(ngModel)]="fluxoCaixa.observacao" name="observacao" class="form-control"></textarea>
       </div>
     </div>
 

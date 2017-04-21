@@ -54,6 +54,7 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
     .subscribe((res: Response) =>{
       this.submit = false
       this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+      this.fluxoCaixa = new FluxoCaixa();
     },
       error => {
         this.submit =false;

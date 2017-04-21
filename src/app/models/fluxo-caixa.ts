@@ -9,7 +9,9 @@ export class FluxoCaixa {
     public data: Date;
     public tipoFluxo: TipoFluxo;
     public descricao: String;
+    public observacao: String;
     public userLancamento: Usuario;
+    public quantidade: number;
     
     constructor() { }
 }

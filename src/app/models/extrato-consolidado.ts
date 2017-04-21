@@ -11,7 +11,6 @@ export class ExtratoConsolidado {
     public id: number;
     // public lancamentos: Extrato[];
     public lancamentos: FluxoCaixa[];
-    public mostrarDetalhe: boolean;
 
     
     constructor() { }

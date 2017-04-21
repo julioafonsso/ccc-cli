@@ -1,3 +1,43 @@
+
+<!-- Modal -->
+
+
+
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="myModalLabel">Detalhes</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Quantidade</th>
+            <th>Descricao</th>
+            <th>Observacao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of getDetalhe()" >
+              <td>{{item.data | date: 'dd/MM/yyyy'}}</td>
+              <td>{{item.valor | currency:'BRL':true}}</td>
+              <td>{{item.quantidade}}</td>
+              <td>{{item.descricao}}</td>
+              <td>{{item.observacao}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <form class="form-inline">
   <div class="form-group">
     <label for="exampleInputName2">Data Inicio</label>
@@ -30,17 +70,16 @@
 
       </div>
 
-      <article class="panel panel-consolidado" [ngClass]="{'panel-success': true }">
-        <div class="panel-heading icon" (click)="entrada.mostrarDetalhe = !entrada.mostrarDetalhe">
-          <i class="glyphicon" [ngClass]="{'glyphicon-plus': !entrada.mostrarDetalhe, 'glyphicon-minus' : entrada.mostrarDetalhe }"></i>
+      <article class="panel panel-consolidado panel-success">
+        <div class="panel-heading icon" (click)="detalhes = entrada.lancamentos" data-toggle="modal" data-target="#myModal">
+          <i class="glyphicon glyphicon-plus" ></i>
         </div>
         <div class="panel-heading">
           <h2 class="panel-title">{{entrada.nome}}</h2>
         </div>
         <ul class="list-group">
           <li class="list-group-item">{{entrada.valor | currency:'BRL':true}}</li>
-          <li *ngIf="!entrada.mostrarDetalhe" class="list-group-item">{{entrada.quantidade}} Lancamentos </li>
-          <li class="list-group-item" *ngFor="let lancamento of getDetalhe(entrada)">{{lancamento.data | date: 'dd/MM/yyyy'}}  ||  {{lancamento.valor | currency:'BRL':true}}  ||  {{lancamento.descricao}} </li> 
+          <li class="list-group-item">{{entrada.quantidade}} Lancamentos </li>
         </ul>
       </article>
     </div>
@@ -64,17 +103,16 @@
     <div *ngFor="let saida of saidas">
       <div class="separator ">
       </div>
-      <article class="panel panel-consolidado" [ngClass]="{'panel-danger': true }">
-        <div class="panel-heading icon" (click)="saida.mostrarDetalhe = !saida.mostrarDetalhe">
-          <i class="glyphicon" [ngClass]="{'glyphicon-plus': !saida.mostrarDetalhe, 'glyphicon-minus' : saida.mostrarDetalhe }"></i>
+      <article class="panel panel-consolidado panel-danger">
+        <div class="panel-heading icon" (click)="detalhes = saida.lancamentos" data-toggle="modal" data-target="#myModal">
+          <i class="glyphicon glyphicon-plus"></i>
         </div>
         <div class="panel-heading">
           <h2 class="panel-title">{{saida.nome}}</h2>
         </div>
         <ul class="list-group">
           <li class="list-group-item">{{saida.valor | currency:'BRL':true}}</li>
-          <li *ngIf="!saida.mostrarDetalhe"  class="list-group-item">{{saida.quantidade}} Lancamentos </li>
-          <li class="list-group-item" *ngFor="let lancamento of getDetalhe(saida)">{{lancamento.data | date: 'dd/MM/yyyy'}}  ||  {{lancamento.valor | currency:'BRL':true}}  ||  {{lancamento.descricao}} </li>
+          <li class="list-group-item">{{saida.quantidade}} Lancamentos </li>
         </ul>
       </article>
     </div>

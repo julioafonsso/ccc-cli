@@ -1,3 +1,4 @@
+import { FluxoCaixa } from './../models/fluxo-caixa';
 import { ExtratoConsolidado } from './../models/extrato-consolidado';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -22,6 +23,8 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
   private dataFim: Date;
 
 
+  public detalhes: FluxoCaixa[];
+
   constructor(private extratoService: ExtratoService) {
     this.dataFim = new Date();
     this.dataInicio = new Date();
@@ -29,13 +32,12 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
     this.dataInicio;
     this.entradas = [];
     this.saidas = [];
+    this.detalhes = [];
 
   }
 
-  getDetalhe(extrato: ExtratoConsolidado) {
-    if (extrato.mostrarDetalhe)
-      return extrato.lancamentos
-    return [];
+  getDetalhe() {
+    return this.detalhes;
   }
 
   getSaldoEntradas() {
