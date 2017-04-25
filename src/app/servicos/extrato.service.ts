@@ -41,7 +41,6 @@ export class ExtratoService {
       extrato.nome = item[2];
       extrato.id = item[3];
       extrato.lancamentos = item[4];
-      extrato.mostrarDetalhe = false;
       extratos.push(extrato);
     }
 
