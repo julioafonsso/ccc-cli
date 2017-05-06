@@ -11,6 +11,7 @@ export class Mensalidade{
     public fluxoCaixa: FluxoCaixa;
 	public matricula: Matricula;
 	public valorCalculado: number;
+	public valorMensalidade:number;
 	public dataVencimento: Date;
 	public valorParaPagar:number;
 	

@@ -21,6 +21,9 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
 
   private dataInicio: Date;
   private dataFim: Date;
+  private nomeDetalhe: string;
+  private valorDetalhe: number;
+  private quantidadeDetalhe: number;
 
 
   public detalhes: FluxoCaixa[];
@@ -33,7 +36,16 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
     this.entradas = [];
     this.saidas = [];
     this.detalhes = [];
+    this.nomeDetalhe = '';
+    this.valorDetalhe = 0;
+    this.quantidadeDetalhe = 0;
+  }
 
+  setDetalhe(fluxo : ExtratoConsolidado){
+    this.detalhes = fluxo.lancamentos;
+    this.nomeDetalhe = fluxo.nome;
+    this.valorDetalhe = fluxo.valor;
+    this.quantidadeDetalhe = fluxo.quantidade;
   }
 
   getDetalhe() {

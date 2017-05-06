@@ -154,7 +154,7 @@ export class DetalheAlunoComponent implements OnInit {
   }
 
   pagarMensalidade(mensalidade: Mensalidade) {
-    mensalidade.valorParaPagar = mensalidade.matricula.turma.mensalidade;
+    mensalidade.valorParaPagar = mensalidade.valorMensalidade;
     this.pagar(mensalidade);
   }
 

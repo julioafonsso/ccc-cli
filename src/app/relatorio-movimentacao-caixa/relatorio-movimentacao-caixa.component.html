@@ -8,7 +8,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-        <h4 class="modal-title" id="myModalLabel">Detalhes</h4>
+        <h4 class="modal-title" id="myModalLabel">{{nomeDetalhe}} {{valorDetalhe | currency:'BRL':true}} </h4>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-striped">
@@ -41,11 +41,11 @@
 <form class="form-inline">
   <div class="form-group">
     <label for="exampleInputName2">Data Inicio</label>
-    <p-calendar [(ngModel)]="dataInicio" [maxDate]="dataFim" name="dataInicio" dateFormat="dd/mm/yy" readonlyInput="readonlyInput">></p-calendar>
+    <p-calendar [(ngModel)]="dataInicio" [maxDate]="dataFim" name="dataInicio" dateFormat="dd/mm/yy" readonlyInput="readonlyInput"></p-calendar>
   </div>
   <div class="form-group">
     <label for="exampleInputEmail2">Data Fim</label>
-    <p-calendar [(ngModel)]="dataFim" [minDate]="dataInicio" name="dataFim" dateFormat="dd/mm/yy" readonlyInput="readonlyInput">></p-calendar>
+    <p-calendar [(ngModel)]="dataFim" [minDate]="dataInicio" name="dataFim" dateFormat="dd/mm/yy" readonlyInput="readonlyInput"></p-calendar>
   </div>
   <button (click)="pesquisar()" class="btn btn-default">Pesquisar</button>
 </form>
@@ -71,7 +71,7 @@
       </div>
 
       <article class="panel panel-consolidado panel-success">
-        <div class="panel-heading icon" (click)="detalhes = entrada.lancamentos" data-toggle="modal" data-target="#myModal">
+        <div class="panel-heading icon" (click)="setDetalhe(entrada)" data-toggle="modal" data-target="#myModal">
           <i class="glyphicon glyphicon-plus" ></i>
         </div>
         <div class="panel-heading">
@@ -104,7 +104,7 @@
       <div class="separator ">
       </div>
       <article class="panel panel-consolidado panel-danger">
-        <div class="panel-heading icon" (click)="detalhes = saida.lancamentos" data-toggle="modal" data-target="#myModal">
+        <div class="panel-heading icon" (click)="setDetalhe(saida)" data-toggle="modal" data-target="#myModal">
           <i class="glyphicon glyphicon-plus"></i>
         </div>
         <div class="panel-heading">

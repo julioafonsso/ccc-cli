@@ -121,11 +121,11 @@
               <td>{{debito.matricula.turma.nivel.nome}}</td>
               <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
               <td>{{debito.mesReferencia.mes}}/{{debito.mesReferencia.ano}}</td>
-              <td>{{debito.matricula.turma.mensalidade | currency:'BRL':true}}</td>
+              <td>{{debito.valorMensalidade | currency:'BRL':true}}</td>
               <td>{{debito.valorCalculado | currency:'BRL':true}}</td>
               <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(debito)">Pagar Mensalidade</button>
-                <button [disabled]="submit" class="btn btn-success" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado< debito.matricula.turma.mensalidade">Pagar com Desconto</button>
-                <button [disabled]="submit" class="btn btn-danger" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado> debito.matricula.turma.mensalidade">Pagar com Multa</button>
+                <button [disabled]="submit" class="btn btn-success" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado< debito.valorMensalidade">Pagar com Desconto</button>
+                <button [disabled]="submit" class="btn btn-danger" (click)="pagarMensalidadeCalculada(debito)" *ngIf="debito.valorCalculado> debito.valorMensalidade">Pagar com Multa</button>
               </td>
 
             </tr>

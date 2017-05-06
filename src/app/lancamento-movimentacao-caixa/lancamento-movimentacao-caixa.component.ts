@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Response } from '@angular/http';
 import { Message } from 'primeng/primeng';
 import { FluxoCaixaService } from './../servicos/fluxo-caixa.service';
@@ -22,10 +23,12 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
   private msgs: Message[];
   private data: Date;
   private submit:boolean;
-
+  private dp = new DatePipe("yyyyMMdd");
   constructor(private tipoFluxoService: TipoFluxoCaixaService, private fluxoCaixaService: FluxoCaixaService) {
+    
     this.submit =false; 
     this.fluxoCaixa = new FluxoCaixa();
+    this.fluxoCaixa.data = this.dp.transform(new Date(), 'yyyy-MM-dd');
     this.msgs = [];
   }
 
@@ -55,6 +58,7 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
       this.submit = false
       this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
       this.fluxoCaixa = new FluxoCaixa();
+      this.fluxoCaixa.data = this.dp.transform(new Date(), 'yyyy-MM-dd');
     },
       error => {
         this.submit =false;

@@ -6,7 +6,7 @@ export class FluxoCaixa {
 
     public id: number;
     public valor: Number;
-    public data: Date;
+    public data: string;
     public tipoFluxo: TipoFluxo;
     public descricao: String;
     public observacao: String;
