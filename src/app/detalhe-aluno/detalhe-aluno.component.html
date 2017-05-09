@@ -17,29 +17,36 @@
 <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
   <div class="btn-group" role="group">
     <button type="button" id="perfil" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(0), 'btn-primary': getTabAtiva(0)}"
-      (click)="tabBios()" href="#tabBios" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      (click)="tab(0)" href="#tabBios" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 <div class="hidden-xs">Perfil</div>
             </button>
   </div>
 
   <div class="btn-group" role="group">
     <button type="button" id="turmas" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(1), 'btn-primary': getTabAtiva(1)}"
-      (click)="tabTurmas()" href="#tabTurmas" data-toggle="tab"><span class="glyphicon glyphicon-text-size" aria-hidden="true"></span>
+      (click)="tab(1)" href="#tabTurmas" data-toggle="tab"><span class="glyphicon glyphicon-text-size" aria-hidden="true"></span>
                 <div class="hidden-xs">Turmas</div>
             </button>
   </div>
 
   <div class="btn-group" role="group">
     <button type="button" id="debitos" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(2), 'btn-primary': getTabAtiva(2)}"
-      (click)="tabDebitos()" href="#tabDebitos" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+      (click)="tab(2)" href="#tabDebitos" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
                 <div class="hidden-xs">Debitos</div>
             </button>
   </div>
 
-<div class="btn-group" role="group">
+  <div class="btn-group" role="group">
     <button type="button" id="debitos" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(3), 'btn-primary': getTabAtiva(3)}"
-      (click)="tabHistPag()" href="#tabHistPag" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+      (click)="tab(3)" href="#tabHistPag" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
                 <div class="hidden-xs">Historico Pagamento</div>
+            </button>
+  </div>
+
+  <div class="btn-group" role="group">
+    <button type="button" id="debitos" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(4), 'btn-primary': getTabAtiva(4)}"
+      (click)="tab(4)" href="#tabAlulasParticulas" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                <div class="hidden-xs">Aulas Particulares</div>
             </button>
   </div>
 
@@ -54,6 +61,7 @@
 
 <div class="well">
   <div class="tab-content">
+
     <div class="tab-pane active" id="tabBios">
       <div class="card__info">
         <div class="card__info__detalhes"><label>Email: </ label>{{aluno.email}}</div>
@@ -72,29 +80,35 @@
       </div>
     </div>
 
-    <div class="tab-pane " id="tabTurmas">
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Codigo</th>
-              <th>Modalidade</th>
-              <th>Nivel</th>
-              <th>Sala</th>
-              <th>Dia Vencimento</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let matricula of matriculas">
-              <td>{{matricula.turma.codigo}}</td>
-              <td>{{matricula.turma.modalidade.nome}}</td>
-              <td>{{matricula.turma.nivel.nome}}</td>
-              <td>{{matricula.turma.sala.nome}}</td>
-              <td>{{matricula.diaVencimento}}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="tab-pane" id="tabTurmas">
+      <div class="row">
+        <button class="btn btn-info pull-right">Nova Turma</button>
       </div>
+      <p>
+        <div class="row">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Codigo</th>
+                  <th>Modalidade</th>
+                  <th>Nivel</th>
+                  <th>Sala</th>
+                  <th>Dia Vencimento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let matricula of matriculas">
+                  <td>{{matricula.turma.codigo}}</td>
+                  <td>{{matricula.turma.modalidade.nome}}</td>
+                  <td>{{matricula.turma.nivel.nome}}</td>
+                  <td>{{matricula.turma.sala.nome}}</td>
+                  <td>{{matricula.diaVencimento}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
     </div>
 
 
@@ -136,35 +150,171 @@
 
 
     <div class="tab-pane " id="tabHistPag">
-      De: <input [(ngModel)]="dataInicio" id="de" type="month"> Ate: <input [(ngModel)]="dataFim" id="ate" type="month" > <button (click)="pesquisar()" class="btn btn-primary">Pesquisar</button>
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Codigo</th>
-              <th>Modalidade</th>
-              <th>Nivel</th>
-              <th>Mes Referencia</th>
-              <th>Vencimento</th>
-              <th>Data Pagamento</th>
-              <th>Valor Pago</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let debito of histPagamento">
-              <td>{{debito.matricula.turma.codigo}}</td>
-              <td>{{debito.matricula.turma.modalidade.nome}}</td>
-              <td>{{debito.matricula.turma.nivel.nome}}</td>
-              <td>{{debito.mesReferencia.mes}}/{{debito.mesReferencia.ano}}</td>
-              <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
-              <td>{{debito.fluxoCaixa.data | date: 'dd/MM/yyyy'}}</td>
-              <td>{{debito.fluxoCaixa.valor | currency:'BRL':true}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-md-3">
+          De: <input [(ngModel)]="dataInicio" id="de" type="month">
+        </div>
+        <div class="col-md-3">
+          Ate: <input [(ngModel)]="dataFim" id="ate" type="month">
+        </div>
+        <div class="col-md-3">
+          <button (click)="pesquisarHistPagamento()" class="btn btn-primary">Pesquisar</button>
+        </div>
       </div>
+      <p>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Codigo</th>
+                <th>Modalidade</th>
+                <th>Nivel</th>
+                <th>Mes Referencia</th>
+                <th>Vencimento</th>
+                <th>Data Pagamento</th>
+                <th>Valor Pago</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let debito of histPagamento">
+                <td>{{debito.matricula.turma.codigo}}</td>
+                <td>{{debito.matricula.turma.modalidade.nome}}</td>
+                <td>{{debito.matricula.turma.nivel.nome}}</td>
+                <td>{{debito.mesReferencia.mes}}/{{debito.mesReferencia.ano}}</td>
+                <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+                <td>{{debito.fluxoCaixa.data | date: 'dd/MM/yyyy'}}</td>
+                <td>{{debito.fluxoCaixa.valor | currency:'BRL':true}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
     </div>
+
+    <div class="tab-pane " id="tabAlulasParticulas">
+      <div class="row">
+        <div class="col-md-3">
+          De: <input [(ngModel)]="dataInicio" id="de" type="month">
+        </div>
+        <div class="col-md-3">
+          Ate: <input [(ngModel)]="dataFim" id="ate" type="month">
+        </div>
+        <div class="col-md-3">
+          <button (click)="pesquisarAulasParticulares()" class="btn btn-primary">Pesquisar</button>
+        </div>
+        <div class="col-md-2">
+          <button data-toggle="modal" data-target="#modaAulaParticular" class="btn btn-primary">Nova Aula</button>
+        </div>
+      </div>
+      <p>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Modalidade</th>
+                <th>Professor</th>
+                <th>Quantidade de Aulas</th>
+                <th>Data Pagamento</th>
+                <th>Valor Pago</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let mensalidade of histAulaParticular">
+                <td>{{mensalidade.matricula.turma.modalidade.nome}}</td>
+                <td>{{mensalidade.matricula.turma.professor1.nome}}</td>
+                <td>{{mensalidade.fluxoCaixa.quantidade}}</td>
+                <td>{{mensalidade.fluxoCaixa.data | date: 'dd/MM/yyyy'}}</td>
+                <td>{{mensalidade.fluxoCaixa.valor | currency:'BRL':true}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+
 
 
   </div>
 </div>
+
+
+
+<!-- Modal Aula Particular -->
+
+
+<div class="modal fade bs-example-modal-lg" id="modaAulaParticular" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="myModalLabel">Cadastrar Aula Particular </h4>
+      </div>
+      <div class="modal-body">
+
+        <form class="form-horizontal" (ngSubmit)="cadastrarAulaParticular()">
+          <fieldset>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="selectbasic">Modalidade da Turma</label>
+              <div class="col-md-6">
+                <select [(ngModel)]="aula.modalidade" name="modalidade" class="form-control" required>
+                  <option *ngFor="let item of modalidades" [ngValue]="item"  >{{item.nome}}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="select1">Professor</label>
+              <div class="col-md-6">
+                <select [(ngModel)]="aula.professor1" name="professor1" class="form-control" required>
+                  <option *ngFor="let professor of professores" [ngValue]="professor"  >{{professor.nome}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="textinput">Percentual do Professor</label>
+              <div class="col-md-6">
+                <input appNumeroInteiro [(ngModel)]="aula.percentualProfessor1" name="percentual1" type="number" min="0" max="100" placeholder="20%" required
+                  class="form-control input-md">
+
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="textinput">Quatidade de Aulas</label>
+              <div class="col-md-6">
+                <input [(ngModel)]="qtdAulas" name="qtd" type="number" placeholder="10" step="1" min="1" class="form-control input-md"
+                  required="">
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="textinput">Valor </label>
+              <div class="col-md-6">
+                <input appValor [(ngModel)]="aula.mensalidade" name="mensalidade" type="text" placeholder="R$135,00" class="form-control input-md"
+                  required="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="button1id"></label>
+              <div class="col-md-8">
+                <button id="button1id" name="button1id" class="btn btn-success" [disabled]="submit" >Cadastrar</button>
+                <button type="button" id="button2id" data-dismiss="modal" name="button2id" class="btn btn-danger">Cancelar</button>
+              </div>
+            </div>
+
+
+          </fieldset>
+        </form>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Fim Modal Aula Particular -->

@@ -1,3 +1,4 @@
+import { AulaParticular } from './../models/aula-particular';
 import { FileUploader } from 'ng2-file-upload';
 import { HttpCustormerService } from './http-custormer.service';
 import { Mensalidade } from './../models/mensalidade';
@@ -60,10 +61,24 @@ export class AlunoService {
       .map((response: Response) => <Mensalidade[]>response.json());
   }
 
+  getAulasParticulares(idAluno: number, dataInicio: string, dataFim: string) {
+    return this.http.get(environment.url + "alunos/" + idAluno + "/aula-particular/"+ dataInicio+"/" + dataFim)
+      .map((response: Response) => <Mensalidade[]>response.json());
+  }
+
   getPagamentos(idAluno: number, dataInicio: string, dataFim: string) {
     return this.http.get(environment.url + "alunos/" + idAluno + "/pagamentos/"+ dataInicio+"/" + dataFim)
       .map((response: Response) => <Mensalidade[]>response.json());
   }
+
+  cadastrarAulaParticular(turma: Turma, idAluno: number, qtd : number)
+  {
+    let aula = new AulaParticular();
+    aula.qtd = qtd;
+    aula.turma = this.tratarDadosTurma(turma);
+    return this.http.post(environment.url + "alunos/"+idAluno + "/aula-particular", aula);
+  }
+
   pagarMensalidade(mensalidade: Mensalidade) {
     let pagamento = new Mensalidade();
     pagamento.id = mensalidade.id;
@@ -71,6 +86,20 @@ export class AlunoService {
     return this.http.post(environment.url + "alunos/pagamento", pagamento
     );
   }
+
+   private tratarDadosTurma(turma: Turma) {
+        let valor = turma.mensalidade.toString();
+        if (valor.indexOf(",") < 0) {
+            if (valor.indexOf(".") < 0)
+                valor = valor + ",00";
+        }
+        let turma2: Turma = Object.assign({}, turma);
+        valor = valor.replace(/[^0-9]/gi, '');
+        turma2.mensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
+
+        return turma2;
+    }
+
 }
 
 

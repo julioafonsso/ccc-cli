@@ -4,6 +4,11 @@ import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+
+import { TurmaService } from './../servicos/turma.service';
+import { ProfessorService } from './../servicos/professor.service';
+import { Professor } from './../models/professor';
+import { ModalidadeTurma } from './../models/modalidade-turma';
 import { Turma } from './../models/turma';
 import { AlunoService } from './../servicos/aluno.service';
 import { Aluno } from './../models/aluno';
@@ -22,20 +27,27 @@ export class DetalheAlunoComponent implements OnInit {
   private aluno: Aluno;
   private matriculas: Matricula[];
   private debitos: Mensalidade[];
+  private histAulaParticular: Mensalidade[];
   private histPagamento: Mensalidade[];
   private botoes = new Array();
   private msgs: Message[];
   private submit: boolean;
   private dataInicio: string;
   private dataFim: string;
+  private professores: Professor[];
+  private modalidades: ModalidadeTurma[];
+  private qtdAulas: number;
+  private aula: Turma;
 
 
-  constructor(private alunoService: AlunoService, private route: ActivatedRoute) {
+  constructor(private alunoService: AlunoService,private turmaService: TurmaService,
+    private professorService: ProfessorService, private route: ActivatedRoute) {
     this.msgs = [];
     this.aluno = new Aluno();
     this.botoes = new Array();
     this.submit = false;
     this.initDatas();
+    this.aula = new Turma();
   }
 
   ngOnInit() {
@@ -46,9 +58,47 @@ export class DetalheAlunoComponent implements OnInit {
         this.loadAluno();
         this.loadTurmas();
         this.loadDebitos();
-        this.pesquisar();
+        this.pesquisarHistPagamento();
+        this.pesquisarAulasParticulares();
       }
     );
+
+    this.turmaService.getModalidades().subscribe(res => {
+      this.modalidades = res;
+    })
+
+
+    this.professorService.getProfessores().subscribe(res => {
+      this.professores = res;
+    })
+  }
+
+  resetCadastroAulaParticular(){
+    this.qtdAulas = null;
+    this.turmaService.getModalidades().subscribe(res => {
+      this.modalidades = res;
+    })
+
+
+    this.professorService.getProfessores().subscribe(res => {
+      this.professores = res;
+    })
+
+    this.aula = new Turma();
+  }
+
+  cadastrarAulaParticular(){
+    this.submit = true;
+    this.alunoService.cadastrarAulaParticular(this.aula, this.idAluno, this.qtdAulas).subscribe(response => {
+                this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+                this.loadAulasParticulares();
+                this.resetCadastroAulaParticular();
+                this.submit = false;
+            },
+            error => {
+                this.submit = false;
+                this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+            });
   }
 
   initDatas() {
@@ -71,10 +121,10 @@ export class DetalheAlunoComponent implements OnInit {
       this.dataInicio = ano.toString() + "-" + mes.toString();
 
   }
-  
 
 
-  pesquisar() {
+
+  pesquisarHistPagamento() {
     if (this.dataInicio == undefined || this.dataInicio.toString().length < 7) {
       this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Inicio" });
     }
@@ -86,10 +136,28 @@ export class DetalheAlunoComponent implements OnInit {
     }
   }
 
+  pesquisarAulasParticulares() {
+    if (this.dataInicio == undefined || this.dataInicio.toString().length < 7) {
+      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Inicio" });
+    }
+    else if (this.dataFim == undefined || this.dataFim.toString().length < 7) {
+      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Fim" });
+    }
+    else {
+      this.loadAulasParticulares();
+    }
+  }
+
+  loadAulasParticulares() {
+    this.alunoService.getAulasParticulares(this.idAluno, this.dataInicio, this.dataFim).subscribe(res => {
+      console.log(res);
+      this.histAulaParticular = res;
+    })
+  }
+
 
   loadPagamentos() {
     this.alunoService.getPagamentos(this.idAluno, this.dataInicio, this.dataFim).subscribe(res => {
-      console.log(res);
       this.histPagamento = res;
     })
   }
@@ -119,24 +187,9 @@ export class DetalheAlunoComponent implements OnInit {
     return retorno;
   }
 
-  tabBios() {
+  tab(valor: number) {
     this.botoes = new Array();
-    this.botoes[0] = true;
-  }
-
-  tabTurmas() {
-    this.botoes = new Array();
-    this.botoes[1] = true;
-  }
-
-  tabDebitos() {
-    this.botoes = new Array();
-    this.botoes[2] = true;
-  }
-
-  tabHistPag() {
-    this.botoes = new Array();
-    this.botoes[3] = true;
+    this.botoes[valor] = true;
   }
 
 

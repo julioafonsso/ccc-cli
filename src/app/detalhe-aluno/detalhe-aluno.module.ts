@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { GrowlModule } from 'primeng/primeng';
 import { AlunoService } from './../servicos/aluno.service';
 import { DetalheAlunoComponent } from './detalhe-aluno.component';
+import { TurmaService } from './../servicos/turma.service';
+import { ProfessorService } from './../servicos/professor.service';
+import { ValorModule } from './../diretivas/valor/valor.module';
 
 const rotas = [ { path: '', component: DetalheAlunoComponent } ];
 
@@ -14,10 +17,11 @@ const rotas = [ { path: '', component: DetalheAlunoComponent } ];
     CommonModule,
     FormsModule,
     GrowlModule,
+    ValorModule,
     RouterModule.forChild(rotas)
   ],
   declarations: [DetalheAlunoComponent],
-  providers: [AlunoService],
+  providers: [AlunoService, ProfessorService, TurmaService],
   exports: []
 })
 export class DetalheAlunoModule { }
