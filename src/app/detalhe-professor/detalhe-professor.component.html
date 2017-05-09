@@ -94,13 +94,15 @@
       </div>
 
       <div class="tab-pane " id="tabPagamentos">
-        Mes Referencia: <input [(ngModel)]="mesReferenciaPagamento" id="de" type="month"><button (click)="loadPagamento()" class="btn btn-primary">Pesquisar</button>
+        Mes Referencia: <input [(ngModel)]="mesReferenciaPagamento" id="de" type="month"><button (click)="loadPagamento()"
+          class="btn btn-primary">Pesquisar</button>
         <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover">
             <thead>
               <tr>
                 <th>Codigo</th>
                 <th>Aluno</th>
+                <th>Modalidade</th>
                 <th>Mes Referencia</th>
                 <th>Valor Mensalidade</th>
                 <th>Valor Pago</th>
@@ -114,6 +116,7 @@
               <tr *ngFor="let salario of salarios">
                 <td>{{salario.mensalidade.matricula.turma.codigo}}</td>
                 <td>{{salario.mensalidade.matricula.aluno.nome}}</td>
+                <td>{{salario.mensalidade.matricula.turma.modalidade.nome}}</td>
                 <td>{{salario.mensalidade.mesReferencia.mes}}/{{salario.mensalidade.mesReferencia.ano}}</td>
                 <td>{{salario.mensalidade.matricula.turma.mensalidade | currency:'BRL':true}}</td>
                 <td>{{salario.mensalidade.fluxoCaixa.valor | currency:'BRL':true}}</td>
@@ -142,7 +145,8 @@
 
 
       <div class="tab-pane " id="tabHistPagamento">
-        De: <input [(ngModel)]="dataInicioHistPagamento" id="de" type="month"> Ate: <input [(ngModel)]="dataFimHistPagamento" id="ate" type="month" > <button (click)="pesquisarPagamentoHistorico()" class="btn btn-primary">Pesquisar</button>  
+        De: <input [(ngModel)]="dataInicioHistPagamento" id="de" type="month"> Ate: <input [(ngModel)]="dataFimHistPagamento"
+          id="ate" type="month"> <button (click)="pesquisarPagamentoHistorico()" class="btn btn-primary">Pesquisar</button>
         <div class="table-responsive">
 
           <table class="table table-bordered table-striped table-hover">
@@ -152,28 +156,30 @@
               <th>Data Recebido</th>
             </thead>
             <tbody>
-              <tr *ngFor="let recibo of getRecebimentosParte1()" >
-                
+              <tr *ngFor="let recibo of getRecebimentosParte1()">
+
                 <td *ngIf="!ehDetalheExibido(recibo)"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" (click)="mostrarDetalhe(recibo)"></span></td>
-                <td *ngIf="ehDetalheExibido(recibo)" ><span class="glyphicon glyphicon-minus-sign" aria-hidden="true" (click)="mostrarDetalhe(recibo)"></span></td>
+                <td *ngIf="ehDetalheExibido(recibo)"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true" (click)="mostrarDetalhe(recibo)"></span></td>
                 <td>{{recibo.valor * -1 | currency:'BRL':true}}</td>
                 <td>{{recibo.data | date: 'dd/MM/yyyy'}}</td>
               </tr>
             </tbody>
           </table>
 
-          <table class="table table-bordered table-striped table-hover" *ngIf="mostraDetalhe" >
+          <table class="table table-bordered table-striped table-hover" *ngIf="mostraDetalhe">
             <thead>
               <th>Codigo Turma</th>
               <th>Aluno</th>
+              <th>Modalidade</th>
               <th>Valor Pago</th>
               <th>Percentual</th>
-              <th>Valor Recebido</th> 
+              <th>Valor Recebido</th>
             </thead>
             <tbody>
-              <tr *ngFor="let detalhe of getDatelhePagamento()" >
+              <tr *ngFor="let detalhe of getDatelhePagamento()">
                 <td>{{detalhe?.mensalidade.matricula.turma.codigo}}</td>
                 <td>{{detalhe?.mensalidade.matricula.aluno.nome }}</td>
+                <td>{{detalhe.mensalidade.matricula.turma.modalidade.nome}}</td>
                 <td>{{detalhe?.mensalidade.fluxoCaixa.valor | currency:'BRL':true }}</td>
                 <td>{{detalhe?.percentual }} %</td>
                 <td>{{detalhe?.valor | currency:'BRL':true }}</td>
@@ -185,14 +191,14 @@
 
 
 
-          <table class="table table-bordered table-striped table-hover" *ngIf="mostrarSegundaParte()" >
+          <table class="table table-bordered table-striped table-hover" *ngIf="mostrarSegundaParte()">
             <thead>
               <th></th>
               <th>Valor Recebido</th>
               <th>Data Recebido</th>
             </thead>
             <tbody>
-              <tr *ngFor="let recibo of getRecebimentosParte2()" >
+              <tr *ngFor="let recibo of getRecebimentosParte2()">
                 <td><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" (click)="mostrarDetalhe(recibo)"></span></td>
                 <td>{{recibo.valor * -1 | currency:'BRL':true}}</td>
                 <td>{{recibo.data | date: 'dd/MM/yyyy'}}</td>
