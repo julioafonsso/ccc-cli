@@ -7,12 +7,10 @@ import { TurmaService } from './../servicos/turma.service';
 import { ProfessorService } from './../servicos/professor.service';
 import { Message } from 'primeng/primeng';
 import { Salas } from './../models/salas';
-import { Professor } from './../models/professor';
-import { DiasSemana } from './../models/dias-semana';
 import { ModalidadeTurma } from './../models/modalidade-turma';
 import { NivelTurma } from './../models/nivel-turma';
-import { Turma } from './../models/turma';
-
+import { CadastroTurma } from './../models/cadastro-turma';
+import { ConsultaProfessor } from './../models/consulta-professor';
 
 @Component({
   selector: 'app-cadastro-turma',
@@ -23,14 +21,13 @@ import { Turma } from './../models/turma';
 
 
 export class CadastroTurmaComponent implements OnInit {
-  private professores: Professor[];
-  private professoras: Professor[];
+  private professores: ConsultaProfessor[];
+  private professoras: ConsultaProfessor[];
   private salas: Salas[];
   private nives: NivelTurma[];
   private modalidades: ModalidadeTurma[];
   private msgs: Message[];
-  private selecionado: string = "tete";
-  private turma: Turma;
+  private turma: CadastroTurma;
   private submit: boolean;
   private load: any;
 
@@ -42,7 +39,7 @@ export class CadastroTurmaComponent implements OnInit {
     this.professores = [];
     this.salas = [];
     this.nives = [];
-    this.turma = new Turma()
+    this.turma = new CadastroTurma()
     this.submit = false;
   }
 
@@ -67,11 +64,11 @@ export class CadastroTurmaComponent implements OnInit {
         (params: any) => {
           if (params['id'] != undefined) {
             this.submit = true;
-            this.turmaService.getTurma(params['id']).subscribe(res => {
-              this.turma = res;
-              this.setCamposCombo();
-              this.submit = false;
-            })
+            // this.turmaService.getTurma(params['id']).subscribe(res => {
+            //   this.turma = res;
+            //   this.setCamposCombo();
+            //   this.submit = false;
+            // })
           }
         }
       );
@@ -81,27 +78,27 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   setCamposCombo() {
-    this.modalidades.forEach(v => {
-      if (this.turma.modalidade.id == v.id)
-        this.turma.modalidade = v;
-    })
-    this.nives.forEach(v => {
-      if (this.turma.nivel.id == v.id)
-        this.turma.nivel = v;
-    })
-    this.salas.forEach(v => {
-      if (this.turma.sala.id == v.id)
-        this.turma.sala = v;
-    })
+    // this.modalidades.forEach(v => {
+    //   if (this.turma.modalidade.id == v.id)
+    //     this.turma.modalidade = v;
+    // })
+    // this.nives.forEach(v => {
+    //   if (this.turma.nivel.id == v.id)
+    //     this.turma.nivel = v;
+    // })
+    // this.salas.forEach(v => {
+    //   if (this.turma.sala.id == v.id)
+    //     this.turma.sala = v;
+    // })
 
-    this.professores.forEach(v => {
-      if (this.turma.professor1.id == v.id)
-        this.turma.professor1 = v;
-    })
-    this.professoras.forEach(v => {
-      if (this.turma.professor2.id == v.id)
-        this.turma.professor2 = v;
-    })
+    // this.professores.forEach(v => {
+    //   if (this.turma.professor1.id == v.id)
+    //     this.turma.professor1 = v;
+    // })
+    // this.professoras.forEach(v => {
+    //   if (this.turma.professor2.id == v.id)
+    //     this.turma.professor2 = v;
+    // })
   }
 
   loadCamposBasicos() {
@@ -125,12 +122,13 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   reset() {
-    this.turma = new Turma();
+    this.turma = new CadastroTurma();
     this.loadCamposBasicos();
     this.submit = false;
   }
 
   cadastrar() {
+    console.log("VOU CADASTRAR")
     if (this.turma.id == undefined)
       return this.turmaService.cadastrarTurma(this.turma);
     else

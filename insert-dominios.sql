@@ -1,10 +1,4 @@
-insert into dias_semana (id, nome) values(1, 'Domingo');
-insert into dias_semana (id, nome) values(2, 'Segunda-Feira');
-insert into dias_semana (id, nome) values(3, 'Terça-Feira');
-insert into dias_semana (id, nome) values(4, 'Quarta-Feira');
-insert into dias_semana (id, nome) values(5, 'Quinta-Feira');
-insert into dias_semana (id, nome) values(6, 'Sexta-Feira');
-insert into dias_semana (id, nome) values(7, 'Sábado');
+
 
 insert into conhece_escola (id, nome) values(1, 'Internet');
 insert into conhece_escola (id, nome) values(2, 'Site');
@@ -28,8 +22,15 @@ insert into sala (id, nome) values(4, 'Sala 4');
 insert into sala (id, nome) values(5, 'Sala 5');
 insert into sala (id, nome) values(6, 'Sala 6');
 
+insert into tipo_funcionario (id, nome) values(1, 'professor');
+
 insert into tipo_fluxo_caixa (id,ind_entrada,  nome) values(1, 1, "Mensalidade");
 insert into tipo_fluxo_caixa (id,ind_entrada,  nome) values(2, 0, "Pagamento Professor");
+insert into tipo_fluxo_caixa (id,ind_entrada,  nome) values(3, 1, "Matricula");
+insert into tipo_fluxo_caixa (id,ind_entrada,  nome) values(4, 1, "Aula Particular");
+insert into tipo_fluxo_caixa (id,ind_entrada,  nome) values(5, 1, "WorkShop");
+insert into tipo_fluxo_caixa (id,ind_entrada,  nome) values(6, 0, "Pagamento Salario Funcionario");
+insert into tipo_fluxo_caixa (id,ind_entrada,  nome) values(7, 0, "Pagamento Vale Transporte");
 
 insert into mes_referencia (id, mes, ano) values ( 1 , 1 , 2016 ) ; 
 insert into mes_referencia (id, mes, ano) values ( 2 , 2 , 2016 ) ; 

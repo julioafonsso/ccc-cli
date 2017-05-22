@@ -1,15 +1,12 @@
-import { ProfessorService } from './../servicos/professor.service';
 import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
 
 import { ModalidadeTurma } from './../models/modalidade-turma';
 import { NivelTurma } from './../models/nivel-turma';
-import { Professor } from './../models/professor';
-import { Turma } from './../models/turma';
 import { TurmaService } from './../servicos/turma.service';
-import { DiasSemana } from './../models/dias-semana';
-
+import { ConsultaTurma } from './../models/consulta-turmas';
+import { ProfessorService } from './../servicos/professor.service';
 
 @Component({
   selector: 'app-consulta-turmas',
@@ -22,7 +19,7 @@ export class ConsultaTurmasComponent implements OnInit {
 
   private niveis = new Array<NivelTurma>();
   private modalidades = new Array<ModalidadeTurma>()
-  private turmas: Turma[];
+  private turmas: ConsultaTurma[];
 
   private nivelSelecionado: NivelTurma;
   private modalidadeSelecionado: ModalidadeTurma;
@@ -55,15 +52,15 @@ export class ConsultaTurmasComponent implements OnInit {
     if ((
       this.nivelSelecionado != undefined
       && this.nivelSelecionado.id != undefined)) {
-      valores = valores.filter((turma: Turma) =>
-        turma.nivel.id === this.nivelSelecionado.id);
+      valores = valores.filter((turma: ConsultaTurma) =>
+        turma.idNivel === this.nivelSelecionado.id);
     }
 
     if ((
       this.modalidadeSelecionado != undefined
       && this.modalidadeSelecionado.id != undefined)) {
-      valores = valores.filter((turma: Turma) =>
-        turma.modalidade.id === this.modalidadeSelecionado.id);
+      valores = valores.filter((turma: ConsultaTurma) =>
+        turma.idModalidade === this.modalidadeSelecionado.id);
     }
 
     return valores;

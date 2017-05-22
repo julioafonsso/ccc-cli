@@ -1,8 +1,4 @@
-import { Matricula } from './maticula';
-import { EstadoCivil } from './estado-civil';
-import { ConheceEscola } from './conhece-escola';
-
-export class Aluno {
+export class CadastroAluno {
 
     public id: number;
     public nome: string;
@@ -13,20 +9,16 @@ export class Aluno {
     public endereco: string;
     public numero: number;
     public complemento: string;
-    public bairro: string;
+    public idBairro: number;
     public cidade: string;
     public dataNascimento: Date;
     public profissao: string;
     public sexo: string;
-    public conheceEscola: ConheceEscola;
-    public estadoCivil :EstadoCivil ;
-    public matriculas: Matricula[];
-    public diaVencimento: number;
+    public idConheceEscola: number;
+    public idEstadoCivil :number ;
     public foto: string;
 
     constructor() {
-        this.estadoCivil = new EstadoCivil()
-        
     }
 
     

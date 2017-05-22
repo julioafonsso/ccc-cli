@@ -1,20 +1,23 @@
+import { CadastroProfessor } from './../models/cadastro-professor';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { FtpService } from './../servicos/ftp.service';
 import { FileUploader } from 'ng2-file-upload';
-import { Professor } from './../models/professor';
 import { Message } from 'primeng/primeng';
 import { ProfessorService } from './../servicos/professor.service';
+
+
 
 @Component({
     selector: 'app-cadastro-professor',
     templateUrl: './cadastro-professor.component.html',
     styleUrls: ['./cadastro-professor.component.scss']
 })
+
 export class CadastroProfessorComponent implements OnInit {
 
-    private professor: Professor;
+    private professor: CadastroProfessor;
     private msgs: Message[];
     public uploader: FileUploader;
     private url: string;
@@ -25,7 +28,7 @@ export class CadastroProfessorComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private professorService: ProfessorService, private ftpService: FtpService) {
         this.submit = false;
-        this.professor = new Professor();
+        this.professor = new CadastroProfessor();
         this.url = "";
         this.uploader = new FileUploader({ url: "" });
         this.msgs = [];
@@ -38,7 +41,7 @@ export class CadastroProfessorComponent implements OnInit {
 
     reset() {
         this.submit = false;
-        this.professor = new Professor();
+        this.professor = new CadastroProfessor();
         this.envieiFoto = false;
         this.dataAdmissao = null;
         this.dataNascimento = null;
@@ -60,6 +63,7 @@ export class CadastroProfessorComponent implements OnInit {
     }
 
     cadastrar() {
+        console.log(this.professor);
         if (this.professor.id != undefined)
             return this.professorService.atualizarProfessor(this.professor)
         else

@@ -1,11 +1,12 @@
+import { ConsultaTurma } from './../models/consulta-turmas';
+import { ConsultaProfessor } from './../models/consulta-professor';
+import { CadastroProfessor } from './../models/cadastro-professor';
 import { DatePipe } from '@angular/common';
 import { FluxoCaixa } from './../models/fluxo-caixa';
-import { Turma } from './../models/turma';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { Salario } from './../models/salario';
-import { Professor } from './../models/professor';
 import { environment } from './../../environments/environment';
 import { HttpCustormerService } from './http-custormer.service';
 
@@ -16,11 +17,11 @@ export class ProfessorService {
 
   constructor(private http: HttpCustormerService) { }
 
-  atualizarProfessor(professor: Professor) {
+  atualizarProfessor(professor: CadastroProfessor) {
     return this.http.put(environment.url + "/professores", professor);
   }
 
-  cadastrarProfessor(professor: Professor) {
+  cadastrarProfessor(professor: CadastroProfessor) {
     return this.http.post(environment.url + "/professores", professor);
   }
 
@@ -31,11 +32,11 @@ export class ProfessorService {
 
   getProfessores() {
       return this.http.get(environment.url + "professores")
-        .map((response: Response) => <Professor[]>response.json())
+        .map((response: Response) => <ConsultaProfessor[]>response.json())
   }
 
   getProfessor(idProfessor: number) {
-      return this.http.get(environment.url + "/professores/" + idProfessor).map((response: Response) => <Professor>response.json());
+      return this.http.get(environment.url + "/professores/" + idProfessor).map((response: Response) => <ConsultaProfessor>response.json());
   }
 
   getRecebimentos(idProfessor: number, dataInicio: string, dataFim: string){
@@ -43,7 +44,7 @@ export class ProfessorService {
   }
 
   getTurmaProfessor(idProfessor: number) {
-      return this.http.get(environment.url + "professores/" + idProfessor + "/turmas").map((response: Response) => <Turma[]>response.json());
+      return this.http.get(environment.url + "professores/" + idProfessor + "/turmas").map((response: Response) => <ConsultaTurma[]>response.json());
   }
 
   getDetalheRecebimento(idFluxo: number){

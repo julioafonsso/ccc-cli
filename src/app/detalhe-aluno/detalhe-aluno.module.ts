@@ -1,3 +1,4 @@
+import { DescontoService } from './../servicos/desconto.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -21,7 +22,7 @@ const rotas = [ { path: '', component: DetalheAlunoComponent } ];
     RouterModule.forChild(rotas)
   ],
   declarations: [DetalheAlunoComponent],
-  providers: [AlunoService, ProfessorService, TurmaService],
+  providers: [AlunoService, ProfessorService, TurmaService, DescontoService],
   exports: []
 })
 export class DetalheAlunoModule { }

@@ -73,6 +73,16 @@
         </div>
       </div>
 
+<!-- Select Basic -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="selectbasic">Bairro</label>
+        <div class="col-md-6">
+          <select [(ngModel)]="aluno.idBairro" name="estadoCivil" class="form-control" >
+        <option *ngFor="let item of listaBairros" [ngValue]="item.id" >{{item.nome}}</option>
+      </select>
+        </div>
+      </div>
+
       <!-- Text input-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Endereço</label>
@@ -120,8 +130,8 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="selectbasic">Estado Civil</label>
         <div class="col-md-6">
-          <select [(ngModel)]="aluno.estadoCivil" name="estadoCivil" class="form-control" >
-        <option *ngFor="let item of listaEstadoCivil" [ngValue]="item" >{{item.nome}}</option>
+          <select [(ngModel)]="aluno.idEstadoCivil" name="estadoCivil" class="form-control" >
+        <option *ngFor="let item of listaEstadoCivil" [ngValue]="item.id" >{{item.nome}}</option>
       </select>
         </div>
       </div>
@@ -130,8 +140,8 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="selectbasic">Como Conheceu</label>
         <div class="col-md-6">
-          <select [(ngModel)]="aluno.conheceEscola" name="conheceEscola" class="form-control" >
-        <option *ngFor="let item of listaComoConheceu" [ngValue]="item" >{{item.nome}}</option>
+          <select [(ngModel)]="aluno.idConheceEscola" name="conheceEscola" class="form-control" >
+        <option *ngFor="let item of listaComoConheceu" [ngValue]="item.id" >{{item.nome}}</option>
       </select>
         </div>
       </div>

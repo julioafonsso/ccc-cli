@@ -1,6 +1,6 @@
+import { ConsultaProfessor } from './../models/consulta-professor';
 import { Component, OnInit } from '@angular/core';
 
-import { Professor } from './../models/professor';
 import { ProfessorService } from './../servicos/professor.service';
 import { TurmaService } from './../servicos/turma.service';
 
@@ -12,7 +12,7 @@ import { TurmaService } from './../servicos/turma.service';
 })
 export class ConsultaProfessoresComponent implements OnInit {
 
-  private professores: Professor[];
+  private professores: ConsultaProfessor[];
   private filtro: string;
 
   constructor(private professorService: ProfessorService) { 
@@ -22,6 +22,7 @@ export class ConsultaProfessoresComponent implements OnInit {
 
   ngOnInit() {
     this.professorService.getProfessores().subscribe(res =>{
+      console.log(res);
       this.professores = res;
     })
   }

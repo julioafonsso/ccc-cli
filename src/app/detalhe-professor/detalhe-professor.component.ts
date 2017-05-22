@@ -1,14 +1,13 @@
+import { ConsultaTurma } from './../models/consulta-turmas';
+import { ConsultaProfessor } from './../models/consulta-professor';
 import { DatePipe } from '@angular/common';
 import { FluxoCaixa } from './../models/fluxo-caixa';
 import { Response } from '@angular/http';
-import { Mensalidade } from './../models/mensalidade';
 import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { ProfessorService } from './../servicos/professor.service';
-import { Professor } from './../models/professor';
-import { Turma } from './../models/turma';
 import { Salario } from './../models/salario';
 import { Message } from 'primeng/primeng';
 
@@ -21,12 +20,12 @@ import { Message } from 'primeng/primeng';
 export class DetalheProfessorComponent implements OnInit {
   private inscricao: Subscription;
   private idProfessor: number;
-  private professor: Professor;
+  private professor: ConsultaProfessor;
   private salarios: Salario[];
   private botoes = new Array();
   private msgs: Message[];
   private submit: boolean;
-  private turmas: Turma[];
+  private turmas: ConsultaTurma[];
   private recebimentos: FluxoCaixa[];
   private detalhes: any[];
   private detalhe: Salario[];
@@ -39,7 +38,7 @@ export class DetalheProfessorComponent implements OnInit {
   
 
   constructor(private professorService: ProfessorService, private router: ActivatedRoute) {
-    this.professor = new Professor();
+    this.professor = new ConsultaProfessor();
     this.salarios = [];
     this.msgs = [];
     this.recebimentos = [];

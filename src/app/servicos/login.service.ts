@@ -48,11 +48,16 @@ export class LoginService {
     this.messageLogin.next(null);
 
     this.http.post(environment.url + "login", usuario).subscribe(res => {
+      console.log("AKI 1")
       this.token = res.headers.get("token");
       this.usuarioEstaLogadoOBS.next(true);
-      this.route.navigate(['/consulta-turmas']);
-      let user: Usuario = res.json();
-      this.usuarioEhSupervisorOBJS.next(user.indSupervisor);
+      // this.route.navigate(['/consulta-turmas']);
+      this.route.navigate(['/cadastro-professor']);
+      console.log("AKI 2")
+      // let user: Usuario = res.json();
+      console.log("AKI 3")
+      // this.usuarioEhSupervisorOBJS.next(user.indSupervisor);
+      this.usuarioEhSupervisorOBJS.next(true);
 
     }, (error: (Response)) => {
       
@@ -66,3 +71,4 @@ export class LoginService {
     return this.messageLogin;
   }
 }
+

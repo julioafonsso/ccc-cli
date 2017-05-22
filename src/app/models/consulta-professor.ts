@@ -1,4 +1,4 @@
-export class Professor {
+export class ConsultaProfessor {
 
     public id: Number;
     public cpf: string;
@@ -12,6 +12,6 @@ export class Professor {
     public sexo: string;
     public dataNascimento: Date;
     public foto: string;
-    
-    constructor() { }
+
+
 }

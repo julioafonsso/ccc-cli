@@ -1,10 +1,9 @@
 import { Subscription } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
 
-import { Aluno } from './../models/aluno';
 import { AlunoService } from './../servicos/aluno.service';
-import { Turma } from './../models/turma';
 import { TurmaService } from './../servicos/turma.service';
+import { ConsultaAlunos } from './../models/consulta-alunos';
 
 @Component({
   selector: 'app-consulta-alunos',
@@ -12,8 +11,7 @@ import { TurmaService } from './../servicos/turma.service';
   styleUrls: ['./consulta-alunos.component.scss']
 })
 export class ConsultaAlunosComponent implements OnInit {
-  private alunos: Aluno[]
-  private turmas: Turma[];
+  private alunos: ConsultaAlunos[]
   private filtro: string;
   constructor(private alunoService: AlunoService) { 
     this.alunos = [];

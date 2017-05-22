@@ -9,8 +9,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Modalidade da Turma</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.modalidade" name="modalidade" class="form-control">
-      <option *ngFor="let item of modalidades" [ngValue]="item"  >{{item.nome}}</option>
+        <select [(ngModel)]="turma.idModalidade" name="modalidade" class="form-control">
+      <option *ngFor="let item of modalidades" [ngValue]="item.id"  >{{item.nome}}</option>
         </select>
       </div>
     </div>
@@ -19,8 +19,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Nivel da Turma</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.nivel" name="nivel" class="form-control">
-      <option *ngFor="let item of nives" [ngValue]="item"  >{{item.nome}}</option>
+        <select [(ngModel)]="turma.idNivel" name="nivel" class="form-control">
+      <option *ngFor="let item of nives" [ngValue]="item.id"  >{{item.nome}}</option>
         </select>
       </div>
     </div>
@@ -49,7 +49,7 @@
           required="">
       </div>
       <div class="col-md-2">
-        <input [(ngModel)]="turma.dataTermino" name="dataTermino" type="date" placeholder="DD/MM/AAAA" class="form-control input-md">
+        <input [(ngModel)]="turma.dataFim" name="dataTermino" type="date" placeholder="DD/MM/AAAA" class="form-control input-md">
       </div>
     </div>
 
@@ -70,8 +70,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="select1">Professor</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.professor1" name="professor1" class="form-control">
-      <option *ngFor="let professor of professores" [ngValue]="professor"  >{{professor.nome}}</option>
+        <select [(ngModel)]="turma.idProfessor1" name="professor1" class="form-control">
+      <option *ngFor="let professor of professores" [ngValue]="professor.id"  >{{professor.nome}}</option>
     </select>
       </div>
     </div>
@@ -89,8 +89,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Professora</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.professor2" name="professor2" class="form-control">
-      <option *ngFor="let professora of professoras" [ngValue]="professora"  >{{professora.nome}}</option>
+        <select [(ngModel)]="turma.idProfessor2" name="professor2" class="form-control">
+      <option *ngFor="let professora of professoras" [ngValue]="professora.id"  >{{professora.nome}}</option>
     </select>
       </div>
     </div>
@@ -108,7 +108,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Valor </label>
       <div class="col-md-6">
-        <input appValor [(ngModel)]="turma.mensalidade" name="mensalidade" type="text" placeholder="R$135,00" class="form-control input-md"
+        <input appValor [(ngModel)]="turma.valorMensalidade" name="mensalidade" type="text" placeholder="R$135,00" class="form-control input-md"
           required="">
       </div>
     </div>
@@ -117,7 +117,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Numero de Vagas</label>
       <div class="col-md-6">
-        <input appNumeroInteiro [(ngModel)]="turma.vagas" name="vagas" type="number" placeholder="15" min="0" class="form-control input-md"
+        <input appNumeroInteiro [(ngModel)]="turma.qtdVagas" name="vagas" type="number" placeholder="15" min="0" class="form-control input-md"
           required="">
 
       </div>
@@ -127,8 +127,8 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Sala da Aula</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.sala" name="sala" class="form-control">
-      <option *ngFor="let sala of salas" [ngValue]="sala"  >{{sala.nome}}</option>
+        <select [(ngModel)]="turma.idSala" name="sala" class="form-control">
+      <option *ngFor="let sala of salas" [ngValue]="sala.id"  >{{sala.nome}}</option>
     </select>
       </div>
     </div>
