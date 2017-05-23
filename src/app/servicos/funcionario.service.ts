@@ -1,3 +1,5 @@
+import { ConsultaFuncionario } from './../models/consulta-funcionario';
+import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 
@@ -17,5 +19,10 @@ export class FuncionarioService {
   cadastrarFuncionario(funcionario: CadastroFuncionario) {
     return this.http.post(environment.url + "/funcionarios/" , funcionario);
   }
+
+getFuncionarios(){
+  return this.http.get(environment.url + "/funcionarios/" )
+  .map((response: Response) => <ConsultaFuncionario[]>response.json())
+}
 
 }

@@ -40,7 +40,7 @@ const appRoutes: Routes = [
     { path: 'cadastro-workshop/:id', loadChildren: './cadastro-workshop/cadastro-workshop.module#CadastroWorkshopModule', canActivate: [EstaLogadoGuard] },
     
     { path: 'cadastro-funcionario', loadChildren: './cadastro-funcionario/cadastro-funcionario.module#CadastroFuncionarioModule', canActivate: [EstaLogadoGuard] },
-    // { path: 'consulta-funcionario', loadChildren: './consulta-funcionario/consulta-funcionario.module#ConsultaFuncionarioModule', canActivate: [EstaLogadoGuard] },
+    { path: 'consulta-funcionario', loadChildren: './consulta-funcionario/consulta-funcionario.module#ConsultaFuncionarioModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-funcionario/:id', loadChildren: './cadastro-funcionario/cadastro-funcionario.module#CadastroFuncionarioModule', canActivate: [EstaLogadoGuard] },
     
     
