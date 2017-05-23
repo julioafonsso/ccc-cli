@@ -1,3 +1,15 @@
+
+import { DatePipe } from '@angular/common';
+import { Subscription } from 'rxjs/Rx';
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
+
+import { Message } from 'primeng/primeng';
+
+
+import { ConsultaAulaParticular } from './../models/consulta-aula-particular';
+import { CadastroAulaParticular } from './../models/cadastro-aula-particular';
 import { ConsultaMensalidades } from './../models/consulta-mensalidades';
 import { TipoDesconto } from './../models/tipo-desconto';
 import { DescontoService } from './../servicos/desconto.service';
@@ -6,12 +18,6 @@ import { ConsultaMatricula } from './../models/consulta-matricula';
 import { ConsultaTurma } from './../models/consulta-turmas';
 import { ConsultaAlunos } from './../models/consulta-alunos';
 import { ConsultaProfessor } from './../models/consulta-professor';
-import { DatePipe } from '@angular/common';
-import { Message } from 'primeng/primeng';
-import { Subscription } from 'rxjs/Rx';
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-
 
 import { TurmaService } from './../servicos/turma.service';
 import { ProfessorService } from './../servicos/professor.service';
@@ -42,6 +48,8 @@ export class DetalheAlunoComponent implements OnInit {
   private descontos: TipoDesconto[];
   private debitos: ConsultaMensalidades[];
   private histPagamento: ConsultaMensalidades[];
+  private aula : CadastroAulaParticular;
+  private histAulaParticular: ConsultaAulaParticular[];
 
   constructor(private alunoService: AlunoService, private turmaService: TurmaService,
     private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute) {
@@ -51,6 +59,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.submit = false;
     this.initDatas();
     this.matricula = new CadastroMatricula();
+    this.aula = new CadastroAulaParticular();
   }
 
   ngOnInit() {
@@ -63,7 +72,7 @@ export class DetalheAlunoComponent implements OnInit {
         this.loadTurmasColetivas();
         this.loadDebitos();
         this.pesquisarHistPagamento();
-        // this.pesquisarAulasParticulares();
+        this.pesquisarAulasParticulares();
       }
     );
 
@@ -102,7 +111,7 @@ export class DetalheAlunoComponent implements OnInit {
       this.professores = res;
     })
 
-    // this.aula = new Turma();
+    this.aula = new CadastroAulaParticular();
   }
 
   loadMatriculas() {
@@ -117,19 +126,20 @@ export class DetalheAlunoComponent implements OnInit {
     })
   }
 
-  // cadastrarAulaParticular(){
-  //   this.submit = true;
-  //   this.alunoService.cadastrarAulaParticular(this.aula, this.idAluno, this.qtdAulas).subscribe(response => {
-  //               this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-  //               this.loadAulasParticulares();
-  //               this.resetCadastroAulaParticular();
-  //               this.submit = false;
-  //           },
-  //           error => {
-  //               this.submit = false;
-  //               this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-  //           });
-  // }
+  cadastrarAulaParticular(){
+    console.log(this.aula)
+    this.submit = true;
+    this.alunoService.cadastrarAulaParticular(this.idAluno, this.aula).subscribe(response => {
+                this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+                this.loadAulasParticulares();
+                this.resetCadastroAulaParticular();
+                this.submit = false;
+            },
+            error => {
+                this.submit = false;
+                this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+            });
+  }
 
   initDatas() {
     let dp = new DatePipe("yyyy-MM");

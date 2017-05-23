@@ -216,11 +216,11 @@
             </thead>
             <tbody>
               <tr *ngFor="let mensalidade of histAulaParticular">
-                <td>{{mensalidade.matricula.turma.modalidade.nome}}</td>
-                <td>{{mensalidade.matricula.turma.professor1.nome}}</td>
-                <td>{{mensalidade.fluxoCaixa.quantidade}}</td>
-                <td>{{mensalidade.fluxoCaixa.data | date: 'dd/MM/yyyy'}}</td>
-                <td>{{mensalidade.fluxoCaixa.valor | currency:'BRL':true}}</td>
+                <td>{{mensalidade.nomeModalidade}}</td>
+                <td>{{mensalidade.nomeProfessor1}}</td>
+                <td>{{mensalidade.qtdAulasContratadas}}</td>
+                <td>{{mensalidade.dataContratacao | date: 'dd/MM/yyyy'}}</td>
+                <td>{{mensalidade.valorPago | currency:'BRL':true}}</td>
               </tr>
             </tbody>
           </table>
@@ -236,7 +236,7 @@
 
 <!-- Modal Aula Particular -->
 
-<!--
+
 <div class="modal fade bs-example-modal-lg" id="modaAulaParticular" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -251,8 +251,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="selectbasic">Modalidade da Turma</label>
               <div class="col-md-6">
-                <select [(ngModel)]="aula.modalidade" name="modalidade" class="form-control" required>
-                  <option *ngFor="let item of modalidades" [ngValue]="item"  >{{item.nome}}</option>
+                <select [(ngModel)]="aula.idModalidade" name="modalidade" class="form-control" required>
+                  <option *ngFor="let item of modalidades" [ngValue]="item.id"  >{{item.nome}}</option>
                 </select>
               </div>
             </div>
@@ -260,8 +260,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="select1">Professor</label>
               <div class="col-md-6">
-                <select [(ngModel)]="aula.professor1" name="professor1" class="form-control" required>
-                  <option *ngFor="let professor of professores" [ngValue]="professor"  >{{professor.nome}}</option>
+                <select [(ngModel)]="aula.idProfessor1" name="professor1" class="form-control" required>
+                  <option *ngFor="let professor of professores" [ngValue]="professor.id"  >{{professor.nome}}</option>
                 </select>
               </div>
             </div>
@@ -278,7 +278,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="textinput">Quatidade de Aulas</label>
               <div class="col-md-6">
-                <input [(ngModel)]="qtdAulas" name="qtd" type="number" placeholder="10" step="1" min="1" class="form-control input-md"
+                <input [(ngModel)]="aula.qtdAulas" name="qtd" type="number" placeholder="10" step="1" min="1" class="form-control input-md"
                   required="">
               </div>
             </div>
@@ -286,7 +286,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="textinput">Valor </label>
               <div class="col-md-6">
-                <input appValor [(ngModel)]="aula.mensalidade" name="mensalidade" type="text" placeholder="R$135,00" class="form-control input-md"
+                <input appValor [(ngModel)]="aula.valorPago" name="mensalidade" type="text" placeholder="R$135,00" class="form-control input-md"
                   required="">
               </div>
             </div>
@@ -307,7 +307,7 @@
       
     </div>
   </div>
-</div>-->
+</div>
 
 <div class="modal fade bs-example-modal-lg" id="modalTurmas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" style="width:90%;" role="document">
