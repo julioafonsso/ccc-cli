@@ -1,0 +1,121 @@
+<p-growl [value]="msgs"  life=6000 ></p-growl>
+<form class="form-horizontal" (ngSubmit)="onSubmit()">
+  <fieldset>
+
+    <!-- Form Name -->
+    <legend>Cadastro de Funcionarios</legend>
+
+    <div class="card" *ngIf="getUploadSuccess()">
+        
+        <div class="card__avatar--temp">
+            <img class="card__avatar--temp__img" [src]="funcionario.foto"   >
+        </div>
+        
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Selecione a Foto</label>
+      <div class="col-md-6">
+        <!--<input type="file" class="btn-upload" ng2FileSelect [uploader]="uploader" />-->
+        <input type="file" [(ngModel)]="foto" name="foto" (change)="onChange($event)" class="custom-file-input" ng2FileSelect [uploader]="uploader">
+      </div>
+    </div>
+
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Nome</label>
+      <div class="col-md-6">
+        <input [(ngModel)]="funcionario.nome" name="nome" type="text" placeholder="Isnard Manso" class="form-control input-md" required="">
+      </div>
+    </div>
+
+
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Identidade (RG)</label>
+      <div class="col-md-6">
+        <input [(ngModel)]="funcionario.rg" name="rg" type="text" placeholder="000000001" class="form-control input-md" required="">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">CPF</label>
+      <div class="col-md-6">
+        <input appCpf [(ngModel)]="funcionario.cpf" name="cpf" type="text" placeholder="012.345.678-90" class="form-control input-md" required="">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Email</label>
+      <div class="col-md-6">
+        <input [(ngModel)]="funcionario.email" name="email" type="email" placeholder="email@email.com" class="form-control input-md" required>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Telefone</label>
+      <div class="col-md-6">
+        <input appTelefone [(ngModel)]="funcionario.telefone" name="telefone" type="tel" placeholder="(21) 99999-9999" class="form-control input-md" required>
+      </div>
+    </div>
+
+    <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Data de Nascimento</label>
+        <div class="col-md-6">
+          <input [(ngModel)]="funcionario.dataNascimento" name="dataNascimento" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+        </div>
+      </div>
+
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Data de Admissão</label>
+      <div class="col-md-6">
+        <input [(ngModel)]="funcionario.dataAdmissao" name="dataAdmissao" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+      </div>
+    </div>
+
+    <!-- Text Area-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Observação</label>
+      <div class="col-md-6">
+        <textarea [(ngModel)]="funcionario.observacao" name="observacao" class="form-control"></textarea>
+      </div>
+    </div>
+
+     <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Salario</label>
+      <div class="col-md-6">
+        <input appValor [(ngModel)]="funcionario.salario" name="salario" type="text" placeholder="1000.00" class="form-control input-md" required>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Vale Transporte</label>
+      <div class="col-md-6">
+        <input appValor [(ngModel)]="funcionario.valeTransporte" name="valeTransporte" type="text" placeholder="1000.00" class="form-control input-md" required>
+      </div>
+    </div>
+
+    
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="button1id"></label>
+      <div class="col-md-8">
+        <button id="button1id" name="button1id" class="btn btn-success" [disabled]="submit">Cadastrar</button>
+        <button type="reset" id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
+      </div>
+    </div>
+
+  </fieldset>
+</form>

@@ -1,32 +1,29 @@
-import { CadastroProfessor } from './../models/cadastro-professor';
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
-import { FtpService } from './../servicos/ftp.service';
+import { ActivatedRoute } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
-import { Message } from 'primeng/primeng';
-import { ProfessorService } from './../servicos/professor.service';
 
+import { FuncionarioService } from './../servicos/funcionario.service';
+import { FtpService } from './../servicos/ftp.service';
+import { Message } from 'primeng/primeng';
+import { CadastroFuncionario } from './../models/cadastro-funcionario';
 
 
 @Component({
-    selector: 'app-cadastro-professor',
-    templateUrl: './cadastro-professor.component.html',
-    styleUrls: ['./cadastro-professor.component.scss']
+  selector: 'app-cadastro-funcionario',
+  templateUrl: './cadastro-funcionario.component.html',
+  styleUrls: ['./cadastro-funcionario.component.css']
 })
-
-export class CadastroProfessorComponent implements OnInit {
-
-    private professor: CadastroProfessor;
+export class CadastroFuncionarioComponent implements OnInit {
+  private funcionario: CadastroFuncionario;
     private msgs: Message[];
     public uploader: FileUploader;
     private url: string;
     private envieiFoto: boolean;
     private submit: boolean;
 
-    constructor(private route: ActivatedRoute, private professorService: ProfessorService, private ftpService: FtpService) {
+    constructor(private route: ActivatedRoute, private funcionarioService: FuncionarioService, private ftpService: FtpService) {
         this.submit = false;
-        this.professor = new CadastroProfessor();
+        this.funcionario = new CadastroFuncionario();
         this.url = "";
         this.uploader = new FileUploader({ url: "" });
         this.msgs = [];
@@ -34,36 +31,36 @@ export class CadastroProfessorComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loadProfessor();
+        this.loadFuncionario();
     }
 
     reset() {
         this.submit = false;
-        this.professor = new CadastroProfessor();
+        this.funcionario = new CadastroFuncionario();
         this.envieiFoto = false;
     }
 
-    loadProfessor() {
-        this.route.params.subscribe(
-            (params: any) => {
-                if (params['id'] != undefined) {
-                    this.submit = true;
-                    this.envieiFoto = true;
-                    this.professorService.getProfessor(params['id']).subscribe(res => {
-                        this.professor = res;
-                        this.submit = false;
-                    })
-                }
-            }
-        );
+    loadFuncionario() {
+        // this.route.params.subscribe(
+        //     (params: any) => {
+        //         if (params['id'] != undefined) {
+        //             this.submit = true;
+        //             this.envieiFoto = true;
+        //             this.funcionarioService.getFuncionario(params['id']).subscribe(res => {
+        //                 this.funcionario = res;
+        //                 this.submit = false;
+        //             })
+        //         }
+        //     }
+        // );
     }
 
     cadastrar() {
-        console.log(this.professor);
-        if (this.professor.id != undefined)
-            return this.professorService.atualizarProfessor(this.professor)
+        console.log(this.funcionario);
+        if (this.funcionario.id != undefined)
+            return this.funcionarioService.atualizarFuncionario(this.funcionario)
         else
-            return this.professorService.cadastrarProfessor(this.professor)
+            return this.funcionarioService.cadastrarFuncionario(this.funcionario)
     }
 
     onSubmit() {
@@ -86,7 +83,7 @@ export class CadastroProfessorComponent implements OnInit {
         this.ftpService.cadastrarFoto(this.uploader);
         this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
             if (status === 200) {
-                this.professor.foto = response
+                this.funcionario.foto = response
                 this.envieiFoto = true;
             }
             else {
