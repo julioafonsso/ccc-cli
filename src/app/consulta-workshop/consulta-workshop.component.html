@@ -31,11 +31,8 @@
       <tr>
         <th>Codigo</th>
         <th>Modalidade</th>
-        <th>Nivel</th>
         <th>Data Inicio</th>
         <th>Data Fim</th>
-        <th>Qtd Cavalheiros</th>
-        <th>Qtd Damas</th>
         <th>Professor</th>
         <th>Professor</th>
         <th>Mensalidade</th>
@@ -45,21 +42,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let turma of getTurmas()">
+      <tr *ngFor="let turma of getWorkShops()">
         <td>{{turma.codigo}}</td>
         <td>{{turma.nomeModalidade}}</td>
-        <td>{{turma.nomeNivel}}</td>
         <td>{{turma.dataInicio | date: 'dd/MM/yyyy'}}</td>
-        <td>{{turma.dataTermino | date: 'dd/MM/yyyy'}}</td>
-        <td>{{turma.qtdAlunos}}</td>
-        <td>{{turma.qtdAlunas}}</td>
+        <td>{{turma.dataFim | date: 'dd/MM/yyyy'}}</td>
         <td>{{turma.nomeProfessor1}}</td>
         <td>{{turma.nomeProfessor2}}</td>
         <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
         <td>{{turma.qtdVagas}}</td>
-        <td><button class="btn btn-primary" [routerLink]="['/cadastro-turma', turma.id]" >Manutenção Turma</button></td>
-        
-        
+        <td><button class="btn btn-primary" [routerLink]="['/cadastro-workshop', turma.id]" >Manutenção Work</button></td>
       </tr>
     </tbody>
   </table>

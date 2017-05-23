@@ -48,7 +48,7 @@ export class TurmaService {
 
     matricularAluno(cadastro: CadastroMatricula) {
 
-        cadastro.valor = cadastro.valor.toString().replace(/[^0-9]/gi, '');
+        // cadastro.valor = cadastro.valor.toString().replace(/[^0-9]/gi, '');
 
         return this.http.post(environment.url + "matriculas", cadastro);
     }
@@ -91,23 +91,12 @@ export class TurmaService {
     }
 
     cadastrarTurma(turma) {
-        return this.http.post(environment.url + 'turmas', this.tratarDadosTurma(turma));
+        return this.http.post(environment.url + 'turmas', turma);
     }
 
     alterarTurma(turma) {
-        return this.http.put(environment.url + 'turmas', this.tratarDadosTurma(turma));
+        return this.http.put(environment.url + 'turmas/' + turma.id, turma);
     }
 
-    private tratarDadosTurma(turma: CadastroTurma) {
-        let valor = turma.valorMensalidade.toString();
-        if (valor.indexOf(",") < 0) {
-            if (valor.indexOf(".") < 0)
-                valor = valor + ",00";
-        }
-        let turma2: CadastroTurma = Object.assign({}, turma);
-        valor = valor.replace(/[^0-9]/gi, '');
-        turma2.valorMensalidade = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
-
-        return turma2;
-    }
+    
 }

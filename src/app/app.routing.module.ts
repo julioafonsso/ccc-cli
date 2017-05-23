@@ -35,6 +35,10 @@ const appRoutes: Routes = [
     { path: 'cadastro-modalidade-turma/:id', loadChildren: './cadastro-modalidade-turma/cadastro-modalidade-turma.module#CadastroModalidadeTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
     { path: 'cadastro-mensagem-email', loadChildren: './cadastro-mensagem-email/cadastro-mensagem-email.module#CadastroMensagemEmailTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
     { path: 'cadastro-bairro', loadChildren: './cadastro-bairro/cadastro-bairro.module#CadastroBairroModule', canActivate: [EstaLogadoGuard] },
+    { path: 'manutencao-bairro/:id', loadChildren: './cadastro-bairro/cadastro-bairro.module#CadastroBairroModule', canActivate: [EstaLogadoGuard] },
+    { path: 'cadastro-workshop', loadChildren: './cadastro-workshop/cadastro-workshop.module#CadastroWorkshopModule', canActivate: [EstaLogadoGuard] },
+    { path: 'consulta-workshop', loadChildren: './consulta-workshop/consulta-workshop.module#ConsultaWorkshopModule', canActivate: [EstaLogadoGuard] },
+    { path: 'manutencao-workshop/:id', loadChildren: './cadastro-workshop/cadastro-workshop.module#CadastroWorkshopModule', canActivate: [EstaLogadoGuard] },
     { path: 'login', loadChildren: './login/login.module#LoginModule', canActivate: [] }
 
 

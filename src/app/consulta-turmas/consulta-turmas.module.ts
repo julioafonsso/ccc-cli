@@ -17,7 +17,7 @@ const rotas = [ { path: '', component: ConsultaTurmasComponent } ];
     RouterModule.forChild(rotas)
   ],
   declarations: [ConsultaTurmasComponent],
-  providers: [TurmaService, ProfessorService],
+  providers: [TurmaService],
   exports: []
 })
 export class ConsultaTurmasModule { }

@@ -1,0 +1,112 @@
+<p-growl [value]="msgs" life=6000></p-growl>
+<form class="form-horizontal" (ngSubmit)="onSubmit()">
+  <fieldset>
+
+    <!-- Form Name -->
+    <legend>Cadastro de Turma</legend>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="selectbasic">Modalidade do WorkShop</label>
+      <div class="col-md-6">
+        <select [(ngModel)]="turma.idModalidade" name="modalidade" class="form-control">
+      <option *ngFor="let item of modalidades" [ngValue]="item.id"  >{{item.nome}}</option>
+        </select>
+      </div>
+    </div>
+
+   
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Data Inicio / Data Termino</label>
+      <div class="col-md-2">
+        <input [(ngModel)]="turma.dataInicio" name="dataInicio" type="date" placeholder="DD/MM/AAAA" class="form-control input-md"
+          required="">
+      </div>
+      <div class="col-md-2">
+        <input [(ngModel)]="turma.dataFim" name="dataTermino" type="date" placeholder="DD/MM/AAAA" class="form-control input-md">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Horario</label>
+      <div class="col-md-2">
+        <input [(ngModel)]="turma.horarioInicial" name="horarioInicial" type="time" placeholder="18:30 as 19:30" class="form-control input-md"
+          required="">
+      </div>
+      <div class="col-md-2">
+        <input [(ngModel)]="turma.horarioFinal" name="horarioFinal" type="time" placeholder="18:30 as 19:30" class="form-control input-md"
+          required="">
+      </div>
+    </div>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="select1">Professor</label>
+      <div class="col-md-6">
+        <select [(ngModel)]="turma.idProfessor1" name="professor1" class="form-control">
+      <option *ngFor="let professor of professores" [ngValue]="professor.id"  >{{professor.nome}}</option>
+    </select>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Percentual do Professor</label>
+      <div class="col-md-6">
+        <input appNumeroInteiro [(ngModel)]="turma.percentualProfessor1" name="percentual1" type="number" min="0" max="100"
+          placeholder="20%" class="form-control input-md" >
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label">Professora</label>
+      <div class="col-md-6">
+        <select [(ngModel)]="turma.idProfessor2" name="professor2" class="form-control">
+      <option *ngFor="let professora of professoras" [ngValue]="professora.id"  >{{professora.nome}}</option>
+    </select>
+      </div>
+    </div>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Percentual da Professora</label>
+      <div class="col-md-6">
+        <input appNumeroInteiro [(ngModel)]="turma.percentualProfessor2" name="percentual2" type="number" min="0" max="100"
+          placeholder="15%" class="form-control input-md" >
+
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Valor </label>
+      <div class="col-md-6">
+        <input appValor [(ngModel)]="turma.valorMensalidade" name="mensalidade" type="text" placeholder="R$135,00" class="form-control input-md"
+          required="">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Numero de Vagas</label>
+      <div class="col-md-6">
+        <input appNumeroInteiro [(ngModel)]="turma.qtdVagas" name="vagas" type="number" placeholder="15" min="0" class="form-control input-md"
+          required="">
+
+      </div>
+    </div>
+
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="button1id"></label>
+      <div class="col-md-8">
+        <button id="button1id" name="button1id" class="btn btn-success" [disabled]="submit">Cadastrar</button>
+        <button type="reset" id="button2id" name="button2id" class="btn btn-danger">Limpar Campos</button>
+      </div>
+    </div>
+
+  </fieldset>
+</form>

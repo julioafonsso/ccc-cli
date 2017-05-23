@@ -128,7 +128,6 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   cadastrar() {
-    console.log("VOU CADASTRAR")
     if (this.turma.id == undefined)
       return this.turmaService.cadastrarTurma(this.turma);
     else

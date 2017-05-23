@@ -15,7 +15,7 @@ import { ProfessorService } from './../servicos/professor.service';
 })
 export class ConsultaTurmasComponent implements OnInit {
 
-  constructor(private turmaService: TurmaService, private professorService: ProfessorService ) { }
+  constructor(private turmaService: TurmaService ) { }
 
   private niveis = new Array<NivelTurma>();
   private modalidades = new Array<ModalidadeTurma>()

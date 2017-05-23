@@ -73,7 +73,7 @@ export class AlunoService {
 
   cadastrarAulaParticular(idAluno: number, aula: CadastroAulaParticular){
     
-    return this.http.post(environment.url + "alunos/" + idAluno + "/aula-particular", this.tratarDadosTurma(aula));
+    return this.http.post(environment.url + "alunos/" + idAluno + "/aula-particular", aula);
   }
 
 getAulasParticulares(idAluno: number, dataInicio:string, dataFim: string)
@@ -81,18 +81,7 @@ getAulasParticulares(idAluno: number, dataInicio:string, dataFim: string)
   return this.http.get(environment.url + "alunos/" + idAluno + "/aula-particular/"+ dataInicio + "/" +dataFim).map((response: Response) => <ConsultaAulaParticular[]>response.json()); 
 }
 
-  private tratarDadosTurma(turma: CadastroAulaParticular) {
-        let valor = turma.valorPago.toString();
-        if (valor.indexOf(",") < 0) {
-            if (valor.indexOf(".") < 0)
-                valor = valor + ",00";
-        }
-        let turma2: CadastroAulaParticular = Object.assign({}, turma);
-        valor = valor.replace(/[^0-9]/gi, '');
-        turma2.valorPago = Number(valor.substr(0, valor.length - 2) + "." + valor.substring(valor.length - 2))
-        return turma2;
-    }
-
+  
 }
 
 
