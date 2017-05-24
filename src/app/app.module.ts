@@ -14,6 +14,7 @@ import { LoginService } from './servicos/login.service';
 
 import { PerfilSupervisorGuard } from './guards/perfil-supervisor.guard';
 import { EstaLogadoGuard } from './guards/esta-logado.guard';
+import { DetalheFuncionarioComponent } from './detalhe-funcionario/detalhe-funcionario.component';
 
 @NgModule({
   declarations: [

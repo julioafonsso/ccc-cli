@@ -23,6 +23,7 @@ insert into sala (id, nome) values(5, 'Sala 5');
 insert into sala (id, nome) values(6, 'Sala 6');
 
 insert into tipo_funcionario (id, nome) values(1, 'professor');
+insert into tipo_funcionario (id, nome) values(2, 'funcionario');
 
 insert into tipo_fluxo_caixa (id,ind_entrada,  nome) values(1, 1, "Mensalidade");
 insert into tipo_fluxo_caixa (id,ind_entrada,  nome) values(2, 0, "Pagamento Professor");

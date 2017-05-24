@@ -26,7 +26,7 @@ export class DetalheProfessorComponent implements OnInit {
   private msgs: Message[];
   private submit: boolean;
   private turmas: ConsultaTurma[];
-  private recebimentos: FluxoCaixa[];
+  private recebimentos: any;
   private detalhes: any[];
   private detalhe: Salario[];
   private mostraDetalhe: boolean;
@@ -144,6 +144,7 @@ export class DetalheProfessorComponent implements OnInit {
     this.mesParaPagar = this.mesReferenciaPagamento;
     this.professorService.getMensalidadesParaReceber(this.idProfessor, this.mesReferenciaPagamento).subscribe(res => {
       this.salarios = res;
+      console.log(this.salarios)
       this.submit = false;
     })
   }

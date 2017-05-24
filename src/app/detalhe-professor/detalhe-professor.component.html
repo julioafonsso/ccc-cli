@@ -84,9 +84,9 @@
             <tbody>
               <tr *ngFor="let turma of turmas">
                 <td>{{turma.codigo}}</td>
-                <td>{{turma.modalidade.nome}}</td>
-                <td>{{turma.nivel.nome}}</td>
-                <td>{{turma.sala.nome}}</td>
+                <td>{{turma.nomeModalidade}}</td>
+                <td>{{turma.nomeNivel}}</td>
+                <td>{{turma.nomeSala}}</td>
               </tr>
             </tbody>
           </table>
@@ -114,12 +114,12 @@
             </thead>
             <tbody>
               <tr *ngFor="let salario of salarios">
-                <td>{{salario.mensalidade.matricula.turma.codigo}}</td>
-                <td>{{salario.mensalidade.matricula.aluno.nome}}</td>
-                <td>{{salario.mensalidade.matricula.turma.modalidade.nome}}</td>
-                <td>{{salario.mensalidade.mesReferencia.mes}}/{{salario.mensalidade.mesReferencia.ano}}</td>
-                <td>{{salario.mensalidade.matricula.turma.mensalidade | currency:'BRL':true}}</td>
-                <td>{{salario.mensalidade.fluxoCaixa.valor | currency:'BRL':true}}</td>
+                <td>{{salario.codigo}}</td>
+                <td>{{salario.nomeAluno}}</td>
+                <td>{{salario.nomeModalidade}}</td>
+                <td>{{salario.mesReferencia}}</td>
+                <td>{{salario.valorMensalidade | currency:'BRL':true}}</td>
+                <td>{{salario.valorPago | currency:'BRL':true}}</td>
                 <td>{{salario.percentual}} %</td>
                 <td>{{salario.valor | currency:'BRL':true}}</td>
                 <td>

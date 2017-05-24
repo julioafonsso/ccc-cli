@@ -69,7 +69,7 @@ export class CadastroFuncionarioComponent implements OnInit {
         this.cadastrar()
             .subscribe(res => {
                 this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-                this.reset()
+                // this.reset()
             },
             error => {
                 this.submit = false;

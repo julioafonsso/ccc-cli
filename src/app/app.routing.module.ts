@@ -42,7 +42,7 @@ const appRoutes: Routes = [
     { path: 'cadastro-funcionario', loadChildren: './cadastro-funcionario/cadastro-funcionario.module#CadastroFuncionarioModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-funcionario', loadChildren: './consulta-funcionario/consulta-funcionario.module#ConsultaFuncionarioModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-funcionario/:id', loadChildren: './cadastro-funcionario/cadastro-funcionario.module#CadastroFuncionarioModule', canActivate: [EstaLogadoGuard] },
-    
+    { path: 'detalhe-funcionario/:id', loadChildren: './detalhe-funcionario/detalhe-funcionario.module#DetalheFuncionarioModule', canActivate: [EstaLogadoGuard] },
     
     { path: 'login', loadChildren: './login/login.module#LoginModule', canActivate: [] }
 
