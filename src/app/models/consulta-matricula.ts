@@ -10,5 +10,11 @@ export class ConsultaMatricula {
     public idSala: number;
     public nomeSala: string;
     public diaVencimento: number;
+    public idDesconto: number;
+    public nomeDesconto: string;
+    public valorDesconto: number;
+    public dataInicio: Date;
+    public dataFim: Date;
+    public dataMatricula: Date;
 
 }

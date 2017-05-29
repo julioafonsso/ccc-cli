@@ -51,14 +51,16 @@ export class CadastroTipoDescontoComponent implements OnInit {
 
   onSubmit() {
     this.submit = true;
-    this.cadastrar().subscribe(response => {
-      this.desconto = new TipoDesconto();
-      this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-      this.submit = false;
-    }, erro => {
-      this.submit = false;
-      this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !' });
-    })
-  }
-
+    this.cadastrar()
+    
+     .subscribe(response => {
+                this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+                 this.desconto = new TipoDesconto();
+                 this.submit = false;
+            },
+            error => {
+                this.submit = false;
+                this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+            })
+    }
 }

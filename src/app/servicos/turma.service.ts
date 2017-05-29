@@ -87,7 +87,7 @@ export class TurmaService {
     }
 
     alterarModalidade(modalidade: ModalidadeTurma) {
-        return this.http.put(environment.url + 'modalidades', modalidade);
+        return this.http.put(environment.url + 'modalidades/' + modalidade.id , modalidade);
     }
 
     cadastrarTurma(turma) {

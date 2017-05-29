@@ -43,8 +43,9 @@ export class CadastroTipoFluxoCaixaComponent implements OnInit {
   }
 
   cadastrar() {
-    if (this.tipo.id != null)
-      this.tipoFluxoService.alterar(this.tipo)
+    console.log(this.tipo)
+    if (this.tipo.id != undefined)
+      return this.tipoFluxoService.alterar(this.tipo)
     return this.tipoFluxoService.cadastrar(this.tipo)
   }
 
@@ -57,9 +58,9 @@ export class CadastroTipoFluxoCaixaComponent implements OnInit {
         this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
 
       },
-      erro => {
+      error => {
         this.submit = false;
-        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !' });
+        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
       });
   }
 }

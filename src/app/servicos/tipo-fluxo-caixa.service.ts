@@ -50,10 +50,12 @@ export class TipoFluxoCaixaService {
     }
 
     cadastrar(tipo: TipoFluxo) {
+        console.log("vou cadastrar")
         return this.http.post(environment.url + "tipo-fluxo-caixa", tipo);
     }
 
     alterar(tipo: TipoFluxo) {
-        return this.http.put(environment.url + "tipo-fluxo-caixa", tipo);
+        console.log("vou alterar")
+        return this.http.put(environment.url + "tipo-fluxo-caixa/" + tipo.id, tipo);
     }
 }

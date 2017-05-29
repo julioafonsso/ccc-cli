@@ -22,7 +22,6 @@ export class ConsultaTipoDescontoComponent implements OnInit {
   reset(){
     this.submit = false;
     this.descontoService.obterDescontos().subscribe(res =>{
-      console.log(res)
       this.descontos = res;
     })
   }

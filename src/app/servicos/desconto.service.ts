@@ -21,7 +21,7 @@ export class DescontoService {
   }
 
   alterarTipoDesconto(desconto: TipoDesconto){
-    return this.http.put(environment.url + "descontos",desconto)
+    return this.http.put(environment.url + "descontos/" + desconto.id,desconto)
   }
   obterDescontos(){
     return this.http.get(environment.url + "descontos").map((res:Response) => <TipoDesconto[]> res.json());

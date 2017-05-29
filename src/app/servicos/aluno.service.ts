@@ -61,6 +61,10 @@ export class AlunoService {
      return this.http.get(environment.url + "alunos/" + idAluno + "/pagamentos/"+ dataInicio + "/" +dataFim).map((response: Response) => <ConsultaMensalidades[]>response.json());
   }
 
+  getWorkShops(idAluno: number, dataInicio:string, dataFim: string){
+     return this.http.get(environment.url + "alunos/" + idAluno + "/workshop/"+ dataInicio + "/" +dataFim).map((response: Response) => <ConsultaMatricula[]>response.json());
+  }
+
   pesquisarAlunos(nome: string, email: string, cpf: string) {
 
     let params: URLSearchParams = new URLSearchParams();

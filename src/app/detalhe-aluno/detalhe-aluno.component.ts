@@ -1,3 +1,5 @@
+import { WorkshopService } from './../servicos/workshop.service';
+import { ConsultaWorkShop } from './../models/consulta-workshop';
 
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs/Rx';
@@ -48,11 +50,14 @@ export class DetalheAlunoComponent implements OnInit {
   private descontos: TipoDesconto[];
   private debitos: ConsultaMensalidades[];
   private histPagamento: ConsultaMensalidades[];
-  private aula : CadastroAulaParticular;
+  private aula: CadastroAulaParticular;
   private histAulaParticular: ConsultaAulaParticular[];
+  private workShops: ConsultaWorkShop[];
+  private matriculasWorkShops: ConsultaMatricula[];
 
   constructor(private alunoService: AlunoService, private turmaService: TurmaService,
-    private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute) {
+    private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute,
+    private workService: WorkshopService) {
     this.msgs = [];
     this.aluno = new ConsultaAlunos();
     this.botoes = new Array();
@@ -73,8 +78,13 @@ export class DetalheAlunoComponent implements OnInit {
         this.loadDebitos();
         this.pesquisarHistPagamento();
         this.pesquisarAulasParticulares();
+        this.pesquisarWorkShops();
       }
     );
+
+    this.workService.getWorkShops().subscribe(res => {
+      this.workShops = res;
+    })
 
     this.descontoService.obterDescontos().subscribe(res => {
       this.descontos = res;
@@ -92,12 +102,16 @@ export class DetalheAlunoComponent implements OnInit {
 
   matricular() {
     this.matricula.idAluno = this.idAluno;
-    this.turmaService.matricularAluno(this.matricula).subscribe(res => {
-      this.matricula = new CadastroMatricula();
-      this.loadMatriculas();
-      this.loadDebitos();
-    })
-
+    this.turmaService.matricularAluno(this.matricula)
+      .subscribe(res => {
+        this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
+        this.matricula = new CadastroMatricula();
+        this.loadMatriculas();
+        this.loadDebitos();
+      }, error => {
+        this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+        this.submit = false;
+      });
   }
 
   resetCadastroAulaParticular() {
@@ -126,19 +140,19 @@ export class DetalheAlunoComponent implements OnInit {
     })
   }
 
-  cadastrarAulaParticular(){
+  cadastrarAulaParticular() {
     console.log(this.aula)
     this.submit = true;
     this.alunoService.cadastrarAulaParticular(this.idAluno, this.aula).subscribe(response => {
-                this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-                this.loadAulasParticulares();
-                this.resetCadastroAulaParticular();
-                this.submit = false;
-            },
-            error => {
-                this.submit = false;
-                this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-            });
+      this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+      this.loadAulasParticulares();
+      this.resetCadastroAulaParticular();
+      this.submit = false;
+    },
+      error => {
+        this.submit = false;
+        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+      });
   }
 
   initDatas() {
@@ -162,6 +176,17 @@ export class DetalheAlunoComponent implements OnInit {
 
   }
 
+  pesquisarWorkShops() {
+    if (this.dataInicio == undefined || this.dataInicio.toString().length < 7) {
+      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Inicio" });
+    }
+    else if (this.dataFim == undefined || this.dataFim.toString().length < 7) {
+      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Fim" });
+    }
+    else {
+      this.loadWorkShops();
+    }
+  }
 
 
   pesquisarHistPagamento() {
@@ -202,6 +227,11 @@ export class DetalheAlunoComponent implements OnInit {
     })
   }
 
+  loadWorkShops() {
+    this.alunoService.getWorkShops(this.idAluno, this.dataInicio, this.dataFim).subscribe(res => {
+      this.matriculasWorkShops = res;
+    })
+  }
 
 
   loadAluno() {
@@ -217,6 +247,8 @@ export class DetalheAlunoComponent implements OnInit {
     })
   }
 
+
+
   getTabAtiva(x: number) {
     let retorno: boolean;
     retorno = this.botoes[x];
@@ -228,6 +260,18 @@ export class DetalheAlunoComponent implements OnInit {
     this.botoes[valor] = true;
   }
 
+  matricularWork(idTurma: number) {
+    this.matricula = new CadastroMatricula();
+    this.matricula.idAluno = this.idAluno;
+    this.matricula.idTurma = idTurma;
+    this.turmaService.matricularAluno(this.matricula).subscribe(res => {
+      this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
+      this.matricula = new CadastroMatricula();
+    }, error => {
+      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+      this.submit = false;
+    });
+  }
 
   pagar(idMensalidade: number, valor: number) {
     this.submit = true;

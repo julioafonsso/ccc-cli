@@ -1,3 +1,4 @@
+import { WorkshopService } from './../servicos/workshop.service';
 import { DescontoService } from './../servicos/desconto.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,7 @@ const rotas = [ { path: '', component: DetalheAlunoComponent } ];
     RouterModule.forChild(rotas)
   ],
   declarations: [DetalheAlunoComponent],
-  providers: [AlunoService, ProfessorService, TurmaService, DescontoService],
+  providers: [AlunoService, ProfessorService, TurmaService, DescontoService, WorkshopService],
   exports: []
 })
 export class DetalheAlunoModule { }
