@@ -1,3 +1,4 @@
+import { ConsultaRecebimentos } from './../models/consulta-recebimentos';
 import { ConsultaTurma } from './../models/consulta-turmas';
 import { ConsultaProfessor } from './../models/consulta-professor';
 import { CadastroProfessor } from './../models/cadastro-professor';
@@ -40,7 +41,7 @@ export class ProfessorService {
   }
 
   getRecebimentos(idProfessor: number, dataInicio: string, dataFim: string){
-    return this.http.get(environment.url + "professores/" + idProfessor + "/recibos/"+ dataInicio + "/" +dataFim).map((response: Response) => <FluxoCaixa[]>response.json());
+    return this.http.get(environment.url + "professores/" + idProfessor + "/recibos/"+ dataInicio + "/" +dataFim).map((response: Response) => <ConsultaRecebimentos[]>response.json());
   }
 
   getTurmaProfessor(idProfessor: number) {

@@ -1,3 +1,4 @@
+import { CadastroFluxoCaixa } from './../models/cadastro-fluxo-caixa';
 import { DatePipe } from '@angular/common';
 import { Response } from '@angular/http';
 import { Message } from 'primeng/primeng';
@@ -6,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { TipoFluxoCaixaService } from './../servicos/tipo-fluxo-caixa.service';
 import { TipoFluxo } from './../models/tipo-fluxo';
-import { FluxoCaixa } from './../models/fluxo-caixa';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
   private fluxos: TipoFluxo[];
   private fluxosEntrada: TipoFluxo[];
   private fluxosSaida: TipoFluxo[];
-  private fluxoCaixa : FluxoCaixa;
+  private fluxoCaixa : CadastroFluxoCaixa;
   private msgs: Message[];
   private data: Date;
   private submit:boolean;
@@ -27,7 +27,7 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
   constructor(private tipoFluxoService: TipoFluxoCaixaService, private fluxoCaixaService: FluxoCaixaService) {
     
     this.submit =false; 
-    this.fluxoCaixa = new FluxoCaixa();
+    this.fluxoCaixa = new CadastroFluxoCaixa();
     this.fluxoCaixa.data = this.dp.transform(new Date(), 'yyyy-MM-dd');
     this.msgs = [];
   }
@@ -48,7 +48,7 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
       this.fluxos = this.fluxosSaida;
     }
 
-    this.fluxoCaixa.tipoFluxo = new TipoFluxo();
+    this.fluxoCaixa.idTipo = undefined;
     
   }
 
@@ -57,7 +57,7 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
     .subscribe((res: Response) =>{
       this.submit = false
       this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-      this.fluxoCaixa = new FluxoCaixa();
+      this.fluxoCaixa = new CadastroFluxoCaixa();
       this.fluxoCaixa.data = this.dp.transform(new Date(), 'yyyy-MM-dd');
     },
       error => {

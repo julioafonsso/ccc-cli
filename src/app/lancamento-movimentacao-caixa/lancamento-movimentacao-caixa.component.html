@@ -20,8 +20,8 @@
 <div class="form-group" *ngIf="indEntrada" >
   <label class="col-md-4 control-label" for="selectbasic">Nome Fluxo</label>
   <div class="col-md-6">
-    <select [(ngModel)]="fluxoCaixa.tipoFluxo" name="tipoFluxo" class="form-control" required="">
-      <option *ngFor="let fluxo of fluxos" [ngValue]="fluxo">{{fluxo.nome}}</option>
+    <select [(ngModel)]="fluxoCaixa.idTipo" name="tipoFluxo" class="form-control" required="">
+      <option *ngFor="let fluxo of fluxos" [ngValue]="fluxo.id">{{fluxo.nome}}</option>
     </select>
   </div>
 </div>
@@ -54,7 +54,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Quantidade</label>  
   <div class="col-md-6">
-  <input [(ngModel)]="fluxoCaixa.quantidade" name="quantidade" type="number" min="1" placeholder="R$1000,00"  class="form-control input-md" required="">
+  <input [(ngModel)]="fluxoCaixa.qtd" name="quantidade" type="number" min="1" placeholder="R$1000,00"  class="form-control input-md" required="">
   </div>
 </div>
 

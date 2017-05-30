@@ -1,3 +1,4 @@
+import { ConsultaRecebimentos } from './../models/consulta-recebimentos';
 import { ConsultaTurma } from './../models/consulta-turmas';
 import { ConsultaProfessor } from './../models/consulta-professor';
 import { DatePipe } from '@angular/common';
@@ -26,7 +27,7 @@ export class DetalheProfessorComponent implements OnInit {
   private msgs: Message[];
   private submit: boolean;
   private turmas: ConsultaTurma[];
-  private recebimentos: any;
+  private recebimentos: ConsultaRecebimentos[];
   private detalhes: any[];
   private detalhe: Salario[];
   private mostraDetalhe: boolean;
@@ -227,19 +228,16 @@ export class DetalheProfessorComponent implements OnInit {
     }
   }
 
-  mostrarDetalhe(recebimento: FluxoCaixa) {
+  mostrarDetalhe(recebimento: ConsultaRecebimentos ) {
     if (recebimento.id == this.idFluxoDetalhado) {
       this.mostraDetalhe = false;
       this.detalhe = [];
       this.idFluxoDetalhado = -1;
     }
     else {
-
       this.detalhe = this.detalhes[recebimento.id];
       this.idFluxoDetalhado = recebimento.id
-      console.log(this.detalhe)
       this.mostraDetalhe = true;
-
     }
   }
 
