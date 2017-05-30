@@ -75,11 +75,11 @@
           <i class="glyphicon glyphicon-plus" ></i>
         </div>
         <div class="panel-heading">
-          <h2 class="panel-title">{{entrada.nome}}</h2>
+          <h2 class="panel-title">{{entrada.nomeTipoLancamento}}</h2>
         </div>
         <ul class="list-group">
           <li class="list-group-item">{{entrada.valor | currency:'BRL':true}}</li>
-          <li class="list-group-item">{{entrada.quantidade}} Lancamentos </li>
+          <li class="list-group-item">{{entrada.qtdLancamentos}} Lancamentos </li>
         </ul>
       </article>
     </div>
@@ -108,11 +108,11 @@
           <i class="glyphicon glyphicon-plus"></i>
         </div>
         <div class="panel-heading">
-          <h2 class="panel-title">{{saida.nome}}</h2>
+          <h2 class="panel-title">{{saida.nomeTipoLancamento}}</h2>
         </div>
         <ul class="list-group">
           <li class="list-group-item">{{saida.valor | currency:'BRL':true}}</li>
-          <li class="list-group-item">{{saida.quantidade}} Lancamentos </li>
+          <li class="list-group-item">{{saida.qtdLancamentos}} Lancamentos </li>
         </ul>
       </article>
     </div>

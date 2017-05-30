@@ -1,4 +1,3 @@
-import { FluxoCaixa } from './../models/fluxo-caixa';
 import { ExtratoConsolidado } from './../models/extrato-consolidado';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -18,6 +17,8 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
   private colors: Array<Color>;
   private entradas: ExtratoConsolidado[];
   private saidas: ExtratoConsolidado[];
+  private detalhes: any[];
+  private detalhe: any[];
 
   private dataInicio: Date;
   private dataFim: Date;
@@ -26,7 +27,6 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
   private quantidadeDetalhe: number;
 
 
-  public detalhes: FluxoCaixa[];
 
   constructor(private extratoService: ExtratoService) {
     this.dataFim = new Date();
@@ -41,15 +41,15 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
     this.quantidadeDetalhe = 0;
   }
 
-  setDetalhe(fluxo : ExtratoConsolidado){
-    this.detalhes = fluxo.lancamentos;
-    this.nomeDetalhe = fluxo.nome;
+  setDetalhe(fluxo: ExtratoConsolidado) {
+    this.detalhe = this.detalhes[fluxo.idTipoLancamento];
+    this.nomeDetalhe = fluxo.nomeTipoLancamento;
     this.valorDetalhe = fluxo.valor;
-    this.quantidadeDetalhe = fluxo.quantidade;
+    this.quantidadeDetalhe = fluxo.qtdLancamentos;
   }
 
   getDetalhe() {
-    return this.detalhes;
+    return this.detalhe;
   }
 
   getSaldoEntradas() {
@@ -61,7 +61,7 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
     return valor;
   }
 
-getSaldoSaidas() {
+  getSaldoSaidas() {
     let valor: number = 0;
     this.saidas.forEach(v => {
       valor = valor + v.valor;
@@ -90,13 +90,26 @@ getSaldoSaidas() {
       d.transform(this.dataFim, "yyyyMMdd")).
       subscribe(res => {
         this.entradas = res;
+        this.loadDetalhes(res);
+
       })
 
     this.extratoService.getExtratoConsolidadoSaidas(d.transform(this.dataInicio, "yyyyMMdd"),
       d.transform(this.dataFim, "yyyyMMdd")).
       subscribe(res => {
         this.saidas = res;
+        this.loadDetalhes(res);
       })
+  }
+
+  loadDetalhes(valores: ExtratoConsolidado[]) {
+    let d = new DatePipe("pt");
+    valores.forEach(v => {
+      this.extratoService.getExtrato(v.idTipoLancamento, d.transform(this.dataInicio, "yyyyMMdd"),
+        d.transform(this.dataFim, "yyyyMMdd")).subscribe(res => {
+          this.detalhes[v.idTipoLancamento] = res;
+        })
+    })
   }
 
   ngOnInit() {

@@ -1,17 +1,13 @@
-import { FluxoCaixa } from './fluxo-caixa';
 import { Extrato } from './extrato';
 import { Usuario } from './usuario';
 import { TipoFluxo } from './tipo-fluxo';
 
 export class ExtratoConsolidado {
 
-    public quantidade :number;
+    public qtdLancamentos :number;
     public valor: number;
-    public nome: string;
-    public id: number;
-    // public lancamentos: Extrato[];
-    public lancamentos: FluxoCaixa[];
-
+    public nomeTipoLancamento: string;
+    public idTipoLancamento: number;
     
     constructor() { }
 }

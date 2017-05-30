@@ -1,10 +1,10 @@
-import { FluxoCaixa } from './fluxo-caixa';
-
 export class Extrato {
 
-    public data: String;
-    public valor: String;
-    public fluxos: FluxoCaixa[];
-
+    public data: Date;
+    public valor: number;
+    public quantidade: number;
+    public observacao:string;
+    public descricao:string;
+    
     constructor() { }
 }

@@ -10,43 +10,21 @@ export class ExtratoService {
 
   constructor(private http: HttpCustormerService) { }
 
-  getExtrato(dtInicial: String, dtFinal: String) {
-    return this.http.get(environment.url + "extrato/" + dtInicial + "/" + dtFinal)
+  getExtrato(id: number, dtInicial: String, dtFinal: String) {
+    return this.http.get(environment.url + "extrato/detalhado/" + id +"/" + dtInicial + "/" + dtFinal)
       .map((response: Response) => <Extrato[]>response.json());
   }
 
   getExtratoConsolidadoEntradas(dtInicial: String, dtFinal: String) {
     return this.http.get(environment.url + "extrato/consolidado/entradas/" + dtInicial + "/" + dtFinal)
-      .map((response: Response) => {
-        return this.mapExtratoConsolidado(response.json());
-
-      });
+      .map((response: Response) => <ExtratoConsolidado[]>response.json());
   }
 
   getExtratoConsolidadoSaidas(dtInicial: String, dtFinal: String) {
     return this.http.get(environment.url + "extrato/consolidado/saidas/" + dtInicial + "/" + dtFinal)
-      .map((response: Response) => {
-        return this.mapExtratoConsolidado(response.json());
-
-      });
+      .map((response: Response) => <ExtratoConsolidado[]>response.json());
   }
-
-  private mapExtratoConsolidado(json: any) {
-    let extratos :ExtratoConsolidado[] = [];
-    
-    for (let item of json) {
-      let extrato = new ExtratoConsolidado();
-      extrato.quantidade = item[0];
-      extrato.valor = item[1];
-      extrato.nome = item[2];
-      extrato.id = item[3];
-      extrato.lancamentos = item[4];
-      extratos.push(extrato);
-    }
-
-    return extratos;
-  }
-
+ 
   private getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';

@@ -145,7 +145,6 @@ export class DetalheProfessorComponent implements OnInit {
     this.mesParaPagar = this.mesReferenciaPagamento;
     this.professorService.getMensalidadesParaReceber(this.idProfessor, this.mesReferenciaPagamento).subscribe(res => {
       this.salarios = res;
-      console.log(this.salarios)
       this.submit = false;
     })
   }
