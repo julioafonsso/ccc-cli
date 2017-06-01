@@ -64,7 +64,7 @@
         </div>
       </div>
 
-<!--
+
       <div class="tab-pane " id="tabPagamentos">
         Mes Referencia: <input [(ngModel)]="mesReferenciaPagamento" id="de" type="month"><button (click)="loadPagamento()"
           class="btn btn-primary">Pesquisar</button>
@@ -72,24 +72,23 @@
           <table class="table table-bordered table-striped table-hover">
             <thead>
               <tr>
-                <th>Salario</th>
+                
                 <th>Situacao</th>
+                <th>Data Pagamento</th>
                 <th>Mes Referencia</th>
+                <th>Valor</th>
                 <th>Ação</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let salario of salarios">
-                <td>{{salario.mensalidade.matricula.turma.codigo}}</td>
-                <td>{{salario.mensalidade.matricula.aluno.nome}}</td>
-                <td>{{salario.mensalidade.matricula.turma.modalidade.nome}}</td>
-                <td>{{salario.mensalidade.mesReferencia.mes}}/{{salario.mensalidade.mesReferencia.ano}}</td>
-                <td>{{salario.mensalidade.matricula.turma.mensalidade | currency:'BRL':true}}</td>
-                <td>{{salario.mensalidade.fluxoCaixa.valor | currency:'BRL':true}}</td>
-                <td>{{salario.percentual}} %</td>
-                <td>{{salario.valor | currency:'BRL':true}}</td>
+              <tr *ngFor="let item of salarios">
+                <td>{{item.situacao}}</td>
+                <td>{{item.dataPagamento | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.mesReferencia}}</td>
+                <td>{{item.valor | currency:'BRL':true}}</td>
                 <td>
-                  <button [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(salario)">Pagar</button>
+                  <button *ngIf="!item.dataPagamento"  [disabled]="submit" class="btn btn-primary" (click)="pagarMensalidade(item)">Pagar</button>
+                  <button *ngIf="!item.dataPagamento"  [disabled]="submit" class="btn btn-primary" (click)="setSalario(item)" data-toggle="modal" data-target="#modalAdiantamento">Adiantamento</button>
                 </td>
               </tr>
             </tbody>
@@ -98,19 +97,52 @@
                 <td>TOTAL</td>
                 <td>----</td>
                 <td>----</td>
-                <td>----</td>
-                <td>----</td>
-                <td>----</td>
                 <td>{{getValorTotal() | currency:'BRL':true}}</td>
-                <td><button [disabled]="submit" class="btn btn-primary" (click)="pagarTudo()">Pagar Total</button></td>
+                <td></td>
               </tr>
             </tfoot>
           </table>
         </div>
-      </div>-->
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
+
+<div class="modal fade bs-example-modal-lg" id="modalAdiantamento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" style="width:90%;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="myModalLabel">Adiantamento</h4>
+      </div>
+      <div class="modal-body">
+        
+       <form class="form-horizontal" >
+          <fieldset>
+            
+          <div class="form-group">
+              <label class="col-md-4 control-label" for="textinput">Valor do Adiantamento</label>
+              <div class="col-md-6">
+                <input appValor [(ngModel)]="salario.valor" name="valor" type="text" placeholder="100,00" class="form-control input-md" required="">
+              </div>
+          </div>      
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="button1id"></label>
+              <div class="col-md-8">
+                <button data-dismiss="modal" id="button1id" name="button1id" class="btn btn-success" [disabled]="submit" type="button" (click)="fazerAdiantamento()">Cadastrar</button>
+                <button data-dismiss="modal" id="button2id" name="button2id" class="btn btn-danger"  [disabled]="submit" >Cancelar</button>
+              </div>
+            </div>
+
+
+          </fieldset>
+        </form>
+      </div>
+      
     </div>
   </div>
 </div>

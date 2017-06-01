@@ -1,3 +1,5 @@
+insert into usuario( id, data_exclusao, ind_supervisor, login, nome_usuario, senha) values(1, null, 1, 'julio', 'julio', 'julio')
+insert into usuario( id, data_exclusao, ind_supervisor, login, nome_usuario, senha) values(2, null, 1, 'isnard', 'isnard', 'isnard')
 
 
 insert into conhece_escola (id, nome) values(1, 'Internet');

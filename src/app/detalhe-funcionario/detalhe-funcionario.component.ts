@@ -1,3 +1,4 @@
+import { Salario } from './../models/salario';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs/Rx';
 import { ConsultaFuncionario } from './../models/consulta-funcionario';
@@ -15,7 +16,8 @@ export class DetalheFuncionarioComponent implements OnInit {
   private inscricao: Subscription;
   private idFuncionario: number;
   private funcionario: ConsultaFuncionario;
-  // private salarios: Salario[];
+  private salarios: Salario[];
+  private salario: Salario;
   private botoes = new Array();
   private msgs: Message[];
   private submit: boolean;
@@ -24,15 +26,14 @@ export class DetalheFuncionarioComponent implements OnInit {
   // private detalhe: Salario[];
   // private mostraDetalhe: boolean;
   // private idFluxoDetalhado: number;
-  private dataInicioHistPagamento: string;
-  private dataFimHistPagamento: string;
   private mesReferenciaPagamento: string;
   private mesParaPagar: string
   
 
   constructor(private funcionarioService: FuncionarioService, private router: ActivatedRoute) {
+    this.salario = new Salario();
     this.funcionario = new ConsultaFuncionario();
-    // this.salarios = [];
+    this.salarios = [];
     this.msgs = [];
     // this.recebimentos = [];
     this.submit = false;
@@ -47,24 +48,21 @@ export class DetalheFuncionarioComponent implements OnInit {
   initDatas() {
     let dp = new DatePipe("yyyy-MM");
     let data = new Date(Date.now());
-    this.dataFimHistPagamento = dp.transform(Date.now(), "yyyy-MM");
 
     data.setMonth(data.getMonth()-1)
     this.mesReferenciaPagamento = dp.transform(data.getTime(), "yyyy-MM");
     this.mesParaPagar = this.mesReferenciaPagamento;
 
-    data.setMonth(data.getMonth()-5)
-    this.dataInicioHistPagamento = dp.transform(data.getTime(), "yyyy-MM");
 
   }
 
-  // getValorTotal() {
-  //   let total = 0;
-  //   for (let i = 0; i < this.salarios.length; i++) {
-  //     total += this.salarios[i].valor;
-  //   }
-  //   return total;
-  // }
+  getValorTotal() {
+    let total = 0;
+    for (let i = 0; i < this.salarios.length; i++) {
+      total += this.salarios[i].valor;
+    }
+    return total;
+  }
 
   ngOnInit() {
     this.botoes[0] = true;
@@ -73,26 +71,10 @@ export class DetalheFuncionarioComponent implements OnInit {
         this.idFuncionario = params['id'];
         this.loadFuncionario();
         this.loadPagamento();
-        this.pesquisarPagamentoHistorico();
 
       }
     );
   }
-
-  loadRecebimentos() {
-    // this.funcionarioService.getRecebimentos(this.idFuncionario, this.dataInicioHistPagamento, this.dataFimHistPagamento).subscribe(res ConsultaFuncionario> {
-    //   this.recebimentos = res;
-    //   this.loadDetalheRecebimento();
-    // })
-  }
-
-  // loadDetalheRecebimento() {
-  //   this.recebimentos.forEach(v => {
-  //     this.funcionarioService.getDetalheRecebimento(v.id).subscribe(res ConsultaFuncionario> {
-  //       this.detalhes[v.id] = res;
-  //     })
-  //   })
-  // }
 
 
   loadFuncionario() {
@@ -124,27 +106,39 @@ export class DetalheFuncionarioComponent implements OnInit {
   }
   
   loadPagamento() {
-    // this.submit = true;
-    // this.mesParaPagar = this.mesReferenciaPagamento;
-    // this.funcionarioService.getMensalidadesParaReceber(this.idFuncionario, this.mesReferenciaPagamento).subscribe(res ConsultaFuncionario> {
-    //   this.salarios = res;
-    //   this.submit = false;
-    // })
+    this.submit = true;
+    this.mesParaPagar = this.mesReferenciaPagamento;
+    this.funcionarioService.getSalario(this.idFuncionario, this.mesReferenciaPagamento).subscribe(res => {
+      this.salarios = res;
+      this.submit = false;
+    })
   }
 
-  
+  setSalario(sal: Salario)
+  {
+    this.salario.id = sal.id;
+  }
 
-  
-  pesquisarPagamentoHistorico() {
-    if (this.dataInicioHistPagamento == undefined || this.dataInicioHistPagamento.toString().length < 7) {
-      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Inicio" });
-    }
-    else if (this.dataFimHistPagamento == undefined || this.dataFimHistPagamento.toString().length < 7) {
-      this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Fim" });
-    }
-    else {
-      this.loadRecebimentos();
-    }
+  pagar(pagamento: Salario)
+  {
+    this.funcionarioService.pagar(this.idFuncionario, pagamento).subscribe(res =>{
+      this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
+      this.loadPagamento();
+      this.salario = new Salario();
+    },
+    error =>{
+       this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+    })
+  }
+
+  fazerAdiantamento(){
+    this.pagar(this.salario);
+  }
+
+  pagarMensalidade(salario: Salario){
+    console.log(salario);
+    this.pagar(salario);
+
   }
 
 }

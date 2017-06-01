@@ -35,7 +35,8 @@ export class CadastroAlunoComponent implements OnInit {
     constructor(private route: ActivatedRoute, 
                 private alunoService: AlunoService,
                 private bairroService: BairroService, 
-                private ftpService: FtpService) {
+                private ftpService: FtpService,
+                private roteador: Router) {
         this.aluno = new CadastroAluno();
         this.url = "";
         this.uploader = new FileUploader({ url: "" });
@@ -112,7 +113,9 @@ export class CadastroAlunoComponent implements OnInit {
         this.cadastrarAluno()
             .subscribe(response => {
                 this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-                this.reset()
+                this.reset();
+                console.log(response.json());
+                this.roteador.navigate(['/detalhe-aluno/',response.json().id]);
             },
             error => {
                 this.submit = false;

@@ -1,9 +1,9 @@
+import { ConsultaComissao } from './../models/consulta-comissao';
 import { ConsultaRecebimentos } from './../models/consulta-recebimentos';
 import { ConsultaTurma } from './../models/consulta-turmas';
 import { ConsultaProfessor } from './../models/consulta-professor';
 import { CadastroProfessor } from './../models/cadastro-professor';
 import { DatePipe } from '@angular/common';
-import { FluxoCaixa } from './../models/fluxo-caixa';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -28,7 +28,7 @@ export class ProfessorService {
 
   getMensalidadesParaReceber(idProfessor: number, mesReferencia:string) {
     return this.http.get(environment.url + "/professores/" + idProfessor + "/salario-pendente/" + mesReferencia)
-      .map((res: Response) => <Salario[]>res.json());
+      .map((res: Response) => <ConsultaComissao[]>res.json());
   }
 
   getProfessores() {
@@ -49,7 +49,7 @@ export class ProfessorService {
   }
 
   getDetalheRecebimento(idFluxo: number){
-    return this.http.get(environment.url + "professores/detalhe-pagamento/"+ idFluxo).map((response: Response) => <Salario[]>response.json());
+    return this.http.get(environment.url + "professores/detalhe-pagamento/"+ idFluxo).map((response: Response) => <ConsultaComissao[]>response.json());
   }
   cadastrarRecebimento(idProfessor: number,mes: string ) {
     return this.http.post(environment.url + "professores/" + idProfessor + "/salario-periodo/" + mes, null);

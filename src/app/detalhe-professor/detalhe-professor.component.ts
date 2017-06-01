@@ -1,15 +1,14 @@
+import { ConsultaComissao } from './../models/consulta-comissao';
 import { ConsultaRecebimentos } from './../models/consulta-recebimentos';
 import { ConsultaTurma } from './../models/consulta-turmas';
 import { ConsultaProfessor } from './../models/consulta-professor';
 import { DatePipe } from '@angular/common';
-import { FluxoCaixa } from './../models/fluxo-caixa';
 import { Response } from '@angular/http';
 import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { ProfessorService } from './../servicos/professor.service';
-import { Salario } from './../models/salario';
 import { Message } from 'primeng/primeng';
 
 
@@ -22,14 +21,14 @@ export class DetalheProfessorComponent implements OnInit {
   private inscricao: Subscription;
   private idProfessor: number;
   private professor: ConsultaProfessor;
-  private salarios: Salario[];
+  private salarios: ConsultaComissao[];
   private botoes = new Array();
   private msgs: Message[];
   private submit: boolean;
   private turmas: ConsultaTurma[];
   private recebimentos: ConsultaRecebimentos[];
   private detalhes: any[];
-  private detalhe: Salario[];
+  private detalhe: ConsultaComissao[];
   private mostraDetalhe: boolean;
   private idFluxoDetalhado: number;
   private dataInicioHistPagamento: string;
@@ -149,7 +148,7 @@ export class DetalheProfessorComponent implements OnInit {
     })
   }
 
-  pagarMensalidade(salario: Salario){
+  pagarMensalidade(salario: ConsultaComissao){
     this.submit = true;
     this.professorService.cadastrarRecebimentoParcial(this.idProfessor, salario.id).subscribe((res: Response) => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
@@ -177,7 +176,7 @@ export class DetalheProfessorComponent implements OnInit {
     return this.detalhe;
   }
 
-  ehDetalheExibido(recebio: FluxoCaixa) {
+  ehDetalheExibido(recebio: ConsultaRecebimentos) {
     return recebio.id == this.idFluxoDetalhado
   }
 

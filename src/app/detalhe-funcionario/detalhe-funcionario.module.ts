@@ -1,3 +1,4 @@
+import { ValorModule } from './../diretivas/valor/valor.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,7 @@ const rotas = [{ path: '', component: DetalheFuncionarioComponent }];
   imports: [
     CommonModule,
     FormsModule,
+    ValorModule,
     GrowlModule,
     RouterModule.forChild(rotas)
   ],
