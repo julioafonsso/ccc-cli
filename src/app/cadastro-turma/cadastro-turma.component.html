@@ -71,6 +71,7 @@
       <label class="col-md-4 control-label" for="select1">Professor</label>
       <div class="col-md-6">
         <select [(ngModel)]="turma.idProfessor1" name="professor1" class="form-control">
+          <option [ngValue]="" ></option>
       <option *ngFor="let professor of professores" [ngValue]="professor.id"  >{{professor.nome}}</option>
     </select>
       </div>
@@ -90,6 +91,7 @@
       <label class="col-md-4 control-label">Professora</label>
       <div class="col-md-6">
         <select [(ngModel)]="turma.idProfessor2" name="professor2" class="form-control">
+          <option [ngValue]="" ></option>
       <option *ngFor="let professora of professoras" [ngValue]="professora.id"  >{{professora.nome}}</option>
     </select>
       </div>
