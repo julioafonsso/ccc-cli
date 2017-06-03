@@ -12,7 +12,7 @@ export class ConsultaAlunos {
     public idBairro: number;
     public nomeBairro: string
     public cidade: string;
-    public dataNascimento: Date;
+    public dataNascimento: string;
     public profissao: string;
     public sexo: string;
     public idConheceEscola: number;

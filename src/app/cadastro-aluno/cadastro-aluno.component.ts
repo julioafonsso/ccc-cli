@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Bairro } from './../models/bairro';
 import { BairroService } from './../servicos/bairro.service';
 import { CadastroAluno } from './../models/cadastro-aluno';
@@ -74,9 +75,29 @@ export class CadastroAlunoComponent implements OnInit {
                         this.submit = true;
                         this.envieiFoto = true;
                         this.alunoService.getAluno(params['id']).subscribe(res => {
-                            // this.aluno = res;
+                           
+                                let dp = new DatePipe("pt");
+                                let data = new Date(res.dataNascimento);
+
+                                this.aluno.id = res.id;
+                                this.aluno.nome = res.nome;
+                                this.aluno.cpf = res.cpf;
+                                this.aluno.rg = res.rg;
+                                this.aluno.email = res.email;
+                                this.aluno.telefone = res.telefone;
+                                this.aluno.endereco = res.endereco;
+                                this.aluno.numero = res.numero;
+                                this.aluno.complemento = res.complemento;
+                                this.aluno.idBairro = res.idBairro;
+                                this.aluno.cidade = res.cidade;
+                                this.aluno.dataNascimento = dp.transform(data,"yyyy-MM-dd"); 
+                                this.aluno.profissao = res.profissao;
+                                this.aluno.sexo = res.sexo;
+                                this.aluno.idConheceEscola = res.idConheceEscola;
+                                this.aluno.idEstadoCivil = res.idEstadoCivil;
+                                this.aluno.foto = res.foto;
                             // this.listaEstadoCivil.forEach(v => {
-                            //     if (v.id == this.aluno.estadoCivil.id) {
+                            //     if (v.id == this.aluno.idEstadoCivil.id) {
                             //         this.aluno.estadoCivil = v;
                             //     }
                             // })
