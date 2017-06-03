@@ -7,10 +7,10 @@ export class CadastroProfessor {
     public email: string;
     public endereco: string;
     public telefone: string;
-    public dataAdmissao: Date;
+    public dataAdmissao: string;
     public observacao: string;
     public sexo: string;
-    public dataNascimento: Date;
+    public dataNascimento: string;
     public foto: string;
     
     constructor() { }

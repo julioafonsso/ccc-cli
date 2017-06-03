@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { CadastroProfessor } from './../models/cadastro-professor';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -50,7 +51,22 @@ export class CadastroProfessorComponent implements OnInit {
                     this.submit = true;
                     this.envieiFoto = true;
                     this.professorService.getProfessor(params['id']).subscribe(res => {
-                        this.professor = res;
+                            let dp = new DatePipe("pt");
+                            
+                            this.professor.id = res.id;
+                            this.professor.cpf = res.cpf;
+                            this.professor.nome = res.nome;
+                            this.professor.rg = res.rg;
+                            this.professor.email = res.email;
+                            this.professor.endereco = res.endereco;
+                            this.professor.telefone = res.telefone;
+                            this.professor.dataAdmissao =  dp.transform(new Date(res.dataAdmissao),"yyyy-MM-dd");
+                            this.professor.observacao = res.observacao;
+                            this.professor.sexo = res.sexo;
+                            this.professor.dataNascimento = dp.transform(new Date(res.dataNascimento),"yyyy-MM-dd");;
+                            this.professor.foto = res.foto;
+
+
                         this.submit = false;
                     })
                 }
