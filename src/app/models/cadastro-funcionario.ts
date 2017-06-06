@@ -12,8 +12,8 @@ export class CadastroFuncionario {
     public sexo: string;
     public dataNascimento: Date;
     public foto: string;
-    public salario: string;
-    public valeTransporte: string;
+    public salario: number;
+    public valeTransporte: number;
     
     constructor() { }
 }

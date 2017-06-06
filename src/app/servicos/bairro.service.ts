@@ -25,6 +25,6 @@ export class BairroService {
 
 
   alterar(bairro: Bairro){
-    return this.http.put(environment.url + "bairros" , bairro);
+    return this.http.put(environment.url + "bairros/" + bairro.id , bairro);
   }
 }

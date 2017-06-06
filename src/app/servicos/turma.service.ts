@@ -18,17 +18,6 @@ import { TipoDesconto } from './../models/tipo-desconto';
 export class TurmaService {
 
     constructor(private http: HttpCustormerService) { }
-
-
-    // deletarDesconto(matricula: Matricula) {
-    //     return this.http.delete(environment.url + "turmas/matricula/" + matricula.id + "/desconto");
-    // }
-
-    // alterarDesconto(matricula: Matricula) {
-    //     return this.http.put(environment.url + "turmas/matricula/" + matricula.id + "/desconto/" + matricula.desconto.id, null);
-    // }
-
-
     // finalizar(turma: Turma) {
     //     return this.http.delete(environment.url + "turmas/" + turma.id);
     // }
@@ -37,19 +26,13 @@ export class TurmaService {
     //     return this.http.delete(environment.url + "turmas/matricula/" + matricula.id);
     // }
 
-    // getTurma(id: number) {
-    //     return this.http.get(environment.url + "turmas/" + id).map((response: Response) => <Turma>response.json());
-    // }
+    getTurma(id: number) {
+        return this.http.get(environment.url + "turmas/" + id).map((response: Response) => <ConsultaTurma>response.json());
+    }
 
-    // getMatriculas(id: number) {
-    //     return this.http.get(environment.url + "turmas/" + id + "/alunos").map((response: Response) => <Matricula[]>response.json());
-    // }
-
+    
 
     matricularAluno(cadastro: CadastroMatricula) {
-
-        // cadastro.valor = cadastro.valor.toString().replace(/[^0-9]/gi, '');
-
         return this.http.post(environment.url + "matriculas", cadastro);
     }
 

@@ -19,7 +19,7 @@ export class ProfessorService {
   constructor(private http: HttpCustormerService) { }
 
   atualizarProfessor(professor: CadastroProfessor) {
-    return this.http.put(environment.url + "/professores", professor);
+    return this.http.put(environment.url + "/professores/" + professor.id , professor);
   }
 
   cadastrarProfessor(professor: CadastroProfessor) {

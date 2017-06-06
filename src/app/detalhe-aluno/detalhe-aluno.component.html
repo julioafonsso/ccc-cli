@@ -173,6 +173,7 @@
           <table class="table table-bordered table-striped table-hover">
             <thead>
               <tr>
+               <th>Tipo Pagamento</th> 
                 <th>Codigo</th>
                 <th>Modalidade</th>
                 <th>Mes Referencia</th>
@@ -183,12 +184,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let debito of histPagamento">
+                 <td>{{debito.tipoPagamento}}</td>
                  <td>{{debito.codigoTurma}}</td>
                  <td>{{debito.nomeModalidade}}</td>
                  <td>{{debito.mesReferencia}}</td>
                  <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
                  <td>{{debito.dataPagamento  | date: 'dd/MM/yyyy'}}</td>                 
-                 <td>{{debito.valorMensalidade | currency:'BRL':true}}</td>
+                 <td>{{debito.valorPago | currency:'BRL':true}}</td>
               </tr>
             </tbody>
           </table>

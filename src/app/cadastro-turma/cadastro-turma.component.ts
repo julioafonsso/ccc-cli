@@ -64,41 +64,17 @@ export class CadastroTurmaComponent implements OnInit {
         (params: any) => {
           if (params['id'] != undefined) {
             this.submit = true;
-            // this.turmaService.getTurma(params['id']).subscribe(res => {
-            //   this.turma = res;
-            //   this.setCamposCombo();
-            //   this.submit = false;
-            // })
+            this.turmaService.getTurma(params['id']).subscribe(res => {
+              console.log(res)
+              this.turma = res;
+              this.submit = false;
+            })
           }
         }
       );
     }
 
 
-  }
-
-  setCamposCombo() {
-    // this.modalidades.forEach(v => {
-    //   if (this.turma.modalidade.id == v.id)
-    //     this.turma.modalidade = v;
-    // })
-    // this.nives.forEach(v => {
-    //   if (this.turma.nivel.id == v.id)
-    //     this.turma.nivel = v;
-    // })
-    // this.salas.forEach(v => {
-    //   if (this.turma.sala.id == v.id)
-    //     this.turma.sala = v;
-    // })
-
-    // this.professores.forEach(v => {
-    //   if (this.turma.professor1.id == v.id)
-    //     this.turma.professor1 = v;
-    // })
-    // this.professoras.forEach(v => {
-    //   if (this.turma.professor2.id == v.id)
-    //     this.turma.professor2 = v;
-    // })
   }
 
   loadCamposBasicos() {

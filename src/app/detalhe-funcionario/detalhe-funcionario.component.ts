@@ -78,7 +78,7 @@ export class DetalheFuncionarioComponent implements OnInit {
 
 
   loadFuncionario() {
-    this.funcionarioService.getFucionario(this.idFuncionario).subscribe(res => {
+    this.funcionarioService.getFuncionario(this.idFuncionario).subscribe(res => {
       this.funcionario = res;;
     })
   }

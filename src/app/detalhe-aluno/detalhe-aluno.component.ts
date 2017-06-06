@@ -67,18 +67,24 @@ export class DetalheAlunoComponent implements OnInit {
     this.aula = new CadastroAulaParticular();
   }
 
+
+  reset() {
+    this.matricula = new CadastroMatricula();
+    this.loadAluno();
+    this.loadMatriculas();
+    this.loadTurmasColetivas();
+    this.loadDebitos();
+    this.pesquisarHistPagamento();
+    this.pesquisarAulasParticulares();
+    this.pesquisarWorkShops();
+  }
+
   ngOnInit() {
     this.botoes[0] = true;
     this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.idAluno = params['id'];
-        this.loadAluno();
-        this.loadMatriculas();
-        this.loadTurmasColetivas();
-        this.loadDebitos();
-        this.pesquisarHistPagamento();
-        this.pesquisarAulasParticulares();
-        this.pesquisarWorkShops();
+        this.reset();
       }
     );
 
@@ -105,9 +111,8 @@ export class DetalheAlunoComponent implements OnInit {
     this.turmaService.matricularAluno(this.matricula)
       .subscribe(res => {
         this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
-        this.matricula = new CadastroMatricula();
-        this.loadMatriculas();
-        this.loadDebitos();
+        
+        this.reset();
       }, error => {
         this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
         this.submit = false;
@@ -119,7 +124,6 @@ export class DetalheAlunoComponent implements OnInit {
     this.turmaService.getModalidades().subscribe(res => {
       this.modalidades = res;
     })
-
 
     this.professorService.getProfessores().subscribe(res => {
       this.professores = res;
@@ -145,6 +149,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.submit = true;
     this.alunoService.cadastrarAulaParticular(this.idAluno, this.aula).subscribe(response => {
       this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
+      this.reset()
       this.loadAulasParticulares();
       this.resetCadastroAulaParticular();
       this.submit = false;
@@ -266,7 +271,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.matricula.idTurma = idTurma;
     this.turmaService.matricularAluno(this.matricula).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
-      this.matricula = new CadastroMatricula();
+      this.reset();
     }, error => {
       this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
       this.submit = false;
@@ -277,8 +282,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.submit = true;
     this.alunoService.pagarMensalidade(idMensalidade, valor, this.idAluno).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Com Sucesso !' });
-      this.loadDebitos();
-      this.loadPagamentos()
+      this.reset();
     }, error => {
       this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
       this.submit = false;

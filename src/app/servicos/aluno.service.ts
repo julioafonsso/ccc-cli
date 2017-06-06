@@ -32,7 +32,7 @@ export class AlunoService {
   }
 
   alterar(aluno: CadastroAluno) {
-    return this.http.put(environment.url + "alunos", aluno);
+    return this.http.put(environment.url + "alunos/" + aluno.id, aluno);
   }
 
   getAlunos() {

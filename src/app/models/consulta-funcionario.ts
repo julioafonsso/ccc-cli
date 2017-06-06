@@ -13,7 +13,7 @@ export class ConsultaFuncionario {
     public dataNascimento: Date;
     public foto: string;
     public salario: number;
-    public valeTransporte;
+    public valeTransporte: number;
 
 
 }

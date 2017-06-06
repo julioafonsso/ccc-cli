@@ -29,7 +29,10 @@ export class CadastroWorkshopComponent implements OnInit {
   constructor(private route: ActivatedRoute, private workService: WorkshopService,
     private professorService: ProfessorService) {
       this.turma = new CadastroWorkShop();
-      this.msgs = []
+      this.msgs = [];
+      this.professoras = [];
+      this.professores = [];
+      this.modalidades = [];
      }
 
   ngOnInit() {
@@ -38,7 +41,27 @@ export class CadastroWorkshopComponent implements OnInit {
   }
 
   loadWork() {
-
+     if (
+      this.modalidades.length == 0 ||
+      this.professoras.length == 0 ||
+      this.professores.length == 0 
+    ) {
+      this.load = setInterval(() => { this.loadWork() }, 500);
+    }
+    else {
+      clearInterval(this.load);
+      this.route.params.subscribe(
+        (params: any) => {
+          if (params['id'] != undefined) {
+            this.submit = true;
+            this.workService.getWokrShop(params['id']).subscribe(res => {
+              this.turma = res;
+              this.submit = false;
+            })
+          }
+        }
+      );
+    }
   }
 
   loadCamposBasicos() {

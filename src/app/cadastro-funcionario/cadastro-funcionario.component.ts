@@ -14,7 +14,7 @@ import { CadastroFuncionario } from './../models/cadastro-funcionario';
   styleUrls: ['./cadastro-funcionario.component.css']
 })
 export class CadastroFuncionarioComponent implements OnInit {
-  private funcionario: CadastroFuncionario;
+    private funcionario: CadastroFuncionario;
     private msgs: Message[];
     public uploader: FileUploader;
     private url: string;
@@ -41,18 +41,18 @@ export class CadastroFuncionarioComponent implements OnInit {
     }
 
     loadFuncionario() {
-        // this.route.params.subscribe(
-        //     (params: any) => {
-        //         if (params['id'] != undefined) {
-        //             this.submit = true;
-        //             this.envieiFoto = true;
-        //             this.funcionarioService.getFuncionario(params['id']).subscribe(res => {
-        //                 this.funcionario = res;
-        //                 this.submit = false;
-        //             })
-        //         }
-        //     }
-        // );
+        this.route.params.subscribe(
+            (params: any) => {
+                if (params['id'] != undefined) {
+                    this.submit = true;
+                    this.envieiFoto = true;
+                    this.funcionarioService.getFuncionario(params['id']).subscribe(res => {
+                        this.funcionario = res;
+                        this.submit = false;
+                    })
+                }
+            }
+        );
     }
 
     cadastrar() {

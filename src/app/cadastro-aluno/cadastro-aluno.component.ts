@@ -46,6 +46,7 @@ export class CadastroAlunoComponent implements OnInit {
         this.submit = false;
         this.listaEstadoCivil = [];
         this.listaComoConheceu = []
+        this.listaBairros = []
     }
 
     ngOnInit() {
@@ -59,12 +60,13 @@ export class CadastroAlunoComponent implements OnInit {
 
         this.bairroService.getBairros().subscribe(res =>{
             this.listaBairros = res;
+            console.log(this.listaBairros)
         })
         this.loadAluno()
     }
 
     loadAluno() {
-        if (this.listaEstadoCivil.length == 0 || this.listaComoConheceu.length == 0) {
+        if (this.listaEstadoCivil.length == 0 || this.listaComoConheceu.length == 0 || this.listaBairros.length == 0) {
             this.load = setInterval(() => { this.loadAluno() }, 500);
         }
         else {
@@ -75,38 +77,9 @@ export class CadastroAlunoComponent implements OnInit {
                         this.submit = true;
                         this.envieiFoto = true;
                         this.alunoService.getAluno(params['id']).subscribe(res => {
-                           
-                                let dp = new DatePipe("pt");
-                                let data = new Date(res.dataNascimento);
-
-                                this.aluno.id = res.id;
-                                this.aluno.nome = res.nome;
-                                this.aluno.cpf = res.cpf;
-                                this.aluno.rg = res.rg;
-                                this.aluno.email = res.email;
-                                this.aluno.telefone = res.telefone;
-                                this.aluno.endereco = res.endereco;
-                                this.aluno.numero = res.numero;
-                                this.aluno.complemento = res.complemento;
-                                this.aluno.idBairro = res.idBairro;
-                                this.aluno.cidade = res.cidade;
-                                this.aluno.dataNascimento = dp.transform(data,"yyyy-MM-dd"); 
-                                this.aluno.profissao = res.profissao;
-                                this.aluno.sexo = res.sexo;
-                                this.aluno.idConheceEscola = res.idConheceEscola;
-                                this.aluno.idEstadoCivil = res.idEstadoCivil;
-                                this.aluno.foto = res.foto;
-                            // this.listaEstadoCivil.forEach(v => {
-                            //     if (v.id == this.aluno.idEstadoCivil.id) {
-                            //         this.aluno.estadoCivil = v;
-                            //     }
-                            // })
-                            // this.listaComoConheceu.forEach(v => {
-                            //     if (v.id == this.aluno.conheceEscola.id) {
-                            //         this.aluno.conheceEscola = v;
-                            //     }
-                            // })
+                            this.aluno = res;
                             this.submit = false;
+
                         })
                     }
                 }

@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { CadastroProfessor } from './../models/cadastro-professor';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { FtpService } from './../servicos/ftp.service';
@@ -25,7 +25,7 @@ export class CadastroProfessorComponent implements OnInit {
     private envieiFoto: boolean;
     private submit: boolean;
 
-    constructor(private route: ActivatedRoute, private professorService: ProfessorService, private ftpService: FtpService) {
+    constructor(private route: ActivatedRoute, private professorService: ProfessorService, private ftpService: FtpService, private roteador: Router) {
         this.submit = false;
         this.professor = new CadastroProfessor();
         this.url = "";
@@ -88,7 +88,7 @@ export class CadastroProfessorComponent implements OnInit {
         this.cadastrar()
             .subscribe(res => {
                 this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-                this.reset()
+                this.roteador.navigate(['/detalhe-professor/',res.json().id]);
             },
             error => {
                 this.submit = false;

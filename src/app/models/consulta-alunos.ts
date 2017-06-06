@@ -12,7 +12,7 @@ export class ConsultaAlunos {
     public idBairro: number;
     public nomeBairro: string
     public cidade: string;
-    public dataNascimento: string;
+    public dataNascimento: Date;
     public profissao: string;
     public sexo: string;
     public idConheceEscola: number;
@@ -20,9 +20,7 @@ export class ConsultaAlunos {
     public idEstadoCivil :number ;
     public nomeEstadoCivil :string ;
     public foto: string;
-
-    constructor() {
-    }
+    public observacao: string;
 
     
 }

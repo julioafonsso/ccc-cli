@@ -23,12 +23,18 @@ export class WorkshopService {
   }
 
   alterarWorkShop(cadastro: CadastroWorkShop) {
-    return this.http.post(environment.url + "workshop/" + cadastro.id, cadastro);
+    return this.http.put(environment.url + "workshop/" + cadastro.id, cadastro);
   }
 
   getWorkShops() {
     return this.http.get(environment.url + 'workshop/')
       .map((response: Response) => <ConsultaWorkShop[]>response.json());
+  }
+
+  getWokrShop(id: number)
+  {
+    return this.http.get(environment.url + 'workshop/'+ id)
+      .map((response: Response) => <ConsultaWorkShop>response.json());
   }
 
 }

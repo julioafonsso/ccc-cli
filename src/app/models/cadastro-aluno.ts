@@ -11,12 +11,13 @@ export class CadastroAluno {
     public complemento: string;
     public idBairro: number;
     public cidade: string;
-    public dataNascimento: string;
+    public dataNascimento: Date;
     public profissao: string;
     public sexo: string;
     public idConheceEscola: number;
     public idEstadoCivil :number ;
     public foto: string;
+    public observacao: string;
 
     constructor() {
     }

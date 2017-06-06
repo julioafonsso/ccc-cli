@@ -26,7 +26,7 @@ export class FuncionarioService {
       .map((response: Response) => <ConsultaFuncionario[]>response.json())
   }
 
-  getFucionario(id: number) {
+  getFuncionario(id: number) {
     return this.http.get(environment.url + "/funcionarios/" + id)
       .map((response: Response) => <ConsultaFuncionario>response.json())
   }
