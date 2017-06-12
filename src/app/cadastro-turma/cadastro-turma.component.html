@@ -9,7 +9,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Modalidade da Turma</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.idModalidade" name="modalidade" class="form-control">
+        <select [(ngModel)]="turma.idModalidade" name="modalidade" class="form-control" required="">
       <option *ngFor="let item of modalidades" [ngValue]="item.id"  >{{item.nome}}</option>
         </select>
       </div>
@@ -19,7 +19,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Nivel da Turma</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.idNivel" name="nivel" class="form-control">
+        <select [(ngModel)]="turma.idNivel" name="nivel" class="form-control" required="">
       <option *ngFor="let item of nives" [ngValue]="item.id"  >{{item.nome}}</option>
         </select>
       </div>
@@ -129,7 +129,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="selectbasic">Sala da Aula</label>
       <div class="col-md-6">
-        <select [(ngModel)]="turma.idSala" name="sala" class="form-control">
+        <select [(ngModel)]="turma.idSala" name="sala" class="form-control" required="">
       <option *ngFor="let sala of salas" [ngValue]="sala.id"  >{{sala.nome}}</option>
     </select>
       </div>

@@ -51,9 +51,53 @@
         <td>{{turma.nomeProfessor2}}</td>
         <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
         <td>{{turma.qtdVagas}}</td>
-        <td><button class="btn btn-primary" [routerLink]="['/cadastro-workshop', turma.id]" >Manutenção Work</button></td>
+        <td><button class="btn btn-primary" [routerLink]="['/cadastro-workshop', turma.id]" >Editar</button>
+        <button class="btn btn-primary" (click)="getAlunos(turma.id)" data-toggle="modal" data-target="#modalAluno"  >Alunos</button>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
+</div>
+
+
+
+
+<div class="modal fade bs-example-modal-lg" id="modalAluno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" style="width:90%;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="myModalLabel">WorkShops</h4>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped ">
+            <thead>
+                <tr>
+                    <th>Nome Aluno</th>
+                    <th>CPf</th>
+                    <th>Email</th>
+                    <th>Nome Desconto</th>
+                    <th>Valor Desconto</th>
+                    <th>Data Matricula</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let aluno of alunos" >
+                    <td>{{aluno.nome}}</td>
+                    <td>{{aluno.cpf}}</td>
+                    <td>{{aluno.email}} </td>
+                    <td>{{aluno.nomeDesconto}}</td>
+                    <td>{{aluno.valorDesconto}}</td>
+                    <td>{{aluno.dataMatricula | date: 'dd/MM/yyyy'}}</td>
+
+            </tbody>
+        </table>
+    </div>
+      
+      </div>
+      
+    </div>
+  </div>
 </div>

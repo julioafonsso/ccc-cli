@@ -1,4 +1,4 @@
-  <p-growl [value]="msgs" life=6000></p-growl>
+<p-growl [value]="msgs" life=6000></p-growl>
 <div>
   <div class="card">
     <div class="card__header">
@@ -78,7 +78,14 @@
                 <th>Codigo</th>
                 <th>Modalidade</th>
                 <th>Nivel</th>
-                <th>Sala</th>
+                <th>Data Inicio</th>
+                <th>Data Fim</th>
+                <th>Qtd Cavalheiros</th>
+                <th>Qtd Damas</th>
+                <th>Professor</th>
+                <th>Professor</th>
+                <th>Mensalidade</th>
+                <th>Nº Vagas</th>
               </tr>
             </thead>
             <tbody>
@@ -86,7 +93,14 @@
                 <td>{{turma.codigo}}</td>
                 <td>{{turma.nomeModalidade}}</td>
                 <td>{{turma.nomeNivel}}</td>
-                <td>{{turma.nomeSala}}</td>
+                <td>{{turma.dataInicio | date: 'dd/MM/yyyy'}}</td>
+                <td>{{turma.dataTermino | date: 'dd/MM/yyyy'}}</td>
+                <td>{{turma.qtdAlunos}}</td>
+                <td>{{turma.qtdAlunas}}</td>
+                <td>{{turma.nomeProfessor1}}</td>
+                <td>{{turma.nomeProfessor2}}</td>
+                <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
+                <td>{{turma.qtdVagas}}</td>
               </tr>
             </tbody>
           </table>

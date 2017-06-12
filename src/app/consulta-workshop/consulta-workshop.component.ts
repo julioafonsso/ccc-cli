@@ -1,3 +1,4 @@
+import { ConsultaAlunosMatriculados } from './../models/consulta-alunos-matriculados';
 import { WorkshopService } from './../servicos/workshop.service';
 import { ConsultaWorkShop } from './../models/consulta-workshop';
 import { Component, OnInit } from '@angular/core';
@@ -10,8 +11,11 @@ import { Component, OnInit } from '@angular/core';
 export class ConsultaWorkshopComponent implements OnInit {
 
 private turmas: ConsultaWorkShop[];
+private alunos: ConsultaAlunosMatriculados[];
 
-  constructor(private workService: WorkshopService) { }
+  constructor(private workService: WorkshopService) { 
+    this.alunos = [];
+  }
 
   ngOnInit() {
     this.workService.getWorkShops().subscribe(res => {
@@ -21,6 +25,13 @@ private turmas: ConsultaWorkShop[];
 
   getWorkShops(){
     return this.turmas;
+  }
+
+  getAlunos(id: number)
+  {
+    this.workService.getAlunos(id).subscribe(res => {
+      this.alunos = res;
+    })
   }
 
 }

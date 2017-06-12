@@ -1,3 +1,4 @@
+import { ConsultaAlunosMatriculados } from './../models/consulta-alunos-matriculados';
 import { ConsultaWorkShop } from './../models/consulta-workshop';
 import { CadastroWorkShop } from './../models/cadastro-workshop';
 
@@ -12,6 +13,11 @@ import { ModalidadeTurma } from './../models/modalidade-turma';
 export class WorkshopService {
 
   constructor(private http: HttpCustormerService) { }
+
+  getAlunos(id: number) {
+    return this.http.get(environment.url + "workshop/" + id + "/alunos").map((response: Response) => <ConsultaAlunosMatriculados[]>response.json());
+  }
+
 
   getModalidades() {
     return this.http.get(environment.url + 'modalidades/')
@@ -31,9 +37,8 @@ export class WorkshopService {
       .map((response: Response) => <ConsultaWorkShop[]>response.json());
   }
 
-  getWokrShop(id: number)
-  {
-    return this.http.get(environment.url + 'workshop/'+ id)
+  getWokrShop(id: number) {
+    return this.http.get(environment.url + 'workshop/' + id)
       .map((response: Response) => <ConsultaWorkShop>response.json());
   }
 

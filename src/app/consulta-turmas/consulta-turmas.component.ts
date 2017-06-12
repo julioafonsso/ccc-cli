@@ -1,3 +1,4 @@
+import { ConsultaAlunosMatriculados } from './../models/consulta-alunos-matriculados';
 import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,7 +16,9 @@ import { ProfessorService } from './../servicos/professor.service';
 })
 export class ConsultaTurmasComponent implements OnInit {
 
-  constructor(private turmaService: TurmaService ) { }
+  constructor(private turmaService: TurmaService ) { 
+    this.alunos = [];
+  }
 
   private niveis = new Array<NivelTurma>();
   private modalidades = new Array<ModalidadeTurma>()
@@ -23,6 +26,8 @@ export class ConsultaTurmasComponent implements OnInit {
 
   private nivelSelecionado: NivelTurma;
   private modalidadeSelecionado: ModalidadeTurma;
+
+  private alunos: ConsultaAlunosMatriculados[];
 
   ngOnInit() {
     this.turmaService.getTurmas().subscribe(res => {
@@ -64,5 +69,12 @@ export class ConsultaTurmasComponent implements OnInit {
     }
 
     return valores;
+  }
+
+  getAlunos(id: number)
+  {
+    this.turmaService.getAlunos(id).subscribe(res => {
+      this.alunos = res;
+    })
   }
 }

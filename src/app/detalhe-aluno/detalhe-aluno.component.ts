@@ -114,7 +114,9 @@ export class DetalheAlunoComponent implements OnInit {
         
         this.reset();
       }, error => {
-        this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+        console.log("ERRO")
+        console.log(error);
+        this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
         this.submit = false;
       });
   }
@@ -144,9 +146,10 @@ export class DetalheAlunoComponent implements OnInit {
     })
   }
 
+
+
+
   cadastrarAulaParticular() {
-    console.log(this.aula)
-    this.submit = true;
     this.alunoService.cadastrarAulaParticular(this.idAluno, this.aula).subscribe(response => {
       this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
       this.reset()
@@ -273,7 +276,7 @@ export class DetalheAlunoComponent implements OnInit {
       this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
       this.reset();
     }, error => {
-      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+      this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
       this.submit = false;
     });
   }

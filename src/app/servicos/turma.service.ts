@@ -1,3 +1,4 @@
+import { ConsultaAlunosMatriculados } from './../models/consulta-alunos-matriculados';
 import { CadastroMatricula } from './../models/cadastro-matricula';
 import { ConsultaTurma } from './../models/consulta-turmas';
 import { CadastroTurma } from './../models/cadastro-turma';
@@ -25,6 +26,11 @@ export class TurmaService {
     // excluirAlunoTurma(matricula: Matricula) {
     //     return this.http.delete(environment.url + "turmas/matricula/" + matricula.id);
     // }
+
+    getAlunos(id: number)
+    {
+         return this.http.get(environment.url + "turmas/" + id + "/alunos").map((response: Response) => <ConsultaAlunosMatriculados[]>response.json()); 
+    }
 
     getTurma(id: number) {
         return this.http.get(environment.url + "turmas/" + id).map((response: Response) => <ConsultaTurma>response.json());

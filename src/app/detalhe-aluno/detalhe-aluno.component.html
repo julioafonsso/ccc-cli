@@ -71,7 +71,7 @@
     <div class="tab-pane active" id="tabBios">
       <div class="card__info">
         <div class="card__info__detalhes"><label>Email: </label>{{aluno.email}}</div>
-          <div class="card__info__detalhes"><label>Telefone: </label> {{aluno.telefone}}</div>
+        <div class="card__info__detalhes"><label>Telefone: </label> {{aluno.telefone}}</div>
         <div class="card__info__detalhes"><label>CPF: </label> {{aluno.cpf}}</div>
         <div class="card__info__detalhes"><label>RG: </label> {{aluno.rg}}</div>
         <div class="card__info__detalhes"><label>Data Nascimento: </label> {{aluno.dataNascimento | date: 'dd/MM/yyyy'}}</div>
@@ -99,9 +99,15 @@
                   <th>Codigo</th>
                   <th>Modalidade</th>
                   <th>Nivel</th>
-                  <th>Sala</th>
-                  <th>Dia Vencimento</th>
-                  <th>Desconto</th>
+                  <th>Data Inicio</th>
+                  <th>Data Fim</th>
+                  <th>Qtd Cavalheiros</th>
+                  <th>Qtd Damas</th>
+                  <th>Professor</th>
+                  <th>Professor</th>
+                  <th>Mensalidade</th>
+                  <th>Nº Vagas</th>
+                  <th>Data Matricula</th>
                 </tr>
               </thead>
               <tbody>
@@ -109,9 +115,15 @@
                   <td>{{matricula.codigo}}</td>
                   <td>{{matricula.nomeModalidade}}</td>
                   <td>{{matricula.nomeNivel}}</td>
-                  <td>{{matricula.nomeSala}}</td>
-                  <td>{{matricula.diaVencimento}}</td>
-                  <td>{{matricula.valorDesconto}} %</td>
+                  <td>{{matricula.dataInicio | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{matricula.dataFim | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{matricula.qtdAlunos}}</td>
+                  <td>{{matricula.qtdAlunas}}</td>
+                  <td>{{matricula.nomeProfessor1}}</td>
+                  <td>{{matricula.nomeProfessor2}}</td>
+                  <td>{{matricula.valorMensalidade | currency:'BRL':true}}</td>
+                  <td>{{matricula.qtdVagas}}</td>
+                  <td>{{matricula.dataMatricula | date: 'dd/MM/yyyy'}}</td>
                 </tr>
               </tbody>
             </table>
@@ -173,7 +185,7 @@
           <table class="table table-bordered table-striped table-hover">
             <thead>
               <tr>
-               <th>Tipo Pagamento</th> 
+                <th>Tipo Pagamento</th>
                 <th>Codigo</th>
                 <th>Modalidade</th>
                 <th>Mes Referencia</th>
@@ -184,13 +196,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let debito of histPagamento">
-                 <td>{{debito.tipoPagamento}}</td>
-                 <td>{{debito.codigoTurma}}</td>
-                 <td>{{debito.nomeModalidade}}</td>
-                 <td>{{debito.mesReferencia}}</td>
-                 <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
-                 <td>{{debito.dataPagamento  | date: 'dd/MM/yyyy'}}</td>                 
-                 <td>{{debito.valorPago | currency:'BRL':true}}</td>
+                <td>{{debito.tipoPagamento}}</td>
+                <td>{{debito.codigoTurma}}</td>
+                <td>{{debito.nomeModalidade}}</td>
+                <td>{{debito.mesReferencia}}</td>
+                <td>{{debito.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+                <td>{{debito.dataPagamento | date: 'dd/MM/yyyy'}}</td>
+                <td>{{debito.valorPago | currency:'BRL':true}}</td>
               </tr>
             </tbody>
           </table>
@@ -238,7 +250,7 @@
     </div>
 
 
-<div class="tab-pane " id="tabWorkShop">
+    <div class="tab-pane " id="tabWorkShop">
       <div class="row">
         <div class="col-md-3">
           De: <input [(ngModel)]="dataInicio" id="de" type="month">
@@ -257,23 +269,23 @@
         <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover">
             <thead>
-                <tr>
-                  <th>Codigo</th>
-                  <th>Modalidade</th>
-                  <th>Data Matricula</th>
-                  <th>Data Inicio</th>
-                  <th>Data Fim</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let matricula of matriculasWorkShops">
-                  <td>{{matricula.codigo}}</td>
-                  <td>{{matricula.nomeModalidade}}</td>
-                  <td>{{matricula.dataMatricula | date: 'dd/MM/yyyy'}}</td>
-                  <td>{{matricula.dataInicio | date: 'dd/MM/yyyy'}}</td>
-                  <td>{{matricula.dataFim | date: 'dd/MM/yyyy'}}</td>
-                </tr>
-              </tbody>
+              <tr>
+                <th>Codigo</th>
+                <th>Modalidade</th>
+                <th>Data Matricula</th>
+                <th>Data Inicio</th>
+                <th>Data Fim</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let matricula of matriculasWorkShops">
+                <td>{{matricula.codigo}}</td>
+                <td>{{matricula.nomeModalidade}}</td>
+                <td>{{matricula.dataMatricula | date: 'dd/MM/yyyy'}}</td>
+                <td>{{matricula.dataInicio | date: 'dd/MM/yyyy'}}</td>
+                <td>{{matricula.dataFim | date: 'dd/MM/yyyy'}}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
     </div>
@@ -297,7 +309,7 @@
       </div>
       <div class="modal-body">
 
-        <form class="form-horizontal" (ngSubmit)="cadastrarAulaParticular()">
+        <form class="form-horizontal">
           <fieldset>
             <div class="form-group">
               <label class="col-md-4 control-label" for="selectbasic">Modalidade da Turma</label>
@@ -320,8 +332,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="textinput">Percentual do Professor</label>
               <div class="col-md-6">
-                <input appNumeroInteiro [(ngModel)]="aula.percentualProfessor1" name="percentual1" type="number" min="0" max="100" placeholder="20%" required
-                  class="form-control input-md">
+                <input appNumeroInteiro [(ngModel)]="aula.percentualProfessor1" name="percentual1" type="number" min="0" max="100" placeholder="20%"
+                  required class="form-control input-md">
 
               </div>
             </div>
@@ -345,17 +357,15 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="button1id"></label>
               <div class="col-md-8">
-                <button id="button1id" name="button1id" class="btn btn-success" [disabled]="submit" >Cadastrar</button>
-                <button type="button" id="button2id" data-dismiss="modal" name="button2id" class="btn btn-danger">Cancelar</button>
+                <button data-dismiss="modal" id="button1id" name="button1id" class="btn btn-success" [disabled]="submit" type="button" (click)="cadastrarAulaParticular()">Cadastrar</button>
+                <button data-dismiss="modal" id="button2id" name="button2id" class="btn btn-danger" [disabled]="submit">Cancelar</button>
               </div>
             </div>
-
-
           </fieldset>
         </form>
 
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -369,43 +379,43 @@
       </div>
       <div class="modal-body">
         <div class="table-responsive">
-        <table class="table table-bordered table-striped ">
+          <table class="table table-bordered table-striped ">
             <thead>
-                <tr>
-                    <th>Codigo</th>
-                    <th>Modalidade</th>
-                    <th>Nivel</th>
-                    <th>Horario</th>
-                    <th>Qtd Cavalheiros</th>
-                    <th>Qtd Damas</th>
-                    <th>Professor</th>
-                    <th>Professor</th>
-                    <th>Mensalidade</th>
-                    <th>Nº Vagas</th>
-                    
-                    <th>Ação</th>
-                </tr>
+              <tr>
+                <th>Codigo</th>
+                <th>Modalidade</th>
+                <th>Nivel</th>
+                <th>Horario</th>
+                <th>Qtd Cavalheiros</th>
+                <th>Qtd Damas</th>
+                <th>Professor</th>
+                <th>Professor</th>
+                <th>Mensalidade</th>
+                <th>Nº Vagas</th>
+
+                <th>Ação</th>
+              </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let turma of turmas" >
-                    <td>{{turma.codigo}}</td>
-                    <td>{{turma.nomeModalidade}}</td>
-                    <td>{{turma.nomeNivel}}</td>
-                    <td>{{turma.horarioInicial}} - {{turma.horarioFinal}}</td>
-                    <td>{{turma.qtdAlunos}}</td>
-                    <td>{{turma.qtdAlunas}}</td>
-                    <td>{{turma.nomeProfessor1}}</td>
-                    <td>{{turma.nomeProfessor2}}</td>
-                    <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
-                    <td>{{turma.qtdVagas}}</td>
-                    <td><button data-dismiss="modal" class="btn btn-default" data-toggle="modal" data-target="#modalMatricular" (click)="matricula.idTurma= turma.id">Matricular</button>
-                </tr>
+              <tr *ngFor="let turma of turmas">
+                <td>{{turma.codigo}}</td>
+                <td>{{turma.nomeModalidade}}</td>
+                <td>{{turma.nomeNivel}}</td>
+                <td>{{turma.horarioInicial}} - {{turma.horarioFinal}}</td>
+                <td>{{turma.qtdAlunos}}</td>
+                <td>{{turma.qtdAlunas}}</td>
+                <td>{{turma.nomeProfessor1}}</td>
+                <td>{{turma.nomeProfessor2}}</td>
+                <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
+                <td>{{turma.qtdVagas}}</td>
+                <td><button data-dismiss="modal" class="btn btn-default" data-toggle="modal" data-target="#modalMatricular" (click)="matricula.idTurma= turma.id">Matricular</button>
+              </tr>
             </tbody>
-        </table>
-    </div>
-      
+          </table>
+        </div>
+
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -421,20 +431,22 @@
       </div>
       <div class="modal-body">
 
-        <form class="form-horizontal" >
+        <form class="form-horizontal">
           <fieldset>
-            
-          <div class="form-group">
+
+            <div class="form-group">
               <label class="col-md-4 control-label" for="textinput">Valor Matricula</label>
               <div class="col-md-6">
-                <input appValor [(ngModel)]="matricula.valor" name="valor" type="text" placeholder="100,00" class="form-control input-md" required="">
+                <input appValor [(ngModel)]="matricula.valor" name="valor" type="text" placeholder="100,00" class="form-control input-md"
+                  required="">
               </div>
-          </div>      
+            </div>
 
             <div class="form-group">
               <label class="col-md-4 control-label" for="select1">Dia Vencimento</label>
               <div class="col-md-6">
-                <input [(ngModel)]="matricula.diaVencimento" name="valor" type="number" min="1" max = "31" placeholder="10" class="form-control input-md" required="">
+                <input [(ngModel)]="matricula.diaVencimento" name="valor" type="number" min="1" max="31" placeholder="10" class="form-control input-md"
+                  required="">
               </div>
             </div>
 
@@ -442,19 +454,19 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="select1">Desconto</label>
               <div class="col-md-6">
-              <select [(ngModel)]="matricula.idDesconto" name="desconto" class="form-control" required>
+                <select [(ngModel)]="matricula.idDesconto" name="desconto" class="form-control" required>
                             <option *ngFor="let desconto of descontos" [ngValue]="desconto.id" >{{desconto.nome}} -- {{desconto.valor}} %</option>
               </select>
               </div>
             </div>
 
-              
+
 
             <div class="form-group">
               <label class="col-md-4 control-label" for="button1id"></label>
               <div class="col-md-8">
                 <button data-dismiss="modal" id="button1id" name="button1id" class="btn btn-success" [disabled]="submit" type="button" (click)="matricular()">Cadastrar</button>
-                <button data-dismiss="modal" id="button2id" name="button2id" class="btn btn-danger"  [disabled]="submit" >Cancelar</button>
+                <button data-dismiss="modal" id="button2id" name="button2id" class="btn btn-danger" [disabled]="submit">Cancelar</button>
               </div>
             </div>
 
@@ -463,7 +475,7 @@
         </form>
 
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -480,36 +492,36 @@
       </div>
       <div class="modal-body">
         <div class="table-responsive">
-        <table class="table table-bordered table-striped ">
+          <table class="table table-bordered table-striped ">
             <thead>
-                <tr>
-                    <th>Codigo</th>
-                    <th>Modalidade</th>
-                    <th>Horario</th>
-                    <th>Professor</th>
-                    <th>Professor</th>
-                    <th>Valor</th>
-                    <th>Nº Vagas</th>
-                    <th>Ação</th>
-                </tr>
+              <tr>
+                <th>Codigo</th>
+                <th>Modalidade</th>
+                <th>Horario</th>
+                <th>Professor</th>
+                <th>Professor</th>
+                <th>Valor</th>
+                <th>Nº Vagas</th>
+                <th>Ação</th>
+              </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let turma of workShops" >
-                    <td>{{turma.codigo}}</td>
-                    <td>{{turma.nomeModalidade}}</td>
-                    <td>{{turma.horarioInicial}} - {{turma.horarioFinal}}</td>
-                    <td>{{turma.nomeProfessor1}}</td>
-                    <td>{{turma.nomeProfessor2}}</td>
-                    <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
-                    <td>{{turma.qtdVagas}}</td>
-                    <td><button data-dismiss="modal" class="btn btn-default"  (click)="matricularWork(turma.id)">Matricular</button>
-                </tr>
+              <tr *ngFor="let turma of workShops">
+                <td>{{turma.codigo}}</td>
+                <td>{{turma.nomeModalidade}}</td>
+                <td>{{turma.horarioInicial}} - {{turma.horarioFinal}}</td>
+                <td>{{turma.nomeProfessor1}}</td>
+                <td>{{turma.nomeProfessor2}}</td>
+                <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
+                <td>{{turma.qtdVagas}}</td>
+                <td><button data-dismiss="modal" class="btn btn-default" (click)="matricularWork(turma.id)">Matricular</button>
+              </tr>
             </tbody>
-        </table>
-    </div>
-      
+          </table>
+        </div>
+
       </div>
-      
+
     </div>
   </div>
 </div>
