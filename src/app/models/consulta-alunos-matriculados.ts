@@ -7,4 +7,5 @@ export class ConsultaAlunosMatriculados {
 	  public nomeDesconto: string;
 	  public valorDesconto: number;
 	  public dataMatricula: Date;
+	  public dataNascimento: Date;
 }

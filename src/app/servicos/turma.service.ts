@@ -32,6 +32,11 @@ export class TurmaService {
          return this.http.get(environment.url + "turmas/" + id + "/alunos").map((response: Response) => <ConsultaAlunosMatriculados[]>response.json()); 
     }
 
+    getListaDiasAulas(id: number)
+    {
+        return this.http.get(environment.url + "turmas/" + id + "/dias").map((response: Response) => <Date[]>response.json()); 
+    }
+
     getTurma(id: number) {
         return this.http.get(environment.url + "turmas/" + id).map((response: Response) => <ConsultaTurma>response.json());
     }

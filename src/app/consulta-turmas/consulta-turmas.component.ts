@@ -16,7 +16,7 @@ import { ProfessorService } from './../servicos/professor.service';
 })
 export class ConsultaTurmasComponent implements OnInit {
 
-  constructor(private turmaService: TurmaService ) { 
+  constructor(private turmaService: TurmaService) {
     this.alunos = [];
   }
 
@@ -28,7 +28,7 @@ export class ConsultaTurmasComponent implements OnInit {
   private modalidadeSelecionado: ModalidadeTurma;
 
   private alunos: ConsultaAlunosMatriculados[];
-
+  private diasAulas: Date[];
   ngOnInit() {
     this.turmaService.getTurmas().subscribe(res => {
       this.turmas = res;
@@ -51,9 +51,9 @@ export class ConsultaTurmasComponent implements OnInit {
   }
 
   getTurmas() {
-    
+
     let valores = this.turmas;
-    
+
     if ((
       this.nivelSelecionado != undefined
       && this.nivelSelecionado.id != undefined)) {
@@ -71,10 +71,14 @@ export class ConsultaTurmasComponent implements OnInit {
     return valores;
   }
 
-  getAlunos(id: number)
-  {
+  getAlunos(id: number) {
     this.turmaService.getAlunos(id).subscribe(res => {
       this.alunos = res;
+    })
+
+    this.turmaService.getListaDiasAulas(id).subscribe(res => {
+      this.diasAulas = res;
+      console.log(this.diasAulas)
     })
   }
 }
