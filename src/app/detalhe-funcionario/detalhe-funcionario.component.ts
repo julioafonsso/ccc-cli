@@ -18,24 +18,23 @@ export class DetalheFuncionarioComponent implements OnInit {
   private funcionario: ConsultaFuncionario;
   private salarios: Salario[];
   private salario: Salario;
+  private valeTransporte: Salario;
   private botoes = new Array();
   private msgs: Message[];
   private submit: boolean;
-  // private recebimentos: FluxoCaixa[];
-  // private detalhes: any[];
-  // private detalhe: Salario[];
-  // private mostraDetalhe: boolean;
-  // private idFluxoDetalhado: number;
+  private pagamentos: any[];
   private mesReferenciaPagamento: string;
   private mesParaPagar: string
-  
+  private dataInicio: string;
+  private dataFim: string;
 
   constructor(private funcionarioService: FuncionarioService, private router: ActivatedRoute) {
     this.salario = new Salario();
     this.funcionario = new ConsultaFuncionario();
     this.salarios = [];
     this.msgs = [];
-    // this.recebimentos = [];
+    this.valeTransporte = new Salario();
+    this.pagamentos = [];
     this.submit = false;
     // this.detalhes = [];
     // this.detalhe = [];
@@ -49,9 +48,26 @@ export class DetalheFuncionarioComponent implements OnInit {
     let dp = new DatePipe("yyyy-MM");
     let data = new Date(Date.now());
 
-    data.setMonth(data.getMonth()-1)
+    data.setMonth(data.getMonth() - 1)
     this.mesReferenciaPagamento = dp.transform(data.getTime(), "yyyy-MM");
     this.mesParaPagar = this.mesReferenciaPagamento;
+
+    this.dataFim = dp.transform(Date.now(), "yyyy-MM");
+    let valores = this.dataFim.split("-");
+    let ano = new Number(valores[0]).valueOf()
+    let mes = new Number(valores[1]).valueOf()
+
+    mes -= 6;
+
+    if (mes < 1) {
+      mes = 12 + mes;
+      ano -= 1;
+    }
+
+    if (mes.toString().length === 1)
+      this.dataInicio = ano.toString() + "-0" + mes.toString();
+    else
+      this.dataInicio = ano.toString() + "-" + mes.toString();
 
 
   }
@@ -71,9 +87,16 @@ export class DetalheFuncionarioComponent implements OnInit {
         this.idFuncionario = params['id'];
         this.loadFuncionario();
         this.loadPagamento();
-
+        this.loadValeTrans();
+        this.loadHist();
       }
     );
+  }
+
+  loadHist() {
+    this.funcionarioService.getRecebimentos(this.idFuncionario, this.dataInicio, this.dataFim).subscribe(res => {
+      this.pagamentos = res;;
+    })
   }
 
 
@@ -89,22 +112,14 @@ export class DetalheFuncionarioComponent implements OnInit {
     return retorno;
   }
 
-  tabBios() {
+  tab(index: number) {
     this.botoes = new Array();
-    this.botoes[0] = true;
+    this.botoes[index] = true;
   }
 
 
-  tabPagamentos() {
-    this.botoes = new Array();
-    this.botoes[1] = true;
-  }
 
-  tabHistPagamentos() {
-    this.botoes = new Array();
-    this.botoes[2] = true;
-  }
-  
+
   loadPagamento() {
     this.submit = true;
     this.mesParaPagar = this.mesReferenciaPagamento;
@@ -114,31 +129,52 @@ export class DetalheFuncionarioComponent implements OnInit {
     })
   }
 
-  setSalario(sal: Salario)
-  {
-    this.salario.id = sal.id;
-  }
-
-  pagar(pagamento: Salario)
-  {
-    this.funcionarioService.pagar(this.idFuncionario, pagamento).subscribe(res =>{
-      this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
-      this.loadPagamento();
-      this.salario = new Salario();
-    },
-    error =>{
-       this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+  loadValeTrans() {
+    this.submit = true;
+    this.mesParaPagar = this.mesReferenciaPagamento;
+    this.funcionarioService.getValeTrans(this.idFuncionario, this.mesReferenciaPagamento).subscribe(res => {
+      console.log(res);
+      this.valeTransporte = res;
+      this.submit = false;
     })
   }
 
-  fazerAdiantamento(){
+  setSalario(sal: Salario) {
+    this.salario.id = sal.id;
+  }
+
+  pagar(pagamento: Salario) {
+    this.funcionarioService.pagar(this.idFuncionario, pagamento).subscribe(res => {
+      this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
+      this.loadPagamento();
+      this.loadHist();
+      this.salario = new Salario();
+    },
+      error => {
+        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+      })
+  }
+
+  fazerAdiantamento() {
     this.pagar(this.salario);
   }
 
-  pagarMensalidade(salario: Salario){
+  pagarMensalidade(salario: Salario) {
     console.log(salario);
     this.pagar(salario);
 
+  }
+
+  pagarVale(vale: Salario) {
+    console.log("pagarVale")
+    this.funcionarioService.pagarVale(this.idFuncionario, vale).subscribe(res => {
+      this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
+      this.loadValeTrans();
+      this.salario = new Salario();
+    },
+      error => {
+        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+      })
   }
 
 }

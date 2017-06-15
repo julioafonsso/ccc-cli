@@ -31,14 +31,29 @@ export class FuncionarioService {
       .map((response: Response) => <ConsultaFuncionario>response.json())
   }
 
+  getRecebimentos(id: number , dataInicio:string, dataFim: string) {
+    return this.http.get(environment.url + "/funcionarios/" + id+ "/recebimento/" + dataInicio + "/" +dataFim)
+      .map((response: Response) => <any[]>response.json())
+  }
+
   getSalario(id: number, mes :string)
   {
     return this.http.get(environment.url + "/funcionarios/" + id + "/salario/"+ mes)
     .map((response:Response) => <Salario[]> response.json());
   }
 
+  getValeTrans(id: number, mes :string)
+  {
+    return this.http.get(environment.url + "/funcionarios/" + id + "/valetransporte/"+ mes)
+    .map((response:Response) => <Salario> response.json());
+  }
+
   pagar(idFuncionario: number, salario: Salario){
     return this.http.post(environment.url + "/funcionarios/" + idFuncionario + "/salario/" + salario.id, salario )
+  }
+
+   pagarVale(idFuncionario: number, salario: Salario){
+    return this.http.post(environment.url + "/funcionarios/" + idFuncionario + "/valetransporte/" + salario.id, salario )
   }
 
 }

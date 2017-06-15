@@ -40,7 +40,8 @@
         <th>Professor</th>
         <th>Mensalidade</th>
         <th>Nº Vagas</th>
-        <th>Ação</th>
+        <th>Editar</th>
+        <th>Alunos</th>
 
       </tr>
     </thead>
@@ -57,7 +58,8 @@
         <td>{{turma.nomeProfessor2}}</td>
         <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
         <td>{{turma.qtdVagas}}</td>
-        <td><button class="btn btn-primary" [routerLink]="['/cadastro-turma', turma.id]" >Editar</button>
+        <td><button class="btn btn-primary" [routerLink]="['/cadastro-turma', turma.id]" >Editar</button></td>
+        <td>
             <button class="btn btn-primary" (click)="getAlunos(turma.id)" data-toggle="modal" data-target="#modalAluno"  >Alunos</button>
         </td>
         
@@ -76,10 +78,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-        <h4 class="modal-title" id="myModalLabel">WorkShops</h4>
+        <h4 class="modal-title" id="myModalLabel">Alunos</h4>
       </div>
       <div class="modal-body">
         <div class="table-responsive">
+          <button  class="btn btn-primary">Lista de Presença</button>
         <table class="table table-bordered table-striped ">
             <thead>
                 <tr>
