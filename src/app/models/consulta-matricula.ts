@@ -16,5 +16,11 @@ export class ConsultaMatricula {
     public dataInicio: Date;
     public dataFim: Date;
     public dataMatricula: Date;
+    public qtdAluno: number;
+    public qtdAluna: number;
+    public nomeProfessor1: string;
+    public nomeProfessor2: string;
+    public valorMensalidade: number;
+    public qtdVaga: number;
 
 }
