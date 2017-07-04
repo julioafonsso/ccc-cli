@@ -101,13 +101,12 @@
                   <th>Nivel</th>
                   <th>Data Inicio</th>
                   <th>Data Fim</th>
-                  <th>Qtd Cavalheiros</th>
-                  <th>Qtd Damas</th>
                   <th>Professor</th>
                   <th>Professor</th>
                   <th>Mensalidade</th>
-                  <th>Nº Vagas</th>
                   <th>Data Matricula</th>
+                  <th>Desconto</th>
+                  <th>salvar</th>
                 </tr>
               </thead>
               <tbody>
@@ -117,13 +116,16 @@
                   <td>{{matricula.nomeNivel}}</td>
                   <td>{{matricula.dataInicio | date: 'dd/MM/yyyy'}}</td>
                   <td>{{matricula.dataFim | date: 'dd/MM/yyyy'}}</td>
-                  <td>{{matricula.qtdAlunos}}</td>
-                  <td>{{matricula.qtdAlunas}}</td>
                   <td>{{matricula.nomeProfessor1}}</td>
                   <td>{{matricula.nomeProfessor2}}</td>
                   <td>{{matricula.valorMensalidade | currency:'BRL':true}}</td>
-                  <td>{{matricula.qtdVagas}}</td>
                   <td>{{matricula.dataMatricula | date: 'dd/MM/yyyy'}}</td>
+                  <td>
+                    <select [(ngModel)]="matricula.idDesconto" name="desconto" class="form-control" required>
+                            <option *ngFor="let desconto of descontos" [ngValue]="desconto.id" >{{desconto.nome}} -- {{desconto.valor}} %</option>
+                    </select>
+                  </td>
+                  <td><button class="btn btn-info" (click)="alterarDesconto(matricula)">Salvar</button></td>
                 </tr>
               </tbody>
             </table>
@@ -312,7 +314,7 @@
         <form class="form-horizontal">
           <fieldset>
             <div class="form-group">
-              <label class="col-md-4 control-label" for="selectbasic">Modalidade da Turma</label>
+              <label class="col-md-4 control-label" for="selectbasic">Modalidade</label>
               <div class="col-md-6">
                 <select [(ngModel)]="aula.idModalidade" name="modalidade" class="form-control" required>
                   <option *ngFor="let item of modalidades" [ngValue]="item.id"  >{{item.nome}}</option>

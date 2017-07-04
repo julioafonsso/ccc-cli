@@ -299,7 +299,16 @@ export class DetalheAlunoComponent implements OnInit {
 
   pagarMensalidadeCalculada(mensalidade: ConsultaMensalidades) {
     this.pagar(mensalidade.id, mensalidade.valorCalculado);
+  }
 
+  alterarDesconto(matricula:ConsultaMatricula)
+  {
+    this.turmaService.alterarDesconto(matricula.id, matricula.idDesconto).subscribe(res =>{
+      this.msgs.push({ severity: 'success', summary: 'Alteração Com Sucesso !' });
+    },
+    error =>{
+      this.msgs.push({ severity: 'error', summary: 'Alteração com erro!' });
+    })
   }
 
 }

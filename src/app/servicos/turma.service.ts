@@ -27,21 +27,19 @@ export class TurmaService {
     //     return this.http.delete(environment.url + "turmas/matricula/" + matricula.id);
     // }
 
-    getAlunos(id: number)
-    {
-         return this.http.get(environment.url + "turmas/" + id + "/alunos").map((response: Response) => <ConsultaAlunosMatriculados[]>response.json()); 
+    getAlunos(id: number) {
+        return this.http.get(environment.url + "turmas/" + id + "/alunos").map((response: Response) => <ConsultaAlunosMatriculados[]>response.json());
     }
 
-    getListaDiasAulas(id: number)
-    {
-        return this.http.get(environment.url + "turmas/" + id + "/dias").map((response: Response) => <Date[]>response.json()); 
+    getListaDiasAulas(id: number) {
+        return this.http.get(environment.url + "turmas/" + id + "/dias").map((response: Response) => <Date[]>response.json());
     }
 
     getTurma(id: number) {
         return this.http.get(environment.url + "turmas/" + id).map((response: Response) => <ConsultaTurma>response.json());
     }
 
-    
+
 
     matricularAluno(cadastro: CadastroMatricula) {
         return this.http.post(environment.url + "matriculas", cadastro);
@@ -81,7 +79,7 @@ export class TurmaService {
     }
 
     alterarModalidade(modalidade: ModalidadeTurma) {
-        return this.http.put(environment.url + 'modalidades/' + modalidade.id , modalidade);
+        return this.http.put(environment.url + 'modalidades/' + modalidade.id, modalidade);
     }
 
     cadastrarTurma(turma) {
@@ -92,5 +90,11 @@ export class TurmaService {
         return this.http.put(environment.url + 'turmas/' + turma.id, turma);
     }
 
-    
+    alterarDesconto(idMatricula: number, idDesconto: number) {
+        let desconto: TipoDesconto = new TipoDesconto();
+        desconto.id = idDesconto;
+        return this.http.put(environment.url + "matriculas/" + idMatricula + "/desconto/", desconto);
+    }
+
+
 }
