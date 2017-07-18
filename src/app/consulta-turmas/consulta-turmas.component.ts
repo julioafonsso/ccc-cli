@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { ConsultaAlunosMatriculados } from './../models/consulta-alunos-matriculados';
 import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
@@ -78,7 +79,30 @@ export class ConsultaTurmasComponent implements OnInit {
 
     this.turmaService.getListaDiasAulas(id).subscribe(res => {
       this.diasAulas = res;
-      console.log(this.diasAulas)
+      this.diasAulas.forEach(data =>{
+        console.log(new Date(data))
+      })
     })
+  }
+
+  export(){
+    let conteudo = "data:text/csv;charser=utf-8,";
+
+    let cabecalho = "Nome;Data Aniversario; Email";
+    this.diasAulas.forEach(valor =>{
+      cabecalho = cabecalho + ";" + valor;
+    })
+    conteudo += cabecalho + "\n";
+
+    this.alunos.forEach(aluno =>{
+      conteudo += aluno.nome + ";" + aluno.dataNascimento + ";" + aluno.email + "\n";
+    })
+
+    var link = document.createElement("a");
+    link.setAttribute("href", encodeURI(conteudo));
+    link.setAttribute("download", "lista presença.csv");
+    document.body.appendChild(link);
+    link.click();
+
   }
 }

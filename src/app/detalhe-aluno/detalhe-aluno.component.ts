@@ -1,15 +1,15 @@
-import { WorkshopService } from './../servicos/workshop.service';
-import { ConsultaWorkShop } from './../models/consulta-workshop';
+
 
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-
 import { Message } from 'primeng/primeng';
 
-
+import { NivelTurma } from './../models/nivel-turma';
+import { WorkshopService } from './../servicos/workshop.service';
+import { ConsultaWorkShop } from './../models/consulta-workshop';
 import { ConsultaAulaParticular } from './../models/consulta-aula-particular';
 import { CadastroAulaParticular } from './../models/cadastro-aula-particular';
 import { ConsultaMensalidades } from './../models/consulta-mensalidades';
@@ -54,6 +54,10 @@ export class DetalheAlunoComponent implements OnInit {
   private histAulaParticular: ConsultaAulaParticular[];
   private workShops: ConsultaWorkShop[];
   private matriculasWorkShops: ConsultaMatricula[];
+  private niveis = new Array<NivelTurma>();
+
+  private nivelSelecionado: NivelTurma;
+  private modalidadeSelecionado: ModalidadeTurma;
 
   constructor(private alunoService: AlunoService, private turmaService: TurmaService,
     private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute,
@@ -65,6 +69,8 @@ export class DetalheAlunoComponent implements OnInit {
     this.initDatas();
     this.matricula = new CadastroMatricula();
     this.aula = new CadastroAulaParticular();
+    this.niveis = new Array<NivelTurma>();
+    this.modalidades = new Array<ModalidadeTurma>() 
   }
 
 
@@ -96,10 +102,21 @@ export class DetalheAlunoComponent implements OnInit {
       this.descontos = res;
     })
 
-    this.turmaService.getModalidades().subscribe(res => {
-      this.modalidades = res;
+   this.turmaService.getNiveis().subscribe(res => {
+     this.niveis 
+      this.niveis.push(new NivelTurma());
+      res.forEach(element => {
+        this.niveis.push(element);
+      });
+
     })
 
+    this.turmaService.getModalidades().subscribe(res => {
+      this.modalidades.push(new ModalidadeTurma());
+      res.forEach(element => {
+        this.modalidades.push(element);
+      });
+    })
 
     this.professorService.getProfessores().subscribe(res => {
       this.professores = res;
@@ -309,6 +326,27 @@ export class DetalheAlunoComponent implements OnInit {
     error =>{
       this.msgs.push({ severity: 'error', summary: 'Alteração com erro!' });
     })
+  }
+
+  getTurmas() {
+
+    let valores = this.turmas;
+
+    if ((
+      this.nivelSelecionado != undefined
+      && this.nivelSelecionado.id != undefined)) {
+      valores = valores.filter((turma: ConsultaTurma) =>
+        turma.idNivel === this.nivelSelecionado.id);
+    }
+
+    if ((
+      this.modalidadeSelecionado != undefined
+      && this.modalidadeSelecionado.id != undefined)) {
+      valores = valores.filter((turma: ConsultaTurma) =>
+        turma.idModalidade === this.modalidadeSelecionado.id);
+    }
+
+    return valores;
   }
 
 }
