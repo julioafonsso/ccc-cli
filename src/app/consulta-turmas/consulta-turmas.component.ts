@@ -79,23 +79,22 @@ export class ConsultaTurmasComponent implements OnInit {
 
     this.turmaService.getListaDiasAulas(id).subscribe(res => {
       this.diasAulas = res;
-      this.diasAulas.forEach(data =>{
-        console.log(new Date(data))
-      })
     })
   }
 
   export(){
+    let dp :DatePipe =new DatePipe("pt-BR")
     let conteudo = "data:text/csv;charser=utf-8,";
 
     let cabecalho = "Nome;Data Aniversario; Email";
     this.diasAulas.forEach(valor =>{
-      cabecalho = cabecalho + ";" + valor;
+      cabecalho = cabecalho + ";" + dp.transform(valor, 'dd/MM/yyyy');
     })
+
     conteudo += cabecalho + "\n";
 
     this.alunos.forEach(aluno =>{
-      conteudo += aluno.nome + ";" + aluno.dataNascimento + ";" + aluno.email + "\n";
+      conteudo += aluno.nome + ";" + dp.transform(aluno.dataNascimento, 'dd/MM/yyyy') + ";" + aluno.email + "\n";
     })
 
     var link = document.createElement("a");
