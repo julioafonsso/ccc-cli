@@ -1,7 +1,6 @@
-insert into usuario( id, data_exclusao, ind_supervisor, login, nome_usuario, senha) values(1, null, 1, 'julio', 'julio', 'julio')
-insert into usuario( id, data_exclusao, ind_supervisor, login, nome_usuario, senha) values(2, null, 1, 'isnard', 'isnard', 'isnard')
+insert into usuario( id, data_exclusao, ind_supervisor, login, nome_usuario, senha) values(1, null, 1, 'isnard', 'isnard', 'isnard');
 
-insert into tipo_desconto (id, data_exclusao, nome, valor) value (1, null, '', 0)
+insert into tipo_desconto (id, data_exclusao, nome, valor) value (1, null, '', 0);
 
 insert into conhece_escola (id, nome) values(1, 'Internet');
 insert into conhece_escola (id, nome) values(2, 'Site');
