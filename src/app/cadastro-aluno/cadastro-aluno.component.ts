@@ -60,7 +60,6 @@ export class CadastroAlunoComponent implements OnInit {
 
         this.bairroService.getBairros().subscribe(res =>{
             this.listaBairros = res;
-            console.log(this.listaBairros)
         })
         this.loadAluno()
     }
@@ -108,7 +107,6 @@ export class CadastroAlunoComponent implements OnInit {
             .subscribe(response => {
                 this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
                 this.reset();
-                console.log(response.json());
                 this.roteador.navigate(['/detalhe-aluno/',response.json().id]);
             },
             error => {

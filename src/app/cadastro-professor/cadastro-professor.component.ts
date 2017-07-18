@@ -75,7 +75,6 @@ export class CadastroProfessorComponent implements OnInit {
     }
 
     cadastrar() {
-        console.log(this.professor);
         if (this.professor.id != undefined)
             return this.professorService.atualizarProfessor(this.professor)
         else

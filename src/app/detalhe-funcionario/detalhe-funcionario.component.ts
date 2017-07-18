@@ -133,7 +133,6 @@ export class DetalheFuncionarioComponent implements OnInit {
     this.submit = true;
     this.mesParaPagar = this.mesReferenciaPagamento;
     this.funcionarioService.getValeTrans(this.idFuncionario, this.mesReferenciaPagamento).subscribe(res => {
-      console.log(res);
       this.valeTransporte = res;
       this.submit = false;
     })
@@ -160,13 +159,11 @@ export class DetalheFuncionarioComponent implements OnInit {
   }
 
   pagarMensalidade(salario: Salario) {
-    console.log(salario);
     this.pagar(salario);
 
   }
 
   pagarVale(vale: Salario) {
-    console.log("pagarVale")
     this.funcionarioService.pagarVale(this.idFuncionario, vale).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Efetuado com Sucesso !' });
       this.loadValeTrans();

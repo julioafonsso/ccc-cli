@@ -131,8 +131,6 @@ export class DetalheAlunoComponent implements OnInit {
         
         this.reset();
       }, error => {
-        console.log("ERRO")
-        console.log(error);
         this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
         this.submit = false;
       });
@@ -240,7 +238,6 @@ export class DetalheAlunoComponent implements OnInit {
 
   loadAulasParticulares() {
     this.alunoService.getAulasParticulares(this.idAluno, this.dataInicio, this.dataFim).subscribe(res => {
-      console.log(res);
       this.histAulaParticular = res;
     })
   }

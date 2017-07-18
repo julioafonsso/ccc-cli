@@ -56,7 +56,6 @@ export class CadastroFuncionarioComponent implements OnInit {
     }
 
     cadastrar() {
-        console.log(this.funcionario);
         if (this.funcionario.id != undefined)
             return this.funcionarioService.atualizarFuncionario(this.funcionario)
         else
