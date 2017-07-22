@@ -30,6 +30,7 @@ export class ConsultaTurmasComponent implements OnInit {
 
   private alunos: ConsultaAlunosMatriculados[];
   private diasAulas: Date[];
+  private url: any;
   ngOnInit() {
     this.turmaService.getTurmas().subscribe(res => {
       this.turmas = res;
@@ -76,32 +77,71 @@ export class ConsultaTurmasComponent implements OnInit {
     this.turmaService.getAlunos(id).subscribe(res => {
       this.alunos = res;
     })
-
-    this.turmaService.getListaDiasAulas(id).subscribe(res => {
-      this.diasAulas = res;
+    this.turmaService.getListaPresenca(id).subscribe(res => {
+      console.log(res)
+      this.downloadFile(res._body);
     })
+
   }
 
-  export(){
-    let dp :DatePipe =new DatePipe("pt-BR")
-    let conteudo = "data:text/csv;charser=utf-8,";
+  downloadFile(data: any) {
 
-    let cabecalho = "Nome;Data Aniversario; Email";
-    this.diasAulas.forEach(valor =>{
-      cabecalho = cabecalho + ";" + dp.transform(valor, 'dd/MM/yyyy');
-    })
 
-    conteudo += cabecalho + "\n";
+    var blob = new Blob([data], { type: 'application/vnd.ms-excel' });
 
-    this.alunos.forEach(aluno =>{
-      conteudo += aluno.nome + ";" + dp.transform(aluno.dataNascimento, 'dd/MM/yyyy') + ";" + aluno.email + "\n";
-    })
+    // var link = document.createElement("a");
+    // link.setAttribute("href", data.toString());
+    // link.setAttribute("download", "lista presença.xls");
+    // document.body.appendChild(link);
+    // link.click();
+
+    this.url= window.URL.createObjectURL(this.b64ToBlob(data));
+    console.log("URL " + this.url)
+
+  }
+
+private b64ToBlob(valor:string){
+  let size = 512;
+  let byteChar = atob(valor);
+  var byteArrays = [];
+  for(var offset = 0; offset < byteChar.length; offset += size)
+  {
+    var slice = byteChar.slice(offset, offset + size);
+    var byteNumber = new Array(slice.length);
+    for(var i = 0; i< slice.length; i++)
+    {
+      byteNumber[i]=slice.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumber);
+    byteArrays.push(byteArray); 
+  
+  }
+    return  new Blob(byteArrays, {type : 'data:application/vnd.ms-excel'})
+}
+
+  export() {
+
+    // window.open(this.url, 'Lista.xls');
+    // let dp :DatePipe =new DatePipe("pt-BR")
+    // let conteudo = "data:text/csv;charser=utf-8,";
+
+    // let cabecalho = "Nome;Data Aniversario; Email";
+    // this.diasAulas.forEach(valor =>{
+    //   cabecalho = cabecalho + ";" + dp.transform(valor, 'dd/MM/yyyy');
+    // })
+
+    // conteudo += cabecalho + "\n";
+
+    // this.alunos.forEach(aluno =>{
+    //   conteudo += aluno.nome + ";" + dp.transform(aluno.dataNascimento, 'dd/MM/yyyy') + ";" + aluno.email + "\n";
+    // })
 
     var link = document.createElement("a");
-    link.setAttribute("href", encodeURI(conteudo));
-    link.setAttribute("download", "lista presença.csv");
+    link.setAttribute("href", this.url);
+    link.setAttribute("download", "lista presença.xls");
     document.body.appendChild(link);
     link.click();
+
 
   }
 }
