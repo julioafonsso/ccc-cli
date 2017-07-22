@@ -38,7 +38,6 @@ export class ConsultaTipoFluxoComponent implements OnInit {
       this.msgs.push({ severity: 'success', summary: 'Tipo Fluxo Apagado !' });
     },
       error => {
-        console.log(error)
         this.msgs.push({ severity: 'error', summary: '', detail: JSON.parse(error._body)["message"] });
         this.submit = false;
       }

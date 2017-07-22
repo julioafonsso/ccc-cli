@@ -43,7 +43,6 @@ export class CadastroTipoFluxoCaixaComponent implements OnInit {
   }
 
   cadastrar() {
-    console.log(this.tipo)
     if (this.tipo.id != undefined)
       return this.tipoFluxoService.alterar(this.tipo)
     return this.tipoFluxoService.cadastrar(this.tipo)

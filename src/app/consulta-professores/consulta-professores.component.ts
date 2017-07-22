@@ -22,7 +22,6 @@ export class ConsultaProfessoresComponent implements OnInit {
 
   ngOnInit() {
     this.professorService.getProfessores().subscribe(res =>{
-      console.log(res);
       this.professores = res;
     })
   }

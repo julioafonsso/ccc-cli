@@ -65,7 +65,6 @@ export class CadastroTurmaComponent implements OnInit {
           if (params['id'] != undefined) {
             this.submit = true;
             this.turmaService.getTurma(params['id']).subscribe(res => {
-              console.log(res)
               this.turma = res;
               this.submit = false;
             })

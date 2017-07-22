@@ -20,7 +20,6 @@ export class ConsultaFuncionarioComponent implements OnInit {
 
   ngOnInit() {
     this.funcionarioService.getFuncionarios().subscribe(res =>{
-      console.log(res);
       this.funconarios = res;
     })
   }

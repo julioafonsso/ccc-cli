@@ -36,7 +36,6 @@ export class ConsultaModalidadeTurmaComponent implements OnInit {
       this.msgs.push({ severity: 'success', summary: 'Modalidade Apagada !' });
     },
       error => {
-        console.log(error)
         this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
         this.submit = false;
       }
