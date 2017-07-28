@@ -14,7 +14,7 @@ export class FuncionarioService {
   constructor(private http: HttpCustormerService) { }
 
   atualizarFuncionario(funcionario: CadastroFuncionario) {
-    return this.http.put(environment.url + "/funcionarios" + funcionario.id, funcionario);
+    return this.http.put(environment.url + "/funcionarios/" + funcionario.id, funcionario);
   }
 
   cadastrarFuncionario(funcionario: CadastroFuncionario) {
