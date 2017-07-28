@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 
 import { FuncionarioService } from './../servicos/funcionario.service';
@@ -11,7 +11,7 @@ import { CadastroFuncionario } from './../models/cadastro-funcionario';
 @Component({
   selector: 'app-cadastro-funcionario',
   templateUrl: './cadastro-funcionario.component.html',
-  styleUrls: ['./cadastro-funcionario.component.css']
+  styleUrls: ['./cadastro-funcionario.component.scss']
 })
 export class CadastroFuncionarioComponent implements OnInit {
     private funcionario: CadastroFuncionario;
@@ -21,7 +21,7 @@ export class CadastroFuncionarioComponent implements OnInit {
     private envieiFoto: boolean;
     private submit: boolean;
 
-    constructor(private route: ActivatedRoute, private funcionarioService: FuncionarioService, private ftpService: FtpService) {
+    constructor(private route: ActivatedRoute, private funcionarioService: FuncionarioService, private ftpService: FtpService, private roteador: Router) {
         this.submit = false;
         this.funcionario = new CadastroFuncionario();
         this.url = "";
@@ -68,7 +68,7 @@ export class CadastroFuncionarioComponent implements OnInit {
         this.cadastrar()
             .subscribe(res => {
                 this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-                // this.reset()
+                 this.roteador.navigate(['/detalhe-professor/',res.json().id]);
             },
             error => {
                 this.submit = false;
