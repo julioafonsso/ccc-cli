@@ -2,7 +2,7 @@
 
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs/Rx';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { Message } from 'primeng/primeng';
@@ -61,7 +61,7 @@ export class DetalheAlunoComponent implements OnInit {
 
   constructor(private alunoService: AlunoService, private turmaService: TurmaService,
     private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute,
-    private workService: WorkshopService) {
+    private workService: WorkshopService, private roteador: Router) {
     this.msgs = [];
     this.aluno = new ConsultaAlunos();
     this.botoes = new Array();
@@ -346,4 +346,14 @@ export class DetalheAlunoComponent implements OnInit {
     return valores;
   }
 
+
+excluir(){
+  this.alunoService.delete(this.idAluno).subscribe(res =>{
+      this.msgs.push({ severity: 'success', summary: 'Exclusão com Sucesso !' });
+      this.roteador.navigate(['/consulta-alunos']);
+  }, error => {
+      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+      this.submit = false;
+    });
+}
 }

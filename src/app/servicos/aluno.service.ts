@@ -43,6 +43,11 @@ export class AlunoService {
     return this.http.get(environment.url + "alunos/" + idAluno).map((response: Response) => <ConsultaAlunos>response.json());
   }
 
+delete(idAluno: number) {
+    return this.http.delete(environment.url + "alunos/" + idAluno);
+  }
+
+
   getMatriculas(idAluno: number) {
     return this.http.get(environment.url + "alunos/" + idAluno + "/turmas").map((response: Response) => <ConsultaMatricula[]>response.json());
   }
