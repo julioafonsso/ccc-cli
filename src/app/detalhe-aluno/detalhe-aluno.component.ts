@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { Message } from 'primeng/primeng';
+import { Message, ConfirmationService } from 'primeng/primeng';
 
 import { NivelTurma } from './../models/nivel-turma';
 import { WorkshopService } from './../servicos/workshop.service';
@@ -61,7 +61,8 @@ export class DetalheAlunoComponent implements OnInit {
 
   constructor(private alunoService: AlunoService, private turmaService: TurmaService,
     private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute,
-    private workService: WorkshopService, private roteador: Router) {
+    private workService: WorkshopService, private roteador: Router,
+    private confirmationService: ConfirmationService) {
     this.msgs = [];
     this.aluno = new ConsultaAlunos();
     this.botoes = new Array();
@@ -70,7 +71,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.matricula = new CadastroMatricula();
     this.aula = new CadastroAulaParticular();
     this.niveis = new Array<NivelTurma>();
-    this.modalidades = new Array<ModalidadeTurma>() 
+    this.modalidades = new Array<ModalidadeTurma>()
   }
 
 
@@ -102,8 +103,8 @@ export class DetalheAlunoComponent implements OnInit {
       this.descontos = res;
     })
 
-   this.turmaService.getNiveis().subscribe(res => {
-     this.niveis 
+    this.turmaService.getNiveis().subscribe(res => {
+      this.niveis
       this.niveis.push(new NivelTurma());
       res.forEach(element => {
         this.niveis.push(element);
@@ -128,7 +129,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.turmaService.matricularAluno(this.matricula)
       .subscribe(res => {
         this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
-        
+
         this.reset();
       }, error => {
         this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
@@ -315,14 +316,13 @@ export class DetalheAlunoComponent implements OnInit {
     this.pagar(mensalidade.id, mensalidade.valorCalculado);
   }
 
-  alterarDesconto(matricula:ConsultaMatricula)
-  {
-    this.turmaService.alterarDesconto(matricula.id, matricula.idDesconto).subscribe(res =>{
+  alterarDesconto(matricula: ConsultaMatricula) {
+    this.turmaService.alterarDesconto(matricula.id, matricula.idDesconto).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Alteração Com Sucesso !' });
     },
-    error =>{
-      this.msgs.push({ severity: 'error', summary: 'Alteração com erro!' });
-    })
+      error => {
+        this.msgs.push({ severity: 'error', summary: 'Alteração com erro!' });
+      })
   }
 
   getTurmas() {
@@ -347,13 +347,20 @@ export class DetalheAlunoComponent implements OnInit {
   }
 
 
-excluir(){
-  this.alunoService.delete(this.idAluno).subscribe(res =>{
-      this.msgs.push({ severity: 'success', summary: 'Exclusão com Sucesso !' });
-      this.roteador.navigate(['/consulta-alunos']);
-  }, error => {
-      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
-      this.submit = false;
+  excluir() {
+    this.confirmationService.confirm({
+      message: 'Deseja excluir o Aluno?',
+      accept: () => {
+        this.alunoService.delete(this.idAluno).subscribe(res => {
+          this.msgs.push({ severity: 'success', summary: 'Exclusão com Sucesso !' });
+          this.roteador.navigate(['/consulta-alunos']);
+        }, error => {
+          this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+          this.submit = false;
+        });
+      }
     });
-}
+
+
+  }
 }
