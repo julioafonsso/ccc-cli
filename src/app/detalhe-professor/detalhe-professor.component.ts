@@ -185,7 +185,7 @@ export class DetalheProfessorComponent implements OnInit {
       return this.recebimentos
     else {
       return this.recebimentos.filter(v => {
-        return v.id <= this.idFluxoDetalhado;
+        return v.id >= this.idFluxoDetalhado;
       })
     }
   }
@@ -195,7 +195,7 @@ export class DetalheProfessorComponent implements OnInit {
       return []
     else {
       return this.recebimentos.filter(v => {
-        return v.id > this.idFluxoDetalhado;
+        return v.id < this.idFluxoDetalhado;
       })
     }
   }
@@ -205,7 +205,7 @@ export class DetalheProfessorComponent implements OnInit {
     if (this.idFluxoDetalhado == -1)
       return false;
     this.recebimentos.forEach(v => {
-      if (v.id > this.idFluxoDetalhado)
+      if (v.id < this.idFluxoDetalhado)
         retorno = true;
       else
         retorno = false

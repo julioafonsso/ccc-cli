@@ -120,6 +120,7 @@
                 <th>Mes Referencia</th>
                 <th>Valor Mensalidade</th>
                 <th>Valor Pago</th>
+                <th>Data Pagamento</th>
                 <th>Porcentagem</th>
                 <th>Valor a Receber</th>
                 <th>Pagar</th>
@@ -134,6 +135,7 @@
                 <td>{{salario.mesReferencia}}</td>
                 <td>{{salario.valorMensalidade | currency:'BRL':true}}</td>
                 <td>{{salario.valorPago | currency:'BRL':true}}</td>
+                <td>{{salario.dataPagamentoMensalidade |  date: 'dd/MM/yyyy'}}
                 <td>{{salario.percentual}} %</td>
                 <td>{{salario.valor | currency:'BRL':true}}</td>
                 <td>
@@ -175,8 +177,9 @@
 
                 <td *ngIf="!ehDetalheExibido(recibo)"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" (click)="mostrarDetalhe(recibo)"></span></td>
                 <td *ngIf="ehDetalheExibido(recibo)"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true" (click)="mostrarDetalhe(recibo)"></span></td>
-                <td>{{recibo.valor * -1 | currency:'BRL':true}}</td>
-                <td>{{recibo.data | date: 'dd/MM/yyyy'}}</td>
+                <td>{{recibo.valor  | currency:'BRL':true}}</td>
+                <!--<td>{{recibo.data | date: 'dd/MM/yyyy'}}</td>-->
+                                <td>{{recibo.id}}</td>
               </tr>
             </tbody>
           </table>
@@ -187,6 +190,7 @@
               <th>Aluno</th>
               <th>Modalidade</th>
               <th>Valor Pago</th>
+              <th>Data Pagamento</th>
               <th>Percentual</th>
               <th>Valor Recebido</th>
             </thead>
@@ -196,6 +200,7 @@
                 <td>{{salario.nomeAluno}}</td>
                 <td>{{salario.nomeModalidade}}</td>
                 <td>{{salario.valorPago | currency:'BRL':true}}</td>
+                <td>{{salario.dataPagamentoMensalidade |  date: 'dd/MM/yyyy'}}
                 <td>{{salario.percentual}} %</td>
                 <td>{{salario.valor | currency:'BRL':true}}</td>
               </tr>
