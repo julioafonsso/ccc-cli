@@ -9,7 +9,7 @@ export class CadastroAluno {
     public endereco: string;
     public numero: number;
     public complemento: string;
-    public idBairro: number;
+    public nomeBairro: string;
     public cidade: string;
     public dataNascimento: Date;
     public profissao: string;

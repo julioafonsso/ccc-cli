@@ -77,9 +77,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="selectbasic">Bairro</label>
         <div class="col-md-6">
-          <select [(ngModel)]="aluno.idBairro" name="bairro" class="form-control" required>
-        <option *ngFor="let item of listaBairros"     [ngValue]="item.id" >{{item.nome}}</option>
-      </select>
+          <input [(ngModel)]="aluno.nomeBairro" name="nomeBairro" type="text" placeholder="centro, tijuca..." class="form-control input-md" required="">
         </div>
       </div>
 
