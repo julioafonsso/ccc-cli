@@ -31,7 +31,6 @@ export class CadastroAlunoComponent implements OnInit {
     private url: string;
     private envieiFoto: boolean;
     private load: any;
-    private listaBairros: Bairro[];
 
     constructor(private route: ActivatedRoute, 
                 private alunoService: AlunoService,
@@ -46,7 +45,6 @@ export class CadastroAlunoComponent implements OnInit {
         this.submit = false;
         this.listaEstadoCivil = [];
         this.listaComoConheceu = []
-        this.listaBairros = []
     }
 
     ngOnInit() {
@@ -58,14 +56,11 @@ export class CadastroAlunoComponent implements OnInit {
             this.listaComoConheceu = res;
         })
 
-        this.bairroService.getBairros().subscribe(res =>{
-            this.listaBairros = res;
-        })
         this.loadAluno()
     }
 
     loadAluno() {
-        if (this.listaEstadoCivil.length == 0 || this.listaComoConheceu.length == 0 || this.listaBairros.length == 0) {
+        if (this.listaEstadoCivil.length == 0 || this.listaComoConheceu.length == 0 ) {
             this.load = setInterval(() => { this.loadAluno() }, 500);
         }
         else {
@@ -76,6 +71,8 @@ export class CadastroAlunoComponent implements OnInit {
                         this.submit = true;
                         this.envieiFoto = true;
                         this.alunoService.getAluno(params['id']).subscribe(res => {
+                            console.log("Aluno")
+                            console.log(this.aluno)
                             this.aluno = res;
                             this.submit = false;
 

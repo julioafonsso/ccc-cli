@@ -36,7 +36,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">CPF</label>
         <div class="col-md-6">
-          <input appCpf [(ngModel)]="aluno.cpf" name="cpf" type="text" placeholder="012.345.678-90"  class="form-control input-md" required="">
+          <input appCpf [(ngModel)]="aluno.cpf" name="cpf" type="text" placeholder="012.345.678-90"  class="form-control input-md" >
         </div>
       </div>
 
@@ -44,7 +44,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Identidade (RG)</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.rg" name="rg" type="text" placeholder="000000001" class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.rg" name="rg" type="text" placeholder="000000001" class="form-control input-md" >
 
         </div>
       </div>
@@ -53,7 +53,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Data de Nascimento</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.dataNascimento" name="dataNascimento" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.dataNascimento" name="dataNascimento" type="date" placeholder="DD/MM/AAAA" class="form-control input-md" >
         </div>
       </div>
 
@@ -69,7 +69,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Telefone</label>
         <div class="col-md-6">
-          <input appTelefone [(ngModel)]="aluno.telefone" name="telefone" type="tel"   placeholder="(21)99999-9999" class="form-control input-md" required="">
+          <input appTelefone [(ngModel)]="aluno.telefone" name="telefone" type="tel"   placeholder="(21)99999-9999" class="form-control input-md" >
         </div>
       </div>
 
@@ -77,7 +77,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="selectbasic">Bairro</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.nomeBairro" name="nomeBairro" type="text" placeholder="centro, tijuca..." class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.nomeBairro" name="nomeBairro" type="text" placeholder="centro, tijuca..." class="form-control input-md" >
         </div>
       </div>
 
@@ -85,7 +85,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Endereço</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.endereco" name="endereco" type="text" placeholder="rua, numero, bairro, cidade" class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.endereco" name="endereco" type="text" placeholder="rua, numero, bairro, cidade" class="form-control input-md" >
         </div>
       </div>
 
@@ -93,7 +93,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Número</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.numero" name="numero" type="number" placeholder="12" class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.numero" name="numero" type="number" placeholder="12" class="form-control input-md" >
         </div>
       </div>
 
@@ -109,7 +109,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Profissão</label>
         <div class="col-md-6">
-          <input [(ngModel)]="aluno.profissao" name="profissao" type="text" placeholder="Analista, Professor ..." class="form-control input-md" required="">
+          <input [(ngModel)]="aluno.profissao" name="profissao" type="text" placeholder="Analista, Professor ..." class="form-control input-md" >
         </div>
       </div>
 
@@ -117,7 +117,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="selectbasic">Sexo</label>
         <div class="col-md-6">
-          <select [(ngModel)]="aluno.sexo" name="sexo" class="form-control" required>
+          <select [(ngModel)]="aluno.sexo" name="sexo" class="form-control" >
             <option  value="F">Feminino</option>
             <option  value="M">Masculino</option>
       </select>
@@ -128,8 +128,8 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="selectbasic">Estado Civil</label>
         <div class="col-md-6">
-          <select [(ngModel)]="aluno.idEstadoCivil" name="estadoCivil" class="form-control" required>
-        <option *ngFor="let item of listaEstadoCivil" [ngValue]="item.id" required>{{item.nome}}</option>
+          <select [(ngModel)]="aluno.idEstadoCivil" name="estadoCivil" class="form-control" >
+        <option *ngFor="let item of listaEstadoCivil" [ngValue]="item.id" >{{item.nome}}</option>
       </select>
         </div>
       </div>
@@ -138,7 +138,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="selectbasic">Como Conheceu</label>
         <div class="col-md-6">
-          <select [(ngModel)]="aluno.idConheceEscola" name="conheceEscola" class="form-control" required >
+          <select [(ngModel)]="aluno.idConheceEscola" name="conheceEscola" class="form-control"  >
         <option *ngFor="let item of listaComoConheceu" [ngValue]="item.id" >{{item.nome}}</option>
       </select>
         </div>
