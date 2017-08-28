@@ -1,17 +1,18 @@
-import { ConsultaAulaParticular } from './../models/consulta-aula-particular';
-import { CadastroAulaParticular } from './../models/cadastro-aula-particular';
-import { ConsultaMensalidades } from './../models/consulta-mensalidades';
-import { ConsultaMatricula } from './../models/consulta-matricula';
-import { ConsultaAlunos } from './../models/consulta-alunos';
-import { CadastroAluno } from './../models/cadastro-aluno';
 import { FileUploader } from 'ng2-file-upload';
-import { HttpCustormerService } from './http-custormer.service';
 import { Http, Response, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 import { EstadoCivil } from './../models/estado-civil';
 import { ConheceEscola } from './../models/conhece-escola';
 import { environment } from './../../environments/environment';
+import { Pagamentos } from 'app/models/pagamentos';
+import { ConsultaAulaParticular } from './../models/consulta-aula-particular';
+import { CadastroAulaParticular } from './../models/cadastro-aula-particular';
+import { ConsultaMensalidades } from './../models/consulta-mensalidades';
+import { ConsultaMatricula } from './../models/consulta-matricula';
+import { ConsultaAlunos } from './../models/consulta-alunos';
+import { CadastroAluno } from './../models/cadastro-aluno';
+import { HttpCustormerService } from './http-custormer.service';
 
 @Injectable()
 export class AlunoService {
@@ -60,6 +61,10 @@ delete(idAluno: number) {
     let objeto: Number = new Number(valor);
     
     return this.http.post(environment.url + "alunos/" + idAluno + "/debitos/" + idMensalidade + "/pagamento", objeto);
+  }
+
+  efetuarPagamento(idAluno:number, pagamentos: Pagamentos){
+    return this.http.post(environment.url + "alunos/" + idAluno + "/pagamentos", pagamentos);
   }
 
   getPagamentos(idAluno: number, dataInicio:string, dataFim: string){

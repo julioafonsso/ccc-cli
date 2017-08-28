@@ -1,5 +1,4 @@
 
-
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +24,7 @@ import { TurmaService } from './../servicos/turma.service';
 import { ProfessorService } from './../servicos/professor.service';
 import { ModalidadeTurma } from './../models/modalidade-turma';
 import { AlunoService } from './../servicos/aluno.service';
+import { Pagamentos } from "app/models/pagamentos";
 
 @Component({
   selector: 'app-detalhe-aluno',
@@ -55,9 +55,9 @@ export class DetalheAlunoComponent implements OnInit {
   private workShops: ConsultaWorkShop[];
   private matriculasWorkShops: ConsultaMatricula[];
   private niveis = new Array<NivelTurma>();
-
   private nivelSelecionado: NivelTurma;
   private modalidadeSelecionado: ModalidadeTurma;
+  private pagamentos: Pagamentos;
 
   constructor(private alunoService: AlunoService, private turmaService: TurmaService,
     private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute,
@@ -72,6 +72,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.aula = new CadastroAulaParticular();
     this.niveis = new Array<NivelTurma>();
     this.modalidades = new Array<ModalidadeTurma>()
+    this.pagamentos = new Pagamentos()
   }
 
 
@@ -84,6 +85,8 @@ export class DetalheAlunoComponent implements OnInit {
     this.pesquisarHistPagamento();
     this.pesquisarAulasParticulares();
     this.pesquisarWorkShops();
+    this.loadAulasParticulares();
+
   }
 
   ngOnInit() {
@@ -166,17 +169,8 @@ export class DetalheAlunoComponent implements OnInit {
 
 
   cadastrarAulaParticular() {
-    this.alunoService.cadastrarAulaParticular(this.idAluno, this.aula).subscribe(response => {
-      this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-      this.reset()
-      this.loadAulasParticulares();
-      this.resetCadastroAulaParticular();
-      this.submit = false;
-    },
-      error => {
-        this.submit = false;
-        this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-      });
+    this.pagamentos.aulasParticulares.push(this.aula);
+    this.aula = new CadastroAulaParticular();
   }
 
   initDatas() {
@@ -296,25 +290,30 @@ export class DetalheAlunoComponent implements OnInit {
     });
   }
 
-  pagar(idMensalidade: number, valor: number) {
+  pagar() {
+    console.log(this.pagamentos)
     this.submit = true;
-    this.alunoService.pagarMensalidade(idMensalidade, valor, this.idAluno).subscribe(res => {
+    this.alunoService.efetuarPagamento(this.idAluno, this.pagamentos).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Com Sucesso !' });
       this.reset();
     }, error => {
-      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
       this.submit = false;
+      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
     });
 
   }
 
   pagarMensalidade(mensalidade: ConsultaMensalidades) {
-    this.pagar(mensalidade.id, mensalidade.valorMensalidade);
+    let mensalidadeParaPagar: ConsultaMensalidades = Object.assign({}, mensalidade);;
+    mensalidadeParaPagar.valorCalculado = mensalidade.valorCalculado
+    this.addMensalidadeParaPagar(mensalidadeParaPagar)
   }
 
   pagarMensalidadeCalculada(mensalidade: ConsultaMensalidades) {
-    this.pagar(mensalidade.id, mensalidade.valorCalculado);
+    let mensalidadeParaPagar: ConsultaMensalidades = Object.assign({}, mensalidade);;
+    this.addMensalidadeParaPagar(mensalidadeParaPagar)
   }
+
 
   alterarDesconto(matricula: ConsultaMatricula) {
     this.turmaService.alterarDesconto(matricula.id, matricula.idDesconto).subscribe(res => {
@@ -363,4 +362,49 @@ export class DetalheAlunoComponent implements OnInit {
 
 
   }
+
+  addMensalidadeParaPagar(mensalidade: ConsultaMensalidades) {
+
+    let index = this.pagamentos.mensalidadesParaPagar.map(function (x) { return x.id; }).indexOf(mensalidade.id);
+    if (index < 0)
+      this.pagamentos.mensalidadesParaPagar.push(mensalidade)
+
+  }
+
+  cancelarPagamentoMensalidade(index: number) {
+    this.pagamentos.mensalidadesParaPagar.splice(index, 1)
+  }
+
+  cancelarPagamentoAulaParticular(index: number){
+    this.pagamentos.aulasParticulares.splice(index, 1)
+  }
+
+  getModalidade(id: number)
+  {
+    return this.modalidades.filter((modalidade) => {
+      return modalidade.id === id;
+    })[0].nome
+  }
+
+  getValor(str: string){
+    let valor = str.replace(/[^0-9]/gi, '');
+    valor = valor.substr(0, valor.length - 2) + "." + valor.substr(valor.length - 2)
+    return new Number(valor).valueOf();
+  }
+
+  getValorTotalParaPagar(){
+    let valorTotal = 0;
+    this.pagamentos.aulasParticulares.forEach(aula =>{
+
+      valorTotal = valorTotal + this.getValor(aula.valorPago.toString());
+    })
+
+    this.pagamentos.mensalidadesParaPagar.forEach(mensalidade =>{
+      valorTotal = valorTotal + mensalidade.valorCalculado;
+    })
+
+    return valorTotal;
+  }
+
+
 }
