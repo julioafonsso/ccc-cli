@@ -78,7 +78,6 @@ export class ConsultaTurmasComponent implements OnInit {
       this.alunos = res;
     })
     this.turmaService.getListaPresenca(id).subscribe(res => {
-      console.log(res)
       this.downloadFile(res._body);
     })
 
@@ -96,7 +95,6 @@ export class ConsultaTurmasComponent implements OnInit {
     // link.click();
 
     this.url= window.URL.createObjectURL(this.b64ToBlob(data));
-    console.log("URL " + this.url)
 
   }
 

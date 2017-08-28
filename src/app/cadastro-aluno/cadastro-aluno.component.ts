@@ -71,8 +71,6 @@ export class CadastroAlunoComponent implements OnInit {
                         this.submit = true;
                         this.envieiFoto = true;
                         this.alunoService.getAluno(params['id']).subscribe(res => {
-                            console.log("Aluno")
-                            console.log(this.aluno)
                             this.aluno = res;
                             this.submit = false;
 
