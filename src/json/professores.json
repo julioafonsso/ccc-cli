@@ -56,7 +56,7 @@
                     "diasSemana": [
                         {
                             "id": 3,
-                            "nome": "Terça-Feira"
+                            "nome": "Ter&#231;a-Feira"
                         },
                         {
                             "id": 4,
@@ -100,7 +100,7 @@
                     "diasSemana": [
                         {
                             "id": 3,
-                            "nome": "Terça-Feira"
+                            "nome": "Ter&#231;a-Feira"
                         },
                         {
                             "id": 4,
@@ -282,7 +282,7 @@
                     },
                     "nivel": {
                         "id": 3,
-                        "nome": "Avançado"
+                        "nome": "Avan&#231;ado"
                     },
                     "alunos": [],
                     "qtdAlunos": 0,
@@ -318,7 +318,7 @@
                     },
                     "nivel": {
                         "id": 3,
-                        "nome": "Avançado"
+                        "nome": "Avan&#231;ado"
                     },
                     "alunos": [],
                     "qtdAlunos": 0,
@@ -354,7 +354,7 @@
                     },
                     "nivel": {
                         "id": 3,
-                        "nome": "Avançado"
+                        "nome": "Avan&#231;ado"
                     },
                     "alunos": [],
                     "qtdAlunos": 0,
@@ -390,7 +390,7 @@
                     },
                     "nivel": {
                         "id": 3,
-                        "nome": "Avançado"
+                        "nome": "Avan&#231;ado"
                     },
                     "alunos": [],
                     "qtdAlunos": 0,
@@ -426,7 +426,7 @@
                     },
                     "nivel": {
                         "id": 3,
-                        "nome": "Avançado"
+                        "nome": "Avan&#231;ado"
                     },
                     "alunos": [],
                     "qtdAlunos": 0,
@@ -462,7 +462,7 @@
                     },
                     "nivel": {
                         "id": 3,
-                        "nome": "Avançado"
+                        "nome": "Avan&#231;ado"
                     },
                     "alunos": [],
                     "qtdAlunos": 0,

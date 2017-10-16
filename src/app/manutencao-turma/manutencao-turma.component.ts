@@ -126,7 +126,7 @@ export class ManutencaoTurmaComponent implements OnInit {
   //   },
   //     error => {
   //       this.submit = false;
-  //       this.msgs.push({ severity: 'error', summary: 'Desconto não Alterado !', detail: JSON.parse(error._body)["message"] });
+  //       this.msgs.push({ severity: 'error', summary: 'Desconto n&#227;o Alterado !', detail: JSON.parse(error._body)["message"] });
   //     });
   // }
 

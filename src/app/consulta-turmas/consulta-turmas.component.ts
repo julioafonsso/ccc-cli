@@ -90,7 +90,7 @@ export class ConsultaTurmasComponent implements OnInit {
 
     // var link = document.createElement("a");
     // link.setAttribute("href", data.toString());
-    // link.setAttribute("download", "lista presença.xls");
+    // link.setAttribute("download", "lista presen&#231;a.xls");
     // document.body.appendChild(link);
     // link.click();
 
@@ -136,7 +136,7 @@ private b64ToBlob(valor:string){
 
     var link = document.createElement("a");
     link.setAttribute("href", this.url);
-    link.setAttribute("download", "lista presença.xls");
+    link.setAttribute("download", "lista presen&#231;a.xls");
     document.body.appendChild(link);
     link.click();
 

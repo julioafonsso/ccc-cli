@@ -7,7 +7,7 @@
       <tr>
         <th>Nome</th>
         <th>Tipo</th>
-        <th>Ação</th>
+        <th>A&#231;&#227;o</th>
       </tr>
     </thead>
     <tbody>
@@ -15,7 +15,7 @@
         <td>{{tipo.nome}}</td>
         <td *ngIf="tipo.indEntrada" >Entrada</td>
         <td *ngIf="!tipo.indEntrada" >Saida</td>
-        <td><button class="btn btn-primary" [routerLink]="['/cadastro-tipo-fluxo-caixa', tipo.id]" >Manutenção Tipo Flxuo</button>
+        <td><button class="btn btn-primary" [routerLink]="['/cadastro-tipo-fluxo-caixa', tipo.id]" >Manuten&#231;&#227;o Tipo Flxuo</button>
         <button class="btn btn-danger" (click)="deletar(tipo)" >Excluir Tipo Fluxo</button>
         </td>
       </tr>

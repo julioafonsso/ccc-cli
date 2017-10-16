@@ -58,7 +58,7 @@ export class LoginService {
     }, (error: (Response)) => {
       
       if(error.status === 0)
-        this.messageLogin.next("Falha na conexão");
+        this.messageLogin.next("Falha na conex&#227;o");
       else
         this.messageLogin.next(error.json().message);
     })

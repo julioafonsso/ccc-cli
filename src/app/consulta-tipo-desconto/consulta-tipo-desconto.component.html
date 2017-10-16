@@ -7,14 +7,14 @@
         <tr>
           <th>Nome</th>
           <th>Percentual</th>
-          <th>Ação</th>
+          <th>A&#231;&#227;o</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let desconto of getDescontos()">
           <td>{{desconto.nome}}</td>
           <td>{{desconto.valor}} %</td>
-          <td><button [disabled]="submit" class="btn btn-primary" [routerLink]="['/cadastro-tipo-desconto', desconto.id]">Manutenção Tipo Desconto</button>
+          <td><button [disabled]="submit" class="btn btn-primary" [routerLink]="['/cadastro-tipo-desconto', desconto.id]">Manuten&#231;&#227;o Tipo Desconto</button>
             <button [disabled]="submit" class="btn btn-danger" (click)="deletar(desconto)">Excluir Tipo Desconto</button>
           </td>
         </tr>

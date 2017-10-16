@@ -317,10 +317,10 @@ export class DetalheAlunoComponent implements OnInit {
 
   alterarDesconto(matricula: ConsultaMatricula) {
     this.turmaService.alterarDesconto(matricula.id, matricula.idDesconto).subscribe(res => {
-      this.msgs.push({ severity: 'success', summary: 'Alteração Com Sucesso !' });
+      this.msgs.push({ severity: 'success', summary: 'Altera&#231;&#227;o Com Sucesso !' });
     },
       error => {
-        this.msgs.push({ severity: 'error', summary: 'Alteração com erro!' });
+        this.msgs.push({ severity: 'error', summary: 'Altera&#231;&#227;o com erro!' });
       })
   }
 
@@ -351,7 +351,7 @@ export class DetalheAlunoComponent implements OnInit {
       message: 'Deseja excluir o Aluno?',
       accept: () => {
         this.alunoService.delete(this.idAluno).subscribe(res => {
-          this.msgs.push({ severity: 'success', summary: 'Exclusão com Sucesso !' });
+          this.msgs.push({ severity: 'success', summary: 'Exclus&#227;o com Sucesso !' });
           this.roteador.navigate(['/consulta-alunos']);
         }, error => {
           this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });

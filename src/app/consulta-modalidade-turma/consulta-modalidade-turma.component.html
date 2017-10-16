@@ -6,13 +6,13 @@
     <thead>
       <tr>
         <th>Nome</th>
-        <th>Ação</th>
+        <th>A&#231;&#227;o</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let modalidade of getModalidades()">
         <td>{{modalidade.nome}}</td>
-        <td><button [disabled]="submit" class="btn btn-primary" [routerLink]="['/cadastro-modalidade-turma', modalidade.id]" >Manutenção Modalidade Turma</button>
+        <td><button [disabled]="submit" class="btn btn-primary" [routerLink]="['/cadastro-modalidade-turma', modalidade.id]" >Manuten&#231;&#227;o Modalidade Turma</button>
         <button [disabled]="submit" class="btn btn-danger" (click)="deletar(modalidade)" >Excluir Modalidade Turma</button></td>
       </tr>
     </tbody>
