@@ -40,14 +40,14 @@
   <div class="btn-group" role="group">
     <button type="button" id="debitos" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(3), 'btn-primary': getTabAtiva(3)}"
       (click)="tab(3)" href="#tabHistPag" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-                <div class="hidden-xs">Historico Pagamento</div>
+                <div class="hidden-xs">Historico de R$</div>
             </button>
   </div>
 
   <div class="btn-group" role="group">
     <button type="button" id="debitos" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(4), 'btn-primary': getTabAtiva(4)}"
       (click)="tab(4)" href="#tabAlulasParticulas" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-                <div class="hidden-xs">Aulas Particulares</div>
+                <div class="hidden-xs">AIS</div>
             </button>
   </div>
   <div class="btn-group" role="group">
@@ -217,10 +217,19 @@
               <td></td>
               <td>{{aula.qtdAulas}}</td>
               <td>{{getValor(aula.valorPago) | currency:'BRL':true }}</td>
-              <td><button [disabled]="submit" class="btn btn-danger" (click)="cancelarPagamentoAulaParticular(debito)">Excluir</button>
+              <td><button [disabled]="submit" class="btn btn-danger" (click)="cancelarPagamentoAulaParticular(index)">Excluir</button>
               </td>
             </tr>
-            
+            <tr *ngFor="let work of pagamentos.workShop;let index = index">
+              <td>WorkShop</td>
+              <td>{{getModalidade(work.idModalidade)}}</td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td>{{work.valorMensalidade | currency:'BRL':true }}</td>
+              <td><button [disabled]="submit" class="btn btn-danger" (click)="cancelarWorkShop(index)">Excluir</button>
+              </td>
+            </tr>
           </tbody>
           <tfoot>
               <tr class="success">
@@ -609,7 +618,7 @@
                 <td>{{turma.nomeProfessor2}}</td>
                 <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
                 <td>{{turma.qtdVagas}}</td>
-                <td><button data-dismiss="modal" class="btn btn-default" (click)="matricularWork(turma.id)">Matricular</button>
+                <td><button data-dismiss="modal" class="btn btn-default" (click)="matricularWork(turma)">Matricular</button>
               </tr>
             </tbody>
           </table>

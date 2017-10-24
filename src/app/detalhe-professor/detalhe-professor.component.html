@@ -178,8 +178,7 @@
                 <td *ngIf="!ehDetalheExibido(recibo)"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true" (click)="mostrarDetalhe(recibo)"></span></td>
                 <td *ngIf="ehDetalheExibido(recibo)"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true" (click)="mostrarDetalhe(recibo)"></span></td>
                 <td>{{recibo.valor  | currency:'BRL':true}}</td>
-                <!--<td>{{recibo.data | date: 'dd/MM/yyyy'}}</td>-->
-                                <td>{{recibo.id}}</td>
+                <td>{{recibo.data | date: 'dd/MM/yyyy'}}</td>
               </tr>
             </tbody>
           </table>

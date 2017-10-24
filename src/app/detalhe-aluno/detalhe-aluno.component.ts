@@ -86,7 +86,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.pesquisarAulasParticulares();
     this.pesquisarWorkShops();
     this.loadAulasParticulares();
-
+    this.pagamentos = new Pagamentos()
   }
 
   ngOnInit() {
@@ -127,19 +127,6 @@ export class DetalheAlunoComponent implements OnInit {
     })
   }
 
-  matricular() {
-    this.matricula.idAluno = this.idAluno;
-    this.turmaService.matricularAluno(this.matricula)
-      .subscribe(res => {
-        this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
-
-        this.reset();
-      }, error => {
-        this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
-        this.submit = false;
-      });
-  }
-
   resetCadastroAulaParticular() {
     this.qtdAulas = null;
     this.turmaService.getModalidades().subscribe(res => {
@@ -163,14 +150,6 @@ export class DetalheAlunoComponent implements OnInit {
     this.turmaService.getTurmas().subscribe(res => {
       this.turmas = res;
     })
-  }
-
-
-
-
-  cadastrarAulaParticular() {
-    this.pagamentos.aulasParticulares.push(this.aula);
-    this.aula = new CadastroAulaParticular();
   }
 
   initDatas() {
@@ -277,21 +256,54 @@ export class DetalheAlunoComponent implements OnInit {
     this.botoes[valor] = true;
   }
 
-  matricularWork(idTurma: number) {
-    this.matricula = new CadastroMatricula();
+  // matricularWork(idTurma: number) {
+  //   this.matricula = new CadastroMatricula();
+  //   this.matricula.idAluno = this.idAluno;
+  //   this.matricula.idTurma = idTurma;
+  //   this.turmaService.matricularAluno(this.matricula).subscribe(res => {
+  //     this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
+  //     this.reset();
+  //   }, error => {
+  //     this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
+  //     this.submit = false;
+  //   });
+  // }
+
+
+  matricular() {
     this.matricula.idAluno = this.idAluno;
-    this.matricula.idTurma = idTurma;
-    this.turmaService.matricularAluno(this.matricula).subscribe(res => {
-      this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
-      this.reset();
-    }, error => {
-      this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
-      this.submit = false;
-    });
+    this.turmaService.matricularAluno(this.matricula)
+      .subscribe(res => {
+        this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
+
+        this.reset();
+      }, error => {
+        this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
+        this.submit = false;
+      });
+  }
+
+  matricularWork(work: ConsultaWorkShop) {
+
+    if(this.matriculasWorkShops.map(function (x) { return x.idTurma; }).indexOf(work.id) > -1){
+      this.msgs.push({ severity: 'error', summary: 'Aluno já cadastrado no workshop' });
+    }
+    else{
+
+      let index = this.pagamentos.workShop.map(function (x) { return x.id; }).indexOf(work.id);
+      if (index < 0)
+        this.pagamentos.workShop.push(work);
+      
+    }
+  }
+
+
+  cadastrarAulaParticular() {
+    this.pagamentos.aulasParticulares.push(this.aula);
+    this.aula = new CadastroAulaParticular();
   }
 
   pagar() {
-    console.log(this.pagamentos)
     this.submit = true;
     this.alunoService.efetuarPagamento(this.idAluno, this.pagamentos).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Com Sucesso !' });
@@ -317,7 +329,7 @@ export class DetalheAlunoComponent implements OnInit {
 
   alterarDesconto(matricula: ConsultaMatricula) {
     this.turmaService.alterarDesconto(matricula.id, matricula.idDesconto).subscribe(res => {
-      this.msgs.push({ severity: 'success', summary: 'Altera&#231;&#227;o Com Sucesso !' });
+      this.msgs.push({ severity: 'success', summary: 'Alteração Com Sucesso !' });
     },
       error => {
         this.msgs.push({ severity: 'error', summary: 'Altera&#231;&#227;o com erro!' });
@@ -379,6 +391,10 @@ export class DetalheAlunoComponent implements OnInit {
     this.pagamentos.aulasParticulares.splice(index, 1)
   }
 
+  cancelarWorkShop(index: number){
+    this.pagamentos.workShop.splice(index, 1)
+  }
+
   getModalidade(id: number)
   {
     return this.modalidades.filter((modalidade) => {
@@ -403,6 +419,9 @@ export class DetalheAlunoComponent implements OnInit {
       valorTotal = valorTotal + mensalidade.valorCalculado;
     })
 
+    this.pagamentos.workShop.forEach(work =>{
+      valorTotal = valorTotal + work.valorMensalidade;
+    })
     return valorTotal;
   }
 

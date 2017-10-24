@@ -31,9 +31,11 @@ export class ConsultaAlunosComponent implements OnInit {
     return this.alunos.filter((aluno) => {
       if (aluno.nome.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
         return true;
-      if (aluno.cpf.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
+      if (aluno.cpf != undefined &&
+        aluno.cpf.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
         return true;
-      if (aluno.email.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
+      if (aluno.email != undefined &&
+        aluno.email.toLowerCase().indexOf(this.filtro.toLowerCase()) > -1)
         return true;
     });
   }
