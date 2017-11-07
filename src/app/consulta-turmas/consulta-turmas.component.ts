@@ -1,3 +1,4 @@
+import { Message } from 'primeng/primeng';
 import { DatePipe } from '@angular/common';
 import { ConsultaAlunosMatriculados } from './../models/consulta-alunos-matriculados';
 import { Response } from '@angular/http';
@@ -19,8 +20,10 @@ export class ConsultaTurmasComponent implements OnInit {
 
   constructor(private turmaService: TurmaService) {
     this.alunos = [];
+    this.msgs = [];
   }
 
+  private msgs: Message[];
   private niveis = new Array<NivelTurma>();
   private modalidades = new Array<ModalidadeTurma>()
   private turmas: ConsultaTurma[];
@@ -31,6 +34,8 @@ export class ConsultaTurmasComponent implements OnInit {
   private alunos: ConsultaAlunosMatriculados[];
   private diasAulas: Date[];
   private url: any;
+  private idTurmaExcluir:Number;
+
   ngOnInit() {
     this.turmaService.getTurmas().subscribe(res => {
       this.turmas = res;
@@ -52,6 +57,7 @@ export class ConsultaTurmasComponent implements OnInit {
     })
   }
 
+  
   getTurmas() {
 
     let valores = this.turmas;
@@ -88,12 +94,6 @@ export class ConsultaTurmasComponent implements OnInit {
 
     var blob = new Blob([data], { type: 'application/vnd.ms-excel' });
 
-    // var link = document.createElement("a");
-    // link.setAttribute("href", data.toString());
-    // link.setAttribute("download", "lista presen&#231;a.xls");
-    // document.body.appendChild(link);
-    // link.click();
-
     this.url= window.URL.createObjectURL(this.b64ToBlob(data));
 
   }
@@ -119,20 +119,6 @@ private b64ToBlob(valor:string){
 
   export() {
 
-    // window.open(this.url, 'Lista.xls');
-    // let dp :DatePipe =new DatePipe("pt-BR")
-    // let conteudo = "data:text/csv;charser=utf-8,";
-
-    // let cabecalho = "Nome;Data Aniversario; Email";
-    // this.diasAulas.forEach(valor =>{
-    //   cabecalho = cabecalho + ";" + dp.transform(valor, 'dd/MM/yyyy');
-    // })
-
-    // conteudo += cabecalho + "\n";
-
-    // this.alunos.forEach(aluno =>{
-    //   conteudo += aluno.nome + ";" + dp.transform(aluno.dataNascimento, 'dd/MM/yyyy') + ";" + aluno.email + "\n";
-    // })
 
     var link = document.createElement("a");
     link.setAttribute("href", this.url);
@@ -141,5 +127,21 @@ private b64ToBlob(valor:string){
     link.click();
 
 
+  }
+
+  setTurmaExcluir(id){
+    this.idTurmaExcluir = id;
+  }
+
+  excluirTurma(){
+    this.turmaService.excluir(this.idTurmaExcluir).subscribe(res => {
+      this.msgs.push({ severity: 'success', summary: 'Exclusão com Sucesso !' });
+      this.turmaService.getTurmas().subscribe(res => {
+        this.turmas = res;
+      })
+      
+    }, error => {
+      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+    });
   }
 }

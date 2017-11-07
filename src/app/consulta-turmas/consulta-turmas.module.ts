@@ -1,3 +1,4 @@
+import { GrowlModule } from 'primeng/primeng';
 import { ProfessorService } from './../servicos/professor.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +15,7 @@ const rotas = [ { path: '', component: ConsultaTurmasComponent } ];
   imports: [
     CommonModule,
     FormsModule,
+    GrowlModule,
     RouterModule.forChild(rotas)
   ],
   declarations: [ConsultaTurmasComponent],

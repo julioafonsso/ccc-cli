@@ -19,13 +19,9 @@ import { TipoDesconto } from './../models/tipo-desconto';
 export class TurmaService {
 
     constructor(private http: HttpCustormerService) { }
-    // finalizar(turma: Turma) {
-    //     return this.http.delete(environment.url + "turmas/" + turma.id);
-    // }
-
-    // excluirAlunoTurma(matricula: Matricula) {
-    //     return this.http.delete(environment.url + "turmas/matricula/" + matricula.id);
-    // }
+    excluir(id: Number) {
+        return this.http.delete(environment.url + "turmas/" + id);
+    }
 
     getAlunos(id: number) {
         return this.http.get(environment.url + "turmas/" + id + "/alunos").map((response: Response) => <ConsultaAlunosMatriculados[]>response.json());

@@ -1,22 +1,23 @@
+<p-growl [value]="msgs" life=6000></p-growl>
 <div class="panel panel-default">
   <div class="panel-heading">Filtros</div>
   <div class="panel-body">
-
-  <div class="col-md-3">
+    
+    <div class="col-md-3">
       <label class="control-label" for="textinput">Modalidades</label>
       <select [(ngModel)]="modalidadeSelecionado" name="modalidade" class="form-control">
-      <option *ngFor="let item of modalidades" [ngValue]="item">{{item.nome}}</option>
-        </select>
+        <option *ngFor="let item of modalidades" [ngValue]="item">{{item.nome}}</option>
+      </select>
     </div>
-
+    
     <div class="col-md-3">
       <label class="control-label" for="textinput">Niveis</label>
       <select [(ngModel)]="nivelSelecionado" name="nivel" class="form-control">
-      <option  *ngFor="let item of niveis" [ngValue]="item">{{item.nome}}</option>
-        </select>
+        <option  *ngFor="let item of niveis" [ngValue]="item">{{item.nome}}</option>
+      </select>
     </div>
-
-
+    
+    
   </div>
 </div>
 
@@ -24,53 +25,74 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Lista de Turmas</div>
-<div class="table-responsive">
-  <!-- Table -->
-  <table class="table table-bordered table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Codigo</th>
-        <th>Modalidade</th>
-        <th>Nivel</th>
-        <th>Data Inicio</th>
-        <th>Data Fim</th>
-        <th>Qtd Cavalheiros</th>
-        <th>Qtd Damas</th>
-        <th>Professor</th>
-        <th>Professor</th>
-        <th>Mensalidade</th>
-        <th>N&#186; Vagas</th>
-        <th>Editar</th>
-        <th>Alunos</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let turma of getTurmas()">
-        <td>{{turma.codigo}}</td>
-        <td>{{turma.nomeModalidade}}</td>
-        <td>{{turma.nomeNivel}}</td>
-        <td>{{turma.dataInicio | date: 'dd/MM/yyyy'}}</td>
-        <td>{{turma.dataTermino | date: 'dd/MM/yyyy'}}</td>
-        <td>{{turma.qtdAlunos}}</td>
-        <td>{{turma.qtdAlunas}}</td>
-        <td>{{turma.nomeProfessor1}}</td>
-        <td>{{turma.nomeProfessor2}}</td>
-        <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
-        <td>{{turma.qtdVagas}}</td>
-        <td><button class="btn btn-primary" [routerLink]="['/cadastro-turma', turma.id]" >Editar</button></td>
-        <td>
+  <div class="table-responsive">
+    <!-- Table -->
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Codigo</th>
+          <th>Modalidade</th>
+          <th>Nivel</th>
+          <th>Data Inicio</th>
+          <th>Data Fim</th>
+          <th>Qtd Cavalheiros</th>
+          <th>Qtd Damas</th>
+          <th>Professor</th>
+          <th>Professor</th>
+          <th>Mensalidade</th>
+          <th>N&#186; Vagas</th>
+          <th>Editar</th>
+          <th>Alunos</th>
+          <th>Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let turma of getTurmas()">
+          <td>{{turma.codigo}}</td>
+          <td>{{turma.nomeModalidade}}</td>
+          <td>{{turma.nomeNivel}}</td>
+          <td>{{turma.dataInicio | date: 'dd/MM/yyyy'}}</td>
+          <td>{{turma.dataTermino | date: 'dd/MM/yyyy'}}</td>
+          <td>{{turma.qtdAlunos}}</td>
+          <td>{{turma.qtdAlunas}}</td>
+          <td>{{turma.nomeProfessor1}}</td>
+          <td>{{turma.nomeProfessor2}}</td>
+          <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
+          <td>{{turma.qtdVagas}}</td>
+          <td><button class="btn btn-primary" [routerLink]="['/cadastro-turma', turma.id]" >Editar</button></td>
+          <td>
             <button class="btn btn-primary" (click)="getAlunos(turma.id)" data-toggle="modal" data-target="#modalAluno"  >Alunos</button>
-        </td>
-        
-        
-      </tr>
-    </tbody>
-  </table>
-</div>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="setTurmaExcluir(turma.id)" data-toggle="modal" data-target="#modalExcluir"  >Excluir</button>
+          </td>
+          
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 
+
+
+<div class="modal fade bs-example-modal-sm" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" style="width:30%;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="myModalLabel">Tem Certeza que deseja Excluir?</h4>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Não</button>
+        <button type="button" class="btn btn-danger" (click)="excluirTurma()" data-dismiss="modal" aria-label="Close">Sim</button>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
 
 
 <div class="modal fade bs-example-modal-lg" id="modalAluno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -83,32 +105,32 @@
       <div class="modal-body">
         <div class="table-responsive">
           <button  class="btn btn-primary" (click)="export()">Lista de Presen&#231;a</button>
-        <table class="table table-bordered table-striped ">
+          <table class="table table-bordered table-striped ">
             <thead>
-                <tr>
-                    <th>Nome Aluno</th>
-                    <th>CPF</th>
-                    <th>Email</th>
-                    <th>Nome Desconto</th>
-                    <th>Valor Desconto</th>
-                    <th>Data Matricula</th>
-                </tr>
+              <tr>
+                <th>Nome Aluno</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Nome Desconto</th>
+                <th>Valor Desconto</th>
+                <th>Data Matricula</th>
+              </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let aluno of alunos" >
-                    <td>{{aluno.nome}}</td>
-                    <td>{{aluno.cpf}}</td>
-                    <td>{{aluno.email}} </td>
-                    <td>{{aluno.nomeDesconto}}</td>
-                    <td>{{aluno.valorDesconto}}</td>
-                    <td>{{aluno.dataMatricula | date: 'dd/MM/yyyy'}}</td>
-
-            </tbody>
-        </table>
-    </div>
-      
+              <tr *ngFor="let aluno of alunos" >
+                <td>{{aluno.nome}}</td>
+                <td>{{aluno.cpf}}</td>
+                <td>{{aluno.email}} </td>
+                <td>{{aluno.nomeDesconto}}</td>
+                <td>{{aluno.valorDesconto}}</td>
+                <td>{{aluno.dataMatricula | date: 'dd/MM/yyyy'}}</td>
+                
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+        
       </div>
-      
     </div>
   </div>
-</div>

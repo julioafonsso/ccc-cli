@@ -363,7 +363,7 @@ export class DetalheAlunoComponent implements OnInit {
       message: 'Deseja excluir o Aluno?',
       accept: () => {
         this.alunoService.delete(this.idAluno).subscribe(res => {
-          this.msgs.push({ severity: 'success', summary: 'Exclus&#227;o com Sucesso !' });
+          this.msgs.push({ severity: 'success', summary: 'Exclusão com Sucesso !' });
           this.roteador.navigate(['/consulta-alunos']);
         }, error => {
           this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
