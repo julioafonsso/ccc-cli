@@ -317,7 +317,7 @@ export class DetalheAlunoComponent implements OnInit {
 
   pagarMensalidade(mensalidade: ConsultaMensalidades) {
     let mensalidadeParaPagar: ConsultaMensalidades = Object.assign({}, mensalidade);;
-    mensalidadeParaPagar.valorCalculado = mensalidade.valorCalculado
+    mensalidadeParaPagar.valorCalculado = mensalidade.valorMensalidade
     this.addMensalidadeParaPagar(mensalidadeParaPagar)
   }
 
@@ -332,7 +332,7 @@ export class DetalheAlunoComponent implements OnInit {
       this.msgs.push({ severity: 'success', summary: 'Alteração Com Sucesso !' });
     },
       error => {
-        this.msgs.push({ severity: 'error', summary: 'Altera&#231;&#227;o com erro!' });
+        this.msgs.push({ severity: 'error', summary: 'Alteração com erro!' });
       })
   }
 

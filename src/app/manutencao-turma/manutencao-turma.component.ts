@@ -25,7 +25,6 @@ export class ManutencaoTurmaComponent implements OnInit {
 
   private inscricao: Subscription;
   private idTurma: number;
-  // private dias: DiasSemana[];
   private professores: ConsultaProfessor[];
   private professoras: ConsultaProfessor[];
   private salas: Salas[];
@@ -84,112 +83,9 @@ export class ManutencaoTurmaComponent implements OnInit {
     this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.idTurma = params['id'];
-        // this.loadTurma();
       }
     );
   }
-
-  // setDescontosAlunosMatriculados(){
-  //   if(this.descontos.length === 0)
-  //   {
-  //     this.load = setInterval(this.setDescontosAlunosMatriculados(), 500);
-  //   }
-  //   else{
-  //     clearInterval(this.load);
-
-  //     this.matriculas.forEach(matricula =>{
-  //       if(matricula.desconto != undefined || matricula.desconto != null)
-  //       {
-  //         this.descontos.forEach(desconto =>{
-  //           if(desconto.id === matricula.desconto.id)
-  //           {
-  //             matricula.desconto = desconto;
-  //           }
-  //         })
-  //       }
-  //     })
-  //   }
-  // }
-
-  // alterarDesconto(matricula: Matricula)
-  // {
-  //   if(matricula.desconto.id === undefined)
-  //     return this.turmaService.deletarDesconto(matricula)
-  //   else
-  //     return this.turmaService.alterarDesconto(matricula);
-  // }
-
-  // atualizarDesconto(matricula: Matricula){
-  //     this.alterarDesconto(matricula).subscribe(res => {
-  //     this.reset();
-  //     this.msgs.push({ severity: 'success', summary: 'Desconto Alterado !' });
-  //   },
-  //     error => {
-  //       this.submit = false;
-  //       this.msgs.push({ severity: 'error', summary: 'Desconto n&#227;o Alterado !', detail: JSON.parse(error._body)["message"] });
-  //     });
-  // }
-
-  // loadTurma() {
-  //   this.turmaService.getTurma(this.idTurma).subscribe(res => {
-  //     this.turma = res;
-
-  //   });
-
-  //   this.turmaService.getMatriculas(this.idTurma).subscribe(res => {
-  //     this.matriculas = res;
-  //     this.setDescontosAlunosMatriculados();
-
-  //   });
-
-  // }
-
-  // encerrar() {
-  //   this.turmaService.finalizar(this.turma).subscribe(res => {
-  //     this.msgs.push({ severity: 'success', summary: 'Turma Encerrada Com Sucesso !' });
-  //     this.router.navigate(['/consulta-turmas']);
-  //   })
-  // }
-
-  // excluirAluno(aluno: Matricula) {
-  //   this.submit = true;
-  //   aluno.turma = this.turma;
-  //   this.turmaService.excluirAlunoTurma(aluno).subscribe(res => {
-  //     this.reset();
-  //     this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
-  //   },
-  //     error => {
-  //       this.submit = false;
-  //       this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-  //     });
-  // }
-
-  // pesquisarAlunos() {
-  //   this.alunoService.pesquisarAlunos(this.pesquisa.nome, this.pesquisa.email, this.pesquisa.cpf).subscribe(res => {
-  //     this.alunos = res;
-  //   });
-  // }
-
-  // reset() {
-  //   this.alunos = new Array<ConsultaAlunos>();
-  //   this.loadTurma();
-  //   this.pesquisa = new ConsultaAlunos();
-  //   this.submit = false;
-  // }
-
-  // matricular(alunoParametro: ConsultaAlunos, desconto: TipoDesconto, diaVencimento: number, valorMatricula: number) {
-  //   this.submit = true;
-  //   this.turmaService.matricularAluno(this.turma, alunoParametro, desconto, diaVencimento, valorMatricula).subscribe(res => {
-  //     this.msgs.push({ severity: 'success', summary: 'Matricula Efetuada Com Sucesso !' });
-  //     this.router.navigate(['/detalhe-aluno', alunoParametro.id]);
-  //     this.reset();
-
-  //   }, error => {
-  //     this.submit = false;
-  //     this.msgs.push({ severity: 'error', summary: 'Matricula Com Erro !', detail: JSON.parse(error._body)["message"] });
-  //   }
-  //   );
-  // }
 
 
 }

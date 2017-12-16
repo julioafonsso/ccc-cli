@@ -5,6 +5,6 @@ export class CadastroMatricula{
     public valor: string;
     public diaVencimento: number;
     public idDesconto: number;
-    
+    public dataMatricula: Date;
     constructor() { }
 }

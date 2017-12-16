@@ -5,27 +5,26 @@
     <!-- Form Name -->
     <legend>Cadastro de Alunos</legend>
 
-
-    <div class="card" *ngIf="getUploadSuccess()">
+      <div class="card" *ngIf="getUploadSuccess()">
         
         <div class="card__avatar--temp">
             <img class="card__avatar--temp__img" [src]="aluno.foto"   >
         </div>
         
-    </div>
-
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Selecione a Foto</label>
-      <div class="col-md-6">
-        <!--<input type="file" class="btn-upload" ng2FileSelect [uploader]="uploader" />-->
-        <input type="file" [(ngModel)]="foto" name="foto" (change)="onChange($event)" class="custom-file-input" ng2FileSelect [uploader]="uploader">
       </div>
-    </div>
 
       <!-- Text input-->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Nome do Aluno</label>
+        <label class="col-md-4 control-label" for="textinput">Selecione a Foto</label>
+        <div class="col-md-6">
+          <!--<input type="file" class="btn-upload" ng2FileSelect [uploader]="uploader" />-->
+          <input type="file" [(ngModel)]="foto" name="foto" (change)="onChange($event)" class="custom-file-input" ng2FileSelect [uploader]="uploader">
+        </div>
+      </div>
+    
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Nome Alunos</label>
         <div class="col-md-6">
           <input [(ngModel)]="aluno.nome" name="nome" type="text" placeholder="Julio Marques" class="form-control input-md" required="">
 

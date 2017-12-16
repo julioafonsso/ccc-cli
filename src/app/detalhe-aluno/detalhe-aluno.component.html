@@ -159,7 +159,7 @@
               <th>Vencimento</th>
               <th>Mes Referencia</th>
               <th>Mensalidade</th>
-              <th>Valor para pagar</th>
+              <th>Pagar com Desconto/Multa</th>
               <th>Pagar</th>
 
             </tr>
@@ -564,6 +564,13 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="select1">Data Matricula</label>
+              <div class="col-md-6">
+                <input [(ngModel)]="matricula.dataMatricula" name="valor" type="date"  class="form-control input-md"
+                  required>
+              </div>
+            </div>
 
 
             <div class="form-group">
@@ -632,4 +639,3 @@
 
 
 
-<!-- Fim Modal Aula Particular -->

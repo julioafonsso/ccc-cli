@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     this.bloquearBotao = true;
     this.loginService.login(this.usuario).subscribe(res => {
       if (res != null) {
+        this.msgs = [];
         this.msgs.push({ severity: 'error', summary: 'Login Fail', detail: res })
         this.bloquearBotao = false;
       }

@@ -49,6 +49,7 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   loadTurma() {
+    console.log("loadTurma")
     if (
       this.modalidades.length == 0 ||
       this.professoras.length == 0 ||
@@ -56,6 +57,7 @@ export class CadastroTurmaComponent implements OnInit {
       this.salas.length == 0 ||
       this.nives.length == 0
     ) {
+      clearInterval(this.load);
       this.load = setInterval(() => { this.loadTurma() }, 500);
     }
     else {
