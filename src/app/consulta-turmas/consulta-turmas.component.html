@@ -114,6 +114,9 @@
                 <th>Nome Desconto</th>
                 <th>Valor Desconto</th>
                 <th>Data Matricula</th>
+                <th>Data Ultimo pagamento</th>
+                <th>Valor Ultimo pagamento</th>
+                <th>Inadiplente</th>
               </tr>
             </thead>
             <tbody>
@@ -124,7 +127,10 @@
                 <td>{{aluno.nomeDesconto}}</td>
                 <td>{{aluno.valorDesconto}}</td>
                 <td>{{aluno.dataMatricula | date: 'dd/MM/yyyy'}}</td>
-                
+                <td>{{aluno.dataUltimoPagamento | date: 'dd/MM/yyyy'}}</td>
+                <td>{{aluno.valorUltimoPagamento | currency:'BRL':true}}</td>                
+                <td *ngIf="aluno.estaAtrasado">Sim</td>
+                <td *ngIf="!aluno.estaAtrasado">Não</td>
               </tbody>
             </table>
           </div>

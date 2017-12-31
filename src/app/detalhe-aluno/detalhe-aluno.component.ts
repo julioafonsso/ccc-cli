@@ -425,5 +425,14 @@ export class DetalheAlunoComponent implements OnInit {
     return valorTotal;
   }
 
+  excluirMatricula(matricula: ConsultaMatricula){
+    this.turmaService.excluirMatricula(matricula.id).subscribe(res => {
+      this.msgs.push({ severity: 'success', summary: 'Aluno foi excluido da turma !' });
+      this.loadMatriculas();
+    }, error => {
+      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+      this.submit = false;
+    });
+  }
 
 }
