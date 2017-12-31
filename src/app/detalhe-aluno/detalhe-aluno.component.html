@@ -57,7 +57,7 @@
             </button>
   </div>
 
-<div class="btn-group" role="group">
+  <div class="btn-group" role="group">
     <button type="button" id="pagamentos" [ngClass]="{'btn': true, 'btn-default': !getTabAtiva(6), 'btn-primary': getTabAtiva(6)}"
       (click)="tab(6)" href="#tabPagamentos" data-toggle="tab"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
                 <div class="hidden-xs">Pagamentos</div>
@@ -69,11 +69,11 @@
                 <div class="hidden-xs">Editar</div>
             </button>
 
-            
+
   </div>
 
-<div class="btn-group" role="group">
-    <button type="button" id="editar" class="btn btn-danger" (click)="excluir()" ><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+  <div class="btn-group" role="group">
+    <button type="button" id="editar" class="btn btn-danger" (click)="excluir()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 <div class="hidden-xs">Excluir</div>
             </button>
   </div>
@@ -202,6 +202,15 @@
             </tr>
           </thead>
           <tbody>
+            <tr *ngFor="let mat of pagamentos.matriculas;let index = index">
+              <td>Matricula</td>
+              <td>{{getModalidadeTurma(mat.idTurma)}}</td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td>{{mat.valor | currency:'BRL':true }}</td>
+              <td></td>
+            </tr>
             <tr *ngFor="let debito of pagamentos.mensalidadesParaPagar;let index = index">
               <td>{{debito.codigoTurma}}</td>
               <td>{{debito.nomeModalidade}}</td>
@@ -234,16 +243,16 @@
             </tr>
           </tbody>
           <tfoot>
-              <tr class="success">
-                  <td>Total</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>{{getValorTotalParaPagar() | currency:'BRL':true }}</td>
-                  <td><button [disabled]="submit" class="btn btn-success" (click)="pagar()">Pagar</button>
-                  </td>
-                </tr>
+            <tr class="success">
+              <td>Total</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{getValorTotalParaPagar() | currency:'BRL':true }}</td>
+              <td><button [disabled]="submit" class="btn btn-success" (click)="pagar()">Pagar</button>
+              </td>
+            </tr>
           </tfoot>
         </table>
       </div>
@@ -463,26 +472,26 @@
       <div class="modal-body">
 
         <div class="panel panel-default">
-  <div class="panel-heading">Filtros</div>
-  <div class="panel-body">
+          <div class="panel-heading">Filtros</div>
+          <div class="panel-body">
 
-  <div class="col-md-3">
-      <label class="control-label" for="textinput">Modalidades</label>
-      <select [(ngModel)]="modalidadeSelecionado" name="modalidade" class="form-control">
+            <div class="col-md-3">
+              <label class="control-label" for="textinput">Modalidades</label>
+              <select [(ngModel)]="modalidadeSelecionado" name="modalidade" class="form-control">
       <option *ngFor="let item of modalidades" [ngValue]="item">{{item.nome}}</option>
         </select>
-    </div>
+            </div>
 
-    <div class="col-md-3">
-      <label class="control-label" for="textinput">Niveis</label>
-      <select [(ngModel)]="nivelSelecionado" name="nivel" class="form-control">
+            <div class="col-md-3">
+              <label class="control-label" for="textinput">Niveis</label>
+              <select [(ngModel)]="nivelSelecionado" name="nivel" class="form-control">
       <option  *ngFor="let item of niveis" [ngValue]="item">{{item.nome}}</option>
         </select>
-    </div>
+            </div>
 
 
-  </div>
-</div>
+          </div>
+        </div>
 
         <div class="table-responsive">
           <table class="table table-bordered table-striped ">
@@ -569,8 +578,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="select1">Data Matricula</label>
               <div class="col-md-6">
-                <input [(ngModel)]="matricula.dataMatricula" name="valor" type="date"  class="form-control input-md"
-                  required>
+                <input [(ngModel)]="matricula.dataMatricula" name="valor" type="date" class="form-control input-md" required>
               </div>
             </div>
 
@@ -638,6 +646,3 @@
     </div>
   </div>
 </div>
-
-
-

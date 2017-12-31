@@ -49,7 +49,6 @@ export class CadastroTurmaComponent implements OnInit {
   }
 
   loadTurma() {
-    console.log("loadTurma")
     if (
       this.modalidades.length == 0 ||
       this.professoras.length == 0 ||

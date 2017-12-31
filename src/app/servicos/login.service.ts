@@ -48,7 +48,6 @@ export class LoginService {
     this.messageLogin.next(null);
 
     this.http.post(environment.url + "login", usuario).subscribe(res => {
-      console.log(res)
       this.token = res.headers.get("token");
       this.usuarioEstaLogadoOBS.next(true);
       this.route.navigate(['/consulta-turmas']);

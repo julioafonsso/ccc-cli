@@ -1,3 +1,4 @@
+import { PagamentoMatricula } from './../models/pagamento-matricula';
 
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs/Rx';
@@ -86,7 +87,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.pesquisarAulasParticulares();
     this.pesquisarWorkShops();
     this.loadAulasParticulares();
-    this.pagamentos = new Pagamentos()
+    
   }
 
   ngOnInit() {
@@ -272,16 +273,26 @@ export class DetalheAlunoComponent implements OnInit {
 
   matricular() {
     this.matricula.idAluno = this.idAluno;
+
     this.turmaService.matricularAluno(this.matricula)
       .subscribe(res => {
         this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
-
+        let mat = new PagamentoMatricula();
+        mat.idMatricula = res.json();
+        mat.idTurma = this.matricula.idTurma;
+        let valor = this.matricula.valor.replace(",", "")
+        valor = valor.replace(".", "")
+        let i = valor.length;
+        valor = valor.substring(0,i-2) + "." + valor.substring(i-2)
+        mat.valor = new Number(valor).valueOf();
+        this.pagamentos.matriculas.push(mat)
         this.reset();
       }, error => {
         this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
         this.submit = false;
       });
   }
+  
 
   matricularWork(work: ConsultaWorkShop) {
 
@@ -308,6 +319,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.alunoService.efetuarPagamento(this.idAluno, this.pagamentos).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Pagamento Com Sucesso !' });
       this.reset();
+      this.pagamentos = new Pagamentos();
     }, error => {
       this.submit = false;
       this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
@@ -344,14 +356,16 @@ export class DetalheAlunoComponent implements OnInit {
       this.nivelSelecionado != undefined
       && this.nivelSelecionado.id != undefined)) {
       valores = valores.filter((turma: ConsultaTurma) =>
-        turma.idNivel === this.nivelSelecionado.id);
+      {
+        return turma.idNivel === this.nivelSelecionado.id
+      });
     }
 
     if ((
       this.modalidadeSelecionado != undefined
       && this.modalidadeSelecionado.id != undefined)) {
       valores = valores.filter((turma: ConsultaTurma) =>
-        turma.idModalidade === this.modalidadeSelecionado.id);
+      { return turma.idModalidade === this.modalidadeSelecionado.id});
     }
 
     return valores;
@@ -422,6 +436,11 @@ export class DetalheAlunoComponent implements OnInit {
     this.pagamentos.workShop.forEach(work =>{
       valorTotal = valorTotal + work.valorMensalidade;
     })
+
+    this.pagamentos.matriculas.forEach(mat =>{
+      valorTotal = valorTotal + mat.valor;
+    })
+
     return valorTotal;
   }
 
@@ -435,4 +454,9 @@ export class DetalheAlunoComponent implements OnInit {
     });
   }
 
+  getModalidadeTurma(id: number){
+    return this.getModalidade(this.turmas.filter(turma =>{
+      return turma.id === id;
+    })[0].idModalidade)
+  }
 }
