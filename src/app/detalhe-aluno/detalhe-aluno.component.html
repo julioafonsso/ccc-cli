@@ -197,6 +197,7 @@
               <th>Mes Referencia</th>
               <th>Quantidade</th>
               <th>Valor</th>
+              <th>Observação</th>
               <th>Excluir</th>
 
             </tr>
@@ -209,6 +210,7 @@
               <td></td>
               <td>1</td>
               <td>{{mat.valor | currency:'BRL':true }}</td>
+              <td><input type="text" name="observacao" [(ngModel)]="mat.observacao" ></td>
               <td></td>
             </tr>
             <tr *ngFor="let debito of pagamentos.mensalidadesParaPagar;let index = index">
@@ -218,6 +220,7 @@
               <td>{{debito.mesReferencia}}</td>
               <td>1</td>
               <td>{{debito.valorCalculado | currency:'BRL':true}}</td>
+              <td><input type="text" name="observacao" [(ngModel)]="debito.observacao" ></td>
               <td><button [disabled]="submit" class="btn btn-danger" (click)="cancelarPagamentoMensalidade(index)">Excluir</button>
               </td>
             </tr>
@@ -228,6 +231,7 @@
               <td></td>
               <td>{{aula.qtdAulas}}</td>
               <td>{{getValor(aula.valorPago) | currency:'BRL':true }}</td>
+              <td><input type="text" name="observacao" [(ngModel)]="aula.observacao" ></td>
               <td><button [disabled]="submit" class="btn btn-danger" (click)="cancelarPagamentoAulaParticular(index)">Excluir</button>
               </td>
             </tr>
@@ -238,6 +242,7 @@
               <td></td>
               <td>1</td>
               <td>{{work.valorMensalidade | currency:'BRL':true }}</td>
+              <td><input type="text" name="observacao" [(ngModel)]="work.observacao" ></td>
               <td><button [disabled]="submit" class="btn btn-danger" (click)="cancelarWorkShop(index)">Excluir</button>
               </td>
             </tr>
@@ -250,6 +255,7 @@
               <td></td>
               <td></td>
               <td>{{getValorTotalParaPagar() | currency:'BRL':true }}</td>
+              <td></td>
               <td><button [disabled]="submit" class="btn btn-success" (click)="pagar()">Pagar</button>
               </td>
             </tr>

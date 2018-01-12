@@ -19,6 +19,11 @@ import { TipoDesconto } from './../models/tipo-desconto';
 export class TurmaService {
 
     constructor(private http: HttpCustormerService) { }
+
+    enviarEmailCobranca(id: number)
+    {
+        return this.http.post(environment.url + "alunos/email-cobranca/" + id, null)
+    }
     excluir(id: Number) {
         return this.http.delete(environment.url + "turmas/" + id);
     }

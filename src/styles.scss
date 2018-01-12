@@ -44,3 +44,7 @@ body {
 .form-control:-moz-placeholder { color: lightgray !important; }
 .form-control::-moz-placeholder { color: lightgray !important; }
 .form-control:-ms-input-placeholder { color: lightgray !important; }
+
+.ui-growl {
+  z-index:99999999999 !important;
+}

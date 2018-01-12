@@ -23,6 +23,7 @@ export class ConsultaTurmasComponent implements OnInit {
     this.msgs = [];
   }
 
+  private submit: boolean;
   private msgs: Message[];
   private niveis = new Array<NivelTurma>();
   private modalidades = new Array<ModalidadeTurma>()
@@ -142,6 +143,17 @@ private b64ToBlob(valor:string){
       
     }, error => {
       this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+    });
+  }
+
+  enviarAviso(aluno: ConsultaAlunosMatriculados){
+    this.submit = true;
+    this.turmaService.enviarEmailCobranca(aluno.id).subscribe(res => {
+      this.msgs.push({ severity: 'success', summary: 'Email enviado com Sucesso !' });
+      this.submit = false;
+    }, error => {
+      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
+      this.submit = false;
     });
   }
 }

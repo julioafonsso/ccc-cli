@@ -129,7 +129,7 @@
                 <td>{{aluno.dataMatricula | date: 'dd/MM/yyyy'}}</td>
                 <td>{{aluno.dataUltimoPagamento | date: 'dd/MM/yyyy'}}</td>
                 <td>{{aluno.valorUltimoPagamento | currency:'BRL':true}}</td>                
-                <td *ngIf="aluno.estaAtrasado">Sim</td>
+                <td *ngIf="aluno.estaAtrasado"><button class="btn btn-info" data-dismiss="modal" aria-label="Close" [disabled]="submit" (click)="enviarAviso(aluno)" >Enviar Aviso</button></td>
                 <td *ngIf="!aluno.estaAtrasado">Não</td>
               </tbody>
             </table>
