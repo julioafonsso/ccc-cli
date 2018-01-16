@@ -566,7 +566,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="select1">Dia Vencimento</label>
               <div class="col-md-6">
-                <input [(ngModel)]="matricula.diaVencimento" name="valor" type="number" min="1" max="31" placeholder="10" class="form-control input-md"
+                <input [(ngModel)]="matricula.diaVencimento" name="diaVencimento" type="number" min="1" max="31" placeholder="10" class="form-control input-md"
                   required="">
               </div>
             </div>
@@ -584,8 +584,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="select1">Data Matricula</label>
               <div class="col-md-6">
-                <input [(ngModel)]="matricula.dataMatricula" name="valor" type="date" class="form-control input-md" required>
-              </div>
+                  <input [ngModel]="matricula.dataMatriculaDate | date:'yyyy-MM-dd'" (ngModelChange)="matricula.dataMatriculaDate = $event" type="date"  name="date" type="date" class="form-control input-md" required>
+                </div>
             </div>
 
 

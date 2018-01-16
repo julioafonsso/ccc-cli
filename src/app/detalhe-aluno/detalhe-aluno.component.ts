@@ -63,7 +63,8 @@ export class DetalheAlunoComponent implements OnInit {
   constructor(private alunoService: AlunoService, private turmaService: TurmaService,
     private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute,
     private workService: WorkshopService, private roteador: Router,
-    private confirmationService: ConfirmationService) {
+    private confirmationService: ConfirmationService,
+    private datePipe: DatePipe) {
     this.msgs = [];
     this.aluno = new ConsultaAlunos();
     this.botoes = new Array();
@@ -78,7 +79,7 @@ export class DetalheAlunoComponent implements OnInit {
 
 
   reset() {
-    this.matricula = new CadastroMatricula();
+    
     this.loadAluno();
     this.loadMatriculas();
     this.loadTurmasColetivas();
@@ -87,7 +88,8 @@ export class DetalheAlunoComponent implements OnInit {
     this.pesquisarAulasParticulares();
     this.pesquisarWorkShops();
     this.loadAulasParticulares();
-    
+    this.matricula = new CadastroMatricula();
+    this.matricula.dataMatriculaDate =  new Date();
   }
 
   ngOnInit() {
@@ -272,8 +274,9 @@ export class DetalheAlunoComponent implements OnInit {
 
 
   matricular() {
+    console.log(this.matricula)
     this.matricula.idAluno = this.idAluno;
-
+    this.matricula.dataMatricula = this.datePipe.transform(this.matricula.dataMatriculaDate, 'yyyy-MM-dd')
     this.turmaService.matricularAluno(this.matricula)
       .subscribe(res => {
         this.msgs.push({ severity: 'success', summary: 'Matriculado com Sucesso !' });
