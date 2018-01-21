@@ -85,7 +85,7 @@
         <h4 class="modal-title" id="myModalLabel">Tem Certeza que deseja Excluir?</h4>
       </div>
       <div class="modal-body">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Não</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">N&#227;o</button>
         <button type="button" class="btn btn-danger" (click)="excluirTurma()" data-dismiss="modal" aria-label="Close">Sim</button>
       </div>
       
@@ -117,6 +117,8 @@
                 <th>Data Ultimo pagamento</th>
                 <th>Valor Ultimo pagamento</th>
                 <th>Inadiplente</th>
+                <td>Qtd Emails enviados</td>
+                <td>Data Ultimo Email </td>
               </tr>
             </thead>
             <tbody>
@@ -130,7 +132,9 @@
                 <td>{{aluno.dataUltimoPagamento | date: 'dd/MM/yyyy'}}</td>
                 <td>{{aluno.valorUltimoPagamento | currency:'BRL':true}}</td>                
                 <td *ngIf="aluno.estaAtrasado"><button class="btn btn-info" data-dismiss="modal" aria-label="Close" [disabled]="submit" (click)="enviarAviso(aluno)" >Enviar Aviso</button></td>
-                <td *ngIf="!aluno.estaAtrasado">Não</td>
+                <td *ngIf="!aluno.estaAtrasado">N&#227;o</td>
+                <td>{{aluno.qtdEmailEnviados}}</td>
+                <td>{{aluno.ultimoEmail | date: 'dd/MM/yyyy'}}</td>
               </tbody>
             </table>
           </div>

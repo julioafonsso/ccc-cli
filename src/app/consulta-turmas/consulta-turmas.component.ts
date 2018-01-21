@@ -36,6 +36,7 @@ export class ConsultaTurmasComponent implements OnInit {
   private diasAulas: Date[];
   private url: any;
   private idTurmaExcluir:Number;
+  private idTurmaSelecionada: number;
 
   ngOnInit() {
     this.turmaService.getTurmas().subscribe(res => {
@@ -81,6 +82,7 @@ export class ConsultaTurmasComponent implements OnInit {
   }
 
   getAlunos(id: number) {
+    this.idTurmaSelecionada = id;
     this.turmaService.getAlunos(id).subscribe(res => {
       this.alunos = res;
     })
@@ -151,6 +153,7 @@ private b64ToBlob(valor:string){
     this.turmaService.enviarEmailCobranca(aluno.id).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Email enviado com Sucesso !' });
       this.submit = false;
+      this.getAlunos(this.idTurmaSelecionada);
     }, error => {
       this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
       this.submit = false;

@@ -11,5 +11,7 @@ export class ConsultaAlunosMatriculados {
 	public estaAtrasado: boolean;
 	public dataUltimoPagamento: Date;
 	public valorUltimoPagamento: number;
+	public qtdEmailEnviados : number;
+	public ultimoEmail : Date ;
 
 }
