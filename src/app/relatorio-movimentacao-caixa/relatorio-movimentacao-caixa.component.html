@@ -19,6 +19,7 @@
             <th>Quantidade</th>
             <th>Descricao</th>
             <th>Observacao</th>
+            <th>Alterar</th>
             </tr>
           </thead>
           <tbody>
@@ -28,6 +29,7 @@
               <td>{{item.quantidade}}</td>
               <td>{{item.descricao}}</td>
               <td>{{item.observacao}}</td>
+              <td><button class="btn btn-default" data-dismiss="modal" [routerLink]="['/lancamento-movimentacao-caixa', item.id]">Editar</button></td>
             </tr>
           </tbody>
         </table>

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  url : 'http://controle-ccc.website/ccc/',
+  url : '/ccc/',
   mock: false
 };

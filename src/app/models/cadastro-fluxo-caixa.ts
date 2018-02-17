@@ -11,6 +11,7 @@ export class CadastroFluxoCaixa {
     public descricao: String;
     public observacao: String;
     public qtd: number;
+    public tipo: string;
     
     constructor() { }
 }

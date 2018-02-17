@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { CadastroFluxoCaixa } from './../models/cadastro-fluxo-caixa';
 import { DatePipe } from '@angular/common';
 import { Response } from '@angular/http';
@@ -24,8 +25,9 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
   private data: Date;
   private submit:boolean;
   private dp = new DatePipe("yyyyMMdd");
-  constructor(private tipoFluxoService: TipoFluxoCaixaService, private fluxoCaixaService: FluxoCaixaService) {
-    
+  constructor(private tipoFluxoService: TipoFluxoCaixaService, private fluxoCaixaService: FluxoCaixaService,private route: ActivatedRoute ) {
+    this.fluxosEntrada = [];
+    this.fluxosSaida = [];
     this.submit =false; 
     this.fluxoCaixa = new CadastroFluxoCaixa();
     this.fluxoCaixa.data = this.dp.transform(new Date(), 'yyyy-MM-dd');
@@ -38,6 +40,7 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
     });
 
     this.tipoFluxoService.getTipoFluxoSaida().subscribe(res => { this.fluxosSaida = res })
+    this.loadLancamento();
   }
 
   atualizarTipoFluxo(indEntrada) {
@@ -65,4 +68,29 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
         this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
       });
   }
+
+  private load: any;
+  loadLancamento() {
+    if (this.fluxosEntrada.length == 0 || this.fluxosSaida.length == 0 ) {
+      this.load = setInterval(() => { this.loadLancamento() }, 500);
+  }
+  else{
+    clearInterval(this.load)
+    this.route.params.subscribe(
+      (params: any) => {
+          if (params['id'] != undefined) {
+              this.submit = true;
+              
+              this.fluxoCaixaService.getFluxo(params['id']).subscribe(res => {
+                  this.atualizarTipoFluxo(res.tipo);
+                  this.fluxoCaixa = res;
+                  this.submit = false;
+
+              })
+          }
+      }
+  );
+  }
+        
+}
 }

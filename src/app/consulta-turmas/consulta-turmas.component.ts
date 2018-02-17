@@ -138,7 +138,7 @@ private b64ToBlob(valor:string){
 
   excluirTurma(){
     this.turmaService.excluir(this.idTurmaExcluir).subscribe(res => {
-      this.msgs.push({ severity: 'success', summary: 'Exclusão com Sucesso !' });
+      this.msgs.push({ severity: 'success', summary: 'Turma Apagada !' });
       this.turmaService.getTurmas().subscribe(res => {
         this.turmas = res;
       })

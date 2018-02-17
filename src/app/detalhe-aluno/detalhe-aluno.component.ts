@@ -344,10 +344,10 @@ export class DetalheAlunoComponent implements OnInit {
 
   alterarDesconto(matricula: ConsultaMatricula) {
     this.turmaService.alterarDesconto(matricula.id, matricula.idDesconto).subscribe(res => {
-      this.msgs.push({ severity: 'success', summary: 'Alteração Com Sucesso !' });
+      this.msgs.push({ severity: 'success', summary: 'Desconto Alterado !' });
     },
       error => {
-        this.msgs.push({ severity: 'error', summary: 'Alteração com erro!' });
+        this.msgs.push({ severity: 'error', summary: 'Erro no processo!' });
       })
   }
 
