@@ -22,4 +22,9 @@ export class FluxoCaixaService {
     return this.http.get(environment.url + "fluxo-caixa/" + id)
     .map((response: Response) => <CadastroFluxoCaixa>response.json());
   }
+
+
+  apagar(id){
+    return this.http.delete(environment.url + "fluxo-caixa/" + id)
+  }
 }

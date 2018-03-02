@@ -55,6 +55,16 @@ export class LancamentoMovimentacaoCaixaComponent implements OnInit {
     
   }
 
+  getFluxos(){
+    return this.fluxos.sort((a:TipoFluxo ,b: TipoFluxo) =>{
+      if(a.nome < b.nome )
+        return -1
+      if(a.nome > b.nome )
+        return 1
+      return 0;
+    })
+  }
+
   onSubmit(){
     this.fluxoCaixaService.cadastrar(this.fluxoCaixa)
     .subscribe((res: Response) =>{

@@ -1,4 +1,4 @@
-
+<p-growl [value]="msgs"  life=6000 ></p-growl>
 <!-- Modal -->
 
 
@@ -20,6 +20,7 @@
             <th>Descricao</th>
             <th>Observacao</th>
             <th>Alterar</th>
+            <th>Apagar</th>
             </tr>
           </thead>
           <tbody>
@@ -30,6 +31,7 @@
               <td>{{item.descricao}}</td>
               <td>{{item.observacao}}</td>
               <td><button class="btn btn-default" data-dismiss="modal" [routerLink]="['/lancamento-movimentacao-caixa', item.id]">Editar</button></td>
+              <td><button class="btn btn-danger" data-dismiss="modal" (click)="apagar(item.id)">Apagar</button></td>
             </tr>
           </tbody>
         </table>

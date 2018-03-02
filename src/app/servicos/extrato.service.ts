@@ -34,4 +34,5 @@ export class ExtratoService {
     return color;
   }
 
+
 }

@@ -1,3 +1,5 @@
+import { Message } from 'primeng/primeng';
+import { FluxoCaixaService } from './../servicos/fluxo-caixa.service';
 import { ExtratoConsolidado } from './../models/extrato-consolidado';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -19,7 +21,7 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
   private saidas: ExtratoConsolidado[];
   private detalhes: any[];
   private detalhe: any[];
-
+  private msgs: Message[];
   private dataInicio: Date;
   private dataFim: Date;
   private nomeDetalhe: string;
@@ -28,7 +30,8 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
 
 
 
-  constructor(private extratoService: ExtratoService) {
+  constructor(private extratoService: ExtratoService,
+    private fluxoCaxaService: FluxoCaixaService) {
     this.dataFim = new Date();
     this.dataInicio = new Date();
     this.dataInicio.setDate(this.dataInicio.getDate() - 30);
@@ -116,4 +119,14 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
     this.pesquisar();
   }
 
+
+  apagar(id) {
+    this.fluxoCaxaService.apagar(id).subscribe(res => {
+      this.pesquisar();
+      this.msgs.push({ severity: 'success', summary: 'Apagado Com Sucesso !' });
+    },
+      error => {
+        this.msgs.push({ severity: 'error', summary: 'Erro !', detail: JSON.parse(error._body)["message"] });
+      });
+  }
 }

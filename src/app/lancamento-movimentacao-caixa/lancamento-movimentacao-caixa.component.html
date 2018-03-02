@@ -21,7 +21,7 @@
   <label class="col-md-4 control-label" for="selectbasic">Nome Fluxo</label>
   <div class="col-md-6">
     <select [(ngModel)]="fluxoCaixa.idTipo" name="tipoFluxo" class="form-control" required="">
-      <option *ngFor="let fluxo of fluxos" [ngValue]="fluxo.id">{{fluxo.nome}}</option>
+      <option *ngFor="let fluxo of getFluxos()" [ngValue]="fluxo.id">{{fluxo.nome}}</option>
     </select>
   </div>
 </div>
@@ -62,7 +62,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Observa&#231;&#227;o</label>
       <div class="col-md-6">
-        <textarea [(ngModel)]="fluxoCaixa.observacao" name="observacao" class="form-control" required=""></textarea>
+        <textarea [(ngModel)]="fluxoCaixa.observacao" name="observacao" class="form-control" ></textarea>
       </div>
     </div>
 
