@@ -101,4 +101,7 @@ export class TurmaService {
     excluirMatricula(idMatricula: number){
         return this.http.delete(environment.url + "matriculas/" + idMatricula);
     }
+    excluirMensalidade(idMensalidade: number){
+        return this.http.delete(environment.url + "mensalidades/" + idMensalidade);
+    }
 }
