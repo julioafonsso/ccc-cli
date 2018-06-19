@@ -80,7 +80,7 @@ export class RelatorioMovimentacaoCaixaComponent implements OnInit {
     })
 
     this.saidas.forEach(v => {
-      valor = valor + v.valor;
+      valor = valor - v.valor;
     })
     return valor;
   }

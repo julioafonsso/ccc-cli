@@ -1,3 +1,5 @@
+import { ConsultaAlunosMatriculadosTurmaExcluida } from './../models/consulta-alunos-matriculados-turma-excluida';
+import { ConsultaTurmasExcluidas } from './../models/consulta-turmas-excluidas';
 import { ConsultaAlunosMatriculados } from './../models/consulta-alunos-matriculados';
 import { CadastroMatricula } from './../models/cadastro-matricula';
 import { ConsultaTurma } from './../models/consulta-turmas';
@@ -103,5 +105,14 @@ export class TurmaService {
     }
     excluirMensalidade(idMensalidade: number){
         return this.http.delete(environment.url + "mensalidades/" + idMensalidade);
+    }
+
+    getTurmasExcluidas(){
+        return this.http.get(environment.url + 'turmas/excluidas')
+        .map((response: Response) => <ConsultaTurmasExcluidas[]>response.json());
+    }
+
+    getAlunosTurmaExcluida(id: number) {
+        return this.http.get(environment.url + "turmas/excluidas/" + id + "/alunos").map((response: Response) => <ConsultaAlunosMatriculadosTurmaExcluida[]>response.json());
     }
 }

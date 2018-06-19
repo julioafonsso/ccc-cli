@@ -1,6 +1,5 @@
 import { Message } from 'primeng/primeng';
 import { DatePipe } from '@angular/common';
-import { ConsultaAlunosMatriculados } from './../models/consulta-alunos-matriculados';
 import { Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,38 +9,37 @@ import { NivelTurma } from './../models/nivel-turma';
 import { TurmaService } from './../servicos/turma.service';
 import { ConsultaTurma } from './../models/consulta-turmas';
 import { ProfessorService } from './../servicos/professor.service';
+import { ConsultaTurmasExcluidas } from '../models/consulta-turmas-excluidas';
+import { ConsultaAlunosMatriculadosTurmaExcluida } from '../models/consulta-alunos-matriculados-turma-excluida';
 
 @Component({
-  selector: 'app-consulta-turmas',
-  templateUrl: './consulta-turmas.component.html',
-  styleUrls: ['./consulta-turmas.component.scss']
+  selector: 'app-consulta-turmas-excluidas',
+  templateUrl: './consulta-turmas-excluidas.component.html',
+  styleUrls: ['./consulta-turmas-excluidas.component.scss']
 })
-export class ConsultaTurmasComponent implements OnInit {
+export class ConsultaTurmasExcluidasComponent implements OnInit {
 
   constructor(private turmaService: TurmaService) {
     this.alunos = [];
-    this.msgs = [];
     this.turmas = [];
   }
 
   private nomeProfessorSelecionado: string;
-  private submit: boolean;
-  private msgs: Message[];
   private niveis = new Array<NivelTurma>();
   private modalidades = new Array<ModalidadeTurma>()
-  private turmas: ConsultaTurma[];
 
+  private turmas: ConsultaTurmasExcluidas[];
   private nivelSelecionado: NivelTurma;
   private modalidadeSelecionado: ModalidadeTurma;
 
-  private alunos: ConsultaAlunosMatriculados[];
+  private alunos: ConsultaAlunosMatriculadosTurmaExcluida[];
   private diasAulas: Date[];
   private url: any;
   private idTurmaExcluir: Number;
   private idTurmaSelecionada: number;
 
   ngOnInit() {
-    this.turmaService.getTurmas().subscribe(res => {
+    this.turmaService.getTurmasExcluidas().subscribe(res => {
       this.turmas = res;
     })
 
@@ -66,7 +64,7 @@ export class ConsultaTurmasComponent implements OnInit {
       return this.turmas.filter(turma => turma.id == this.idTurmaSelecionada)[0]
     }
     else
-      return new ConsultaTurma();
+      return new ConsultaTurmasExcluidas();
   }
 
   getTurmas() {
@@ -78,7 +76,7 @@ export class ConsultaTurmasComponent implements OnInit {
     return valores;
   }
 
-  private filtraProfessores(valores: ConsultaTurma[]) {
+  private filtraProfessores(valores: ConsultaTurmasExcluidas[]) {
     if (this.nomeProfessorSelecionado != undefined && this.nomeProfessorSelecionado.length > 0) {
       return valores.filter(turma => {
 
@@ -92,11 +90,11 @@ export class ConsultaTurmasComponent implements OnInit {
 
   }
 
-  private filtraModalidade(valores: ConsultaTurma[]) {
+  private filtraModalidade(valores: ConsultaTurmasExcluidas[]) {
     if ((
       this.modalidadeSelecionado != undefined
       && this.modalidadeSelecionado.id != undefined)) {
-      return valores.filter((turma: ConsultaTurma) =>
+      return valores.filter((turma: ConsultaTurmasExcluidas) =>
         turma.idModalidade === this.modalidadeSelecionado.id);
     }
     else {
@@ -104,11 +102,11 @@ export class ConsultaTurmasComponent implements OnInit {
     }
   }
 
-  private filtraNivel(valores: ConsultaTurma[]) {
+  private filtraNivel(valores: ConsultaTurmasExcluidas[]) {
     if ((
       this.nivelSelecionado != undefined
       && this.nivelSelecionado.id != undefined)) {
-      return valores.filter((turma: ConsultaTurma) =>
+      return valores.filter((turma: ConsultaTurmasExcluidas) =>
         turma.idNivel === this.nivelSelecionado.id);
     }
     else {
@@ -119,78 +117,9 @@ export class ConsultaTurmasComponent implements OnInit {
 
   getAlunos(id: number) {
     this.idTurmaSelecionada = id;
-    this.turmaService.getAlunos(id).subscribe(res => {
+    this.turmaService.getAlunosTurmaExcluida(id).subscribe(res => {
       this.alunos = res;
     })
-    this.turmaService.getListaPresenca(id).subscribe(res => {
-      this.downloadFile(res._body);
-    })
 
-  }
-
-  downloadFile(data: any) {
-
-
-    var blob = new Blob([data], { type: 'application/vnd.ms-excel' });
-
-    this.url = window.URL.createObjectURL(this.b64ToBlob(data));
-
-  }
-
-  private b64ToBlob(valor: string) {
-    let size = 512;
-    let byteChar = atob(valor);
-    var byteArrays = [];
-    for (var offset = 0; offset < byteChar.length; offset += size) {
-      var slice = byteChar.slice(offset, offset + size);
-      var byteNumber = new Array(slice.length);
-      for (var i = 0; i < slice.length; i++) {
-        byteNumber[i] = slice.charCodeAt(i);
-      }
-      var byteArray = new Uint8Array(byteNumber);
-      byteArrays.push(byteArray);
-
-    }
-    return new Blob(byteArrays, { type: 'data:application/vnd.ms-excel' })
-  }
-
-  export() {
-
-
-    var link = document.createElement("a");
-    link.setAttribute("href", this.url);
-    link.setAttribute("download", "lista presen&#231;a.xls");
-    document.body.appendChild(link);
-    link.click();
-
-
-  }
-
-  setTurmaExcluir(id) {
-    this.idTurmaExcluir = id;
-  }
-
-  excluirTurma() {
-    this.turmaService.excluir(this.idTurmaExcluir).subscribe(res => {
-      this.msgs.push({ severity: 'success', summary: 'Turma Apagada !' });
-      this.turmaService.getTurmas().subscribe(res => {
-        this.turmas = res;
-      })
-
-    }, error => {
-      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
-    });
-  }
-
-  enviarAviso(aluno: ConsultaAlunosMatriculados) {
-    this.submit = true;
-    this.turmaService.enviarEmailCobranca(aluno.id).subscribe(res => {
-      this.msgs.push({ severity: 'success', summary: 'Email enviado com Sucesso !' });
-      this.submit = false;
-      this.getAlunos(this.idTurmaSelecionada);
-    }, error => {
-      this.msgs.push({ severity: 'error', summary: JSON.parse(error)["message"] });
-      this.submit = false;
-    });
   }
 }

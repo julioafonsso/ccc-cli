@@ -44,9 +44,9 @@
           <th>Professor</th>
           <th>Mensalidade</th>
           <th>N&#186; Vagas</th>
-          <th>Editar</th>
+          <th>Valoro total em matriculas</th>
+          <th>Valoro total em mensalidades</th>
           <th>Alunos</th>
-          <th>Excluir</th>
         </tr>
       </thead>
       <tbody>
@@ -62,12 +62,10 @@
           <td>{{turma.nomeProfessor2}}</td>
           <td>{{turma.valorMensalidade | currency:'BRL':true}}</td>
           <td>{{turma.qtdVagas - turma.qtdAlunas - turma.qtdAlunos}}</td>
-          <td><button class="btn btn-primary" [routerLink]="['/cadastro-turma', turma.id]" >Editar</button></td>
+          <td>{{turma.valorTotalMatriculas | currency:'BRL':true}}</td>
+          <td>{{turma.valorTotalMensalidades | currency:'BRL':true}}</td>
           <td>
             <button class="btn btn-primary" (click)="getAlunos(turma.id)" data-toggle="modal" data-target="#modalAluno"  >Alunos</button>
-          </td>
-          <td>
-            <button class="btn btn-danger" (click)="setTurmaExcluir(turma.id)" data-toggle="modal" data-target="#modalExcluir"  >Excluir</button>
           </td>
           
           
@@ -80,24 +78,6 @@
 
 
 
-<div class="modal fade bs-example-modal-sm" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" style="width:30%;" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-        <h4 class="modal-title" id="myModalLabel">Tem Certeza que deseja Excluir?</h4>
-      </div>
-      <div class="modal-body">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">N&#227;o</button>
-        <button type="button" class="btn btn-danger" (click)="excluirTurma()" data-dismiss="modal" aria-label="Close">Sim</button>
-      </div>
-      
-    </div>
-    
-  </div>
-</div>
-
-
 <div class="modal fade bs-example-modal-lg" id="modalAluno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" style="width:90%;" role="document">
     <div class="modal-content">
@@ -107,7 +87,6 @@
       </div>
       <div class="modal-body">
         <div class="table-responsive">
-          <button  class="btn btn-primary" (click)="export()">Lista de Presen&#231;a</button>
           <table class="table table-bordered table-striped ">
             <thead>
               <tr>
@@ -117,11 +96,9 @@
                 <th>Nome Desconto</th>
                 <th>Valor Desconto</th>
                 <th>Data Matricula</th>
-                <th>Data Ultimo pagamento</th>
-                <th>Valor Ultimo pagamento</th>
-                <th>Inadiplente</th>
-                <td>Qtd Emails enviados</td>
-                <td>Data Ultimo Email </td>
+                <th>Valor Matricula</th>
+                <th>Data Saida</th>
+                <th>Valor Total Pago</th>
               </tr>
             </thead>
             <tbody>
@@ -132,18 +109,13 @@
                 <td>{{aluno.nomeDesconto}}</td>
                 <td>{{aluno.valorDesconto}}</td>
                 <td>{{aluno.dataMatricula | date: 'dd/MM/yyyy'}}</td>
-                <td>{{aluno.dataUltimoPagamento | date: 'dd/MM/yyyy'}}</td>
-                <td>{{aluno.valorUltimoPagamento | currency:'BRL':true}}</td>                
-                <td *ngIf="aluno.estaAtrasado"><button class="btn btn-info" data-dismiss="modal" aria-label="Close" [disabled]="submit" (click)="enviarAviso(aluno)" >Enviar Aviso</button></td>
-                <td *ngIf="!aluno.estaAtrasado">N&#227;o</td>
-                <td>{{aluno.qtdEmailEnviados}}</td>
-                <td>{{aluno.ultimoEmail | date: 'dd/MM/yyyy'}}</td>
+                <td>{{aluno.valorMatricula | currency:'BRL':true}}</td>
+                <td>{{aluno.dataSaida | date: 'dd/MM/yyyy'}}</td>
+                <td>{{aluno.valorTotalMensalidade | currency:'BRL':true}}</td>
               </tbody>
             </table>
           </div>
-          
         </div>
-        
       </div>
     </div>
   </div>

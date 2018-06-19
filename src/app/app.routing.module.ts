@@ -20,6 +20,7 @@ const appRoutes: Routes = [
     { path: 'lancamento-movimentacao-caixa/:id', loadChildren: './lancamento-movimentacao-caixa/lancamento-movimentacao-caixa.module#LancamentoMovimentacaoCaixaModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-aluno-debito', loadChildren: './consulta-alunos-debito/consulta-alunos-debito.module#ConsultaAlunosDebitoModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-turmas', loadChildren: './consulta-turmas/consulta-turmas.module#ConsultaTurmasModule', canActivate: [EstaLogadoGuard] },
+    { path: 'consulta-turmas-excluidas', loadChildren: './consulta-turmas-excluidas/consulta-turmas-excluidas.module#ConsultaTurmasExcluidasModule', canActivate: [EstaLogadoGuard] },
     { path: 'detalhe-aluno/:id', loadChildren: './detalhe-aluno/detalhe-aluno.module#DetalheAlunoModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-professores', loadChildren: './consulta-professores/consulta-professores.module#ConsultaProfessoresModule', canActivate: [EstaLogadoGuard] },
     { path: 'detalhe-professor/:id', loadChildren: './detalhe-professor/detalhe-professor.module#DetalheProfessorModule', canActivate: [EstaLogadoGuard] },
