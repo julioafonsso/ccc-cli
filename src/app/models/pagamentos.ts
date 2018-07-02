@@ -1,3 +1,4 @@
+import { AulaAvulsa } from './aula-avulsa';
 import { Taxa } from './taxa';
 import { PagamentoMatricula } from './pagamento-matricula';
 import { CadastroMatricula } from './cadastro-matricula';
@@ -13,11 +14,13 @@ export class Pagamentos {
         this.workShop = new Array<ConsultaWorkShop>();
         this.matriculas = new Array<PagamentoMatricula>();
         this.taxas = new Array<Taxa> ();
+        this.aulasAvulsa = new Array<AulaAvulsa>();
     }
     public mensalidadesParaPagar: ConsultaMensalidades[];
     public aulasParticulares: CadastroAulaParticular[];
     public workShop: ConsultaWorkShop[];
     public matriculas: PagamentoMatricula[];
     public taxas: Taxa[];
+    public aulasAvulsa: AulaAvulsa[];
     
 }

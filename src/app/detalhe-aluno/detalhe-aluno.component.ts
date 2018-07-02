@@ -1,3 +1,4 @@
+import { AulaAvulsa } from './../models/aula-avulsa';
 import { Taxa } from './../models/taxa';
 import { PagamentoMatricula } from './../models/pagamento-matricula';
 
@@ -61,6 +62,7 @@ export class DetalheAlunoComponent implements OnInit {
   private modalidadeSelecionado: ModalidadeTurma;
   private pagamentos: Pagamentos;
   private taxa: Taxa;
+  private aulaAvulsa: AulaAvulsa;
 
   constructor(private alunoService: AlunoService, private turmaService: TurmaService,
     private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute,
@@ -78,6 +80,9 @@ export class DetalheAlunoComponent implements OnInit {
     this.modalidades = new Array<ModalidadeTurma>()
     this.pagamentos = new Pagamentos();
     this.taxa = new Taxa();
+    this.taxa.dataPagamentoDate = new Date();
+    this.aulaAvulsa = new AulaAvulsa();
+    this.aulaAvulsa.dataPagamentoDate = new Date();
   }
 
 
@@ -95,6 +100,8 @@ export class DetalheAlunoComponent implements OnInit {
     this.matricula.dataMatriculaDate = new Date();
     this.taxa = new Taxa();
     this.taxa.dataPagamentoDate = new Date();
+    this.aulaAvulsa = new AulaAvulsa();
+    this.aulaAvulsa.dataPagamentoDate = new Date();
   }
 
   ngOnInit() {
@@ -254,10 +261,18 @@ export class DetalheAlunoComponent implements OnInit {
   addTaxas() {
     this.taxa.valor = this.getValor(this.taxa.valor.toString())
     this.taxa.dataPagamento = this.datePipe.transform(this.taxa.dataPagamentoDate, 'yyyy-MM-dd')
-    console.log(this.taxa)
     this.pagamentos.taxas.push(this.taxa);
-    this.reset();
+    this.taxa = new Taxa();
+    this.taxa.dataPagamentoDate = new Date();
 
+  }
+
+  addAulaAvulsa() {
+    this.aulaAvulsa.valor = this.getValor(this.aulaAvulsa.valor.toString())
+    this.aulaAvulsa.dataPagamento = this.datePipe.transform(this.aulaAvulsa.dataPagamentoDate, 'yyyy-MM-dd')
+    this.pagamentos.aulasAvulsa.push(this.aulaAvulsa);
+    this.aulaAvulsa = new AulaAvulsa();
+    this.aulaAvulsa.dataPagamentoDate = new Date();
   }
 
   getTabAtiva(x: number) {
@@ -291,7 +306,6 @@ export class DetalheAlunoComponent implements OnInit {
         valor = valor.substring(0, i - 2) + "." + valor.substring(i - 2)
         mat.valor = new Number(valor).valueOf();
         this.pagamentos.matriculas.push(mat)
-        console.log(this.pagamentos)
         this.reset();
       }, error => {
         this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
@@ -469,6 +483,10 @@ export class DetalheAlunoComponent implements OnInit {
       valorTotal = valorTotal + mat.valor;
     })
 
+    this.pagamentos.aulasAvulsa.forEach(aulas => {
+      valorTotal = valorTotal + aulas.valor;
+    })
+
     return valorTotal;
   }
 
@@ -489,5 +507,22 @@ export class DetalheAlunoComponent implements OnInit {
     return this.getModalidade(this.turmas.filter(turma => {
       return turma.id === id;
     })[0].idModalidade)
+  }
+
+  getNomeTaxa(id: number){
+    if(id == 8)
+      return 'ARM'
+    if(id == 10)
+      return 'TXF'
+    return ''
+  }
+
+  getCodigoTurma(id: number){
+    
+    return this.turmas.filter(c => {return c.id === id})[0].codigo;
+  }
+
+  getNomeTurma(id: number){
+    return this.turmas.filter(c => { return c.id === id})[0].nomeModalidade;
   }
 }
