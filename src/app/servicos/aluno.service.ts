@@ -17,6 +17,9 @@ import { HttpCustormerService } from './http-custormer.service';
 @Injectable()
 export class AlunoService {
 
+  cadastrarMensalidade(idMatricula: number, mes: string) {
+    return this.http.post(environment.url + "matriculas/" + idMatricula + "/mensalidade/" + mes, null);
+  }
   constructor(private http: HttpCustormerService) { }
 
   getListaEstadoCivil() {

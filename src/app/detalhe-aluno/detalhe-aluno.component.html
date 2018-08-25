@@ -264,6 +264,9 @@
   </div>
 
     <div class="tab-pane " id="tabDebitos">
+        <div class="row">
+            <button class="btn btn-info pull-right" data-toggle="modal" data-target="#modalNovaMensalidade">Criar Mensalidade</button>
+          </div>
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
           <thead>
@@ -790,3 +793,52 @@
     </div>
   </div>
 </div>
+
+
+
+
+<div class="modal fade bs-example-modal-lg" id="modalNovaMensalidade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+          <h4 class="modal-title" id="myModalLabel">Cadastrar Nova Mensalidade </h4>
+        </div>
+        <div class="modal-body">
+  
+          <form class="form-horizontal">
+            <fieldset>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="selectbasic">Codigo Turma</label>
+                <div class="col-md-6">
+                  <select [(ngModel)]="idMatriculaParaMensalidade" name="modalidade" class="form-control" required>
+                    <option *ngFor="let matricula of matriculas" [ngValue]="matricula.id"  >{{matricula.codigo}}</option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Mes Referencia</label>
+                <div class="col-md-6">
+                  <input  [(ngModel)]="dataMensalidade" name="mes" type="month"
+                    required class="form-control input-md">
+  
+                </div>
+              </div>
+  
+              
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="button1id"></label>
+                <div class="col-md-8">
+                  <button data-dismiss="modal" id="button1id" name="button1id" class="btn btn-success" [disabled]="submit" type="button" (click)="cadastrarMensalidade()">Cadastrar</button>
+                  <button data-dismiss="modal" id="button2id" name="button2id" class="btn btn-danger" [disabled]="submit">Cancelar</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+  
+        </div>
+  
+      </div>
+    </div>
+  </div>

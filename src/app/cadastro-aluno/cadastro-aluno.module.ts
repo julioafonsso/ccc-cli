@@ -10,7 +10,6 @@ import { CpfModule } from './../diretivas/cpf/cpf.module';
 import { TelefoneModule } from './../diretivas/telefone/telefone.module';
 import { CadastroAlunoComponent } from './cadastro-aluno.component';
 import { AlunoService } from './../servicos/aluno.service';
-import { BairroService } from './../servicos/bairro.service';
 
 const rotas = [ { path: '', component: CadastroAlunoComponent } ];
 
@@ -25,7 +24,7 @@ const rotas = [ { path: '', component: CadastroAlunoComponent } ];
     RouterModule.forChild(rotas)
   ],
   declarations: [CadastroAlunoComponent],
-  providers: [AlunoService, FtpService, BairroService],
+  providers: [AlunoService, FtpService],
   exports: []
 
 })

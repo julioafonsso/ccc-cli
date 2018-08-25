@@ -63,6 +63,8 @@ export class DetalheAlunoComponent implements OnInit {
   private pagamentos: Pagamentos;
   private taxa: Taxa;
   private aulaAvulsa: AulaAvulsa;
+  private dataMensalidade: string;
+  private idMatriculaParaMensalidade: number;
 
   constructor(private alunoService: AlunoService, private turmaService: TurmaService,
     private professorService: ProfessorService, private descontoService: DescontoService, private route: ActivatedRoute,
@@ -296,8 +298,8 @@ export class DetalheAlunoComponent implements OnInit {
         let mat = new PagamentoMatricula();
         mat.idMatricula = res.json();
         mat.idTurma = this.matricula.idTurma;
-        
-        if(this.matricula.valor == undefined)
+
+        if (this.matricula.valor == undefined)
           this.matricula.valor = "0,00"
 
         let valor = this.matricula.valor.replace(",", "")
@@ -346,7 +348,7 @@ export class DetalheAlunoComponent implements OnInit {
       this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
     });
 
-  } 
+  }
   cancelarMensalidade(mensalidade: ConsultaMensalidades) {
     console.log("CAncelando")
     this.submit = true;
@@ -355,8 +357,8 @@ export class DetalheAlunoComponent implements OnInit {
       this.reset();
     },
       error => {
-        
-        this.msgs.push({ severity: 'error', summary: JSON.parse(error._body )["message"] });
+
+        this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
         this.submit = false;
       })
   }
@@ -397,8 +399,7 @@ export class DetalheAlunoComponent implements OnInit {
     if ((
       this.modalidadeSelecionado != undefined
       && this.modalidadeSelecionado.id != undefined)) {
-      valores = valores.filter((turma: ConsultaTurma) =>
-      { return turma.idModalidade === this.modalidadeSelecionado.id });
+      valores = valores.filter((turma: ConsultaTurma) => { return turma.idModalidade === this.modalidadeSelecionado.id });
     }
 
     return valores;
@@ -494,7 +495,7 @@ export class DetalheAlunoComponent implements OnInit {
     this.turmaService.excluirMatricula(matricula.id).subscribe(res => {
       this.msgs.push({ severity: 'success', summary: 'Aluno foi excluido da turma !' });
       this.loadMatriculas();
-      this.pagamentos.matriculas = this.pagamentos.matriculas.filter(m =>{
+      this.pagamentos.matriculas = this.pagamentos.matriculas.filter(m => {
         return m.idMatricula != matricula.id;
       })
     }, error => {
@@ -509,20 +510,34 @@ export class DetalheAlunoComponent implements OnInit {
     })[0].idModalidade)
   }
 
-  getNomeTaxa(id: number){
-    if(id == 8)
+  getNomeTaxa(id: number) {
+    if (id == 8)
       return 'ARM'
-    if(id == 10)
+    if (id == 10)
       return 'TXF'
     return ''
   }
 
-  getCodigoTurma(id: number){
-    
-    return this.turmas.filter(c => {return c.id === id})[0].codigo;
+  getCodigoTurma(id: number) {
+
+    return this.turmas.filter(c => { return c.id === id })[0].codigo;
   }
 
-  getNomeTurma(id: number){
-    return this.turmas.filter(c => { return c.id === id})[0].nomeModalidade;
+  getNomeTurma(id: number) {
+    return this.turmas.filter(c => { return c.id === id })[0].nomeModalidade;
+  }
+
+  cadastrarMensalidade() {
+    this.submit = true;
+    this.alunoService.cadastrarMensalidade(this.idMatriculaParaMensalidade, this.dataMensalidade).subscribe(res => {
+      this.msgs.push({ severity: 'success', summary: 'Mensalidade cadastrada  !' })
+      this.submit = false;
+      this.loadDebitos()
+    }, error => {
+      this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
+      this.submit = false;
+    }
+    )
+
   }
 }

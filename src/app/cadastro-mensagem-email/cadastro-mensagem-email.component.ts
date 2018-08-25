@@ -1,4 +1,4 @@
-import { MensagemEmailService } from './../servios/mensagem-email.service';
+import { EmailService } from './../servicos/email-service';
 import { Message } from 'primeng/primeng';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,7 +15,7 @@ export class CadastroMensagemEmailComponent implements OnInit {
   private mensagem :MensagemEmail;
   private msgs: Message[];
   private submit: boolean;
-  constructor(private emailService: MensagemEmailService) { 
+  constructor(private emailService: EmailService) { 
     this.msgs = []
     this.submit =false
     this.mensagem = new MensagemEmail();

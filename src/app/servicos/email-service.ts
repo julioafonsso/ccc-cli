@@ -1,3 +1,4 @@
+import { Email } from './../models/email';
 import { MensagemEmail } from './../models/mensagem-email';
 import { Response } from '@angular/http';
 import { HttpCustormerService } from './../servicos/http-custormer.service';
@@ -6,8 +7,13 @@ import { environment } from './../../environments/environment';
 
 
 @Injectable()
-export class MensagemEmailService {
+export class EmailService {
 
+  
+  obterEmailsAlunos() {
+    return this.http.get(environment.url + "email/alunos")
+        .map((response: Response) => response.text())
+  }
    constructor(private http: HttpCustormerService) { }
 
   obterMensagemCadastrada()
@@ -19,6 +25,9 @@ export class MensagemEmailService {
   atualizaMensagem(msg: MensagemEmail)
   {
     return this.http.put(environment.url + "email/mensagem", msg)
+  }
+  enviarEmail(email: Email) {
+    return this.http.post(environment.url + "email/mkt", email)
   }
 
 }

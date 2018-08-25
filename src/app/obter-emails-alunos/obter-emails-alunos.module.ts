@@ -3,23 +3,18 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ObterEmailsAlunosComponent } from './obter-emails-alunos.component';
 
-
-import { GrowlModule } from 'primeng/primeng';
-import { CadastroMensagemEmailComponent } from './cadastro-mensagem-email.component';
-
-
-const rotas = [ { path: '', component: CadastroMensagemEmailComponent } ];
+const rotas = [ { path: '', component: ObterEmailsAlunosComponent } ];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    GrowlModule,
     RouterModule.forChild(rotas)
   ],
-  declarations: [CadastroMensagemEmailComponent],
-  providers: [ EmailService ],
+  declarations: [ObterEmailsAlunosComponent],
+  providers: [EmailService],  
   exports: []
 })
-export class CadastroMensagemEmailTurmaModule { }
+export class ObterEmailsAlunosModule { }

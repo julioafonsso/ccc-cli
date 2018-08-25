@@ -2,6 +2,9 @@
     border-color: darkred;
 }
 
+input[type=file]{
+  display: inline !important;
+}
 
 .custom-file-input {
   color: transparent;

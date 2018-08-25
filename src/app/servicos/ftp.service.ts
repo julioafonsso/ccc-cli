@@ -12,4 +12,9 @@ export class FtpService {
         upload.setOptions({ url: environment.url + "ftp/foto/" })
         upload.uploadAll();
   }
+
+  cadastrarFotoEmail(upload: FileUploader) {
+    upload.setOptions({ url: environment.url + "ftp/foto/email" })
+    upload.uploadAll();
+}
 }

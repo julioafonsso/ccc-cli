@@ -1,0 +1,49 @@
+<p-growl [value]="msgs" life=6000></p-growl>
+<form class="form-horizontal" (ngSubmit)="onSubmit()">
+
+  <legend>Envio de E-mail</legend>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Selecione a Foto</label>
+    <div class="col-md-6">
+
+      <input [disabled]="submit" type="file" [(ngModel)]="foto" name="foto" (change)="onChange($event)" class="custom-file-input"
+        ng2FileSelect [uploader]="uploader">
+      <span class="glyphicon glyphicon-ok" style="color: green" *ngIf="email.fotoEnviada"></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="selectbasic">Teste ?</label>
+    <div class="col-md-6">
+      <select [(ngModel)]="email.teste" name="teste" class="form-control" required>
+        <option value="S">Sim</option>
+        <option value="N">Não</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Assunto E-mail</label>
+    <div class="col-md-6">
+      <input [(ngModel)]="email.assunto" name="assunto" type="text" class="form-control input-md" required="">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Texto E-mail</label>
+    <div class="col-md-6">
+      <textarea rows="15" [(ngModel)]="email.texto" name="texto" class="form-control" required></textarea>
+    </div>
+  </div>
+
+  <!-- Button (Double) -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="button1id"></label>
+    <div class="col-md-8">
+      <button id="button1id" name="button1id" class="btn btn-success" [disabled]="submit">Enviar</button>
+    </div>
+  </div>
+
+</form>

@@ -1,6 +1,4 @@
 import { DatePipe } from '@angular/common';
-import { Bairro } from './../models/bairro';
-import { BairroService } from './../servicos/bairro.service';
 import { CadastroAluno } from './../models/cadastro-aluno';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response, Headers } from '@angular/http';
@@ -34,7 +32,6 @@ export class CadastroAlunoComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, 
                 private alunoService: AlunoService,
-                private bairroService: BairroService, 
                 private ftpService: FtpService,
                 private roteador: Router) {
         this.aluno = new CadastroAluno();

@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent,  canActivate: [EstaLogadoGuard] },
+    { path: 'envio-email', loadChildren: 'app/envio-email/envio-email.module#EnvioEmailModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-alunos', loadChildren: 'app/consulta-alunos/consulta-alunos.module#ConsultaAlunosModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-aluno', loadChildren: './cadastro-aluno/cadastro-aluno.module#CadastroAlunoModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-aluno/:id', loadChildren: './cadastro-aluno/cadastro-aluno.module#CadastroAlunoModule', canActivate: [EstaLogadoGuard] },
@@ -35,16 +36,14 @@ const appRoutes: Routes = [
     { path: 'cadastro-modalidade-turma', loadChildren: './cadastro-modalidade-turma/cadastro-modalidade-turma.module#CadastroModalidadeTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
     { path: 'cadastro-modalidade-turma/:id', loadChildren: './cadastro-modalidade-turma/cadastro-modalidade-turma.module#CadastroModalidadeTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
     { path: 'cadastro-mensagem-email', loadChildren: './cadastro-mensagem-email/cadastro-mensagem-email.module#CadastroMensagemEmailTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'cadastro-bairro', loadChildren: './cadastro-bairro/cadastro-bairro.module#CadastroBairroModule', canActivate: [EstaLogadoGuard] },
-    { path: 'cadastro-bairro/:id', loadChildren: './cadastro-bairro/cadastro-bairro.module#CadastroBairroModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-workshop', loadChildren: './cadastro-workshop/cadastro-workshop.module#CadastroWorkshopModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-workshop', loadChildren: './consulta-workshop/consulta-workshop.module#ConsultaWorkshopModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-workshop/:id', loadChildren: './cadastro-workshop/cadastro-workshop.module#CadastroWorkshopModule', canActivate: [EstaLogadoGuard] },
-    
     { path: 'cadastro-funcionario', loadChildren: './cadastro-funcionario/cadastro-funcionario.module#CadastroFuncionarioModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-funcionario', loadChildren: './consulta-funcionario/consulta-funcionario.module#ConsultaFuncionarioModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-funcionario/:id', loadChildren: './cadastro-funcionario/cadastro-funcionario.module#CadastroFuncionarioModule', canActivate: [EstaLogadoGuard] },
     { path: 'detalhe-funcionario/:id', loadChildren: './detalhe-funcionario/detalhe-funcionario.module#DetalheFuncionarioModule', canActivate: [EstaLogadoGuard] },
+    { path: 'obter-email-alunos', loadChildren: './obter-emails-alunos/obter-emails-alunos.module#ObterEmailsAlunosModule', canActivate: [EstaLogadoGuard] },
     
     { path: 'login', loadChildren: './login/login.module#LoginModule', canActivate: [] }
 
