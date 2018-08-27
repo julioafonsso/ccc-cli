@@ -25,6 +25,7 @@ export class ConsultaTurmasComponent implements OnInit {
   }
 
   private nomeProfessorSelecionado: string;
+  private codigoTurmaSelecionado: string;
   private submit: boolean;
   private msgs: Message[];
   private niveis = new Array<NivelTurma>();
@@ -75,7 +76,19 @@ export class ConsultaTurmasComponent implements OnInit {
     valores = this.filtraModalidade(valores);
     valores = this.filtraNivel(valores);
     valores = this.filtraProfessores(valores);
+    valores = this.filtraCodigo(valores);
     return valores;
+  }
+
+  private filtraCodigo(valores: ConsultaTurma[]) {
+    if (this.codigoTurmaSelecionado != undefined && this.codigoTurmaSelecionado.length > 0) {
+      return valores.filter(turma => {
+        return turma.codigo.indexOf(this.codigoTurmaSelecionado) > -1
+      })
+    } else {
+      return valores;
+    }
+
   }
 
   private filtraProfessores(valores: ConsultaTurma[]) {
