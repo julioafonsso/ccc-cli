@@ -19,7 +19,6 @@ import { EstaLogadoGuard } from './guards/esta-logado.guard';
   declarations: [
     AppComponent,
     HomeComponent
-    
   ],
   imports: [
     BrowserModule,

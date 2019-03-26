@@ -18,12 +18,13 @@ export class EstaLogadoGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | boolean {
 
-    this.loginService.usuarioLogado().subscribe(res => {
-      if (!res)
-        this.router.navigate(['/login']);
-    });
+    // this.loginService.usuarioLogado().subscribe(res => {
+    //   if (!res)
+    //     this.router.navigate(['/login']);
+    // });
 
-    return this.loginService.usuarioLogado();
+    // return this.loginService.usuarioLogado();
+    return true;
   }
 
 }

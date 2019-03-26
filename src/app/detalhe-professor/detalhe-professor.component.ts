@@ -215,6 +215,7 @@ export class DetalheProfessorComponent implements OnInit {
   }
 
   pesquisarPagamentoHistorico() {
+    this.mostraDetalhe = false;
     if (this.dataInicioHistPagamento == undefined || this.dataInicioHistPagamento.toString().length < 7) {
       this.msgs.push({ severity: 'error', summary: 'Pesquisa Com Erro !', detail: "Selecionar Data Inicio" });
     }

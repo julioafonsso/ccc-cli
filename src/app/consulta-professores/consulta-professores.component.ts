@@ -26,8 +26,11 @@ export class ConsultaProfessoresComponent implements OnInit {
     })
   }
   getProfessores() {
-    return this.professores.filter((professor) => {
+    if(this.filtro == undefined || this.filtro.length == 0 )
+      return this.professores
 
+    return this.professores.filter((professor) => {
+      
       if (this.validaFiltro(professor.nome))
         return true;
       if (this.validaFiltro(professor.cpf))
@@ -46,7 +49,7 @@ export class ConsultaProfessoresComponent implements OnInit {
   }
 
   validaFiltro(campo: string) {
-    return campo != undefined && campo.toLowerCase().indexOf(this.filtro.toLowerCase())
+    return campo != undefined && campo.toLowerCase().indexOf(this.filtro.toLowerCase()) > 1
   }
 
 }
