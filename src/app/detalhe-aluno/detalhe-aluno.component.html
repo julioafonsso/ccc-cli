@@ -115,6 +115,7 @@
         <div class="card__info__detalhes"><label>Sexo: </label> {{aluno.sexo}}</div>
         <div class="card__info__detalhes"><label>Profiss&#227;o: </label> {{aluno.profissao}}</div>
         <div class="card__info__detalhes"><label>Como Conheceu: </label> {{aluno.nomeConheceEscola}}</div>
+        <div class="card__info__detalhes"><label>Receber Email ?: </label> {{aluno.receberEmail ? 'Sim' : 'Não' }}</div>
 
       </div>
     </div>
@@ -267,6 +268,7 @@
         <div class="row">
             <button class="btn btn-info pull-right" data-toggle="modal" data-target="#modalNovaMensalidade">Criar Mensalidade</button>
           </div>
+          <p>
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
           <thead>

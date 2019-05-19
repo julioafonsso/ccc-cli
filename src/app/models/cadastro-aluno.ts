@@ -18,7 +18,8 @@ export class CadastroAluno {
     public idEstadoCivil :number ;
     public foto: string;
     public observacao: string;
-
+    public receberEmail: boolean;
+    
     constructor() {
     }
 

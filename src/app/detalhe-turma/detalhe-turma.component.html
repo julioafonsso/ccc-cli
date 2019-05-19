@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-3">
+    De: <input [(ngModel)]="dataInicio" id="de" type="month">
+  </div>
+  <div class="col-md-3">
+    Ate: <input [(ngModel)]="dataFim" id="ate" type="month">
+  </div>
+  <div class="col-md-3">
+    <button (click)="pesquisar()" class="btn btn-primary">Pesquisar</button>
+  </div>
+</div>
+<p>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Nome Aluno</th>
+          <th>Mes Referencia</th>
+          <th>Vencimento</th>
+          <th>Data Pagamento</th>
+          <th>Valor Mensalidade</th>
+          <th>Valor Pago</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pg of pagamentos">
+          <td>{{pg.nomeAluno}}</td>
+          <td>{{pg.mesReferencia}}</td>
+          <td>{{pg.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+          <td>{{pg.dataPagamento | date: 'dd/MM/yyyy'}}</td>
+          <td>{{pg.valorMensalidade | currency:'BRL':true}}</td>
+          <td>{{pg.valorPago | currency:'BRL':true}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="success">
+          <td>TOTAL</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{getValorTotalMensalidade()   | currency:'BRL':true }}</td>
+          <td>{{getValorTotalPago() | currency:'BRL':true }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>

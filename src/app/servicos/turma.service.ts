@@ -1,3 +1,4 @@
+import { ConsultaPagamentosTurma } from './../models/consulta-pagamentos-turma';
 import { ConsultaAlunosMatriculadosTurmaExcluida } from './../models/consulta-alunos-matriculados-turma-excluida';
 import { ConsultaTurmasExcluidas } from './../models/consulta-turmas-excluidas';
 import { ConsultaAlunosMatriculados } from './../models/consulta-alunos-matriculados';
@@ -115,4 +116,8 @@ export class TurmaService {
     getAlunosTurmaExcluida(id: number) {
         return this.http.get(environment.url + "turmas/excluidas/" + id + "/alunos").map((response: Response) => <ConsultaAlunosMatriculadosTurmaExcluida[]>response.json());
     }
+
+    getPagamentos(id: number, dataInicio:string, dataFim: string){
+        return this.http.get(environment.url + "turmas/" + id + "/pagamentos/"+ dataInicio + "/" +dataFim).map((response: Response) => <ConsultaPagamentosTurma[]>response.json());
+     }
 }

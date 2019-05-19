@@ -47,6 +47,7 @@
           <th>Valoro total em matriculas</th>
           <th>Valoro total em mensalidades</th>
           <th>Alunos</th>
+          <th>Detalhar</th>
         </tr>
       </thead>
       <tbody>
@@ -67,7 +68,7 @@
           <td>
             <button class="btn btn-primary" (click)="getAlunos(turma.id)" data-toggle="modal" data-target="#modalAluno"  >Alunos</button>
           </td>
-          
+          <td><button class="btn btn-primary" [routerLink]="['/detalhe-turma', turma.id]" >Detalhar</button></td>
           
         </tr>
       </tbody>

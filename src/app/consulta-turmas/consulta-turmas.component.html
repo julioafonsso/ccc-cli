@@ -51,6 +51,7 @@
           <th>N&#186; Vagas</th>
           <th>Editar</th>
           <th>Alunos</th>
+          <th>Detalhar</th>
           <th>Excluir</th>
         </tr>
       </thead>
@@ -71,6 +72,7 @@
           <td>
             <button class="btn btn-primary" (click)="getAlunos(turma.id)" data-toggle="modal" data-target="#modalAluno"  >Alunos</button>
           </td>
+          <td><button class="btn btn-primary" [routerLink]="['/detalhe-turma', turma.id]" >Detalhar</button></td>
           <td>
             <button class="btn btn-danger" (click)="setTurmaExcluir(turma.id)" data-toggle="modal" data-target="#modalExcluir"  >Excluir</button>
           </td>

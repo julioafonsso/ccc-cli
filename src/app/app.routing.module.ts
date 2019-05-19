@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { ConsultaAlunosModule } from './consulta-alunos/consulta-alunos.module';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PerfilSupervisorGuard } from './guards/perfil-supervisor.guard';
 import { EstaLogadoGuard } from './guards/esta-logado.guard';
 import { HomeComponent } from './home/home.component';
 
@@ -25,17 +24,17 @@ const appRoutes: Routes = [
     { path: 'detalhe-aluno/:id', loadChildren: './detalhe-aluno/detalhe-aluno.module#DetalheAlunoModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-professores', loadChildren: './consulta-professores/consulta-professores.module#ConsultaProfessoresModule', canActivate: [EstaLogadoGuard] },
     { path: 'detalhe-professor/:id', loadChildren: './detalhe-professor/detalhe-professor.module#DetalheProfessorModule', canActivate: [EstaLogadoGuard] },
-    { path: 'relatorio-movimentacao-caixa', loadChildren: './relatorio-movimentacao-caixa/relatorio-movimentacao-caixa.module#RelatorioMovimentacaoCaixaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'consulta-tipo-desconto', loadChildren: './consulta-tipo-desconto/consulta-tipo-desconto.module#ConsultaTipoDescontoModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'cadastro-tipo-desconto', loadChildren: './cadastro-tipo-desconto/cadastro-tipo-desconto.module#CadastroTipoDescontoModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'cadastro-tipo-desconto/:id', loadChildren: './cadastro-tipo-desconto/cadastro-tipo-desconto.module#CadastroTipoDescontoModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'consulta-tipo-fluxo', loadChildren: './consulta-tipo-fluxo/consulta-tipo-fluxo.module#ConsultaTipoFluxoModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'cadastro-tipo-fluxo-caixa', loadChildren: './cadastro-tipo-fluxo-caixa/cadastro-tipo-fluxo-caixa.module#CadastroTipoFluxoCaixaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'cadastro-tipo-fluxo-caixa/:id', loadChildren: './cadastro-tipo-fluxo-caixa/cadastro-tipo-fluxo-caixa.module#CadastroTipoFluxoCaixaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'consulta-modalidade-turma', loadChildren: './consulta-modalidade-turma/consulta-modalidade-turma.module#ConsultaModalidadeTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'cadastro-modalidade-turma', loadChildren: './cadastro-modalidade-turma/cadastro-modalidade-turma.module#CadastroModalidadeTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'cadastro-modalidade-turma/:id', loadChildren: './cadastro-modalidade-turma/cadastro-modalidade-turma.module#CadastroModalidadeTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
-    { path: 'cadastro-mensagem-email', loadChildren: './cadastro-mensagem-email/cadastro-mensagem-email.module#CadastroMensagemEmailTurmaModule', canActivate: [EstaLogadoGuard, PerfilSupervisorGuard] },
+    { path: 'relatorio-movimentacao-caixa', loadChildren: './relatorio-movimentacao-caixa/relatorio-movimentacao-caixa.module#RelatorioMovimentacaoCaixaModule', canActivate: [EstaLogadoGuard] },
+    { path: 'consulta-tipo-desconto', loadChildren: './consulta-tipo-desconto/consulta-tipo-desconto.module#ConsultaTipoDescontoModule', canActivate: [EstaLogadoGuard] },
+    { path: 'cadastro-tipo-desconto', loadChildren: './cadastro-tipo-desconto/cadastro-tipo-desconto.module#CadastroTipoDescontoModule', canActivate: [EstaLogadoGuard] },
+    { path: 'cadastro-tipo-desconto/:id', loadChildren: './cadastro-tipo-desconto/cadastro-tipo-desconto.module#CadastroTipoDescontoModule', canActivate: [EstaLogadoGuard] },
+    { path: 'consulta-tipo-fluxo', loadChildren: './consulta-tipo-fluxo/consulta-tipo-fluxo.module#ConsultaTipoFluxoModule', canActivate: [EstaLogadoGuard] },
+    { path: 'cadastro-tipo-fluxo-caixa', loadChildren: './cadastro-tipo-fluxo-caixa/cadastro-tipo-fluxo-caixa.module#CadastroTipoFluxoCaixaModule', canActivate: [EstaLogadoGuard] },
+    { path: 'cadastro-tipo-fluxo-caixa/:id', loadChildren: './cadastro-tipo-fluxo-caixa/cadastro-tipo-fluxo-caixa.module#CadastroTipoFluxoCaixaModule', canActivate: [EstaLogadoGuard] },
+    { path: 'consulta-modalidade-turma', loadChildren: './consulta-modalidade-turma/consulta-modalidade-turma.module#ConsultaModalidadeTurmaModule', canActivate: [EstaLogadoGuard] },
+    { path: 'cadastro-modalidade-turma', loadChildren: './cadastro-modalidade-turma/cadastro-modalidade-turma.module#CadastroModalidadeTurmaModule', canActivate: [EstaLogadoGuard] },
+    { path: 'cadastro-modalidade-turma/:id', loadChildren: './cadastro-modalidade-turma/cadastro-modalidade-turma.module#CadastroModalidadeTurmaModule', canActivate: [EstaLogadoGuard] },
+    { path: 'cadastro-mensagem-email', loadChildren: './cadastro-mensagem-email/cadastro-mensagem-email.module#CadastroMensagemEmailTurmaModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-workshop', loadChildren: './cadastro-workshop/cadastro-workshop.module#CadastroWorkshopModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-workshop', loadChildren: './consulta-workshop/consulta-workshop.module#ConsultaWorkshopModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-workshop/:id', loadChildren: './cadastro-workshop/cadastro-workshop.module#CadastroWorkshopModule', canActivate: [EstaLogadoGuard] },
@@ -45,7 +44,8 @@ const appRoutes: Routes = [
     { path: 'detalhe-funcionario/:id', loadChildren: './detalhe-funcionario/detalhe-funcionario.module#DetalheFuncionarioModule', canActivate: [EstaLogadoGuard] },
     { path: 'obter-email-alunos', loadChildren: './obter-emails-alunos/obter-emails-alunos.module#ObterEmailsAlunosModule', canActivate: [EstaLogadoGuard] },
     { path: 'supervisao', loadChildren: './supervisao/supervisao.module#SupervisaoModule' },
-    
+    { path: 'detalhe-turma/:id', loadChildren: './detalhe-turma/detalhe-turma.module#DetalheTurmaModule', canActivate: [EstaLogadoGuard] },
+
     { path: 'login', loadChildren: './login/login.module#LoginModule', canActivate: [] }
 
 

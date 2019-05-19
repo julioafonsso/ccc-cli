@@ -20,6 +20,7 @@ export class ConsultaAlunos {
     public nomeEstadoCivil :string ;
     public foto: string;
     public observacao: string;
+    public receberEmail: boolean;
 
     
 }

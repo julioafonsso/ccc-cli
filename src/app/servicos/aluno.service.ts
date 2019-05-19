@@ -36,6 +36,7 @@ export class AlunoService {
   }
 
   alterar(aluno: CadastroAluno) {
+    console.log(aluno)
     return this.http.put(environment.url + "alunos/" + aluno.id, aluno);
   }
 

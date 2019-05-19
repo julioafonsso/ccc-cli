@@ -4,9 +4,9 @@
   <form class="form-signin" (ngSubmit)="onSubmit()">
     <h2 class="form-signin-heading">Please sign in</h2>
     <label for="login" class="sr-only">Login</label>
-    <input [(ngModel)]="usuario.login"type="texte" id="login" name="login" class="form-control" placeholder="Login" required autofocus>
+    <input [(ngModel)]="usuario.username"type="texte" id="login" name="login" class="form-control" placeholder="Login" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input [(ngModel)]="usuario.senha" type="password" id="senha" name="senha" class="form-control" placeholder="Password" required>
+    <input [(ngModel)]="usuario.password" type="password" id="senha" name="senha" class="form-control" placeholder="Password" required>
     <button class="btn btn-lg btn-primary btn-block" [disabled]="bloquearBotao" type="submit">Sign in</button>
   </form>
 

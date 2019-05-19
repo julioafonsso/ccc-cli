@@ -8,7 +8,7 @@ export class SupervisaoService {
   constructor(private http: HttpCustormerService) { }
 
   recalcularComissoes(){
-    return this.http.get(environment.url + "/admin/recalcular-comissao" );
+    return this.http.post(environment.url + "/admin/recalcular-comissao" , null);
   }
 
 }

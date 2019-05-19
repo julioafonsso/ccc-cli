@@ -12,7 +12,6 @@ import { HomeComponent } from './home/home.component';
 import { HttpCustormerService } from './servicos/http-custormer.service';
 import { LoginService } from './servicos/login.service';
 
-import { PerfilSupervisorGuard } from './guards/perfil-supervisor.guard';
 import { EstaLogadoGuard } from './guards/esta-logado.guard';
 
 @NgModule({
@@ -28,7 +27,7 @@ import { EstaLogadoGuard } from './guards/esta-logado.guard';
     AppRoutingModule
   ],
   exports: [],
-  providers: [LoginService, EstaLogadoGuard, PerfilSupervisorGuard, HttpCustormerService],
+  providers: [LoginService, EstaLogadoGuard,  HttpCustormerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

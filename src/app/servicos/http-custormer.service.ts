@@ -12,7 +12,7 @@ export class HttpCustormerService {
 
   createrHeader() {
     let header: Headers = new Headers();
-    header.append('token', this.loginService.getToken());
+    header.append("Authorization", this.loginService.getToken());
     return header;
   }
 
