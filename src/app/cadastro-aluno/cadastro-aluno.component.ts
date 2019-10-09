@@ -10,6 +10,7 @@ import { AlunoService } from './../servicos/aluno.service';
 import { ConheceEscola } from './../models/conhece-escola';
 import { Message } from 'primeng/primeng';
 import { EstadoCivil } from './../models/estado-civil';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-cadastro-aluno',
@@ -29,11 +30,13 @@ export class CadastroAlunoComponent implements OnInit {
     private url: string;
     private envieiFoto: boolean;
     private load: any;
+    private flagLoadComoConheceu: boolean;
+    private flagLoadEstadoCivil: boolean;
 
-    constructor(private route: ActivatedRoute, 
-                private alunoService: AlunoService,
-                private ftpService: FtpService,
-                private roteador: Router) {
+    constructor(private route: ActivatedRoute,
+        private alunoService: AlunoService,
+        private ftpService: FtpService,
+        private roteador: Router) {
         this.aluno = new CadastroAluno();
         this.url = "";
         this.uploader = new FileUploader({ url: "" });
@@ -45,39 +48,33 @@ export class CadastroAlunoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.alunoService.getListaEstadoCivil().subscribe(res => {
-            this.listaEstadoCivil = res;
+
+        Observable.forkJoin(
+            this.alunoService.getListaEstadoCivil(),
+            this.alunoService.getListaComoConheceu()
+        ).subscribe(res => {
+            this.listaEstadoCivil = res[0];
+            this.listaComoConheceu = res[1];
+            this.loadAluno();
         })
 
-        this.alunoService.getListaComoConheceu().subscribe(res => {
-            this.listaComoConheceu = res;
-        })
-
-        this.loadAluno()
     }
 
     loadAluno() {
-        if (this.listaEstadoCivil.length == 0 || this.listaComoConheceu.length == 0 ) {
-            this.load = setInterval(() => { this.loadAluno() }, 500);
-        }
-        else {
-            clearInterval(this.load);
-            this.route.params.subscribe(
-                (params: any) => {
-                    if (params['id'] != undefined) {
-                        this.submit = true;
-                        this.envieiFoto = true;
-                        this.alunoService.getAluno(params['id']).subscribe(res => {
-                            console.log(res)
-                            this.aluno = res;
-                            this.submit = false;
+        this.route.params.subscribe(
+            (params: any) => {
+                if (params['id'] != undefined) {
+                    this.submit = true;
+                    this.envieiFoto = true;
+                    this.alunoService.getAluno(params['id']).subscribe(res => {
+                        console.log(res)
+                        this.aluno = res;
+                        this.submit = false;
 
-                        })
-                    }
+                    })
                 }
-            );
-        }
-
+            }
+        );
     }
 
     reset() {
@@ -100,12 +97,12 @@ export class CadastroAlunoComponent implements OnInit {
             .subscribe(response => {
                 this.msgs.push({ severity: 'success', summary: 'Cadastro Com Sucesso !' });
                 this.reset();
-                this.roteador.navigate(['/detalhe-aluno/',response.json().id]);
+                this.roteador.navigate(['/detalhe-aluno/', response.json().id]);
             },
-            error => {
-                this.submit = false;
-                this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
-            })
+                error => {
+                    this.submit = false;
+                    this.msgs.push({ severity: 'error', summary: 'Cadastro Com Erro !', detail: JSON.parse(error._body)["message"] });
+                })
     }
 
     onChange(event) {

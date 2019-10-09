@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ObterEmailsAlunosComponent } from './obter-emails-alunos.component';
+import { TurmaService } from 'app/servicos/turma.service';
 
 const rotas = [ { path: '', component: ObterEmailsAlunosComponent } ];
 
@@ -14,7 +15,7 @@ const rotas = [ { path: '', component: ObterEmailsAlunosComponent } ];
     RouterModule.forChild(rotas)
   ],
   declarations: [ObterEmailsAlunosComponent],
-  providers: [EmailService],  
+  providers: [EmailService, TurmaService],  
   exports: []
 })
 export class ObterEmailsAlunosModule { }

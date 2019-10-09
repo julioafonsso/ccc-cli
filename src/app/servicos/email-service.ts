@@ -1,6 +1,7 @@
+import { ModalidadeTurma } from './../models/modalidade-turma';
 import { Email } from './../models/email';
 import { MensagemEmail } from './../models/mensagem-email';
-import { Response } from '@angular/http';
+import { Response, URLSearchParams } from '@angular/http';
 import { HttpCustormerService } from './../servicos/http-custormer.service';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
@@ -9,21 +10,29 @@ import { environment } from './../../environments/environment';
 @Injectable()
 export class EmailService {
 
-  
-  obterEmailsAlunos() {
-    return this.http.get(environment.url + "email/alunos")
-        .map((response: Response) => response.text())
+  obterEmailsAlunosPorModalidade(modalidade: number) {
+    return this.http.get(environment.url + "email/alunos/modalidade/" + modalidade)
+      .map((response: Response) => response.text())
   }
-   constructor(private http: HttpCustormerService) { }
+  obterEmailsAlunos(modalidade: number, ativo: boolean) {
 
-  obterMensagemCadastrada()
-  {
+    let params = new URLSearchParams();
+    params.append("idModalidade", modalidade.toString())
+    params.append("ativo", ativo.toString())
+
+    return this.http.get(environment.url + "email/alunos/",  params )
+      .map((response: Response) => response.text())
+
+
+  }
+  constructor(private http: HttpCustormerService) { }
+
+  obterMensagemCadastrada() {
     return this.http.get(environment.url + "email/mensagem")
-        .map((response: Response) => <MensagemEmail>response.json())
+      .map((response: Response) => <MensagemEmail>response.json())
   }
 
-  atualizaMensagem(msg: MensagemEmail)
-  {
+  atualizaMensagem(msg: MensagemEmail) {
     return this.http.put(environment.url + "email/mensagem", msg)
   }
   enviarEmail(email: Email) {

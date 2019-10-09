@@ -16,11 +16,25 @@ import { HttpCustormerService } from './http-custormer.service';
 
 @Injectable()
 export class AlunoService {
+  reativar(idAluno: number): any {
+    return this.http.post(environment.url + "alunos/" + idAluno , null);
+  }
 
   cadastrarMensalidade(idMatricula: number, mes: string) {
     return this.http.post(environment.url + "matriculas/" + idMatricula + "/mensalidade/" + mes, null);
   }
   constructor(private http: HttpCustormerService) { }
+
+  getQtdAlunosAtivos(){
+    return this.http.get(environment.url + "alunos/ativos/quantidade")
+    .map((response: Response) => <number>response.json())
+  }
+
+
+  getQtdAlunosInativos(){
+    return this.http.get(environment.url + "alunos/inativos/quantidade")
+    .map((response: Response) => <number>response.json())
+  }
 
   getListaEstadoCivil() {
     return this.http.get(environment.url + "estado-civil")

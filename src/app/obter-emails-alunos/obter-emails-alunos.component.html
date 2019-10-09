@@ -1,13 +1,36 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Filtros</div>
+  <div class="panel-body">
+
+
+    <div class="col-md-3">
+      <label class="control-label" for="textinput">Modalidades</label>
+      <!-- <select (change)="pesquisar($event.target.value)" name="modalidade" class="form-control"> -->
+          <select [(ngModel)]="modalidade" (change)="pesquisar()" name="modalidade" class="form-control">
+        <option *ngFor="let item of modalidades" [value]="item.id">{{item.nome}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-3">  
+        <label class="control-label" for="textinput">Alunos Ativos?</label>
+        <select [(ngModel)]="ativo" (change)="pesquisar()" name="ativo" class="form-control">
+          <option *ngFor="let item of lista_ativo" [value]="item.value">{{item.nome}}</option>
+        </select>
+      </div>
+
+  </div>
+</div>
+
 <form class="form-horizontal">
 
-    <legend>Envio de E-mail</legend>
-  
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Lista Emails</label>
-      <div class="col-md-6">
-        <textarea rows="20" [(ngModel)]="email" name="texto" class="form-control" required></textarea>
-      </div>
+  <legend>Envio de E-mail</legend>
+
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Lista Emails</label>
+    <div class="col-md-6">
+      <textarea rows="20" [(ngModel)]="email" name="texto" class="form-control" required></textarea>
     </div>
-  
-  </form>
+  </div>
+
+</form>

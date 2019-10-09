@@ -1,3 +1,4 @@
+import { AlunoService } from './../servicos/aluno.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private alunosService: AlunoService) { }
+  private qtdAlunosAtivos: number;
+  private qtdAlunosInativos: number;
   ngOnInit() {
+    this.alunosService.getQtdAlunosAtivos().subscribe(res => this.qtdAlunosAtivos)
+    this.alunosService.getQtdAlunosInativos().subscribe(res => this.qtdAlunosInativos)
   }
 
 }

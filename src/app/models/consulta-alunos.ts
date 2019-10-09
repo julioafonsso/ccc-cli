@@ -21,6 +21,6 @@ export class ConsultaAlunos {
     public foto: string;
     public observacao: string;
     public receberEmail: boolean;
-
+    public ativo: boolean;
     
 }

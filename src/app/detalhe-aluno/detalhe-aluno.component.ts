@@ -419,8 +419,21 @@ export class DetalheAlunoComponent implements OnInit {
         });
       }
     });
+  }
 
-
+  reativar() {
+    this.confirmationService.confirm({
+      message: 'Deseja re-ativar o Aluno?',
+      accept: () => {
+        this.alunoService.reativar(this.idAluno).subscribe(res => {
+          this.msgs.push({ severity: 'success', summary: 'Aluno reativado !' });
+          this.aluno.ativo = true;
+        }, error => {
+          this.msgs.push({ severity: 'error', summary: JSON.parse(error._body)["message"] });
+          this.submit = false;
+        });
+      }
+    });
   }
 
   addMensalidadeParaPagar(mensalidade: ConsultaMensalidades) {
