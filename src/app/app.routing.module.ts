@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent,  canActivate: [EstaLogadoGuard] },
+    { path: '', loadChildren: 'app/home/home.module#HomeModule', canActivate: [EstaLogadoGuard] },
     { path: 'envio-email', loadChildren: 'app/envio-email/envio-email.module#EnvioEmailModule', canActivate: [EstaLogadoGuard] },
     { path: 'consulta-alunos', loadChildren: 'app/consulta-alunos/consulta-alunos.module#ConsultaAlunosModule', canActivate: [EstaLogadoGuard] },
     { path: 'cadastro-aluno', loadChildren: './cadastro-aluno/cadastro-aluno.module#CadastroAlunoModule', canActivate: [EstaLogadoGuard] },

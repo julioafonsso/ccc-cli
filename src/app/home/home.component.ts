@@ -9,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   constructor(private alunosService: AlunoService) { }
-  private qtdAlunosAtivos: number;
-  private qtdAlunosInativos: number;
+  private qtdAlunosAtivos: number = 0;
+  private qtdAlunosInativos: number = 0;
   ngOnInit() {
-    this.alunosService.getQtdAlunosAtivos().subscribe(res => this.qtdAlunosAtivos)
-    this.alunosService.getQtdAlunosInativos().subscribe(res => this.qtdAlunosInativos)
+    this.alunosService.getQtdAlunosAtivos().subscribe(res => {this.qtdAlunosAtivos = res })
+    this.alunosService.getQtdAlunosInativos().subscribe(res => {this.qtdAlunosInativos = res })
   }
 
 }

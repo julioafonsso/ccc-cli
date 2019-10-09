@@ -16,8 +16,7 @@ import { EstaLogadoGuard } from './guards/esta-logado.guard';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
